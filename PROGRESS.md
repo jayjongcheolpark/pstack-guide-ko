@@ -232,3 +232,9 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 
 해석한 부분: `architect`의 "한 파일에서 맞아 보이는 변경이 저장소 전체에도 맞는 설계"와 `/correct`의 같은 가정은 원문이 같은 문장으로 적습니다. 성능 만트라는 원문의 일곱 문장을 그대로 두고, 옛 여덟 계열은 원문에서 빠졌으므로 원고에서도 뺐습니다. `지침(guideline)`의 첫 표기 장은 `technical-writing`이 출처 줄을 뺀 뒤 `personal`(`create-skill`의 writing guidelines)로 옮겼습니다. `게이트(gate)`의 첫 표기 장은 Perf issue에서 기능 게이트 용례가 빠진 뒤 `playbooks-pr`(`watch-pr`의 게이트 사유)로 옮겼습니다. 원칙 색인 표가 390px에서 가로로 넘쳐서 `assets/style.css`의 표를 `table-layout: fixed`로 바꿨습니다.
 
+확인 (2026-10-04, 원본 클론 `e43c7ee`):
+
+- `PSTACK_SRC=<클론>/pstack bun tools/check.mjs`: 스킬 50개와 플레이북 23개의 절 존재, 링크, 용어 병기 짝 29개, 버전 일치, epubcheck 오류 0, 경고 0.
+- `bun tools/check-layout.mjs`: 390px에서 가로 넘침 없음.
+- PDF 462쪽, 아웃라인 574항목, 엠대시 0, 대체 문자 0.
+
