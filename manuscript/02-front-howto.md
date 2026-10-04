@@ -2,7 +2,7 @@
 
 ## 누구를 위한 책인가
 
-Cursor에서 에이전트에게 실제 코드를 맡겨 본 엔지니어를 위한 책입니다. pstack을 설치했지만 스킬이 47개나 되어 어디서 시작할지 막막한 분, 특정 스킬이 어떻게 동작하는지 정확히 알고 싶은 분을 염두에 두었습니다. Cursor 채팅, Git, GitHub PR을 써 본 경험을 가정합니다.
+Cursor에서 에이전트에게 실제 코드를 맡겨 본 엔지니어를 위한 책입니다. pstack을 설치했지만 스킬이 50개나 되어 어디서 시작할지 막막한 분, 특정 스킬이 어떻게 동작하는지 정확히 알고 싶은 분을 염두에 두었습니다. Cursor 채팅, Git, GitHub PR을 써 본 경험을 가정합니다.
 
 ## 구성
 
@@ -11,10 +11,10 @@ Cursor에서 에이전트에게 실제 코드를 맡겨 본 엔지니어를 위�
 | 시작하기 | pstack의 목적과 설계 아이디어, 설치와 첫 사용, 모델 설정 |
 | 진입점 | 대부분의 작업이 거쳐 가는 `poteto-mode`와 그 플레이북 23개 |
 | 이해하기 | `how`, `why`, `teach`, `recall` |
-| 설계하기 | `architect`, `arena`, `swarm`, `figure-it-out`, 그리고 `principle-*` 스킬 23개 |
-| 고치고 검증하기 | `tdd`, `blast-radius`, `interrogate`, 검증 스킬 2개 |
+| 설계하기 | `architect`, `arena`, `swarm`, `figure-it-out`, 그리고 `principle-*` 스킬 24개 |
+| 고치고 검증하기 | `tdd`, `blast-radius`, `interrogate`, 검증 스킬 2개, `benchmark-checklist` |
 | 글과 코드 정리 | `unslop`, `technical-writing`, `no-comments`, `typescript-best-practices` |
-| 나만의 방식과 유틸리티 | `automate-me`, `reflect`, `show-me-your-work`, `bro` |
+| 나만의 방식과 유틸리티 | `automate-me`, `reflect`, `show-me-your-work`, `correct`, `bro` |
 | 자동화 | `make-bot-ui`와 benny 자동화 팩 |
 | 실전 | 밤새 돌리기, 레시피와 함정 |
 

@@ -4,14 +4,14 @@
 
 ## 원본
 
-`cursor/plugins`의 `pstack/`, 커밋 `adf3218ca2f5b9971eedc07a76bef22df7701539` (0.15.5) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`.
+`cursor/plugins`의 `pstack/`, 커밋 `e43c7ee26e0038c6c1fa8380dd34ce86ff94cb2a` (0.15.9) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`.
 
 ## 빌드와 검사
 
 ```shell
 bun install
 bun tools/build.mjs        # dist/pstack-guide-<버전>.epub, dist/pstack-guide-<버전>.pdf
-PSTACK_SRC=<클론 경로>/pstack bun tools/check.mjs   # 원고 규칙, 링크, 스킬 47개와 플레이북 23개의 절 존재, epubcheck
+PSTACK_SRC=<클론 경로>/pstack bun tools/check.mjs   # 원고 규칙, 링크, 스킬 50개와 플레이북 23개의 절 존재, epubcheck
 bun tools/check-layout.mjs                          # EPUB을 390px 폭에서 열어 가로 넘침 검사
 bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2,10,300   # PDF 페이지 수, 개요, 글꼴, 한글 텍스트, 선택한 페이지를 PNG로
 ```
@@ -39,16 +39,16 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 | 40-part-design | 4부 설계하기 | | checked |
 | 41-ch-architect | `architect` | | checked |
 | 42-ch-arena-swarm | `arena`, `swarm`, `figure-it-out` | | checked |
-| 43-ch-principles | `principle-*` 23개 | | checked |
+| 43-ch-principles | `principle-*` 24개 | | checked |
 | 50-part-fix | 5부 고치고 검증하기 | | checked |
 | 51-ch-tdd-blast | `tdd`, `blast-radius` | | checked |
 | 52-ch-interrogate | `interrogate` | | checked |
-| 53-ch-verification | `create-verification-skill`, `maintain-verification-skill` | | checked |
+| 53-ch-verification | `create-verification-skill`, `maintain-verification-skill`, `benchmark-checklist` | | checked |
 | 60-part-clean | 6부 글과 코드 정리 | | checked |
 | 61-ch-writing | `unslop`, `technical-writing` | | checked |
 | 62-ch-code-hygiene | `no-comments`, `typescript-best-practices` | | checked |
 | 70-part-yours | 7부 나만의 방식과 유틸리티 | | checked |
-| 71-ch-personal | `automate-me`, `reflect`, `show-me-your-work` | | checked |
+| 71-ch-personal | `automate-me`, `reflect`, `show-me-your-work`, `correct` | | checked |
 | 72-ch-utility | `bro` | | checked |
 | 80-part-automation | 8부 자동화 | | checked |
 | 81-ch-benny | `make-bot-ui`, `automations/benny` | | checked |
@@ -72,14 +72,14 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 
 ## 해석한 부분 (원문이 모호했던 곳)
 
-- **원문 개수.** principle 스킬은 23개입니다(스킬 총 47개 = 일반 24개 + principle 23개). README도 23개라고 합니다. 책은 고정한 커밋의 디렉터리를 세어 얻은 수를 따릅니다.
+- **원문 개수.** principle 스킬은 24개입니다(스킬 총 50개 = 일반 26개 + principle 24개). README도 24개라고 합니다. 책은 고정한 커밋의 디렉터리를 세어 얻은 수를 따릅니다. 0.15.5 원고를 쓸 때의 수는 47개(일반 24 + principle 23)였습니다.
 - **Comment Sicko의 읽기 전용 여부.** README와 안내서는 "read-only comment reviewer"라고 하지만 `agents/comment-sicko.md`는 스스로 주석을 지우고 삭제 수를 보고한다고 씁니다("I touch comments", "touched files, deletion count"). 애플리케이션 코드는 쓰지 않는다는 점은 일치합니다. 책은 정의 파일의 표현을 따르고 README의 표현을 함께 밝혔습니다.
 - **`/setup-pstack` 재실행의 보존 범위.** README와 안내서는 "기본값과 다른 역할을 유지"라고 하고, `setup-pstack/SKILL.md` 3(b)는 계열, 목록, 별칭으로 바꾼 역할을 유지하고 강도 토큰은 새 예산에 맞춰 다시 계산한다고 합니다. 책은 정밀한 쪽(스킬 본문)을 따릅니다.
 - **`poteto-mode`의 프런트매터 해석.** `mode: true`, `disable-model-invocation: true`, `reminder`는 원문에 뜻이 풀이되어 있지 않습니다. README의 "sticky mode" 설명과 `reminder` 문구에서 읽은 대로 옮겼고, `disable-model-invocation`은 "모델이 자동으로 부르지 않는다"는 통상 뜻으로 적었습니다.
 - **`benny`가 슬래시 스킬이 아니라는 점.** README가 "dormant", "not registered as slash skills"라고 밝힙니다. 책은 별도 부(자동화)에서 지시문의 내용을 원문 순서대로 옮겼습니다.
 - **`cursor-team-kit`.** 별개 플러그인이라 장으로 다루지 않았습니다. `poteto-mode`와 플레이북이 부르는 자리(`deslop`, `control-cli`, `control-ui`, `create-skill` 내장 기능 등)에서 출처만 밝혔습니다.
 - **Claude Code 포팅.** 저장소 원본에는 나오지 않는 외부 정보라서 저작권 표기 부록에서 존재만 언급하고 원본에서 확인하지 않았다고 밝혔습니다.
-- **`disable-model-invocation`.** `setup-pstack`만 이 프런트매터가 없고 나머지 46개 스킬에는 모두 있습니다. 스킬 절에서는 있는 경우에 한해 언급했습니다.
+- **`disable-model-invocation`.** `setup-pstack`만 이 프런트매터가 없고 나머지 49개 스킬에는 모두 있습니다. 스킬 절에서는 있는 경우에 한해 언급했습니다.
 
 ## 열린 질문
 
@@ -214,3 +214,21 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 - `PSTACK_SRC=<클론>/pstack bun tools/check.mjs`: 스킬 47개와 플레이북 23개의 절 존재, 링크, 용어 병기 짝 29개, 버전 일치, epubcheck 오류 0, 경고 0.
 - `bun tools/check-layout.mjs`: 390px 폭에서 가로 넘침 없음. 원칙 장의 표 칸에 병기를 넣었을 때 넘쳐서 그 칸들은 표 밖의 첫 용례로 옮겼습니다.
 - `bun tools/pdf-inspect.mjs`: 425쪽, 개요 561항목, 한글 텍스트 추출 확인, em dash 0, 표지와 용어집 쪽을 PNG로 눈으로 확인했습니다.
+
+## 0.15.9-ko.1: 원문을 0.15.5에서 0.15.9로
+
+원본을 커밋 `e43c7ee26e0038c6c1fa8380dd34ce86ff94cb2a`의 pstack 0.15.9로 올렸습니다. 책 버전은 그 원문의 첫 한국어 개정인 `0.15.9-ko.1`입니다.
+
+고정한 0.15.5 커밋(`adf3218`)과 이 커밋의 `pstack/` diff를 읽고 원고를 고쳤습니다. 새 스킬은 `correct`, `benchmark-checklist`, `principle-explain-the-number`입니다. 스킬은 47개에서 50개(일반 26, 원칙 24)가 되었고 플레이북은 23개입니다.
+
+원문에서 바뀐 것:
+
+- 0.15.6: `explain-the-number`와 `benchmark-checklist`, 기본은 새 서브에이전트, Autopilot의 `/loop 1h`, Opening a PR의 `##` 제목과 `What changed`, TypeScript의 스키마 우선 캐스트, `poteto-mode`의 약어 토큰 금지.
+- 0.15.7: `/correct`.
+- 0.15.8: `architect`가 다음 기여자를 에이전트로 가정하고 적신호 네 개를 더함.
+- 0.15.9: Perf issue와 Hillclimb의 성능 만트라를 짧은 일곱 문장으로 바꿈(`e43c7ee`).
+
+원문이 뺀 것: `technical-writing`의 층별 출처 줄, Autopilot과 Multi-phase plan의 `/goal` 무장과 30분 tick, Perf issue의 여덟 전략 계열.
+
+해석한 부분: `architect`의 "한 파일에서 맞아 보이는 변경이 저장소 전체에도 맞는 설계"와 `/correct`의 같은 가정은 원문이 같은 문장으로 적습니다. 성능 만트라는 원문의 일곱 문장을 그대로 두고, 옛 여덟 계열은 원문에서 빠졌으므로 원고에서도 뺐습니다. `지침(guideline)`의 첫 표기 장은 `technical-writing`이 출처 줄을 뺀 뒤 `personal`(`create-skill`의 writing guidelines)로 옮겼습니다.
+

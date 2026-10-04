@@ -26,19 +26,21 @@
 - **커밋.** 자주 커밋하고, PR을 열기 전에 작고 순서 있는 커밋으로 리베이스합니다. 각 커밋은 미래의 PR이므로 병합 가능해야 하고 이야기가 되도록 순서를 정합니다. 방금 만든 커밋에 속한 수정이면 amend하고, 분리할 수 있으면 새 커밋으로 만듭니다.
 - **정리와 글쓰기.** 커밋 전에 cursor-team-kit의 `/deslop`을 diff에 돌립니다. 리뷰 전에 `/no-comments`를 돌립니다. PR 제목, PR 설명, 커밋 본문은 모두 `/technical-writing`으로 쓴 다음 `/unslop`을 적용합니다. Diátaxis를 제외한 technical-writing의 모든 층을 적용합니다. 행동 하나에 낱말 하나를 쓰고, 관사를 유지하고, 평범한 동사로 되는 곳에는 `-ing`를 피합니다.
 - **제목.** Conventional Commits 형식 `type(scope): subject`입니다. type은 `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `perf` 중 하나, scope는 바뀐 영역(`pstack`, `poteto-mode` 등), subject는 짧은 명령형입니다. 변경을 나르는 실제 심볼이 있으면 이름을 씁니다. 원문의 예는 `fix(pstack): retarget opening-a-pr babysit trigger`입니다. 끝에 마침표를 붙이지 않습니다.
-- **설명.** PR 본문은 브리핑이지 실험 노트가 아닙니다. diff를 가진 리뷰어가 이 변경이 왜 있는지, 범위 밖이 무엇인지, 변경이 동작함을 어떻게 증명했는지를 알 수 있어야 합니다. 스쿼시 커밋 본문이 곧 PR 본문이고, 스쿼시 커밋이 약 40줄을 넘게 만든다면 본문을 자릅니다. 아래 절을 이 순서로 씁니다. 할 말이 없는 절은 뺍니다.
+- **설명.** PR 본문은 브리핑이지 실험 노트가 아닙니다. diff를 가진 리뷰어가 이 변경이 왜 있는지, 무엇을 빼는지, 무엇을 깨뜨릴 수 있는지, 어떻게 증명했는지를 1분 안에 알 수 있어야 합니다. 짧은 문장으로 쓰고 식별자는 적게 둡니다. 글의 벽을 쓰지 않습니다. 스쿼시 커밋 본문이 곧 PR 본문이고, 스쿼시 커밋이 약 40줄을 넘게 만든다면 본문을 자릅니다. 각 절은 굵은 도입이 아니라 `##` 제목 아래에 두어 절이 서로 떨어지게 합니다. 아래 절을 이 순서로 씁니다. 할 말이 없는 절은 뺍니다.
 
   | 절 | 내용 |
   | --- | --- |
-  | `## Why` | 의도와 접근을 한두 짧은 문단으로. SHA 목록이나 리베이스 계보, "main 기반" 서두를 넣지 않습니다 |
-  | `## Scope` | 실제 심볼과 경로를 불릿으로. 이름 바꾸기나 재지정은 양쪽을 다 씁니다. 경계가 중요할 때만 범위 안과 밖을 밝힙니다. 파일별 에세이는 쓰지 않습니다 |
+  | `## Why` | 문제와 접근을 짧은 문장 한 개에서 세 개로. SHA 목록이나 리베이스 계보, "main 기반" 서두를 넣지 않습니다 |
+  | `## What changed` | 짧은 불릿 한 개에서 세 개. 변경을 나르는 실제 심볼이나 경로만 이름을 씁니다. 이름 바꾸기나 재지정은 양쪽을 다 씁니다 |
+  | `## Scope` | 항상 이 PR이 덮는 것과 일부러 빼는 것(이어질 후속이나 알려진 빈틈 등)을 밝힙니다. 짧은 항목 한 개에서 세 개. 심볼이나 경로를 나열하지 않고 파일별 에세이도 쓰지 않습니다 |
   | `## Tradeoffs` | 리뷰어가 물을 만한 기각된 대안만. 진짜 선택이 없었으면 뺍니다 |
-  | `## Blast Radius` | 한 문장에서 세 문장으로, 변경이 누구나 무엇을 건드리는지와 왜 안전한지 혹은 위험한지. 수정이 없으면 main이 계속 빨간 채로 있을 때의 지속 비용을 밝힙니다 |
-  | `## Verification` | 실제로 돌린 경로와 그 결과를 각각. 성능 변경은 단위와 함께 대표 수치 하나를 `before → after`로. 나머지 증거는 arena나 swarm 디렉터리를 링크. 표본 크기 방법론, swarm 낭독, 지표 표는 넣지 않습니다 |
+  | `## Blast Radius` | 한 문장이나 두 문장으로, 변경이 누구나 무엇을 건드리는지와 왜 안전한지 혹은 위험한지. main이 빨강이면 그대로 둘 때의 비용을 밝힙니다 |
+  | `## Verification` | 짧은 불릿 한 개에서 세 개. 각각 실제로 돌린 경로와 그 결과. 성능 변경은 단위와 함께 대표 수치 하나를 `before → after`로. 나머지 증거는 arena나 swarm 디렉터리를 링크. 표본 크기 방법론, swarm 낭독, 지표 표는 넣지 않습니다 |
 
-  절 뒤에는 주장을 증명하는 영상이나 스크린숏을 붙입니다. 전체 SHA, swarm이나 arena 레인 낭독, 지렛대 교정 에세이, 파일별 체크리스트, "CLEAN" 판정은 붙이지 않고 링크된 산출물(artifact)에 둡니다. `## Summary`나 `## Test plan` 상투 절은 쓰지 않습니다. 커밋 본문은 제목을 되풀이하지 않습니다.
-- **크기와 스택.** 큰 PR 하나보다 좁은 PR 다섯 개를 선호합니다. 스택은 베이스 브랜치 사슬입니다. 루트 PR은 트렁크를 대상으로 하고 각 자식 브랜치는 부모의 정확한 끝 위로 리베이스되며 자식 PR은 부모 브랜치를 대상으로 합니다. 자식은 `origin pr create --status open --base <parent-branch>` 또는 `gh pr create --base <parent-branch>`로 만들고, 기존 자식은 `origin pr edit <pr> --base <parent-branch>` 또는 `gh pr edit <pr> --base <parent-branch>`로 재지정합니다. 독립된 작업만 트렁크에서 분기합니다. 스택 작업을 본격적으로 하기 전에 트렁크로 리베이스합니다.
-- **준비 상태.** PR은 항상 준비 상태로 열고 초안(draft)으로 열지 않습니다. Origin에서는 `--status open`, `gh`에서는 `--draft`를 생략합니다. 클라우드 에이전트의 PR 도구는 기본이 초안이므로 PR 생성 호출마다 `draft: false`를 설정합니다. 그래도 초안으로 열렸으면 `origin pr ready <number>` 또는 `gh pr ready <number>`를 실행합니다. PR 상태를 언급하기 전에 `origin pr view <number>` 또는 `gh pr view <number>`를 실행합니다.
+  절 뒤에는 주장을 증명하는 영상이나 스크린숏을 붙입니다. 전체 SHA, swarm이나 arena 레인 낭독, 지렛대 교정 에세이, 파일별 체크리스트, "CLEAN" 판정은 붙이지 않고 링크된 산출물(artifact)에 둡니다. 커밋 본문은 제목을 되풀이하지 않습니다.
+- **내장 PR 도구.** 실행이 내장 PR 도구를 제공하면 생성, 수정, 재지정, 준비 상태 표시는 그 도구로 하고 포지 CLI로는 하지 않습니다. 쓰는 방법은 그 도구의 지시가 말합니다. CLI로 만든 PR은 이후 실행이 고칠 설명처럼 도구가 추적하는 것을 놓칩니다. 도구가 덮지 않는 일과, 그런 도구가 없을 때의 모든 PR 작업은 정한 포지를 씁니다.
+- **크기와 스택.** 큰 PR 하나보다 좁은 PR 다섯 개를 선호합니다. 스택은 베이스 브랜치 사슬입니다. 루트 PR은 트렁크를 대상으로 하고 각 자식 브랜치는 부모의 정확한 끝 위로 리베이스되며 자식 PR은 부모 브랜치를 대상으로 합니다. 내장 PR 도구가 없으면 자식은 `origin pr create --status open --base <parent-branch>` 또는 `gh pr create --base <parent-branch>`로 만들고, 기존 자식은 `origin pr edit <pr> --base <parent-branch>` 또는 `gh pr edit <pr> --base <parent-branch>`로 재지정합니다. 독립된 작업만 트렁크에서 분기합니다. 스택 작업을 본격적으로 하기 전에 트렁크로 리베이스합니다.
+- **준비 상태.** PR은 항상 준비 상태로 열고 초안(draft)으로 열지 않습니다. 내장 PR 도구는 초안이 기본일 수 있으므로 그 도구로 만들 때마다 `draft: false`를 설정합니다. Origin에서는 `--status open`, `gh`에서는 `--draft`를 생략합니다. 그래도 초안으로 열렸으면 PR 도구로 준비 상태로 표시하거나 `origin pr ready <number>` 또는 `gh pr ready <number>`를 실행합니다. PR 상태를 언급하기 전에 `origin pr view <number>` 또는 `gh pr view <number>`를 실행합니다.
 - **Babysit.** PR을 여는 것이 babysit을 시작하지는 않습니다. URL을 게시하고 계속 만듭니다. 단계나 스택을 먼저 끝냅니다. 스택 전체가 생긴 뒤 사용자가 요청할 때만 별도의 babysit 패스를 돌립니다. 새 PR마다 babysit하면 빌드가 멈추고 나중 웨이브가 다시 시작시킬 커밋에 체크를 낭비합니다. 피드백이 의도에서 벗어나면 반박합니다.
 
   PR을 여는 서브에이전트는 `interrogate`, `/deslop`, `/no-comments`를 돌리고 URL을 게시한 뒤 babysit 없이 부모에게 돌아갑니다. Autopilot-full이나 Autopilot-stack의 소유자는 예외입니다. 그 소유자의 브리프가 babysit 루프를 배정하고, 그것이 `playbooks/babysit.md`가 기다리는 요청입니다. 소유자는 code-ready 보고 뒤에 루프를 시작하고 자기 플레이북대로 merge-ready나 STACK-READY를 보고합니다. 스택 전체가 만들어질 때까지 babysit을 미루는 이 플레이북과 babysit 플레이북의 규칙(rule)은 그 소유자에게 적용되지 않습니다.
@@ -49,14 +51,14 @@
 
 ### 함정과 주의점
 
-- 초안으로 열지 않습니다. 클라우드 에이전트 도구의 기본값(초안)에 주의합니다.
+- 초안으로 열지 않습니다. 내장 PR 도구의 기본값(초안)에 주의합니다.
 - 설명에 SHA 목록, swarm 낭독, 파일별 체크리스트를 넣지 않습니다.
 - PR마다 babysit을 붙이지 않습니다.
 - 안내서의 표현으로는, 좁은 PR 다섯 개가 뚱뚱한 PR 하나보다 낫고 스택으로 쌓는 후속이 자라나는 브랜치보다 낫습니다.
 
 ### 흐름도
 
-이 플레이북은 번호 붙은 단계 대신 굵은 소제목 아홉 개(Worktree, Commits, PRs, Titles, Descriptions, Forge, Size and stacks, Readiness, Babysit)로 되어 있습니다. 아래 그림은 그 순서를 실행 흐름으로 옮긴 것입니다. 순서는 원문 소제목의 순서를 따랐고, 소제목에 없는 단계는 넣지 않았습니다.
+이 플레이북은 번호 붙은 단계 대신 굵은 소제목 열 개(Worktree, Commits, PRs, Titles, Descriptions, Forge, Built-in PR tool, Size and stacks, Readiness, Babysit)로 되어 있습니다. 아래 그림은 그 순서를 실행 흐름으로 옮긴 것입니다. 순서는 원문 소제목의 순서를 따랐고, 소제목에 없는 단계는 넣지 않았습니다.
 
 ```flow Opening a PR 플레이북의 흐름
 start 다른 플레이북의 마지막 단계
@@ -67,6 +69,7 @@ step PRs 준비
 step Titles
 step Descriptions
 step Forge 결정
+step Built-in PR tool
 step Size and stacks
 step Readiness
 step Babysit
@@ -81,8 +84,9 @@ end 응답
 | Commits | 작고 순서 있는 커밋. 각 커밋이 미래의 PR입니다 |
 | PRs | `/deslop`을 거친 diff, `/no-comments`를 거친 코드, `/technical-writing`과 `/unslop`을 거친 제목, 설명, 커밋 본문 |
 | Titles | `type(scope): subject` 형식의 제목 |
-| Descriptions | `## Why`, `## Scope`, `## Tradeoffs`, `## Blast Radius`, `## Verification` 순서의 본문(없는 절은 생략), 필요하면 영상이나 스크린숏 |
+| Descriptions | `## Why`, `## What changed`, `## Scope`, `## Tradeoffs`, `## Blast Radius`, `## Verification` 순서의 본문(없는 절은 생략. Scope는 안과 밖을 항상 밝힘), 필요하면 영상이나 스크린숏 |
 | Forge | 고정한 포지 선택(`gh` 또는 `origin`)과 폴백 기록 |
+| Built-in PR tool | 있으면 생성, 수정, 재지정, 준비 상태는 그 도구로. 없으면 정한 포지 |
 | Size and stacks | 좁은 PR 여럿, 또는 베이스 브랜치 사슬의 스택 |
 | Readiness | 초안이 아닌 PR과 `view`로 확인한 상태 |
 | Babysit | PR URL 게시 |
@@ -96,13 +100,14 @@ end 응답
 > 1. 작업은 `main`에서 딴 워크트리에 있습니다.
 > 2. 오타 수정을 수정 커밋으로 합치고, 실패하는 테스트 커밋과 수정 커밋 두 개가 순서대로 남게 리베이스합니다.
 > 3. `/deslop`, `/no-comments`를 돌리고, 제목을 `fix(cart): invalidate the price cache on quantity change`로 씁니다. 마침표는 붙이지 않습니다.
-> 4. 본문은 `## Why`와 `## Verification`만 씁니다. 나머지 절은 할 말이 없으므로 생략합니다. 검증 절에는 실행한 경로와 결과를 적습니다.
-> 5. `gh pr create`를 `--draft` 없이 실행하고 `gh pr view`로 초안이 아닌지 확인합니다. 열었다고 babysit를 시작하지 않고 URL만 게시합니다.
+> 4. 본문은 `## Why`, `## What changed`, `## Scope`, `## Verification`을 씁니다. Scope는 이 PR이 캐시 무효화만 덮고 가격 재계산 후속은 뺀다고 밝힙니다. Tradeoffs는 할 말이 없어 생략합니다. 검증 절에는 실행한 경로와 결과를 적습니다.
+> 5. 내장 PR 도구가 있으면 그것으로 `draft: false`를 주고 엽니다. 없으면 `gh pr create`를 `--draft` 없이 실행하고 `gh pr view`로 초안이 아닌지 확인합니다. 열었다고 babysit를 시작하지 않고 URL만 게시합니다.
 
 ### 실패, 중단, 모호할 때
 
 - **워크트리가 엉켰을 때.** 관계없는 작업이 섞인 더러운 브랜치는 패치로 빼서 새 워크트리에 적용합니다. 엉킨 워크트리는 `main`에서 리셋해 최소로 다시 합니다.
-- **PR이 초안으로 열렸을 때.** 클라우드 에이전트의 PR 도구는 초안이 기본이므로 만들 때마다 `draft: false`를 줍니다. 그래도 초안이면 `origin pr ready <번호>`나 `gh pr ready <번호>`를 실행합니다.
+- **PR이 초안으로 열렸을 때.** 내장 PR 도구는 초안이 기본일 수 있으므로 만들 때마다 `draft: false`를 줍니다. 그래도 초안이면 그 도구로 준비 상태로 표시하거나 `origin pr ready <번호>`나 `gh pr ready <번호>`를 실행합니다.
+- **내장 PR 도구가 있을 때.** 생성, 수정, 재지정, 준비 상태는 CLI가 아니라 그 도구로 합니다. CLI로 열면 이후 실행이 고칠 설명을 놓칩니다.
 - **Origin을 쓸 수 없을 때.** `gh`에 머무르고 폴백을 기록합니다. Graphite(`gt`)를 요구하지 않습니다.
 - **본문이 길어질 때.** 스쿼시 커밋 본문이 약 40줄을 넘게 하지 않습니다. 넘으면 본문을 자릅니다. 세부는 링크한 산출물에 둡니다.
 - **피드백이 의도에서 벗어날 때.** 반박합니다(Push back).
@@ -117,7 +122,7 @@ end 응답
 | [`/technical-writing`](writing.md#skill-technical-writing) | 스킬 | PRs |
 | [`/unslop`](writing.md#skill-unslop) | 스킬 | PRs |
 | [`interrogate`](interrogate.md#skill-interrogate) | 스킬 | 서브에이전트가 PR을 열 때 |
-| `gh` 또는 `origin` | 명령줄 도구 | Forge, Size and stacks, Readiness |
+| `gh` 또는 `origin` | 명령줄 도구 | Forge, Size and stacks, Readiness. 내장 PR 도구가 덮지 않을 때 |
 | [Babysit](playbooks-pr.md#playbook-babysit) | 플레이북 | 사용자가 요청할 때만 |
 
 ## Babysit {#playbook-babysit}

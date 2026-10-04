@@ -47,7 +47,7 @@
 | 작업 | 플레이북 |
 | --- | --- |
 | 결함이 보고되었다 | [Bug fix](playbooks-work.md#playbook-bug-fix) (값싼 테스트 경로가 있으면 [`tdd`](tdd-blast.md#skill-tdd)) |
-| 측정된 느림이 있다 | [Perf issue](playbooks-work.md#playbook-perf-issue) |
+| 측정된 느림이 있다 | [Perf issue](playbooks-work.md#playbook-perf-issue) ([`benchmark-checklist`](verification.md#skill-benchmark-checklist)로 숫자를 검사) |
 | 지표 하나를 목표까지 끌어올리고 싶다 | [Hillclimb](playbooks-work.md#playbook-hillclimb) |
 | 실행 중인 프로세스의 누수나 스핀을 진단하고 싶다 | [Runtime forensics](playbooks-work.md#playbook-runtime-forensics) |
 | 이미 캡처된 트레이스나 힙 스냅숏을 진단하고 싶다 | [Trace forensics](playbooks-work.md#playbook-trace-forensics) |
@@ -66,6 +66,7 @@
 | 검증 스킬의 기능 지도가 낡았다 | [`maintain-verification-skill`](verification.md#skill-maintain-verification-skill) |
 | 끝났다고 선언하기 전이다 | [`principle-prove-it-works`](principles.md#skill-principle-prove-it-works) |
 | 테스트를 쓰거나 남기려 한다 | [`principle-test-behavior-not-implementation`](principles.md#skill-principle-test-behavior-not-implementation) |
+| 벤치마크나 측정한 가속, 회귀를 보고하거나 그에 따라 행동하려 한다 | [`benchmark-checklist`](verification.md#skill-benchmark-checklist) ([`explain-the-number`](principles.md#skill-principle-explain-the-number)) |
 
 **PR을 다루고 싶다.**
 
@@ -104,6 +105,7 @@
 | 쓸 모델을 정하고 싶다 | [`setup-pstack`](setup.md#skill-setup-pstack) |
 | 내 작업 방식에서 나만의 모드 스킬을 만들고 싶다 | [`automate-me`](personal.md#skill-automate-me) |
 | 긴 작업의 교훈을 스킬 수정으로 남기고 싶다 | [`reflect`](personal.md#skill-reflect) |
+| 같은 실수로 에이전트를 계속 교정한다 | [`correct`](personal.md#skill-correct) |
 | 슬랙 이슈 제보를 자동으로 분류하고 재현하고 싶다 | [benny 자동화 팩](benny.md#automation-benny) |
 | 웹훅으로 봇을 깨우는 버튼 UI가 필요하다 | [`make-bot-ui`](benny.md#skill-make-bot-ui) |
 
