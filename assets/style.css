@@ -52,8 +52,8 @@ pre {
   break-inside: avoid;
 }
 pre code { background: none; padding: 0; border-radius: 0; font-size: 1em; overflow-wrap: anywhere; }
-table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 0.9em; table-layout: auto; }
-th, td { border: 1px solid #ccc; padding: 0.35em 0.55em; vertical-align: top; text-align: left; overflow-wrap: break-word; }
+table { border-collapse: collapse; width: 100%; max-width: 100%; margin: 1em 0; font-size: 0.9em; table-layout: fixed; }
+th, td { border: 1px solid #ccc; padding: 0.35em 0.55em; vertical-align: top; text-align: left; overflow-wrap: anywhere; word-break: break-word; }
 th code, td code { overflow-wrap: anywhere; }
 th { background: #eee; font-family: var(--sans, sans-serif); }
 tr { page-break-inside: avoid; break-inside: avoid; }

@@ -50,7 +50,7 @@ separate before serializing shared state. 시도마다 자기 워크트리를 �
 | 검증 | [fix-root-causes](#skill-principle-fix-root-causes) | 디버깅 | 증상을 근본 원인까지 추적하고 먼저 재현한다 |
 | 검증 | [sequence-verifiable-units](#skill-principle-sequence-verifiable-units) | 여러 단계 작업, 커밋과 PR을 쌓는 방식 | 각각 검사로 끝나는 작은 단위로 나눈다 |
 | 검증 | [test-behavior-not-implementation](#skill-principle-test-behavior-not-implementation) | 테스트를 쓰거나 바꾸거나 남길 때 | 사용자가 하듯 호출하고 리터럴 기대값에 단언한다 |
-| 검증 | [explain-the-number](#skill-principle-explain-the-number) | 측정한 숫자를 믿거나 보고하거나 그에 따라 행동하기 전 | 무엇이 한계인지 찾고, 다른 것을 재었을 가능성을 배제한다 |
+| 검증 | [explain-the-number](#skill-principle-explain-the-number) | 측정한 숫자를 믿거나 보고하기 전 | 한계를 찾고 다른 측정을 배제한다 |
 | 위임 | [guard-the-context-window](#skill-principle-guard-the-context-window) | 컨텍스트가 차오를 때 | 대용량은 서브에이전트에게, 요약만 메인 스레드에 |
 | 위임 | [never-block-on-the-human](#skill-principle-never-block-on-the-human) | 되돌릴 수 있는 일에서 "해도 될까요?"를 묻고 싶을 때 | 진행하고 결과를 보여 준다 |
 | 메타 | [encode-lessons-in-structure](#skill-principle-encode-lessons-in-structure) | 같은 지시를 두 번째로 쓰는 자신을 발견했을 때 | 린트, 플래그, 검사, 스크립트로 인코딩한다 |
