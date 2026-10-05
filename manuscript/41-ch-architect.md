@@ -23,7 +23,7 @@
 **B단계. 스케치합니다.** 설계 스케치 작업과 A단계의 그라운딩 산출물(artifact)로 `arena` 스킬을 돌립니다. 각 러너의 프롬프트로 `references/runner-prompt.md`를 넘깁니다. 각 후보는 `references/rationale-template.md`의 모양을 갖춘 설계 패키지를 만듭니다. 러너는 `pstack-models.mdc` 규칙(rule)의 `architect runners` 줄에서 가져오고, `arena runners` 줄 대신 씁니다. 규칙이나 그 줄이 없으면 `claude-opus-5-5-max`, `gpt-5.6-sol-max`, `grok-4.7-xhigh-fast`를 씁니다. 별칭이나 거부된 항목은 `arena` 스킬 A단계의 러너 규칙을 따릅니다.
 
 - **두 번 설계합니다.** 첫 후보가 충분해 보여도 종합 전에 구조가 뚜렷이 다른 후보를 적어도 둘 요구합니다. `exhaust-the-design-space` 원칙(principle)을 구체화한 것입니다. 한 모양 안의 점 수정이 아니라 모양 전체의 대안입니다.
-- 종합 전에 모든 후보를 `references/design-red-flags.md`(아래 "설계 적신호" 참조)에 견줘 거릅니다. 얕은 모듈, 정보 누수, 시간적 분해, 통과 메서드는 기각하거나 고칩니다.
+- 종합 전에 모든 후보를 `references/design-red-flags.md`(아래 "설계 적신호" 참조)에 견줘 거릅니다. 다음 기여자는 연 파일만 보고, 가장 가까운 예를 베끼고, 컴파일되는 가장 짧은 길을 택하는 에이전트라고 가정합니다. 파일 하나에서 보아 옳은 변경이 저장소 전체에서도 옳은 설계를 선호합니다.
 - 살아남은 후보는 인터페이스 깊이로 비교합니다. 더 작고 단순한 공개 표면 뒤에 더 많은 복잡도를 숨기는 설계를 선호합니다. 풍부한 인터페이스는 능력을 여러 계층에 흩뿌리지 않고 집중시켜 호출 사슬을 짧게 유지할 수 있습니다.
 - `arena`가 종합된 설계 패키지 하나를 돌려줍니다. 종합 결정이 근거서의 "Synthesis decision" 절을 채웁니다.
 
@@ -90,6 +90,10 @@
 | Information leakage(정보 누수) | 여러 모듈이 같은 내부 결정에 의존합니다. 표현, 정책, 프로토콜 세부가 두 곳 이상에 나타나 바꾸려면 함께 고쳐야 합니다. 전송 타입이나 wire 타입의 공개 재수출은 누수입니다. 외부 데이터는 인터페이스 뒤에서 도메인 타입으로 파싱하고, 저장 스키마, 프레임워크 객체, 프로토콜 세부는 비공개로 둡니다 |
 | Temporal decomposition(시간적 분해) | 모듈을 소유한 지식이 아니라 실행 순서로 나눕니다. load, validate, transform, save를 따로 두면 표현 하나와 그 불변식이 여러 경계에 반복됩니다. 도메인 지식과 소유권을 중심으로 묶습니다. 다른 시점에 도는 메서드도 같은 결정을 지키면 한 모듈에 속할 수 있습니다 |
 | Pass-through method(통과 메서드) | 같은 모양의 인자를 다른 메서드로 그대로 넘깁니다. 복잡도를 숨기지 않고 계층만 더합니다. 없애거나 연산을 마칠 수 있는 모듈로 책임을 옮깁니다. 정책, 적응, 뚜렷한 추상화를 더할 때만 전달 경계를 둡니다 |
+| Split ownership(소유 분할) | 모듈 둘 이상이 같은 상태를 쓰거나 각자 복사본을 둡니다. 작성자 하나를 고치는 에이전트는 나머지를 보지 못하므로 규칙이 갈라집니다. 상태 조각마다 소유자를 하나로 두고, 다른 모듈은 읽거나 소유자에게 변경을 요청합니다 |
+| Two ways to do one task(한 일에 두 길) | 같은 일을 하는 길이 둘 이상입니다. 에이전트는 먼저 찾은 길을 베끼므로 모든 길이 호출자를 계속 얻습니다. 길은 하나로 두고, 같은 변경에서 호출자를 옮기고 나머지를 지웁니다 |
+| Importable internals(가져올 수 있는 내부) | 호출자가 모듈의 내부를 임포트할 수 있습니다. 에이전트는 컴파일되는 가장 짧은 길을 택하므로 내부를 직접 임포트하고, 그것이 인터페이스의 일부가 됩니다. 모듈 밖에서 내부를 임포트하면 빌드가 실패하게 만듭니다 |
+| Hand-synced list(손으로 맞추는 목록) | 둘 이상의 자리가 같은 항목을 나열하고, 항목을 더하려면 모든 목록을 고쳐야 합니다. 목록 하나를 본 에이전트는 그것만 고칩니다. 목록은 하나로 두고 나머지는 거기서 도출합니다. 도출할 수 없으면 목록이 어긋날 때 빌드가 실패하게 만듭니다 |
 
 ### 사용 예
 
@@ -113,4 +117,4 @@
 
 ### 관련 스킬
 
-그라운딩에 [`how`](how.md#skill-how)와 [`why`](why.md#skill-why), 후보 생성에 [`arena`](arena-swarm.md#skill-arena), 스케치에 대한 적대적 압력에 [`interrogate`](interrogate.md#skill-interrogate)를 씁니다. 판단의 근거는 [원칙 장](principles.md)의 `exhaust-the-design-space`, `foundational-thinking`, `boundary-discipline`, `separate-before-serializing-shared-state` 등입니다.
+그라운딩에 [`how`](how.md#skill-how)와 [`why`](why.md#skill-why), 후보 생성에 [`arena`](arena-swarm.md#skill-arena), 스케치에 대한 적대적 압력에 [`interrogate`](interrogate.md#skill-interrogate)를 씁니다. 적신호 네 가지(소유 분할, 한 일에 두 길, 가져올 수 있는 내부, 손으로 맞추는 목록)는 [`correct`](personal.md#skill-correct)가 아키텍처로 없애라는 것과 같은 모양입니다. 판단의 근거는 [원칙 장](principles.md)의 `exhaust-the-design-space`, `foundational-thinking`, `boundary-discipline`, `separate-before-serializing-shared-state` 등입니다.

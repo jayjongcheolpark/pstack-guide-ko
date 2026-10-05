@@ -66,6 +66,7 @@
 | 검증 스킬의 기능 지도가 낡았다 | [`maintain-verification-skill`](verification.md#skill-maintain-verification-skill) |
 | 끝났다고 선언하기 전이다 | [`principle-prove-it-works`](principles.md#skill-principle-prove-it-works) |
 | 테스트를 쓰거나 남기려 한다 | [`principle-test-behavior-not-implementation`](principles.md#skill-principle-test-behavior-not-implementation) |
+| 측정한 숫자를 믿거나 보고하거나 그 숫자로 행동하기 전이다 | [`benchmark-checklist`](verification.md#skill-benchmark-checklist), [`principle-explain-the-number`](principles.md#skill-principle-explain-the-number) |
 
 **PR을 다루고 싶다.**
 
@@ -104,6 +105,7 @@
 | 쓸 모델을 정하고 싶다 | [`setup-pstack`](setup.md#skill-setup-pstack) |
 | 내 작업 방식에서 나만의 모드 스킬을 만들고 싶다 | [`automate-me`](personal.md#skill-automate-me) |
 | 긴 작업의 교훈을 스킬 수정으로 남기고 싶다 | [`reflect`](personal.md#skill-reflect) |
+| 에이전트가 같은 실수를 되풀이한다 | [`correct`](personal.md#skill-correct) |
 | 슬랙 이슈 제보를 자동으로 분류하고 재현하고 싶다 | [benny 자동화 팩](benny.md#automation-benny) |
 | 웹훅으로 봇을 깨우는 버튼 UI가 필요하다 | [`make-bot-ui`](benny.md#skill-make-bot-ui) |
 

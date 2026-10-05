@@ -8,7 +8,7 @@
 
 | 한국어 | 영어 | 처음 표기하는 장 | 구분이 필요한 곳과 예 |
 | --- | --- | --- | --- |
-| 원칙 | principle | colophon | `principle-*` 스킬 23개는 "principle" 스킬이고, `poteto-mode`의 Principles 절(원칙 색인)은 "principles"입니다. 그 밖의 뜻은 표 아래에 적었습니다. 원문은 원칙의 내용을 "rule"이라 부릅니다. 예: `prove-it-works` 원칙(principle) |
+| 원칙 | principle | colophon | `principle-*` 스킬 24개는 "principle" 스킬이고, `poteto-mode`의 Principles 절(원칙 색인)은 "principles"입니다. 그 밖의 뜻은 표 아래에 적었습니다. 원문은 원칙의 내용을 "rule"이라 부릅니다. 예: `prove-it-works` 원칙(principle) |
 | 규칙 | rule | what-is-pstack | 원문이 "rule"이라 부르는 것입니다. 원칙 스킬이 담은 rule, Cursor의 rule 파일(`pstack-models.mdc`), lint rule, `unslop`의 번호 붙은 rule, patch-id rule이 모두 여기에 듭니다. 원칙(principle)과 함께 나오는 곳에서는 둘을 나란히 적었습니다. 예: 원칙(principle)이 가리키는 규칙(rule) |
 | 규칙 | non-negotiable | poteto-mode | `poteto-mode`의 Non-negotiables 절을 이 책이 규칙으로 옮긴 곳입니다. 원문에 rule이라는 말이 없는 다른 곳은 규칙(Autonomy section), 규칙(Stack safety), 규칙(mandatory), 규칙(mapping), 규칙(bucket)처럼 원문의 절 이름이나 낱말을 붙였습니다. 예: 규칙(non-negotiable) 위반 |
 | 기준 | criteria | playbooks-work | 채점하거나 받아들이는 조건입니다. rubric의 criteria, acceptance criteria, success criteria. 예: 성공 기준(criteria) |
@@ -47,7 +47,7 @@
 | skill | 스킬 | `SKILL.md`를 가진 디렉터리 하나. 에이전트가 따르는 워크플로 문서 |
 | plugin | 플러그인 | 스킬, 에이전트를 묶어 설치하는 단위. pstack은 `/add-plugin pstack`으로 설치 |
 | playbook | 플레이북 | `poteto-mode`가 작업 유형별로 고르는 절차서. 23개 |
-| principle | 원칙 | `principle-*` 스킬 하나. 23개. 다른 뜻은 위 표에 있음 |
+| principle | 원칙 | `principle-*` 스킬 하나. 24개. 다른 뜻은 위 표에 있음 |
 | mode / sticky mode | 모드 / 스티키 모드 | 한 번 켜면 여러 턴 동안 유지되는 스킬(`poteto-mode`) |
 | agent / subagent | 에이전트 / 서브에이전트 | 작업하는 모델 인스턴스 / 부모가 띄워 일을 맡기는 에이전트 |
 | harness | 하니스 | 앱을 구동해 검사하거나 지표를 재는 테스트 도구 |

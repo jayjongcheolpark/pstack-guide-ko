@@ -1,8 +1,8 @@
-# 원칙 스킬 23개
+# 원칙 스킬 24개
 
 원문: {{src:skills/poteto-mode/SKILL.md}} {{src:docs/guide/08-principles.md}} {{src:README.md}}
 
-pstack에는 원칙(principle) 스킬이 23개 있습니다. 하나의 원칙마다 짧은 스킬 하나이고 `SKILL.md`도 짧습니다. `poteto-mode`는 이 원칙의 색인을 자기 본문에 내장하고, 다중 단계 작업을 시작할 때 색인을 읽고, 작업이 건드리는 원칙을 적용하고, 응답에서 적용한 원칙과 그 원칙이 바꾼 결정을 밝힙니다. 원칙 스킬 파일이 따로 있는 이유는 다른 스킬이 원칙을 이름으로 참조할 수 있고, 색인이 각 규칙(rule)의 전체 문서를 가리킬 수 있게 하기 위해서입니다. 원칙의 프런트매터에는 모두 `disable-model-invocation: true`가 있습니다.
+pstack에는 원칙(principle) 스킬이 24개 있습니다. 하나의 원칙마다 짧은 스킬 하나이고 `SKILL.md`도 짧습니다. `poteto-mode`는 이 원칙의 색인을 자기 본문에 내장하고, 다중 단계 작업을 시작할 때 색인을 읽고, 작업이 건드리는 원칙을 적용하고, 응답에서 적용한 원칙과 그 원칙이 바꾼 결정을 밝힙니다. 원칙 스킬 파일이 따로 있는 이유는 다른 스킬이 원칙을 이름으로 참조할 수 있고, 색인이 각 규칙(rule)의 전체 문서를 가리킬 수 있게 하기 위해서입니다. 원칙의 프런트매터에는 모두 `disable-model-invocation: true`가 있습니다.
 
 ## 원칙은 이름으로 조향하는 도구입니다
 
@@ -50,6 +50,7 @@ separate before serializing shared state. 시도마다 자기 워크트리를 �
 | 검증 | [fix-root-causes](#skill-principle-fix-root-causes) | 디버깅 | 증상을 근본 원인까지 추적하고 먼저 재현한다 |
 | 검증 | [sequence-verifiable-units](#skill-principle-sequence-verifiable-units) | 여러 단계 작업, 커밋과 PR을 쌓는 방식 | 각각 검사로 끝나는 작은 단위로 나눈다 |
 | 검증 | [test-behavior-not-implementation](#skill-principle-test-behavior-not-implementation) | 테스트를 쓰거나 바꾸거나 남길 때 | 사용자가 하듯 호출하고 리터럴 기대값에 단언한다 |
+| 검증 | [explain-the-number](#skill-principle-explain-the-number) | 측정한 숫자를 믿거나 보고하거나 그 숫자로 행동하기 전 | 무엇이 숫자를 제한하는지 밝히고, 다른 것을 잰 것이 아님을 배제한다 |
 | 위임 | [guard-the-context-window](#skill-principle-guard-the-context-window) | 컨텍스트가 차오를 때 | 대용량은 서브에이전트에게, 요약만 메인 스레드에 |
 | 위임 | [never-block-on-the-human](#skill-principle-never-block-on-the-human) | 되돌릴 수 있는 일에서 "해도 될까요?"를 묻고 싶을 때 | 진행하고 결과를 보여 준다 |
 | 메타 | [encode-lessons-in-structure](#skill-principle-encode-lessons-in-structure) | 같은 지시를 두 번째로 쓰는 자신을 발견했을 때 | 린트, 플래그, 검사, 스크립트로 인코딩한다 |
@@ -734,6 +735,41 @@ separate before serializing shared state. 시도마다 자기 워크트리를 �
 
 **함께 보는 원칙.** `interrogate`의 루브릭이 테스트가 동작을 검사하는지 구현 세부를 검사하는지 묻습니다. **해설 (이 책의 해석, 원본에 없음).** 위 검사 문장은 [`prove-it-works`](#skill-principle-prove-it-works)와 같은 정신을 테스트에 옮긴 것으로 읽히지만, 두 원문이 서로를 언급하지는 않습니다. 원문 본문에서 이 원칙을 직접 인용하는 다른 스킬은 없습니다.
 
+### explain-the-number {#skill-principle-explain-the-number}
+
+원문: {{src:skills/principle-explain-the-number/SKILL.md}}
+
+> 측정한 숫자는 시스템에 대한 주장입니다. 믿거나 보고하거나 그 숫자로 행동하기 전에, 무엇이 그 숫자를 제한하는지 찾고 다른 것을 잰 것이 아님을 배제합니다.
+
+**이유.** 잘못 돈 실행도 그럴듯한 숫자를 찍습니다. 실패한 요청, 일을 건너뛴 캐시, 실행되지 않은 코드, 기본 설정에 둔 한쪽, 실행마다의 잡음이 모두 멀쩡해 보이는 결과를 만듭니다. 왜 숫자가 두 배가 아닌지를 말할 수 없으면, 무엇을 쟀는지 모르는 것입니다.
+
+**패턴.**
+
+- **"why not double?"을 묻습니다.** 결과를 가두는 자원이나 코드 경로에 이름을 붙입니다. 코어, 락, 디스크, 네트워크, 부하 발생기 자체 같은 것입니다. 실행 중의 프로파일이나 시스템 카운터에서 얻고, 그다음 소스에 대응시킵니다. 코드를 읽고 한 짐작은 제한 요인이 아닙니다.
+- **그 숫자가 달리 잴 수 있는 것을 나열하고, 각각을 증거로 배제합니다.** 흔한 후보는 오류, 건너뛰거나 캐시된 일, 조율되지 않은 쪽, 잡음, 종단에서 보기에는 너무 작은 조각입니다.
+- **증거를 숫자와 함께 둡니다.** 실행 횟수, 퍼짐, 제한 요인을 노트나 링크된 산출물(artifact)에 두어 읽는 사람이 주장을 확인할 수 있게 합니다.
+
+성능 숫자이면 [benchmark-checklist](verification.md#skill-benchmark-checklist)의 절차 전체를 돌립니다. eval 결과이면 시행에 같은 질문을 합니다. 모든 실행이 과제를 했는지, 차이가 시행과 모델에 걸쳐 유지되는지, 그 시나리오가 중요한지입니다.
+
+이것을 건너뛴 자리는, 숫자 뒤의 증거에 실행 횟수나 퍼짐이나 이름 붙인 제한 요인이 없을 때, 또는 아낀 시간이 바뀐 조각이 쓰던 시간보다 클 때입니다.
+
+[`prove-it-works`](#skill-principle-prove-it-works)와는 다릅니다. 그 원칙은 출력이 진짜인지 확인하고, 이 원칙은 측정한 숫자가 말하는 뜻인지를 확인합니다.
+
+**적용과 예외.** 측정한 숫자를 믿거나 보고하거나 그 숫자로 행동하기 전입니다. 속도 향상, 회귀, 처리량, 지연, eval 결과가 해당합니다. 성능 숫자는 체크리스트 스킬의 절차를 따르고, eval은 같은 질문을 시행에 묻습니다.
+
+> **예시 (이 책의 저자가 만든 것, 원본에 없음)**
+>
+> ```text
+> 전: "내보내기가 30% 빨라졌다"고 한 번 돌린 숫자만 보고합니다.
+> 후: 왜 두 배가 아닌지를 먼저 묻습니다. 프로파일은 JSON 파싱이 코어 하나를
+>     꽉 채운다고 말하고, 오류 응답은 0건이고, 일곱 번 실행의 중앙값과 범위를
+>     노트에 붙입니다. 제한 요인을 이름 붙이지 못하면 판정은 결론 없음입니다.
+> ```
+
+**함정.** 원문이 건너뛴 것으로 보는 자리가 네 가지입니다. 실행 횟수가 없음, 퍼짐이 없음, 이름 붙인 제한 요인이 없음, 아낀 시간이 바뀐 조각이 쓰던 시간보다 큼. 코드를 읽고 병목을 짐작하는 것은 제한 요인이 아닙니다.
+
+**함께 보는 원칙.** 원문이 [`prove-it-works`](#skill-principle-prove-it-works)와 구분합니다. 앞의 것은 출력이 진짜인지이고, 이 원칙은 숫자가 뜻하는 바인지입니다. 성능 숫자의 절차는 [`benchmark-checklist`](verification.md#skill-benchmark-checklist)가 갖고, Perf issue와 Hillclimb가 그 스킬로 기준선과 하니스를 걸러 냅니다.
+
 ## 위임 원칙
 
 ### guard-the-context-window {#skill-principle-guard-the-context-window}
@@ -829,7 +865,7 @@ separate before serializing shared state. 시도마다 자기 워크트리를 �
 
 ## 원칙이 서로 당길 때 {#principles-interactions}
 
-원칙 23개를 한꺼번에 적용하는 일은 없습니다. 색인은 원칙마다 "언제 적용하는가"를 붙여 놓았고, 안내서는 `poteto-mode`가 작업이 촉발한 원칙만 적용한다고 설명합니다. 원문은 원칙이 서로 부딪칠 때 어느 쪽을 택하라는 일반 규칙(rule)을 따로 두지 않습니다. 대신 개별 원칙과 플레이북이 몇몇 짝의 관계를 직접 밝힙니다. 아래 표는 그 서술만 모은 것입니다.
+원칙 24개를 한꺼번에 적용하는 일은 없습니다. 색인은 원칙마다 "언제 적용하는가"를 붙여 놓았고, 안내서는 `poteto-mode`가 작업이 촉발한 원칙만 적용한다고 설명합니다. 원문은 원칙이 서로 부딪칠 때 어느 쪽을 택하라는 일반 규칙(rule)을 따로 두지 않습니다. 대신 개별 원칙과 플레이북이 몇몇 짝의 관계를 직접 밝힙니다. 아래 표는 그 서술만 모은 것입니다.
 
 | 짝 | 원문이 밝히는 관계 | 출처 |
 | --- | --- | --- |
@@ -843,6 +879,7 @@ separate before serializing shared state. 시도마다 자기 워크트리를 �
 | `laziness-protocol`과 Feature의 `arena` 위임 | 이 원칙은 `arena` 위임 의무를 면제하지 않습니다. 이득은 줄 수가 아니라 리뷰의 분리입니다 | Feature 플레이북 |
 | `laziness-protocol`과 Prototype | Prototype은 "가장 작은 변경"과 검증 기준이 뒤집히는 유일한 플레이북입니다. 폴리시보다 속도이고 엄밀함은 올바른 설계를 싸게 고르는 데 있습니다 | Prototype 플레이북 |
 | `attack-the-premise`와 `fix-root-causes` | 센서스가 보여 준 배정이 무엇이냐는 물음이 다음 "왜"입니다 | `attack-the-premise` |
+| `explain-the-number`와 `prove-it-works` | 뒤의 것은 출력이 진짜인지 확인하고, 앞의 것은 측정한 숫자가 말한 뜻인지 확인합니다 | `explain-the-number` |
 
 > **해설 (이 책의 해석, 원본에 없음)**
 >

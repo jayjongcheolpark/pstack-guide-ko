@@ -32,14 +32,14 @@ README는 "포크하고, 개선하고, 자기 것으로 만들라"고 권하고,
 
 | 구성 요소 | 내용 |
 | --- | --- |
-| `skills/` | 스킬 47개. 일반 스킬 24개와 `principle-*` 스킬 23개 |
+| `skills/` | 스킬 50개. 일반 스킬 26개와 `principle-*` 스킬 24개 |
 | `agents/` | 서브에이전트 정의 2개: `poteto-agent`, `Comment Sicko` |
 | `automations/` | 휴면 상태의 자동화 팩 `benny` |
 | `docs/guide/` | 열 장으로 된 사용 안내서와 삽화 |
 | `.cursor-plugin/plugin.json` | 플러그인 매니페스트 |
 | `README.md`, `LICENSE` | 소개와 MIT 라이선스 |
 
-매니페스트는 이름 `pstack`, 버전 `0.15.5`, 작성자 Lauren Tan, 라이선스 MIT, 분류 `developer-tools`를 선언하고 `skills`와 `agents` 디렉터리를 가리킵니다. 태그는 `workflow`, `principles`, `review`, `planning`입니다. 훅이나 규칙(rule) 파일 같은 자동 실행 요소는 플러그인에 들어 있지 않습니다. 모델 설정 규칙은 `/setup-pstack`을 실행할 때 사용자 쪽에 생성됩니다. 자세한 내용은 [설치와 첫 사용](setup.md)에서 다룹니다.
+매니페스트는 이름 `pstack`, 버전 `{{version}}`, 작성자 Lauren Tan, 라이선스 MIT, 분류 `developer-tools`를 선언하고 `skills`와 `agents` 디렉터리를 가리킵니다. 태그는 `workflow`, `principles`, `review`, `planning`입니다. 훅이나 규칙(rule) 파일 같은 자동 실행 요소는 플러그인에 들어 있지 않습니다. 모델 설정 규칙은 `/setup-pstack`을 실행할 때 사용자 쪽에 생성됩니다. 자세한 내용은 [설치와 첫 사용](setup.md)에서 다룹니다.
 
 스킬은 하나의 디렉터리이고 그 안의 `SKILL.md`가 본문입니다. 어떤 스킬은 `references/`에 하위 프롬프트와 판단 기준을, `playbooks/`에 절차를, `scripts/`에 실행 도구를 함께 둡니다.
 
@@ -74,7 +74,7 @@ README와 `poteto-mode`의 `SKILL.md`에서 읽히는 설계 아이디어를 정
 
 **하나의 입구, 여러 플레이북.** 대부분의 작업은 `poteto-mode`로 들어갑니다. 플레이북은 조사, 버그 수정, 성능, 기능, 리팩터링, PR 유지, 배포처럼 작업 유형마다 있습니다. 어느 플레이북도 맞지 않는 큰 작업은 `figure-it-out`이 그 작업만의 플레이북을 새로 설계합니다.
 
-**원칙이 결정의 근거가 된다.** `poteto-mode`는 원칙 23개의 색인을 내장하고 있고, 응답에서 결정에 영향을 준 원칙과 그 원칙이 바꾼 구체적 선택을 밝히라고 요구합니다. 원칙 하나하나는 짧은 스킬입니다. 사용자는 원칙 이름으로 에이전트를 조향할 수도 있습니다.
+**원칙이 결정의 근거가 된다.** `poteto-mode`는 원칙 24개의 색인을 내장하고 있고, 응답에서 결정에 영향을 준 원칙과 그 원칙이 바꾼 구체적 선택을 밝히라고 요구합니다. 원칙 하나하나는 짧은 스킬입니다. 사용자는 원칙 이름으로 에이전트를 조향할 수도 있습니다.
 
 **깊이 파고들고 나서 만든다.** 코드가 함수 경계를 넘으면 구현 전에 `architect`로 병렬 설계 탐색을 하고, 논쟁적인 설계는 배포 전에 `interrogate`로 여러 모델이 공격합니다. 이해가 필요하면 `how`와 `why`로 먼저 조사합니다.
 
@@ -100,17 +100,17 @@ README에는 "왜 계획 스킬이 없는가"라는 절이 있습니다. Cursor�
 
 ## 스킬 지도
 
-47개 스킬을 이 책은 다음과 같이 나눕니다. 전체 목록과 트리거 문구는 [부록의 빠른 참조표](quickref.md)에 있습니다.
+50개 스킬을 이 책은 다음과 같이 나눕니다. 전체 목록과 트리거 문구는 [부록의 빠른 참조표](quickref.md)에 있습니다.
 
 | 부 | 스킬 |
 | --- | --- |
 | 시작하기 | `setup-pstack` |
 | 진입점 | `poteto-mode` (플레이북 23개 포함) |
 | 이해하기 | `how`, `why`, `teach`, `recall` |
-| 설계하기 | `architect`, `arena`, `swarm`, `figure-it-out`, `principle-*` 23개 |
-| 고치고 검증하기 | `tdd`, `blast-radius`, `interrogate`, `create-verification-skill`, `maintain-verification-skill` |
+| 설계하기 | `architect`, `arena`, `swarm`, `figure-it-out`, `principle-*` 24개 |
+| 고치고 검증하기 | `tdd`, `blast-radius`, `interrogate`, `benchmark-checklist`, `create-verification-skill`, `maintain-verification-skill` |
 | 글과 코드 정리 | `unslop`, `technical-writing`, `no-comments`, `typescript-best-practices` |
-| 나만의 방식과 유틸리티 | `automate-me`, `reflect`, `show-me-your-work`, `bro` |
+| 나만의 방식과 유틸리티 | `automate-me`, `reflect`, `correct`, `show-me-your-work`, `bro` |
 | 자동화 | `make-bot-ui` |
 
-수를 세면 1 + 1 + 4 + 27 + 5 + 4 + 4 + 1 = 47개입니다. 표의 설계하기 행은 일반 스킬 4개와 원칙 23개를 합쳐 27개입니다.
+수를 세면 1 + 1 + 4 + 28 + 6 + 4 + 5 + 1 = 50개입니다. 표의 설계하기 행은 일반 스킬 4개와 원칙 24개를 합쳐 28개입니다.
