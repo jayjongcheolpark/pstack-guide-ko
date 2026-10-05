@@ -2,9 +2,9 @@
 
 원문: {{src:README.md}} {{src:skills/poteto-mode/SKILL.md}}
 
-이 표는 pstack 0.15.5(커밋 `adf3218`)의 스킬 47개, 에이전트 2개, `poteto-mode` 플레이북 23개를 한곳에 모았습니다. 트리거 문구는 각 스킬의 `description`에 있는 문구를 그대로 두었고(`no-comments`처럼 `description`에 없는 곳은 `poteto-mode`의 규칙(non-negotiable)을 적었고), 영어 원문이 없는 곳(원칙(principle) 스킬 등)은 "언제 적용하는가"를 한국어로 적었습니다. 이름을 누르면 해당 절로 갑니다.
+이 표는 pstack 0.15.9(커밋 `e43c7ee`)의 스킬 50개, 에이전트 2개, `poteto-mode` 플레이북 23개를 한곳에 모았습니다. 트리거 문구는 각 스킬의 `description`에 있는 문구를 그대로 두었고(`no-comments`처럼 `description`에 없는 곳은 `poteto-mode`의 규칙(non-negotiable)을 적었고), 영어 원문이 없는 곳(원칙(principle) 스킬 등)은 "언제 적용하는가"를 한국어로 적었습니다. 이름을 누르면 해당 절로 갑니다.
 
-## 일반 스킬 24개
+## 일반 스킬 26개
 
 | 스킬 | 한 줄 목적 | 트리거 문구 |
 | --- | --- | --- |
@@ -21,6 +21,7 @@
 | [`tdd`](tdd-blast.md#skill-tdd) | 버그를 실패하는 테스트로 먼저 고정하고 고침 | 사용자가 TDD, 실패하는 테스트, 회귀 테스트를 요청했을 때, 또는 버그에 값싼 로컬 테스트 대상이 있을 때 |
 | [`blast-radius`](tdd-blast.md#skill-blast-radius) | 변경이 다른 곳에서 깨뜨릴 것을 찾고 안전 근거를 실행으로 증명 | "blast radius of X", "what could this break", 믿지 못하는 작은 diff |
 | [`interrogate`](interrogate.md#skill-interrogate) | 여러 모델이 diff를 적대적으로 리뷰하고 판정을 냄 | "interrogate", "adversarial review", "multi-model review", "challenge this", "stress test this code", "find blind spots", "tear this apart" |
+| [`benchmark-checklist`](verification.md#skill-benchmark-checklist) | 성능 숫자를 보고하거나 그 숫자로 행동하기 전에 걸러 냄 | 벤치마크를 돌리거나, 자신이 측정한 속도 향상이나 회귀를 보고할 때 |
 | [`create-verification-skill`](verification.md#skill-create-verification-skill) | 앱을 사용자처럼 구동하는 프로젝트 전용 검증(verification) 스킬 생성 | `/create-verification-skill`, "make a control skill for this repo", 앱 동작을 증명할 스크립트된 방법이 없을 때 |
 | [`maintain-verification-skill`](verification.md#skill-maintain-verification-skill) | 검증 스킬과 기능 지도를 정직하게 유지 | `/maintain-verification-skill`, "audit the verify skill" |
 | [`unslop`](writing.md#skill-unslop) | 글에서 AI가 쓴 티를 걷어 냄 | 원문: "Must always apply" |
@@ -29,11 +30,12 @@
 | [`typescript-best-practices`](code-hygiene.md#skill-typescript-best-practices) | 타입 시스템 원칙을 TypeScript 문법으로 구체화 | `.ts`나 `.tsx` 파일을 읽거나 편집할 때 |
 | [`automate-me`](personal.md#skill-automate-me) | 자신의 작업 방식에서 `-mode` 스킬을 만듦 | "automate me", "create/update/refresh my -mode skill", "turn/capture my preferences or working style into a skill" |
 | [`reflect`](personal.md#skill-reflect) | 대화 기록에서 배운 것을 스킬 수정으로 라우팅 | "reflect", `/reflect` |
+| [`correct`](personal.md#skill-correct) | 되풀이되는 에이전트 실수를 찾아 각각을 불가능하게 만듦 | `/correct` |
 | [`show-me-your-work`](personal.md#skill-show-me-your-work) | 오래 걸리거나 무인인 작업의 결정 기록을 TSV로 남김 | `/show-me-your-work`, 자율 또는 여러 단계 실행, 사람이 자리를 뜬 뒤 검토하는 작업 |
 | [`bro`](utility.md#skill-bro) | 마지막 메시지를 전문 용어 없이 다시 말함 | `/bro` |
 | [`make-bot-ui`](benny.md#skill-make-bot-ui) | 웹훅으로 Grok Bot을 깨우는 버튼이 있는 UI를 만듦 | 커스텀 UI(페이지, 대시보드, 버튼)로 Grok Bot을 깨울 때, 웹훅 발신자 키가 필요할 때, Tailscale로 노출할 때 |
 
-## 원칙 스킬 23개
+## 원칙 스킬 24개
 
 모두 [원칙 장](principles.md)에 절이 있고, 절마다 적용하는 때와 아닌 때, 예시, 함정, 함께 보는 원칙이 붙어 있습니다. 원칙이 서로 당길 때는 [그 장의 끝 절](principles.md#principles-interactions)에 모았습니다. 트리거 문구는 영어 `description`의 "Apply when ..."을 옮긴 것입니다.
 
@@ -59,6 +61,7 @@
 | [`principle-fix-root-causes`](principles.md#skill-principle-fix-root-causes) | 검증 | 디버깅할 때 |
 | [`principle-sequence-verifiable-units`](principles.md#skill-principle-sequence-verifiable-units) | 검증 | 여러 단계 작업(스윕, 마이그레이션, 비슷한 수정의 연속)과 커밋과 PR을 쌓는 방식 |
 | [`principle-test-behavior-not-implementation`](principles.md#skill-principle-test-behavior-not-implementation) | 검증 | 테스트를 쓰거나 바꾸거나 남길 때 |
+| [`principle-explain-the-number`](principles.md#skill-principle-explain-the-number) | 검증 | 측정한 숫자(속도 향상, 회귀, 처리량, 지연, eval 결과)를 믿거나 보고하거나 그 숫자로 행동하기 전 |
 | [`principle-guard-the-context-window`](principles.md#skill-principle-guard-the-context-window) | 위임 | 대용량 출력, 긴 파일, 반복 읽기, 팬아웃 계획으로 컨텍스트가 차오를 때 |
 | [`principle-never-block-on-the-human`](principles.md#skill-principle-never-block-on-the-human) | 위임 | 되돌릴 수 있는 일에서 "X를 할까요?"라고 묻고 싶을 때 |
 | [`principle-encode-lessons-in-structure`](principles.md#skill-principle-encode-lessons-in-structure) | 메타 | 같은 지시를 두 번째로 쓰는 자신을 발견했거나 반복되는 교정을 알아챘을 때 |
@@ -120,8 +123,10 @@ README의 "모든 스킬" 표가 스킬마다 붙인 한 줄 설명입니다(원
 | `/make-bot-ui` | 버튼이 웹훅으로 Grok Bot을 깨우는 페이지나 대시보드를 원할 때 |
 | `/setup-pstack` | pstack이 역할별로 쓸 모델을 고르고 싶을 때. 모델을 감지하고 설정 규칙을 씀 |
 | `/reflect` | 긴 작업이 끝났고 그 레시피를 스킬 수정으로 남기고 싶을 때 |
+| `/correct` | 같은 실수로 에이전트를 계속 고치고 있을 때. 이력에서 실수 부류를 찾고, 통하는 가장 높은 수준(아키텍처, 그다음 타입, 린트와 CI, 그다음 테스트, 문서는 마지막)에서 고치고, 규칙마다 무엇이 강제하는지를 짝지은 표를 유지 |
 | `/teach` | 변경이나 서브시스템을 요약이 아니라 실제로 이해하고 싶을 때. `how`와 `why`를 돌려 그림을 한 장씩 쌓아 가며 평이한 설명 하나로 엮음 |
 | `/tdd` | 버그를 고치는데 값싼 로컬 테스트 경로가 있을 때. 실패하는 테스트를 먼저, 그다음 수정 |
+| `/benchmark-checklist` | 벤치마크를 돌렸거나 속도 향상이나 회귀를 측정했을 때. 보고하거나 그 숫자로 행동하기 전에 숫자(제한 요인, 조율, 오류, 반복 실행, 종단 관련성)를 걸러 냄 |
 | `/no-comments` | 리뷰 전에 주석을 걷어 내려는 때. Comment Sicko를 띄우고 수용한 발견을 고치고 제약 주장에 인코딩을 제안 |
 | `/typescript-best-practices` | TypeScript를 읽거나 편집할 때. `type-system-discipline` 원칙을 문법에 접지 |
 | `/figure-it-out` | 맞는 번들 플레이북이 없을 때. 과업에 맞는 엄밀하고 감사 가능한 플레이북을 설계 |

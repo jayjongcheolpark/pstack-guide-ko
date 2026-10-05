@@ -93,7 +93,7 @@ pstack은 `Comment Sicko`라는 주석 리뷰어(README는 읽기 전용이라�
 | Simplest total type | 모든 연산이 전체(total)인 동안은 `T[]`를 유지합니다. 느슨한 타입이 `!`, 캐스트, "일어나면 안 되는" throw를 강제하는 곳에서만 `NonEmpty<T>`로 강화합니다 |
 | `unknown` over `any` | 외부 데이터는 `unknown`입니다 |
 | Schemas before guards | 속성별 타입 가드를 손으로 쓰기 전에 저장소의 런타임 스키마 라이브러리를 쓰고 `z.infer`처럼 스키마에서 타입을 추론합니다 |
-| No `as` casts | 모든 `as`는 런타임 충돌이 기다리는 것입니다. 검증 뒤에만 캐스트합니다 |
+| No `as` casts | 모든 `as`는 런타임 충돌이 기다리는 것입니다. 캐스트는 타입 시스템이 주장을 검증한 뒤에만 하고, 경계는 그 모양을 소유한 스키마로 파싱합니다 |
 | Narrowing hierarchy | 판별자 switch > `in` 연산자 > `typeof`/`instanceof` > 사용자 정의 타입 가드 > `as` |
 | Type guards | 주장을 실제로 검증해야 합니다. 거짓말하는 가드는 `as`보다 나쁩니다. 안전하다고 말하는 이름 뒤에 버그가 숨기 때문입니다. `isX`나 `hasX`로 이름 붙입니다 |
 | Exhaustiveness | default 분기에 `const _exhaustive: never = x;`를 인라인으로 두어 새 변형이 추가되면 컴파일러가 오류를 냅니다 |
@@ -204,7 +204,28 @@ function parseUser(input: unknown): User {
 
 실패가 예상된 분기이면 `safeParse`를, 저장소가 다른 스키마 라이브러리를 쓰면 그것의 추론 헬퍼를 씁니다. 가드 하나 때문에 새 스키마 의존성을 추가하지 않습니다. 코드베이스가 이미 믿는 스키마 시스템을 선호하는 규칙입니다.
 
-**`as` 캐스트 금지.** 모든 `as`는 잠재적 런타임 충돌입니다. 타입 시스템이 주장을 검증한 뒤에만 캐스트합니다. 경계에서 캐스트를 얻어 냅니다(모든 필드를 검증한 뒤의 `return data as User;`). 기존 코드에서 `as`를 걷어 낼 때는 TypeScript가 왜 추론하지 못하는지 찾습니다. 판별자가 없으면 추가하고 판별 유니온으로 바꿉니다. 소스 타입이 너무 넓으면(예: `Record<string, unknown>`) 좁힙니다. 경계가 타입 없이 열려 있으면 파싱 함수나 스키마를 더합니다. 정말 표현할 수 없으면 브랜드 타입이나 `satisfies`를 씁니다.
+**`as` 캐스트 금지.** 모든 `as`는 잠재적 런타임 충돌입니다. 타입 시스템이 주장을 검증한 뒤에만 캐스트합니다. 존재만 보는 타입 술어(`"id" in data`처럼)로 캐스트를 얻어 내지 않습니다. 경계는 그 모양을 소유한 스키마로 파싱합니다.
+
+```ts
+import { z } from "zod";
+
+const userSchema = z.object({ id: z.string(), name: z.string() });
+type User = z.infer<typeof userSchema>;
+
+function parseUser(data: unknown): User {
+  return userSchema.parse(data);
+}
+```
+
+타입이 먼저 오면 스키마에 그 타입이 증명하는 주석을 답니다. 아래 객체에서 `name`을 빼면 대입이 컴파일되지 않습니다.
+
+```ts
+type User = { id: string; name: string };
+
+const userSchema: z.ZodType<User> = z.object({ id: z.string(), name: z.string() });
+```
+
+기존 코드에서 `as`를 걷어 낼 때는 TypeScript가 왜 추론하지 못하는지 찾습니다. 판별자가 없으면 추가하고 판별 유니온으로 바꿉니다. 소스 타입이 너무 넓으면(예: `Record<string, unknown>`) 좁힙니다. 경계가 타입 없이 열려 있으면 그 모양을 소유한 스키마로 파싱합니다. 스키마는 없는 곳에만 더합니다. 정말 표현할 수 없으면 브랜드 타입이나 `satisfies`를 씁니다.
 
 **좁히기 위계.** 최선에서 최후 수단까지 다음 순서입니다. (1) 판별 유니온 switch나 if, 컴파일러가 자동으로 좁힙니다. (2) `in` 연산자, `"key" in obj`가 그 키를 가진 변형으로 좁힙니다. (3) `typeof`와 `instanceof`, 원시 타입과 클래스 인스턴스용. (4) 사용자 정의 타입 가드, 위가 부족할 때. (5) `as` 캐스트, 검증 뒤에만.
 
@@ -222,7 +243,7 @@ function parseUser(input: unknown): User {
 
 ### 사용 예
 
-`.ts`나 `.tsx` 파일을 건드리면 에이전트가 이 규칙을 스스로 씁니다. 따로 부를 필요는 없습니다. 예를 들어 상태를 `{ loading: boolean; diff?: GitDiff; error?: string }`처럼 모델링한 코드를 리뷰하면 판별 유니온으로, `data as User`가 보이면 경계의 파싱 함수나 스키마로, switch의 default가 비어 있으면 `never` 완전성 검사로 바꾸게 됩니다.
+`.ts`나 `.tsx` 파일을 건드리면 에이전트가 이 규칙을 스스로 씁니다. 따로 부를 필요는 없습니다. 예를 들어 상태를 `{ loading: boolean; diff?: GitDiff; error?: string }`처럼 모델링한 코드를 리뷰하면 판별 유니온으로, `data as User`가 보이면 그 모양을 소유한 스키마의 파싱으로, switch의 default가 비어 있으면 `never` 완전성 검사로 바꾸게 됩니다.
 
 ### 함정과 주의점
 
