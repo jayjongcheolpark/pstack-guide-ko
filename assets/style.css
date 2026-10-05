@@ -55,6 +55,8 @@ pre code { background: none; padding: 0; border-radius: 0; font-size: 1em; overf
 table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 0.9em; table-layout: auto; }
 th, td { border: 1px solid #ccc; padding: 0.35em 0.55em; vertical-align: top; text-align: left; overflow-wrap: break-word; }
 th code, td code { overflow-wrap: anywhere; }
+/* Hyphenated skill links do not shrink a table's min-content under break-word. */
+th a, td a { overflow-wrap: anywhere; }
 th { background: #eee; font-family: var(--sans, sans-serif); }
 tr { page-break-inside: avoid; break-inside: avoid; }
 hr { border: 0; border-top: 1px solid #ccc; margin: 2em 0; }

@@ -24,7 +24,7 @@
 | 뼈대 | scaffold | playbooks-long | 뒤따르는 작업을 돕는 기반입니다. `foundational-thinking`의 "scaffold first", 임시 scaffolding. 예: 뼈대(scaffold) 먼저 |
 | 뼈대 | skeleton | playbooks-work | 채워 넣는 틀입니다. multi-phase plan의 skeleton, eval의 project skeleton. 예: 계획서 뼈대(skeleton) |
 | 관문 | gate | poteto-mode | gate입니다. 사람이 정하는 지점과 통과해야 나아가는 검사 둘 다 gate입니다. 예: 회귀 관문(gate) |
-| 게이트 | gate | playbooks-work | 같은 gate를 소리 나는 대로 적은 말입니다. 기능 게이트처럼 코드 안의 분기 조건을 가리키거나 병합 사유를 가리킬 때 씁니다. 예: 기능 게이트(gate) |
+| 게이트 | gate | playbooks-pr | 같은 gate를 소리 나는 대로 적은 말입니다. 기능 게이트처럼 코드 안의 분기 조건을 가리키거나 병합 사유를 가리킬 때 씁니다. 예: 게이트(gate) 사유 |
 | 관문 시험 | gauntlet | poteto-mode | `swarm`의 gauntlet입니다. gate와는 다른 낱말입니다. 예: 관문 시험(gauntlet) |
 | 지침 | guideline | writing | 스타일 가이드의 guideline입니다. Global English Style Guide의 guideline, `create-skill`의 writing guidelines. 예: 지침(guideline) 텍스트 |
 | 지침 | guide | why | epistemics 문서의 phrasing guide입니다. 예: 표현 지침(guide) |
