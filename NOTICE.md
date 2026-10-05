@@ -8,7 +8,7 @@ The original author, Lauren Tan (X: @poteto), gave permission on 2026-09-28 to d
 
 - **pstack** by Lauren Tan, Copyright (c) 2026 Lauren Tan, MIT License.
 - Source: https://github.com/cursor/plugins/tree/main/pstack
-- Based on pstack 0.15.9; the book version starts from the pstack version, and a book-only revision adds the suffix (`-ko.N`). Pinned commit: `e43c7ee26e0038c6c1fa8380dd34ce86ff94cb2a`.
+- Based on pstack 0.15.10; the book version starts from the pstack version, and a book-only revision adds the suffix (`-ko.N`). Pinned commit: `4e5b1cf2ccb0ea3716f08c8ee0a5856b5ab93536`.
 - The MIT notice of the original is quoted in `LICENSE` (with an added copyright line for this explanation) and in the attribution appendix of the book (`manuscript/94-app-attribution.md`).
 
 ## What comes from pstack

@@ -1,8 +1,8 @@
 # 스킬 선택 흐름도
 
-원문: {{src:skills/poteto-mode/SKILL.md}} {{src:docs/guide/02-poteto-mode.md}} {{src:docs/guide/04-design.md}}
+원문: {{src:skills/poteto-mode/SKILL.md}} {{src:docs/guide/02-poteto-mode.md}} {{src:docs/guide/04-design.md}} {{src:skills/poteto-help/SKILL.md}}
 
-어떤 스킬을 써야 할지 모를 때 위에서부터 질문에 답하며 내려갑니다. 대부분은 첫 질문에서 끝납니다. 원문이 강조하듯 스킬을 손으로 나열하지 않아도 `poteto-mode`가 플레이북을 고르고 필요한 스킬을 부릅니다. 이 흐름도는 `poteto-mode`가 하는 선택을 사람이 따라가 볼 수 있게 풀어 쓴 것입니다.
+어떤 스킬을 써야 할지 모를 때 위에서부터 질문에 답하며 내려갑니다. 대부분은 첫 질문에서 끝납니다. 원문이 강조하듯 스킬을 손으로 나열하지 않아도 `poteto-mode`가 플레이북을 고르고 필요한 스킬을 부릅니다. 이 흐름도는 `poteto-mode`가 하는 선택을 사람이 따라가 볼 수 있게 풀어 쓴 것입니다. Cursor 안에서 막혔거나 어느 스킬이 맞는지 모르겠으면 [`/poteto-help`](setup.md#skill-poteto-help)가 이 질문을 대신 묻고 보낼 프롬프트를 줍니다.
 
 ## 1단계: 그냥 `poteto-mode`로 시작해도 되는가
 
@@ -86,7 +86,7 @@
 | 글에서 AI의 티를 걷어 내고 싶다 | [`unslop`](writing.md#skill-unslop) |
 | 문서, RFC, README, PR 설명, 커밋 메시지를 쓰거나 리뷰한다 | [`technical-writing`](writing.md#skill-technical-writing) |
 | 리뷰 전에 주석을 정리하고 싶다 | [`no-comments`](code-hygiene.md#skill-no-comments) |
-| TypeScript 파일을 읽거나 편집한다 | [`typescript-best-practices`](code-hygiene.md#skill-typescript-best-practices) (자동) |
+| TypeScript 파일을 읽거나 편집한다 | [`typescript-best-practices`](code-hygiene.md#skill-typescript-best-practices) (`/typescript-best-practices`를 직접 침) |
 | 코드의 슬롭(불필요한 방어, 죽은 경로)을 걷어 내고 싶다 | cursor-team-kit의 `/deslop` (이 책의 범위 밖) |
 
 **오래 걸리거나 자리를 뜨는 작업이다.**
@@ -102,6 +102,7 @@
 
 | 하고 싶은 것 | 스킬 |
 | --- | --- |
+| pstack이 낯설거나 어느 스킬이 맞는지 모르겠다 | [`poteto-help`](setup.md#skill-poteto-help) |
 | 쓸 모델을 정하고 싶다 | [`setup-pstack`](setup.md#skill-setup-pstack) |
 | 내 작업 방식에서 나만의 모드 스킬을 만들고 싶다 | [`automate-me`](personal.md#skill-automate-me) |
 | 긴 작업의 교훈을 스킬 수정으로 남기고 싶다 | [`reflect`](personal.md#skill-reflect) |

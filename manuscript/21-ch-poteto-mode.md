@@ -4,7 +4,7 @@
 
 ## poteto-mode {#skill-poteto-mode}
 
-원문: {{src:skills/poteto-mode/SKILL.md}} {{src:docs/guide/02-poteto-mode.md}} {{src:agents/poteto-agent.md}}
+원문: {{src:skills/poteto-mode/SKILL.md}} {{src:docs/guide/02-poteto-mode.md}} {{src:docs/guide/01-setup.md}} {{src:README.md}} {{src:agents/poteto-agent.md}}
 
 > 요청을 읽고 플레이북 하나를 골라, 필요한 스킬을 단계마다 불러 가며 엄밀하게 끝내는 진입점 스킬입니다.
 
@@ -14,7 +14,7 @@
 
 프런트매터에 몇 가지 눈에 띄는 설정이 있습니다.
 
-- `mode: true`. 이 스킬은 스티키 모드입니다. 한 번 들어가면 대화 내내 유지됩니다.
+- `mode: true`. 스킬 파일은 이 플래그를 둡니다. README와 안내서는 유지 방법을 이렇게 말합니다. `/` 메뉴에서 Option+Enter(Mac) 또는 Alt+Enter(Windows)로 Custom Mode를 켜면 매 턴 컨텍스트에 남습니다. Enter만 치면 그 메시지 하나에만 붙고 대화가 이어지면 사라집니다. Custom Mode는 Agents Window와 CLI에서 쓸 수 있고, 그만하라고 말하거나 모드를 나가면 꺼집니다.
 - `disable-model-invocation: true`. 모델이 알아서 이 스킬을 부르지 않고, 사용자가 `/poteto-mode`로 부릅니다.
 - `reminder`. 모드가 켜진 동안 에이전트에게 주는 짧은 알림입니다. 새 작업이 오면 플레이북이 맞거나 엄밀함이 필요한지 보고 적용하고, 가벼운 대화이거나 사용자가 빠지겠다고 하면 적용하지 않습니다.
 
@@ -145,7 +145,7 @@ continue
 keep going until done
 ```
 
-짧아도 되는 이유는 모드가 스티키이고 구조는 플레이북이 갖고 있기 때문입니다. 말은 의도를 싣고 스킬은 엄밀함을 싣습니다.
+짧아도 되는 이유는 구조는 플레이북이 갖고, Custom Mode가 `/poteto-mode`를 매 턴 컨텍스트에 두기 때문입니다. 켜는 방법은 [설치와 첫 사용](setup.md)에 있습니다. 말은 의도를 싣고 스킬은 엄밀함을 싣습니다.
 
 **작업을 바꿀 때는 "new task"라고 말합니다.** 긴 채팅에는 지난 작업의 맥락이 쌓입니다. 주제를 바꿀 때는 그렇게 말합니다.
 
@@ -178,7 +178,7 @@ keep going until done
 
 ### 관련 스킬
 
-플레이북이 부르는 스킬은 [이해하기](how.md#skill-how), [설계하기](architect.md#skill-architect), [고치고 검증하기](tdd-blast.md#skill-tdd) 부에서 다룹니다. 모델 설정은 [`setup-pstack`](setup.md#skill-setup-pstack)에서, 원칙은 [원칙 장](principles.md)에서 다룹니다.
+플레이북이 부르는 스킬은 [이해하기](how.md#skill-how), [설계하기](architect.md#skill-architect), [고치고 검증하기](tdd-blast.md#skill-tdd) 부에서 다룹니다. 모델 설정은 [`setup-pstack`](setup.md#skill-setup-pstack)에서, 원칙은 [원칙 장](principles.md)에서 다룹니다. 어느 스킬이나 플레이북이 맞는지 모르겠으면 [`poteto-help`](setup.md#skill-poteto-help)가 이 장을 가리킵니다.
 
 ## poteto-agent {#agent-poteto-agent}
 

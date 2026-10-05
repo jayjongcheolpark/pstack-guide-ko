@@ -4,14 +4,14 @@
 
 ## 원본
 
-`cursor/plugins`의 `pstack/`, 커밋 `e43c7ee26e0038c6c1fa8380dd34ce86ff94cb2a` (0.15.9) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을 적은 기록입니다.
+`cursor/plugins`의 `pstack/`, 커밋 `4e5b1cf2ccb0ea3716f08c8ee0a5856b5ab93536` (0.15.10) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를 적은 기록입니다.
 
 ## 빌드와 검사
 
 ```shell
 bun install
 bun tools/build.mjs        # dist/pstack-guide-<버전>.epub, dist/pstack-guide-<버전>.pdf
-PSTACK_SRC=<클론 경로>/pstack bun tools/check.mjs   # 원고 규칙, 링크, 스킬 50개와 플레이북 23개의 절 존재, epubcheck
+PSTACK_SRC=<클론 경로>/pstack bun tools/check.mjs   # 원고 규칙, 링크, 스킬 51개와 플레이북 23개의 절 존재, epubcheck
 bun tools/check-layout.mjs                          # EPUB을 390px 폭에서 열어 가로 넘침 검사
 bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2,10,300   # PDF 페이지 수, 개요, 글꼴, 한글 텍스트, 선택한 페이지를 PNG로
 ```
@@ -26,7 +26,7 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 | 02-front-howto | 이 책을 읽는 방법 | | checked |
 | 10-part-start | 1부 시작하기 | | checked |
 | 11-ch-what-is-pstack | pstack이란 무엇인가 (README, 매니페스트, 구성) | | checked |
-| 12-ch-setup | 설치와 첫 사용 (`setup-pstack`) | | checked |
+| 12-ch-setup | 설치와 첫 사용 (`setup-pstack`, `poteto-help`) | | checked |
 | 20-part-entry | 2부 진입점 | | checked |
 | 21-ch-poteto-mode | `poteto-mode` 본체와 `poteto-agent` | | checked |
 | 22-ch-playbooks-work | 작업 플레이북 12개 (조사, 버그, 성능, 기능 등) | | checked |
@@ -72,14 +72,14 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 
 ## 해석한 부분 (원문이 모호했던 곳)
 
-- **원문 개수.** principle 스킬은 24개입니다(스킬 총 50개 = 일반 26개 + principle 24개). README도 24개라고 합니다. 책은 고정한 커밋의 디렉터리를 세어 얻은 수를 따릅니다. 0.15.5 핀에서는 23개와 47개였고, 그 기록은 아래 사실 확인에 남아 있습니다.
+- **원문 개수.** principle 스킬은 24개입니다(스킬 총 51개 = 일반 27개 + principle 24개). README도 24개라고 합니다. 책은 고정한 커밋의 디렉터리를 세어 얻은 수를 따릅니다. 0.15.5 핀에서는 23개와 47개, 0.15.9 핀에서는 26개와 50개였고, 그 기록은 아래 사실 확인에 남아 있습니다.
 - **Comment Sicko의 읽기 전용 여부.** README와 안내서는 "read-only comment reviewer"라고 하지만 `agents/comment-sicko.md`는 스스로 주석을 지우고 삭제 수를 보고한다고 씁니다("I touch comments", "touched files, deletion count"). 애플리케이션 코드는 쓰지 않는다는 점은 일치합니다. 책은 정의 파일의 표현을 따르고 README의 표현을 함께 밝혔습니다.
 - **`/setup-pstack` 재실행의 보존 범위.** README와 안내서는 "기본값과 다른 역할을 유지"라고 하고, `setup-pstack/SKILL.md` 3(b)는 계열, 목록, 별칭으로 바꾼 역할을 유지하고 강도 토큰은 새 예산에 맞춰 다시 계산한다고 합니다. 책은 정밀한 쪽(스킬 본문)을 따릅니다.
-- **`poteto-mode`의 프런트매터 해석.** `mode: true`, `disable-model-invocation: true`, `reminder`는 원문에 뜻이 풀이되어 있지 않습니다. README의 "sticky mode" 설명과 `reminder` 문구에서 읽은 대로 옮겼고, `disable-model-invocation`은 "모델이 자동으로 부르지 않는다"는 통상 뜻으로 적었습니다.
+- **`poteto-mode`의 프런트매터 해석.** `mode: true`, `disable-model-invocation: true`, `reminder`는 스킬 파일에 뜻이 풀이되어 있지 않습니다. 0.15.10 README와 안내서는 더 이상 "sticky mode"라고 하지 않고, Enter는 한 메시지에만 붙고 Option+Enter/Alt+Enter(또는 Use as Mode)가 Custom Mode를 만든다고 적습니다. 책은 그 설명을 따릅니다. `disable-model-invocation`은 "모델이 자동으로 부르지 않는다"는 통상 뜻으로 적었습니다.
 - **`benny`가 슬래시 스킬이 아니라는 점.** README가 "dormant", "not registered as slash skills"라고 밝힙니다. 책은 별도 부(자동화)에서 지시문의 내용을 원문 순서대로 옮겼습니다.
 - **`cursor-team-kit`.** 별개 플러그인이라 장으로 다루지 않았습니다. `poteto-mode`와 플레이북이 부르는 자리(`deslop`, `control-cli`, `control-ui`, `create-skill` 내장 기능 등)에서 출처만 밝혔습니다.
 - **Claude Code 포팅.** 저장소 원본에는 나오지 않는 외부 정보라서 저작권 표기 부록에서 존재만 언급하고 원본에서 확인하지 않았다고 밝혔습니다.
-- **`disable-model-invocation`.** `setup-pstack`만 이 프런트매터가 없고 나머지 49개 스킬에는 모두 있습니다. 스킬 절에서는 있는 경우에 한해 언급했습니다.
+- **`disable-model-invocation`.** `setup-pstack`과 `poteto-help`만 이 프런트매터가 없고 나머지 49개 스킬에는 모두 있습니다. `poteto-help`는 사용자의 말만으로 로드되는 스킬이 이 둘뿐이라고 적습니다. 스킬 절에서는 있는 경우에 한해 언급했습니다.
 
 ## 열린 질문
 
@@ -236,3 +236,25 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 - Autopilot-full과 Autopilot-stack은 `/goal` 무장과 30분 cloud-sleeper를 빼고, 운영자의 go에서 `/loop 1h`로 트렁크의 플레이북만 다시 읽습니다. 검증 가능한 단위마다 푸시합니다. 병합 직전 `git merge-tree`와 CI를 고르는 경로를 확인하고, 초록이고 patch-id가 같으면 그 뒤의 트렁크 이동만으로 다시 리베이스하지 않습니다. 다음 항목은 새 소유자가 잡습니다. `check-plan.mjs`의 프로그램 마커는 `git show origin/main:`, `/loop 1h`, `status message`입니다.
 - swarm Phase C는 실패한 작업자를 다시 띄웁니다(respawn). technical-writing의 Source 줄 네 개는 원문에서 빠졌습니다. TypeScript의 `as` 캐스트는 존재만 보는 타입 술어로 얻지 않고, 타입이 먼저면 `z.ZodType<User>`로 스키마를 주석합니다.
 - 0.15.5-ko.2 감사 절의 개수와 커밋은 그때의 기록으로 남겼습니다.
+
+## 0.15.10
+
+원문을 `e43c7ee26e0038c6c1fa8380dd34ce86ff94cb2a`(0.15.9)에서 `4e5b1cf2ccb0ea3716f08c8ee0a5856b5ab93536`(0.15.10)로 올렸습니다. pstack 트리에 닿은 커밋은 한 개입니다.
+
+- `4e5b1cf` feat(pstack): add `/poteto-help` skill (#502)
+
+책 버전은 `BOOK_REVISION = 0`이라 pstack 버전과 같은 `0.15.10`입니다. 산출물 이름은 `pstack-guide-0.15.10.epub`, `pstack-guide-0.15.10.pdf`입니다.
+
+원고에서 반영한 내용입니다.
+
+- 스킬 51개(일반 27, 원칙 24). 새 절은 `poteto-help`(설치 장)입니다. `disable-model-invocation`은 `setup-pstack`과 `poteto-help`를 뺀 49개에 있습니다.
+- README와 안내서는 막혔거나 어느 스킬이 맞는지 모르겠으면 `/poteto-help`를 쓰라고 합니다. 도움 질문에서는 일을 시작하지 않고, 보낼 프롬프트와 공개 permalink를 줍니다. 일을 시키면 `poteto-mode`로 넘깁니다.
+- `/poteto-mode`를 여러 턴 유지하려면 Custom Mode입니다. Enter는 한 메시지에만 붙습니다. Option+Enter(Mac) 또는 Alt+Enter(Windows), 또는 Use as Mode가 Custom Mode를 만듭니다. Agents Window와 CLI에서 쓸 수 있습니다.
+- 안내서 5장은 TypeScript 규칙을 이름으로 로드하라고 바뀌었습니다. `typescript-best-practices`는 스스로 로드되지 않으므로 `/typescript-best-practices`를 칩니다. `poteto-help`도 사용자의 말만으로 로드되는 스킬은 `/setup-pstack`과 `/poteto-help`뿐이라고 적습니다.
+- 0.15.9 절의 개수와 커밋은 그때의 기록으로 남겼습니다.
+
+### 실행한 검사
+
+- `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 51개와 플레이북 23개의 절 존재, 용어 병기 짝 29개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
+- `bun tools/check-layout.mjs`: 390px 폭에서 가로 넘침 없음.
+- `bun tools/build.mjs`: `pstack-guide-0.15.10.epub`, `pstack-guide-0.15.10.pdf` (450쪽).
