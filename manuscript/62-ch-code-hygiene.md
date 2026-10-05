@@ -73,13 +73,13 @@ pstack은 `Comment Sicko`라는 주석 리뷰어(README는 읽기 전용이라�
 
 ## typescript-best-practices {#skill-typescript-best-practices}
 
-원문: {{src:skills/typescript-best-practices/SKILL.md}} {{src:skills/typescript-best-practices/references/patterns.md}} {{src:docs/guide/05-build-and-clean.md}}
+원문: {{src:skills/typescript-best-practices/SKILL.md}} {{src:skills/typescript-best-practices/references/patterns.md}} {{src:docs/guide/05-build-and-clean.md}} {{src:skills/poteto-help/SKILL.md}}
 
 > `type-system-discipline` 원칙을 TypeScript 문법에 접지하는 규칙 열여섯 개입니다.
 
 ### 언제 쓰는가
 
-원문의 `description`은 ".ts나 .tsx 파일을 읽거나 편집할 때"이고 프런트매터에 `paths: ["**/*.ts", "**/*.tsx"]`가 있습니다. 안내서는 이 스킬이 워크플로에 슬래시 명령이 없고 에이전트가 `.ts`나 `.tsx` 파일을 건드릴 때마다 스스로 로드되어 타입 시스템 원칙(principle)을 구체적 규칙(rule)으로 바꾼다고 설명합니다. 판별 유니온, 경계의 `unknown`, 완전한 변형 매칭, 스키마에서 도출한 타입입니다. 프런트매터에는 다른 스킬처럼 `disable-model-invocation: true`도 있습니다. 원문이 이 스킬의 첫 지시로 두는 것은 `type-system-discipline` 원칙을 먼저 적용하라는 것입니다.
+원문의 `description`은 ".ts나 .tsx 파일을 읽거나 편집할 때"이고 프런트매터에 `paths: ["**/*.ts", "**/*.tsx"]`가 있습니다. 안내서는 이 스킬이 스스로 로드되지 않으므로 `.ts`나 `.tsx` 작업을 할 때 `/typescript-best-practices`를 직접 치라고 합니다. 판별 유니온, 경계의 `unknown`, 완전한 변형 매칭, 스키마에서 도출한 타입입니다. 프런트매터에는 다른 스킬처럼 `disable-model-invocation: true`도 있습니다. `poteto-help`도 사용자의 말만으로 스스로 로드되는 스킬은 `/setup-pstack`과 `/poteto-help`뿐이라고 적습니다. 원문이 이 스킬의 첫 지시로 두는 것은 `type-system-discipline` 원칙(principle)을 먼저 적용하라는 것입니다.
 
 ### 동작 방식
 
@@ -243,7 +243,7 @@ const userSchema: z.ZodType<User> = z.object({ id: z.string(), name: z.string() 
 
 ### 사용 예
 
-`.ts`나 `.tsx` 파일을 건드리면 에이전트가 이 규칙을 스스로 씁니다. 따로 부를 필요는 없습니다. 예를 들어 상태를 `{ loading: boolean; diff?: GitDiff; error?: string }`처럼 모델링한 코드를 리뷰하면 판별 유니온으로, `data as User`가 보이면 그 모양을 소유한 스키마의 파싱으로, switch의 default가 비어 있으면 `never` 완전성 검사로 바꾸게 됩니다.
+`.ts`나 `.tsx` 작업을 할 때 `/typescript-best-practices`를 칩니다. 안내서는 이 스킬이 스스로 로드되지 않는다고 합니다. 예를 들어 상태를 `{ loading: boolean; diff?: GitDiff; error?: string }`처럼 모델링한 코드를 리뷰하면 판별 유니온으로, `data as User`가 보이면 그 모양을 소유한 스키마의 파싱으로, switch의 default가 비어 있으면 `never` 완전성 검사로 바꾸게 됩니다.
 
 ### 함정과 주의점
 

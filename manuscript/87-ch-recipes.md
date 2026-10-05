@@ -2,7 +2,7 @@
 
 ![그녀가 완성된 요리를 맛보는 동안 로봇들이 레시피 상자에서 요리하고, 조리대 위에 /how, /tdd, /loop 카드가 핀으로 꽂혀 있는 일러스트](images/recipes.jpg)
 
-원문: {{src:docs/guide/10-recipes-and-pitfalls.md}} {{src:docs/guide/02-poteto-mode.md}} {{src:docs/guide/05-build-and-clean.md}} {{src:docs/guide/09-make-it-yours.md}}
+원문: {{src:docs/guide/10-recipes-and-pitfalls.md}} {{src:docs/guide/02-poteto-mode.md}} {{src:docs/guide/05-build-and-clean.md}} {{src:docs/guide/09-make-it-yours.md}} {{src:skills/poteto-help/SKILL.md}}
 
 바로 복사해 쓸 프롬프트와, 누구나 한 번은 저지르는 실수를 모았습니다. 경로와 끝 조건은 자기 것으로 바꾸십시오. 레시피는 일부러 격식이 없습니다. 실제로 그렇게 입력되고, 스킬은 의도를 잘 알아듣기 때문입니다.
 
@@ -72,6 +72,14 @@ prove it works를 적용해. 빌드 로그가 아니라 실제 출력을 보여 
 
 말이 많이 필요하지 않습니다. 필요한 것은 올바른 이름이고, [원칙 장](principles.md)이 그 어휘입니다.
 
+**어느 스킬인지 모르겠을 때.**
+
+```text
+/poteto-help which skill should i use to review this branch?
+```
+
+일을 시키지 않고 길을 묻습니다. 스킬은 그 부분만 답하고, 보낼 프롬프트 하나와 공개 링크를 줍니다. → [`poteto-help`](setup.md#skill-poteto-help)
+
 **응답을 평이한 말로 받기.**
 
 ```text
@@ -97,6 +105,7 @@ prove it works를 적용해. 빌드 로그가 아니라 실제 출력을 보여 
 
 안내서가 꼽은 함정을 그대로 모읍니다.
 
+- **Enter만 치고 모드가 남는 줄 알기.** `/poteto-mode`에서 Enter는 그 메시지 하나에만 붙습니다. 매 턴 유지하려면 Option+Enter(Mac) 또는 Alt+Enter(Windows)로 Custom Mode를 켭니다. [`poteto-help`](setup.md#skill-poteto-help)의 "잘못된 실행" 표가 같은 증상을 적습니다.
 - **프롬프트에 스킬을 나열하기.** "/how 그다음 /architect 그다음 /arena를 써"는 플레이북이 이미 정해 둔 단계를 뒤섞습니다. 목표와 제약을 말하고, 기본값을 덮어쓸 때만 스킬 이름을 씁니다.
 - **모호한 끝 조건.** "더 낫게 만들어"는 `/loop`에게 확인할 것을 주지 않습니다. 통과나 실패가 가능한 명령이나 산출물(artifact)을 줍니다.
 - **한 워크트리에서 병렬 에이전트.** 서로 덮어쓰고 diff가 고고학이 됩니다. "시도마다 자기 워크트리"라고 말하면 격리는 공짜입니다.

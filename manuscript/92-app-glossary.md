@@ -48,7 +48,8 @@
 | plugin | 플러그인 | 스킬, 에이전트를 묶어 설치하는 단위. pstack은 `/add-plugin pstack`으로 설치 |
 | playbook | 플레이북 | `poteto-mode`가 작업 유형별로 고르는 절차서. 23개 |
 | principle | 원칙 | `principle-*` 스킬 하나. 24개. 다른 뜻은 위 표에 있음 |
-| mode / sticky mode | 모드 / 스티키 모드 | 한 번 켜면 여러 턴 동안 유지되는 스킬(`poteto-mode`) |
+| mode / sticky mode | 모드 / 스티키 모드 | `poteto-mode`의 `mode: true`. 매 턴 유지하려면 Custom Mode로 켭니다. Enter만 치면 한 메시지에만 붙습니다 |
+| Custom Mode | Custom Mode | Cursor 기능. `/` 메뉴에서 Option+Enter(Mac) 또는 Alt+Enter(Windows)로 스킬을 모드로 붙입니다. Agents Window와 CLI에서 제공합니다 |
 | agent / subagent | 에이전트 / 서브에이전트 | 작업하는 모델 인스턴스 / 부모가 띄워 일을 맡기는 에이전트 |
 | harness | 하니스 | 앱을 구동해 검사하거나 지표를 재는 테스트 도구 |
 | role | 역할 | 자기 모델 선택을 가진 위임 작업 단위(`arena runners` 등) |

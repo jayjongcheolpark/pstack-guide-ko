@@ -2,13 +2,14 @@
 
 원문: {{src:README.md}} {{src:skills/poteto-mode/SKILL.md}}
 
-이 표는 pstack 0.15.9(커밋 `e43c7ee`)의 스킬 50개, 에이전트 2개, `poteto-mode` 플레이북 23개를 한곳에 모았습니다. 트리거 문구는 각 스킬의 `description`에 있는 문구를 그대로 두었고(`no-comments`처럼 `description`에 없는 곳은 `poteto-mode`의 규칙(non-negotiable)을 적었고), 영어 원문이 없는 곳(원칙(principle) 스킬 등)은 "언제 적용하는가"를 한국어로 적었습니다. 이름을 누르면 해당 절로 갑니다.
+이 표는 pstack 0.15.10(커밋 `4e5b1cf`)의 스킬 51개, 에이전트 2개, `poteto-mode` 플레이북 23개를 한곳에 모았습니다. 트리거 문구는 각 스킬의 `description`에 있는 문구를 그대로 두었고(`no-comments`처럼 `description`에 없는 곳은 `poteto-mode`의 규칙(non-negotiable)을 적었고), 영어 원문이 없는 곳(원칙(principle) 스킬 등)은 "언제 적용하는가"를 한국어로 적었습니다. 이름을 누르면 해당 절로 갑니다.
 
-## 일반 스킬 26개
+## 일반 스킬 27개
 
 | 스킬 | 한 줄 목적 | 트리거 문구 |
 | --- | --- | --- |
 | [`poteto-mode`](poteto-mode.md#skill-poteto-mode) | 진입점. 요청에 맞는 플레이북을 골라 필요한 스킬을 부르며 엄밀하게 끝냄 | `poteto`, `/poteto-mode`, 이 스타일로 일해 달라는 요청 |
+| [`poteto-help`](setup.md#skill-poteto-help) | pstack 사용법과 스킬 선택을 안내하고, 보낼 프롬프트를 건넴. 일은 시작하지 않음 | `/poteto-help`, 설치나 설정이나 쓰는 법, 어느 스킬이 맞는지. 일을 시키는 요청은 아님 |
 | [`setup-pstack`](setup.md#skill-setup-pstack) | 역할별 모델과 추론 예산을 정하고 규칙(rule) 파일을 씀 | `/setup-pstack`, "configure pstack models", "pstack budget" |
 | [`how`](how.md#skill-how) | 코드가 어떻게 동작하는지, 어디에 두어야 하는지 설명 | "how does X work", 변경 전 코드 워크스루, "where should this live", "which package owns this", "is this the right layer" |
 | [`why`](why.md#skill-why) | 코드의 동기와 의도를 MCP 증거 범주별로 병렬 조사 | "why does X work this way", "why we picked Y", 설계 근거, 회귀, 포스트모템, 데이터로 뒷받침된 임계값 |
@@ -27,7 +28,7 @@
 | [`unslop`](writing.md#skill-unslop) | 글에서 AI가 쓴 티를 걷어 냄 | 원문: "Must always apply" |
 | [`technical-writing`](writing.md#skill-technical-writing) | 문서를 Diátaxis, Google 스타일, STE, Global English 층으로 씀 | `/technical-writing`, 문서, RFC, README, PR 설명, 커밋 메시지 쓰기와 리뷰 |
 | [`no-comments`](code-hygiene.md#skill-no-comments) | Comment Sicko로 주석을 걷어 내고 제약 주석에 인코딩을 제안 | 리뷰 전 (`poteto-mode`의 트리거) |
-| [`typescript-best-practices`](code-hygiene.md#skill-typescript-best-practices) | 타입 시스템 원칙을 TypeScript 문법으로 구체화 | `.ts`나 `.tsx` 파일을 읽거나 편집할 때 |
+| [`typescript-best-practices`](code-hygiene.md#skill-typescript-best-practices) | 타입 시스템 원칙을 TypeScript 문법으로 구체화 | `.ts`나 `.tsx` 파일을 읽거나 편집할 때. 스스로 로드되지 않으므로 `/typescript-best-practices`를 침 |
 | [`automate-me`](personal.md#skill-automate-me) | 자신의 작업 방식에서 `-mode` 스킬을 만듦 | "automate me", "create/update/refresh my -mode skill", "turn/capture my preferences or working style into a skill" |
 | [`reflect`](personal.md#skill-reflect) | 대화 기록에서 배운 것을 스킬 수정으로 라우팅 | "reflect", `/reflect` |
 | [`correct`](personal.md#skill-correct) | 되풀이되는 에이전트 실수를 찾아 각각을 불가능하게 만듦 | `/correct` |
@@ -111,6 +112,7 @@ README의 "모든 스킬" 표가 스킬마다 붙인 한 줄 설명입니다(원
 | 명령 | 쓸 때 |
 | --- | --- |
 | `/poteto-mode` | 사소하지 않은 모든 작업의 기본 진입점 |
+| `/poteto-help` | pstack이 낯설거나 어느 스킬, 플레이북, 원칙이 맞는지 모르겠을 때. 무엇을 하려는지 알아내고 그 부분만 답하며, 칠 프롬프트를 건넴. pstack 사용법을 물으면 스스로도 로드됨 |
 | `/how` | 서브시스템이 어떻게 동작하는지 워크스루를 원할 때 |
 | `/why` | 왜 이렇게 만들었는지 알고 싶을 때. 런타임에 MCP를 발견하고 각 증거 범주를 병렬로 조회 |
 | `/recall` | 작업을 시작하거나 재개하며 주제에 대한 최근 맥락을 자신의 채팅 기록과 공유 기록에서 다시 세워 빡빡한 현재 상태 브리프로 받고 싶을 때 |
@@ -128,7 +130,7 @@ README의 "모든 스킬" 표가 스킬마다 붙인 한 줄 설명입니다(원
 | `/tdd` | 버그를 고치는데 값싼 로컬 테스트 경로가 있을 때. 실패하는 테스트를 먼저, 그다음 수정 |
 | `/benchmark-checklist` | 벤치마크를 돌렸거나 속도 향상이나 회귀를 측정했을 때. 보고하거나 그 숫자로 행동하기 전에 숫자(제한 요인, 조율, 오류, 반복 실행, 종단 관련성)를 걸러 냄 |
 | `/no-comments` | 리뷰 전에 주석을 걷어 내려는 때. Comment Sicko를 띄우고 수용한 발견을 고치고 제약 주장에 인코딩을 제안 |
-| `/typescript-best-practices` | TypeScript를 읽거나 편집할 때. `type-system-discipline` 원칙을 문법에 접지 |
+| `/typescript-best-practices` | TypeScript를 읽거나 편집할 때. 스스로 로드되지 않으므로 명령을 침. `type-system-discipline` 원칙을 문법에 접지 |
 | `/figure-it-out` | 맞는 번들 플레이북이 없을 때. 과업에 맞는 엄밀하고 감사 가능한 플레이북을 설계 |
 | `/show-me-your-work` | 검토 가능한 결정 기록을 원할 때. 커밋할 수 있는 TSV에 결정을 기록 |
 | `/create-verification-skill` | 프로젝트에 앱 동작을 증명할 스크립트된 방법이 없을 때. 기능 지도가 있는 프로젝트 전용 verify 스킬을 생성 |
