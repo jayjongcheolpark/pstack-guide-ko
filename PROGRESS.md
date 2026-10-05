@@ -252,3 +252,9 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 - `/poteto-mode`를 여러 턴 유지하려면 Custom Mode입니다. Enter는 한 메시지에만 붙습니다. Option+Enter(Mac) 또는 Alt+Enter(Windows), 또는 Use as Mode가 Custom Mode를 만듭니다. Agents Window와 CLI에서 쓸 수 있습니다.
 - 안내서 5장은 TypeScript 규칙을 이름으로 로드하라고 바뀌었습니다. `typescript-best-practices`는 스스로 로드되지 않으므로 `/typescript-best-practices`를 칩니다. `poteto-help`도 사용자의 말만으로 로드되는 스킬은 `/setup-pstack`과 `/poteto-help`뿐이라고 적습니다.
 - 0.15.9 절의 개수와 커밋은 그때의 기록으로 남겼습니다.
+
+### 실행한 검사
+
+- `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 51개와 플레이북 23개의 절 존재, 용어 병기 짝 29개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
+- `bun tools/check-layout.mjs`: 390px 폭에서 가로 넘침 없음.
+- `bun tools/build.mjs`: `pstack-guide-0.15.10.epub`, `pstack-guide-0.15.10.pdf` (450쪽).
