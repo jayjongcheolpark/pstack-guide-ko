@@ -53,8 +53,8 @@
 | agent / subagent | 에이전트 / 서브에이전트 | 작업하는 모델 인스턴스 / 부모가 띄워 일을 맡기는 에이전트 |
 | harness | 하니스 | 앱을 구동해 검사하거나 지표를 재는 테스트 도구 |
 | role | 역할 | 자기 모델 선택을 가진 위임 작업 단위(`arena runners` 등) |
-| panel | 패널 | 다중 모델 스킬이 쓰는 서로 다른 모델의 묶음. 기본은 opus, sol, grok |
-| model slug | 모델 슬러그 | 모델을 가리키는 식별 문자열(`claude-opus-5-5-max` 등) |
+| panel | 패널 | 다중 모델 스킬이 쓰는 서로 다른 모델의 묶음. 기본은 opus, grok |
+| model slug | 모델 슬러그 | 모델을 가리키는 식별 문자열(`claude-opus-5-5-xhigh` 등) |
 | reasoning budget / effort | 추론 예산 / 추론 강도 | `/setup-pstack`이 정하는 unlimited, large, medium, small과 모델 이름의 `max`, `xhigh` 같은 등급 |
 | rule file | 규칙 파일 | `~/.cursor/rules/pstack-models.mdc`. 역할별 모델을 정하는 항상 적용 규칙 |
 | inherit-parent / auto | inherit-parent / auto | 모델 필드를 생략해 서브에이전트가 부모 모델을 쓰게 하는 별칭 |

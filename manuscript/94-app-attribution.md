@@ -19,7 +19,7 @@
 | 저작권 | Copyright (c) 2026 Lauren Tan |
 | 라이선스 | MIT |
 | 원본 저장소 | https://github.com/cursor/plugins 의 `pstack/` 디렉터리 |
-| 이 책의 버전 | {{bookVersion}} (pstack {{version}}과 같습니다. 같은 pstack 버전에서 이 책만 고치면 `-ko.N`을 붙입니다), 커밋 `4e5b1cf2ccb0ea3716f08c8ee0a5856b5ab93536` |
+| 이 책의 버전 | {{bookVersion}} (pstack {{version}}과 같습니다. 같은 pstack 버전에서 이 책만 고치면 `-ko.N`을 붙입니다), 커밋 `df581122cde17e6e27686b5a448bde23e4ad4318` |
 
 pstack의 매니페스트(`.cursor-plugin/plugin.json`)는 작성자를 Lauren Tan, 라이선스를 MIT로 밝히고 저장소를 `https://github.com/cursor/plugins`로 가리킵니다. README는 "포크하고, 개선하고, 자기 것으로 만들라. PR을 환영한다"고 적습니다.
 

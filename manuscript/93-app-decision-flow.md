@@ -2,7 +2,7 @@
 
 원문: {{src:skills/poteto-mode/SKILL.md}} {{src:docs/guide/02-poteto-mode.md}} {{src:docs/guide/04-design.md}} {{src:skills/poteto-help/SKILL.md}}
 
-어떤 스킬을 써야 할지 모를 때 위에서부터 질문에 답하며 내려갑니다. 대부분은 첫 질문에서 끝납니다. 원문이 강조하듯 스킬을 손으로 나열하지 않아도 `poteto-mode`가 플레이북을 고르고 필요한 스킬을 부릅니다. 이 흐름도는 `poteto-mode`가 하는 선택을 사람이 따라가 볼 수 있게 풀어 쓴 것입니다. Cursor 안에서 막혔거나 어느 스킬이 맞는지 모르겠으면 [`/poteto-help`](setup.md#skill-poteto-help)가 이 질문을 대신 묻고 보낼 프롬프트를 줍니다.
+어떤 스킬을 써야 할지 모를 때 위에서부터 질문에 답하며 내려갑니다. 대부분은 첫 질문에서 끝납니다. 원문이 강조하듯 스킬을 손으로 나열하지 않아도 `poteto-mode`가 플레이북을 고르고 필요한 스킬을 부릅니다. 이 흐름도는 `poteto-mode`가 하는 선택을 사람이 따라가 볼 수 있게 풀어 쓴 것입니다. Cursor 안에서 막혔거나 어느 스킬이 맞는지 모르겠으면 [`/poteto-help`](setup.md#skill-poteto-help)를 질문과 함께 칩니다. 이 질문을 대신 묻고 보낼 프롬프트를 주며, 칠 때만 돕니다.
 
 ## 1단계: 그냥 `poteto-mode`로 시작해도 되는가
 

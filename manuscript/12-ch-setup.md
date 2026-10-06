@@ -28,19 +28,30 @@ Cursor가 설치되었다는 확인을 보여 줍니다.
 
 **Auto를 쓰는 경우.** 역할의 값을 `inherit-parent` 또는 `auto`로 정하면 pstack은 서브에이전트의 `model` 필드를 생략하고, 서브에이전트는 부모 채팅의 모델을 물려받습니다. 두 값은 같은 뜻이고, 둘 다 모델 슬러그(slug, 모델의 식별 문자열)가 아닙니다. 패널 역할의 값은 목록이고 항목마다 서브에이전트가 하나씩 뜨므로, 목록의 길이가 패널의 크기를 정합니다. 설정은 `swarm workers`도 함께 정합니다. `/swarm`의 모든 워커가 쓰는 기본 모델이고, 경주(race)에서 팔(arm)마다 모델을 지정하면 그것이 우선합니다.
 
-**0.15.3 이전에 만든 규칙 파일.** 0.15.3 이전에 쓴 규칙은 옛 기본 모델을 고정해 둡니다. 그 역할의 줄을 지우거나 파일을 지운 다음 `/setup-pstack`을 다시 실행하십시오.
+기본값은 `xhigh` 추론으로 돌고, `large` 예산과 같습니다. `unlimited`는 각 모델을 그 계열이 닿는 가장 높은 등급까지 올립니다. Opus는 `max`까지 가고, Grok은 `xhigh`가 끝이므로 그대로입니다. `medium`과 `small`은 추론을 낮춰 토큰을 덜 씁니다.
+
+**기본값이 바뀐 뒤의 규칙 파일.** 기본값이 바뀌어도 그 전에 쓴 규칙은 옛 기본 모델을 고정해 둡니다. 그 역할의 줄을 지우거나 파일을 지운 다음 `/setup-pstack`을 다시 실행하십시오.
 
 ### 기본 모델 구성
 
-README가 밝히는 기본 구성은 모델의 강점에 따라 작업을 나누는 것입니다. 코드를 쓰는 위임(기능, 리팩터링, 버그 수정, 성능, hillclimb)은 grok에게 가고, 가장 어려운 변경과 글쓰기, 판단은 opus 5.5로 갑니다. 기본 패널은 opus 5.5, sol, grok입니다. `/setup-pstack`이 이 모두를 바꿀 수 있습니다.
+README가 밝히는 기본 구성은 모델의 강점에 따라 작업을 나누는 것입니다. 코드를 쓰는 위임(기능, 리팩터링, 버그 수정, 성능, hillclimb)은 grok에게 가고, 가장 어려운 변경과 글쓰기, 판단은 opus 5.5로 갑니다. 기본 패널은 opus 5.5와 grok입니다. `/setup-pstack`이 이 모두를 바꿀 수 있습니다.
 
 ## 검증 스킬 제안을 받을지 정하기
 
 설정의 마지막에 `/setup-pstack`은 프로젝트에 앱 동작을 증명할 방법이 있는지 봅니다. `verify-*` 스킬이나 기존 하니스(harness, 앱을 구동하고 검사하는 테스트 도구)가 있는지 확인합니다. 둘 다 없으면 `/create-verification-skill`로 하나 만들지 한 번 묻습니다.
 
-승낙하면 `.cursor/skills/verify-<app>/`를 씁니다. 에이전트가 사용자처럼 앱을 구동하는 법을 알려 주는 프로젝트 전용 스킬입니다. 넘겨주기 전에 그 스킬이 실제로 동작하는지 한 번 증명합니다. 거절하면 설정은 그냥 넘어갑니다. `/create-verification-skill`은 언제든 직접 실행할 수 있고, 이 스킬은 [검증 스킬 장](verification.md)에서 다룹니다.
+승낙하면 `.cursor/skills/verify-<app>/`를 씁니다. 에이전트가 사용자처럼 앱을 구동하는 법을 알려 주는 프로젝트 전용 스킬입니다. 넘겨주기 전에 그 스킬이 실제로 동작하는지 한 번 증명합니다. 거절하면 설정은 그냥 넘어갑니다. `/create-verification-skill`은 언제든 직접 실행할 수 있고, 이 스킬은 [검증 스킬 장](verification.md)에서 다룹니다. 안내서는 pstack이 처음이면 승낙하라고 합니다. 자기 일을 확인할 수 있는 에이전트는 검사가 통과할 때까지 가고, 그렇지 않으면 결과를 사람에게 넘깁니다. 안내서가 이 가이드에서 가장 이득이 큰 것이라고 부르는 것이 검증 스킬입니다.
 
 설정이 끝나면 새 채팅을 시작하십시오. 모델 규칙은 새 세션에 적용됩니다.
+
+## 비용을 줄이려면
+
+pstack은 서브에이전트와 리뷰 패널에 토큰을 더 씁니다. 엄밀함의 대가입니다. 덜 쓰려면 안내서는 다음을 듭니다.
+
+- `/setup-pstack`을 다시 돌려 더 작은 추론 예산이나 더 싼 모델을 고릅니다. 본채팅은 강한 모델, 코드 역할은 더 싸고 빠른 모델이 좋은 나눔입니다.
+- 역할을 `auto`나 `inherit-parent`로 두어 채팅 모델로 돌립니다.
+- 패널 목록을 짧게 합니다. 항목마다 서브에이전트가 하나씩 뜹니다.
+- 엄밀함이 필요한 일에만 `/poteto-mode`를 씁니다. 작고 뻔한 수정에는 쓰지 않습니다.
 
 ## 첫 작업 실행
 
@@ -71,7 +82,7 @@ README가 밝히는 기본 구성은 모델의 강점에 따라 작업을 나누
 1. **사용 가능한 모델 감지.** 이 세션에서 `Task` 서브에이전트에 넘길 수 있는 모델 슬러그를 나열합니다. 이것이 믿을 만한 출처입니다. Cursor가 사용자가 쓸 수 있는 모델을 나열하는 API나 CLI를 따로 제공하면 완전성을 위해 그쪽을 우선합니다. 하나도 감지하지 못하면 사용자에게 접근 가능한 슬러그를 붙여 넣게 합니다. 확인하지 못한 실제 슬러그는 절대 쓰지 않습니다. 별칭 `inherit-parent`와 `auto`는 감지된 슬러그가 아니지만 항상 유효합니다.
 2. **현재 상태 읽기.** 기본 역할-모델 매핑은 5단계에 나오는 규칙의 모양입니다. `~/.cursor/rules/pstack-models.mdc`가 이미 있으면 읽어서 `# budget` 줄과 역할 값을 현재 선택으로 취급합니다. 없으면 기본값에서 시작합니다. 5단계에 없는 역할의 줄(예: `how critics`)은 폐지된 역할이므로 버립니다.
 3. **예산, 매핑, 확인.**
-   - (a) 예산을 묻습니다. 자유 입력보다 AskQuestion을 씁니다. 네 가지 선택지가 있고, 규칙에 현재 예산이 기록돼 있으면 그것을 알려 줍니다. 각각 모델의 추론 강도(effort)에 대응합니다.
+   - (a) 예산을 묻습니다. 자유 입력보다 AskQuestion을 씁니다. 네 가지 선택지가 있고, 규칙에 현재 예산이 기록돼 있으면 그것을 알려 줍니다. 규칙이 없으면 `large`가 스킬 기본값과 같다고 말합니다. 각각 모델의 추론 강도(effort)에 대응합니다.
    - (b) 예산을 적용합니다. 스킬의 기본값으로 작업 표를 만들고, 다시 실행하는 경우 계열, 목록, 별칭으로 바꿔 둔 역할은 유지합니다.
    - (c) 역할과 모델을 보여 주고 확인을 받습니다. 감지된 집합에 없는 실제 슬러그는 선택이 필요하다고 표시하고, 2단계에서 버린 줄도 알려 줍니다. 그대로 받을지, 특정 역할을 바꿀지 묻고, 선택지로 감지된 모델과 `inherit-parent`, `auto`를 제시합니다.
 4. **검증(validation).** 쓰는 모든 실제 슬러그는 감지된 집합에 있어야 합니다. `inherit-parent`와 `auto`는 항상 통과합니다. 고른 슬러그가 사용 불가면 멈추고 다시 묻습니다.
@@ -81,7 +92,7 @@ README가 밝히는 기본 구성은 모델의 강점에 따라 작업을 나누
 
 #### 예산 선택지
 
-예산은 `unlimited`, `large`, `medium`, `small` 네 가지입니다. `unlimited`는 표의 모든 강도를 그대로 둡니다. `large`, `medium`, `small`은 모든 실제 슬러그(패널 항목 포함)의 강도 토큰을 각각 `xhigh`, `high`, `medium`으로 바꿉니다. 강도 토큰은 마지막 토큰이거나, 끝에 `fast`가 붙으면 그 앞의 토큰이고, 사다리는 `max` > `xhigh` > `high` > `medium` > `low`입니다. 결과가 감지된 슬러그가 아니면 같은 계열의 감지된 슬러그 중 목표 이하에서 가장 높은 강도를 쓰고, 그것도 없으면 그 역할을 선택이 필요한 것으로 표시합니다. `inherit-parent`와 `auto`는 바뀌지 않습니다. 원문의 예로 `small`은 `claude-opus-5-5-max`를 `claude-opus-5-5-medium`으로, `grok-4.7-xhigh-fast`를 `grok-4.7-medium-fast`로 바꿉니다.
+예산은 `unlimited`, `large`, `medium`, `small` 네 가지입니다. 네 값 모두 모든 실제 슬러그(패널 항목 포함)의 강도 토큰을 각각 `max`, `xhigh`, `high`, `medium`으로 바꿉니다. 강도 토큰은 마지막 토큰이거나, 끝에 `fast`가 붙으면 그 앞의 토큰이고, 사다리는 `max` > `xhigh` > `high` > `medium` > `low`입니다. 결과가 감지된 슬러그가 아니면 같은 계열의 감지된 슬러그 중 목표 이하에서 가장 높은 강도를 쓰고, 그것도 없으면 그 역할을 선택이 필요한 것으로 표시합니다. `inherit-parent`와 `auto`는 바뀌지 않습니다. 원문의 예로 `unlimited`는 `claude-opus-5-5-xhigh`를 `claude-opus-5-5-max`로 바꿉니다. Grok 슬러그는 `xhigh`가 끝이므로 `unlimited`에서도 폴백이 Grok을 `xhigh`에 두고 `grok-4.7-xhigh-fast`는 그대로입니다. `large`는 두 기본값을 유지합니다. `small`은 각각 `claude-opus-5-5-medium`과 `grok-4.7-medium-fast`로 바꿉니다.
 
 #### 규칙 파일의 모양
 
@@ -94,24 +105,24 @@ alwaysApply: true
 ---
 # pstack model configuration. One line per role. Delete a line to fall back to the skill default.
 # `inherit-parent` or `auto` as a value: the role runs on the parent chat model (omit Task `model`). Alias entries in a panel list still count toward its fan-out.
-# budget: unlimited (max)
+# budget: large (xhigh)
 feature, refactoring: grok-4.7-xhigh-fast
 bug-fix: grok-4.7-xhigh-fast
 perf-issue: grok-4.7-xhigh-fast
 hillclimb: grok-4.7-xhigh-fast
-judgment and prose: claude-opus-5-5-max
-hardest tasks: claude-opus-5-5-max
+judgment and prose: claude-opus-5-5-xhigh
+hardest tasks: claude-opus-5-5-xhigh
 how explorer: grok-4.7-xhigh-fast
-how explainer: claude-opus-5-5-max
+how explainer: claude-opus-5-5-xhigh
 why investigators: grok-4.7-xhigh-fast
-why synthesizer: claude-opus-5-5-max
-reflect tooling: gpt-5.6-sol-max
-reflect judgment, divergent, synthesizer: claude-opus-5-5-max
-arena runners: claude-opus-5-5-max, gpt-5.6-sol-max, grok-4.7-xhigh-fast
-arena cross-judge pool: claude-opus-5-5-max, gpt-5.6-sol-max, grok-4.7-xhigh-fast
+why synthesizer: claude-opus-5-5-xhigh
+reflect tooling: grok-4.7-xhigh-fast
+reflect judgment, divergent, synthesizer: claude-opus-5-5-xhigh
+arena runners: claude-opus-5-5-xhigh, grok-4.7-xhigh-fast
+arena cross-judge pool: claude-opus-5-5-xhigh, grok-4.7-xhigh-fast
 swarm workers: grok-4.7-xhigh-fast
-architect runners: claude-opus-5-5-max, gpt-5.6-sol-max, grok-4.7-xhigh-fast
-interrogate reviewers: claude-opus-5-5-max, gpt-5.6-sol-max, grok-4.7-xhigh-fast
+architect runners: claude-opus-5-5-xhigh, grok-4.7-xhigh-fast
+interrogate reviewers: claude-opus-5-5-xhigh, grok-4.7-xhigh-fast
 ```
 
 역할 이름을 성격별로 묶으면 다음과 같습니다.
@@ -119,12 +130,12 @@ interrogate reviewers: claude-opus-5-5-max, gpt-5.6-sol-max, grok-4.7-xhigh-fast
 | 역할 | 기본 모델 | 쓰는 곳 |
 | --- | --- | --- |
 | `feature, refactoring`, `bug-fix`, `perf-issue`, `hillclimb` | grok-4.7-xhigh-fast | 코드를 쓰는 위임 |
-| `judgment and prose`, `hardest tasks` | claude-opus-5-5-max | 글쓰기, 판단, 가장 어려운 변경 |
+| `judgment and prose`, `hardest tasks` | claude-opus-5-5-xhigh | 글쓰기, 판단, 가장 어려운 변경 |
 | `how explorer`, `why investigators` | grok-4.7-xhigh-fast | 읽고 수집하는 역할 |
-| `how explainer`, `why synthesizer` | claude-opus-5-5-max | 설명과 종합 |
-| `reflect tooling` | gpt-5.6-sol-max | 도구 관점의 리뷰 |
-| `reflect judgment, divergent, synthesizer` | claude-opus-5-5-max | 판단, 발산, 종합 |
-| `arena runners`, `arena cross-judge pool`, `architect runners`, `interrogate reviewers` | 세 모델 패널 (opus, sol, grok) | 다중 모델 패널 |
+| `how explainer`, `why synthesizer` | claude-opus-5-5-xhigh | 설명과 종합 |
+| `reflect tooling` | grok-4.7-xhigh-fast | 도구 관점의 리뷰 |
+| `reflect judgment, divergent, synthesizer` | claude-opus-5-5-xhigh | 판단, 발산, 종합 |
+| `arena runners`, `arena cross-judge pool`, `architect runners`, `interrogate reviewers` | 두 모델 패널 (opus, grok) | 다중 모델 패널 |
 | `swarm workers` | grok-4.7-xhigh-fast | `/swarm`의 기본 워커 |
 
 패널 역할의 값은 쉼표로 이은 목록이고 항목마다 서브에이전트가 하나씩 뜹니다. `arena cross-judge pool`도 목록이지만, Arena가 그중 부모의 모델 계열과 가능하면 다른 값 하나를 골라 씁니다.
@@ -143,7 +154,7 @@ interrogate reviewers: claude-opus-5-5-max, gpt-5.6-sol-max, grok-4.7-xhigh-fast
 - `auto`와 `inherit-parent`는 모델 슬러그가 아니라, 모델 필드를 생략해 부모 모델을 그대로 쓰겠다는 표시입니다. 패널 목록 안에 넣어도 패널의 팬아웃 수에는 포함됩니다.
 - 5단계의 역할 이름과 다른 줄은 폐지된 역할로 보고 버립니다. 옛 규칙에서 다시 실행했는데 줄이 사라졌다면 그런 경우입니다.
 - 규칙은 새 세션부터 적용됩니다.
-- 0.15.3 이전에 만든 규칙은 옛 기본 모델을 고정합니다. 줄이나 파일을 지우고 다시 실행합니다.
+- 기본값이 바뀌기 전에 만든 규칙은 옛 기본 모델을 고정합니다. 줄이나 파일을 지우고 다시 실행합니다.
 
 ### 관련 스킬
 
@@ -151,13 +162,13 @@ interrogate reviewers: claude-opus-5-5-max, gpt-5.6-sol-max, grok-4.7-xhigh-fast
 
 ## poteto-help {#skill-poteto-help}
 
-원문: {{src:skills/poteto-help/SKILL.md}} {{src:README.md}} {{src:docs/guide/README.md}} {{src:docs/guide/01-setup.md}} {{src:docs/guide/02-poteto-mode.md}} {{src:docs/guide/06-verify-and-ship.md}} {{src:docs/guide/07-overnight.md}} {{src:docs/guide/08-principles.md}} {{src:docs/guide/09-make-it-yours.md}} {{src:docs/guide/10-recipes-and-pitfalls.md}}
+원문: {{src:skills/poteto-help/SKILL.md}} {{src:skills/poteto-help/references/prompting.md}} {{src:skills/poteto-help/references/recipes.md}} {{src:README.md}} {{src:docs/guide/README.md}} {{src:docs/guide/01-setup.md}} {{src:docs/guide/02-poteto-mode.md}} {{src:docs/guide/06-verify-and-ship.md}} {{src:docs/guide/07-overnight.md}} {{src:docs/guide/08-principles.md}} {{src:docs/guide/09-make-it-yours.md}} {{src:docs/guide/10-recipes-and-pitfalls.md}}
 
 > pstack에 대한 질문에 답하고, 보낼 수 있는 프롬프트를 건네고, 답이 나온 파일의 공개 사본을 링크합니다. 도움 질문에서는 그 일을 시작하지 않습니다.
 
 ### 언제 쓰는가
 
-원문의 `description`은 `/poteto-help`, pstack을 설치하거나 설정하거나 쓰는 법을 물을 때, 어느 pstack 스킬이 맞는지 물을 때입니다. 일을 해 달라는 요청에는 쓰지 않습니다. pstack 이름을 붙여도 일이면 아닙니다. README는 막혔거나 어느 스킬이 맞는지 모르겠을 때 이 스킬을 쓰라고 하고, 사용자의 말만으로도 스스로 로드된다고 합니다. `setup-pstack`과 같이 프런트매터에 `disable-model-invocation`이 없습니다.
+원문의 `description`은 질문과 함께 `/poteto-help`를 치라는 것입니다. 일을 해 달라는 요청에는 쓰지 않습니다. pstack 이름을 붙여도 일이면 아닙니다. README와 안내서는 막혔거나 어느 스킬이 맞는지 모르겠을 때 이 스킬을 치라고 하고, 칠 때만 돈다고 합니다. 프런트매터에 `disable-model-invocation: true`가 있습니다. 사용자의 말만으로 로드되는 스킬은 `/setup-pstack`뿐입니다.
 
 도움 질문과 일 요청을 가릅니다. "use pstack to fix this bug"처럼 일을 시키면 도움 질문이 아닙니다. 그때는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode)를 읽고 그 밑에서 일을 하며, Custom Mode가 모드를 유지한다고 한 번만 말합니다.
 
@@ -180,13 +191,18 @@ interrogate reviewers: claude-opus-5-5-max, gpt-5.6-sol-max, grok-4.7-xhigh-fast
 - `~/.cursor/rules/pstack-models.mdc`가 없으면 이 사용자에게 `/setup-pstack`이 아직 돌지 않은 것이고, 모든 역할이 기본 모델을 씁니다.
 - 프로젝트에 `verify-*` 스킬이나 다른 앱 하니스가 없으면 에이전트에게 앱을 스크립트로 돌릴 길이 없습니다. 변경이 동작하는지 증명하는 질문이면 [`/create-verification-skill`](verification.md#skill-create-verification-skill)을 말합니다.
 
+모델 규칙이 없고 그것이 답을 바꿀 때는, 역할마다 모델과 추론 예산을 지금 고를지 묻습니다. 처음이거나, 질문이 설정이나 비용이거나, 답이 어떤 모델이 도는지에 달릴 때입니다. 채팅마다 한 번만 묻습니다. 필요도 흐리면 두 질문을 함께 합니다. 선택지는 둘입니다.
+
+- 지금: `/setup-pstack`을 치게 하고, 질문에도 답합니다.
+- 나중: 질문에 답하고, `/setup-pstack`을 돌리기 전까지 모든 역할이 기본 모델을 쓴다는 한 줄을 덧붙입니다.
+
 #### 설정을 한다
 
 1. 채팅에서 `/add-plugin pstack`으로 설치하거나, 사이드바 Customize에서 설치합니다.
 2. [`/setup-pstack`](#skill-setup-pstack)을 돌립니다. 추론 예산을 묻고, 역할마다 모델을 정하고, 규칙을 씁니다. 규칙은 새 채팅에 적용됩니다.
 3. 진짜 작업을 `/poteto-mode`로 시작합니다. 목표와, 통과하거나 실패할 수 있는 확인을 함께 줍니다.
 
-설치만으로는 아무것도 바뀌지 않습니다. 스킬을 불러야 합니다. 사용자의 말만으로 로드되는 것은 `/setup-pstack`과 `/poteto-help`뿐입니다. 자세한 내용은 README와 안내서 1장에 있습니다. 첫 프롬프트를 함께 다듬겠다고 제안합니다.
+설치만으로는 아무것도 바뀌지 않습니다. 스킬을 불러야 합니다. 사용자의 말만으로 로드되는 것은 `/setup-pstack`뿐입니다. 자세한 내용은 README와 안내서 1장에 있습니다. 첫 프롬프트를 함께 다듬겠다고 제안하되, 그때는 `references/prompting.md`를 따릅니다.
 
 비용이 걱정이면 토큰이 어디로 가는지와 덜 쓰는 법을 말합니다. pstack은 서브에이전트와 리뷰 패널에 토큰을 더 씁니다. `/setup-pstack`을 다시 돌려 더 작은 예산이나 더 싼 모델을 고릅니다. 역할을 `auto`나 `inherit-parent`로 두면 채팅 모델로 돌아가므로, 채팅이 Auto이거나 더 싼 모델일 때 토큰을 줄입니다. 패널 목록을 짧게 하면 항목마다 뜨는 서브에이전트가 줄어듭니다. 엄밀함이 필요한 일에만 `/poteto-mode`를 씁니다.
 
@@ -194,7 +210,7 @@ pstack은 Cursor용입니다. 스킬은 Agent Skills 형식이라 다른 도구�
 
 #### `/poteto-mode`로 작업을 시작한다
 
-`/poteto-mode`는 작업에 플레이북을 맞추고, 그 단계를 할 일 목록에 복사하고, 단계가 필요로 하는 다른 스킬을 돌립니다. 건너뛴 단계는 `skip: <이유>`로 목록에 남습니다. 좋은 프롬프트는 목표와 끝난 판별 방법을 말합니다. 스킬을 나열하지 않습니다. 손으로 쓴 순서는 플레이북이 지킬 단계를 빠뜨리거나 뒤섞기 쉽습니다. 안내서 2장에 예가 있습니다.
+`/poteto-mode`는 작업에 플레이북을 맞추고, 그 단계를 할 일 목록에 복사하고, 단계가 필요로 하는 다른 스킬을 돌립니다. 건너뛴 단계는 `skip: <이유>`로 목록에 남습니다. 좋은 프롬프트는 목표와 끝난 판별 방법을 말합니다. 스킬을 나열하지 않습니다. 손으로 쓴 순서는 플레이북이 지킬 단계를 빠뜨리거나 뒤섞기 쉽습니다. 프롬프트를 함께 다듬기 전에 `references/prompting.md`를 읽습니다. 안내서 2장에 예가 있습니다.
 
 `/poteto-mode`가 남는지는 시작하는 방식에 달립니다.
 
@@ -219,7 +235,7 @@ pstack은 Cursor용입니다. 스킬은 Agent Skills 형식이라 다른 도구�
 | 함수 경계를 넘는 코드 전에 타입과 모듈 모양을 정한다 | [`/architect`](architect.md#skill-architect) |
 | 같은 지시에 여러 시도를 돌려 좋은 부분을 합친다 | [`/arena`](arena-swarm.md#skill-arena) |
 | 조각을 나눠 병렬로 검사하거나 작업자를 경주시키고, 클라우드 에이전트로 | [`/swarm`](arena-swarm.md#skill-swarm) |
-| 여러 모델이 diff를 리뷰하고 깨뜨려 보게 | [`/interrogate`](interrogate.md#skill-interrogate) |
+| 서로 다른 모델이 diff를 리뷰하고 깨뜨려 보게 | [`/interrogate`](interrogate.md#skill-interrogate) |
 | 값싼 로컬 테스트가 있는 버그를 테스트 먼저 고친다 | [`/tdd`](tdd-blast.md#skill-tdd) |
 | `.ts`나 `.tsx` 작업에 TypeScript 규칙을 적용한다 | [`/typescript-best-practices`](code-hygiene.md#skill-typescript-best-practices) |
 | 리뷰 전에 주석을 걷어 내되, 쓰지 않은 리뷰어에게 맡긴다 | [`/no-comments`](code-hygiene.md#skill-no-comments) |
@@ -280,12 +296,12 @@ pstack에는 계획 스킬이 없습니다. Cursor의 Plan Mode가 나란히 동
 | 질문이 지난 작업의 다음 단계로 취급된다 | "new task"라고 하거나, 그 턴에 모드가 필요 없다고 말한다 |
 | 새 모델 선택이 효과가 없다 | `/setup-pstack`의 규칙은 새 채팅에 적용된다. 새 채팅을 연다 |
 | 실행 비용이 생각보다 크다 | 위 설정의 비용 문단을 본다 |
-| 스킬이 스스로 로드되지 않았다 | 사용자의 말만으로 로드되는 것은 `/setup-pstack`과 `/poteto-help`뿐이다. 나머지는 사용자가 치거나 `/poteto-mode`가 돌릴 때이고, 모드가 모든 스킬을 돌리지는 않는다 |
+| 스킬이 스스로 로드되지 않았다 | 사용자의 말만으로 로드되는 것은 `/setup-pstack`뿐이다. 나머지는 사용자가 치거나 `/poteto-mode`가 돌릴 때이고, 모드가 모든 스킬을 돌리지는 않는다 |
 | 병렬 에이전트가 서로를 덮어썼다 | 에이전트마다 워크트리를 주거나, 머신 하나씩을 받는 클라우드 에이전트로 돌린다 |
 | 밤새 실행이 움직이기만 하고 끝난 것이 없다 | `/loop`는 기간이 아니라 통과하거나 실패할 수 있는 확인이 필요하다. 안내서 7장 |
 | 초록 빌드로 성공을 주장한다 | 실제 명령, 흐름, 저장된 값, 프로파일을 요구한다. prove-it-works 원칙 |
 
-안내서 10장에 함정과 복사할 레시피가 더 있습니다.
+실행이 흐르면 `references/prompting.md`에 한 줄 조향이 있습니다. 안내서 10장에 함정과 복사할 레시피가 더 있습니다.
 
 #### pstack을 내 것으로 만든다
 
@@ -298,7 +314,7 @@ pstack에는 계획 스킬이 없습니다. Cursor의 Plan Mode가 나란히 동
 
 #### 응답
 
-답을 앞에 둡니다. 코드 블록의 예 프롬프트는 많아도 하나이고, 그다음 그 파일의 링크입니다. 사용자가 지도 전체를 달라고 하지 않으면 짧게 둡니다.
+답을 앞에 둡니다. 코드 블록의 예 프롬프트는 많아도 하나이고, 맞는 것이 있으면 `references/recipes.md`에서 고쳐 씁니다. 그다음 그 파일의 링크입니다. 사용자가 지도 전체를 달라고 하지 않으면 짧게 둡니다.
 
 ### 사용 예
 
@@ -313,9 +329,10 @@ README가 든 예입니다. 스킬은 리뷰 질문을 알아차리고 [`/interr
 > 상황: pstack을 방금 설치했고, 어느 명령부터 쳐야 하는지 모릅니다.
 >
 > 1. `~/.cursor/rules/pstack-models.mdc`가 없으므로 `/setup-pstack`이 아직 돌지 않았다고 말합니다.
-> 2. 설정 절만 답합니다. `/add-plugin pstack`, `/setup-pstack`, 목표와 확인이 있는 `/poteto-mode`입니다.
-> 3. 첫 프롬프트를 함께 다듬겠다고 제안하고, 안내서 1장의 공개 링크를 줍니다.
-> 4. 버그를 고치거나 코드를 쓰지 않습니다.
+> 2. 역할마다 모델과 예산을 지금 고를지 한 번 묻습니다. 지금은 `/setup-pstack`을 치게 하고, 나중이면 기본 모델을 쓴다는 한 줄을 덧붙입니다.
+> 3. 설정 절만 답합니다. `/add-plugin pstack`, `/setup-pstack`, 목표와 확인이 있는 `/poteto-mode`입니다.
+> 4. 첫 프롬프트를 함께 다듬겠다고 제안하고, 안내서 1장의 공개 링크를 줍니다.
+> 5. 버그를 고치거나 코드를 쓰지 않습니다.
 
 ### 함정과 주의점
 
@@ -323,7 +340,7 @@ README가 든 예입니다. 스킬은 리뷰 질문을 알아차리고 [`/interr
 - 일을 시키는 메시지는 도움으로 바꾸지 않습니다. `poteto-mode`를 읽고 그 밑에서 하고, Custom Mode를 한 번만 말합니다.
 - 이 지도와 대상 파일이 어긋나면 대상 파일을 따릅니다. 인용 전에 그 파일을 읽습니다.
 - 설치된 플러그인 경로를 사용자가 열 수 있다고 가정하지 않습니다. `https://github.com/cursor/plugins/blob/main/pstack/`에 경로를 붙인 공개 사본을 줍니다.
-- 사용자의 말만으로 로드되는 스킬은 `/setup-pstack`과 `/poteto-help`뿐입니다.
+- 사용자의 말만으로 로드되는 스킬은 `/setup-pstack`뿐입니다. `/poteto-help`는 칠 때만 돕니다.
 - 예 프롬프트는 많아도 하나입니다. 사용자가 지도 전체를 달라고 하지 않으면 짧게 둡니다.
 
 ### 관련 스킬

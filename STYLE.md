@@ -4,7 +4,7 @@
 
 ## 기준 원본
 
-- 유일한 원본: GitHub `cursor/plugins`의 `pstack/` 디렉터리, 커밋 `4e5b1cf2ccb0ea3716f08c8ee0a5856b5ab93536` (pstack 0.15.10). 자세한 내용은 `SOURCE.md`.
+- 유일한 원본: GitHub `cursor/plugins`의 `pstack/` 디렉터리, 커밋 `df581122cde17e6e27686b5a448bde23e4ad4318` (pstack 0.15.15). 자세한 내용은 `SOURCE.md`.
 - 저장소 밖에 읽기 전용으로 클론해서 읽습니다. 포팅이나 다른 버전, 설치본의 자료는 사용하지 않습니다.
 - pstack은 Cursor용으로 설명합니다. Claude Code 동작은 설명하지 않습니다.
 - cursor-team-kit 스킬(deslop, fix-ci 등)은 장으로 쓰지 않고, 언급할 때 "cursor-team-kit 플러그인에 속한다"고 밝힙니다.

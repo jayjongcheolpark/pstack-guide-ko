@@ -133,13 +133,13 @@ ls -t <agent-transcripts>/*.jsonl <agent-transcripts>/*/*.jsonl <agent-transcrip
 
 | 렌즈 | 역할 줄 | 기본 `model` | 프롬프트 템플릿 |
 | --- | --- | --- | --- |
-| Judgment | `reflect judgment, divergent, synthesizer` | `claude-opus-5-5-max` | `references/judgment-reviewer.md` |
-| Tooling | `reflect tooling` | `gpt-5.6-sol-max` | `references/tooling-reviewer.md` |
-| Divergent | `reflect judgment, divergent, synthesizer` | `claude-opus-5-5-max` | `references/divergent-reviewer.md` |
+| Judgment | `reflect judgment, divergent, synthesizer` | `claude-opus-5-5-xhigh` | `references/judgment-reviewer.md` |
+| Tooling | `reflect tooling` | `grok-4.7-xhigh-fast` | `references/tooling-reviewer.md` |
+| Divergent | `reflect judgment, divergent, synthesizer` | `claude-opus-5-5-xhigh` | `references/divergent-reviewer.md` |
 
 각 템플릿을 표시된 곳에 대화 기록 경로나 요약을 채워 그대로 넘깁니다. 리뷰어는 `Task` 응답 본문으로 발견을 돌려줍니다.
 
-**3. 종합합니다.** `Task` 호출 하나, `subagent_type: generalPurpose`, `reflect judgment, divergent, synthesizer` 줄(기본 `claude-opus-5-5-max`)의 `model`, 에이전트 모드(`readonly: false`). 종합자의 품질 점검은 인용의 표본 검증을 포함하고 그때 MCP 접근이 필요할 수 있으며 읽기 전용은 MCP를 벗깁니다. `references/synthesizer.md`를 그대로 쓰고 표시된 곳에 각 리뷰어의 전체 출력을 인라인으로 넣습니다. 종합자는 구조화된 Accepted / Rejected / Backlog 목록을 돌려줍니다.
+**3. 종합합니다.** `Task` 호출 하나, `subagent_type: generalPurpose`, `reflect judgment, divergent, synthesizer` 줄(기본 `claude-opus-5-5-xhigh`)의 `model`, 에이전트 모드(`readonly: false`). 종합자의 품질 점검은 인용의 표본 검증을 포함하고 그때 MCP 접근이 필요할 수 있으며 읽기 전용은 MCP를 벗깁니다. `references/synthesizer.md`를 그대로 쓰고 표시된 곳에 각 리뷰어의 전체 출력을 인라인으로 넣습니다. 종합자는 구조화된 Accepted / Rejected / Backlog 목록을 돌려줍니다.
 
 **4. 구조적 강제 점검.** 종합자의 Accepted 목록을 점검합니다. 린트 규칙(rule), 스크립트, 메타데이터 플래그, 런타임 검사가 더 믿을 만하게 강제할 항목은 Accepted에서 Backlog로 옮깁니다(`encode-lessons-in-structure` 원칙(principle)).
 
@@ -216,13 +216,13 @@ ls -t <agent-transcripts>/*.jsonl <agent-transcripts>/*/*.jsonl <agent-transcrip
 
 ### 언제 쓰는가
 
-운영자가 같은 실수로 에이전트를 계속 교정할 때입니다. `disable-model-invocation: true`입니다.
+운영자가 같은 실수로 에이전트를 계속 교정할 때입니다. `disable-model-invocation: true`입니다. 안내서는 고치기가 다음 프롬프트가 아니라 저장소에 속한다고 하고, 사람 리뷰는 목록에 없다고 합니다. 같은 실수를 모든 PR에서 잡아야 하는 리뷰어가 이 스킬이 고치는 문제입니다.
 
 ```text
-/correct
+/correct 에이전트가 저장소 계층을 거치지 않고 데이터베이스 클라이언트를 직접 계속 호출해
 ```
 
-다음 기여자가, 연 파일만 보고 가장 가까운 예를 복사하고 컴파일되는 가장 짧은 길을 택하는 에이전트라고 가정합니다. 파일 하나에서 옳아 보이는 변경이 저장소 전체에서도 옳도록 저장소를 바꿉니다. 이 문장은 [`architect`](architect.md#skill-architect)의 선별 문장과 같습니다.
+인자 없이 돌리면 이력에서 부류를 스스로 찾습니다. 다음 기여자가, 연 파일만 보고 가장 가까운 예를 복사하고 컴파일되는 가장 짧은 길을 택하는 에이전트라고 가정합니다. 파일 하나에서 옳아 보이는 변경이 저장소 전체에서도 옳도록 저장소를 바꿉니다. 이 문장은 [`architect`](architect.md#skill-architect)의 선별 문장과 같습니다. `/reflect`는 한 세션에서 스킬을 다듬고, `/correct`는 실수 부류가 돌아오지 않게 저장소를 바꿉니다. 고치기가 새 경계이면 `/architect`와 짝입니다.
 
 ### 동작 방식
 

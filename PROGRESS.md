@@ -4,7 +4,7 @@
 
 ## 원본
 
-`cursor/plugins`의 `pstack/`, 커밋 `4e5b1cf2ccb0ea3716f08c8ee0a5856b5ab93536` (0.15.10) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를 적은 기록입니다.
+`cursor/plugins`의 `pstack/`, 커밋 `df581122cde17e6e27686b5a448bde23e4ad4318` (0.15.15) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를 적은 기록입니다.
 
 ## 빌드와 검사
 
@@ -79,7 +79,7 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 - **`benny`가 슬래시 스킬이 아니라는 점.** README가 "dormant", "not registered as slash skills"라고 밝힙니다. 책은 별도 부(자동화)에서 지시문의 내용을 원문 순서대로 옮겼습니다.
 - **`cursor-team-kit`.** 별개 플러그인이라 장으로 다루지 않았습니다. `poteto-mode`와 플레이북이 부르는 자리(`deslop`, `control-cli`, `control-ui`, `create-skill` 내장 기능 등)에서 출처만 밝혔습니다.
 - **Claude Code 포팅.** 저장소 원본에는 나오지 않는 외부 정보라서 저작권 표기 부록에서 존재만 언급하고 원본에서 확인하지 않았다고 밝혔습니다.
-- **`disable-model-invocation`.** `setup-pstack`과 `poteto-help`만 이 프런트매터가 없고 나머지 49개 스킬에는 모두 있습니다. `poteto-help`는 사용자의 말만으로 로드되는 스킬이 이 둘뿐이라고 적습니다. 스킬 절에서는 있는 경우에 한해 언급했습니다.
+- **`disable-model-invocation`.** `setup-pstack`만 이 프런트매터가 없고 나머지 50개 스킬에는 모두 있습니다. 0.15.11부터 `poteto-help`에도 붙었고, 사용자의 말만으로 로드되는 스킬은 `/setup-pstack`뿐입니다. 스킬 절에서는 있는 경우에 한해 언급했습니다.
 
 ## 열린 질문
 
@@ -258,3 +258,30 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 - `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 51개와 플레이북 23개의 절 존재, 용어 병기 짝 29개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
 - `bun tools/check-layout.mjs`: 390px 폭에서 가로 넘침 없음.
 - `bun tools/build.mjs`: `pstack-guide-0.15.10.epub`, `pstack-guide-0.15.10.pdf` (450쪽).
+
+## 0.15.15
+
+원문을 `4e5b1cf2ccb0ea3716f08c8ee0a5856b5ab93536`(0.15.10)에서 `df581122cde17e6e27686b5a448bde23e4ad4318`(0.15.15)로 올렸습니다. pstack 트리에 닿은 커밋은 다섯 개입니다.
+
+- `00b52d9` fix(pstack): make `/poteto-help` typed-only (#506) (0.15.11)
+- `807c031` feat(pstack): add prompting references to `/poteto-help` (#507) (0.15.12)
+- `2cbf585` docs(pstack): refresh guide for `/correct`, checklist, prompting tips (#508) (0.15.13)
+- `1e56b29` feat(pstack): have `/poteto-help` ask about `/setup-pstack` when no model rule exists (#509) (0.15.14)
+- `df58112` feat(pstack): drop Sol, default to Opus xhigh and Grok (#511) (0.15.15)
+
+책 버전은 `BOOK_REVISION = 0`이라 pstack 버전과 같은 `0.15.15`입니다. 산출물 이름은 `pstack-guide-0.15.15.epub`, `pstack-guide-0.15.15.pdf`입니다.
+
+원고에서 반영한 내용입니다.
+
+- 스킬 수는 그대로 51개(일반 27, 원칙 24). `disable-model-invocation`은 `setup-pstack`만 없고 나머지 50개에 있습니다. 사용자의 말만으로 로드되는 스킬은 `/setup-pstack`뿐입니다. `/poteto-help`는 칠 때만 돕니다.
+- `/poteto-help`에 `references/prompting.md`와 `references/recipes.md`가 붙었습니다. 예 프롬프트는 많아도 하나이고, 맞는 것이 있으면 레시피에서 고칩니다. 첫 프롬프트를 다듬기 전에 prompting을 읽습니다.
+- 모델 규칙 파일이 없으면 `/poteto-help`가 `/setup-pstack`을 지금 돌릴지 한 번 묻습니다. 처음이거나, 질문이 설정이나 비용이거나, 답이 어떤 모델이 도는지에 달릴 때입니다.
+- 기본 모델에서 Sol을 빼고 Opus는 `xhigh`, 코드 역할은 Grok입니다. 패널은 opus와 grok 둘입니다. 예산 `unlimited`는 강도 토큰을 `max`로 바꾸고, `large`는 `xhigh`이며 기본값과 같습니다. 옛 규칙 파일은 줄을 지우고 `/setup-pstack`을 다시 실행해야 새 기본값을 받습니다.
+- 안내서 갱신: 프롬프트에 넣을 다섯, 클라우드 서브에이전트 격리, `/correct`와 점검표와 프로토타입과 계획, 밤새 돌리기의 신뢰 쌓기와 Cursor Project, 레시피와 함정 추가.
+- 0.15.10 절의 개수와 커밋은 그때의 기록으로 남겼습니다.
+
+### 실행한 검사
+
+- `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 51개와 플레이북 23개의 절 존재, 용어 병기 짝 29개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
+- `bun tools/check-layout.mjs`: 390px 폭에서 가로 넘침 없음.
+- `bun tools/build.mjs`: `pstack-guide-0.15.15.epub`, `pstack-guide-0.15.15.pdf`.
