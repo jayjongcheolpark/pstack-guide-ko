@@ -79,7 +79,7 @@ pstack은 `Comment Sicko`라는 주석 리뷰어(README는 읽기 전용이라�
 
 ### 언제 쓰는가
 
-원문의 `description`은 ".ts나 .tsx 파일을 읽거나 편집할 때"이고 프런트매터에 `paths: ["**/*.ts", "**/*.tsx"]`가 있습니다. 안내서는 이 스킬이 스스로 로드되지 않으므로 `.ts`나 `.tsx` 작업을 할 때 `/typescript-best-practices`를 직접 치라고 합니다. 판별 유니온, 경계의 `unknown`, 완전한 변형 매칭, 스키마에서 도출한 타입입니다. 프런트매터에는 다른 스킬처럼 `disable-model-invocation: true`도 있습니다. `poteto-help`도 사용자의 말만으로 스스로 로드되는 스킬은 `/setup-pstack`과 `/poteto-help`뿐이라고 적습니다. 원문이 이 스킬의 첫 지시로 두는 것은 `type-system-discipline` 원칙(principle)을 먼저 적용하라는 것입니다.
+원문의 `description`은 ".ts나 .tsx 파일을 읽거나 편집할 때"이고 프런트매터에 `paths: ["**/*.ts", "**/*.tsx"]`가 있습니다. 안내서는 이 스킬이 스스로 로드되지 않으므로 `.ts`나 `.tsx` 작업을 할 때 `/typescript-best-practices`를 직접 치라고 합니다. 판별 유니온, 경계의 `unknown`, 완전한 변형 매칭, 스키마에서 도출한 타입입니다. 프런트매터에는 다른 스킬처럼 `disable-model-invocation: true`도 있습니다. `poteto-help`도 사용자의 말만으로 스스로 로드되는 스킬은 `/setup-pstack`뿐이라고 적습니다. 원문이 이 스킬의 첫 지시로 두는 것은 `type-system-discipline` 원칙(principle)을 먼저 적용하라는 것입니다.
 
 ### 동작 방식
 

@@ -368,7 +368,7 @@ separate before serializing shared state. 시도마다 자기 워크트리를 �
 - 이 원칙을 적용하면 파일이 나옵니다. 이 원칙을 인용했는데 diff에 코드모드, 스크립트, 생성기, 위임 스킬이 없으면 적용한 것이 아닙니다.
 - 작업이 세션보다 오래가면 지렛대를 커밋합니다.
 
-**균형.** 기준은 반복이 아니라 사소함입니다. 일회성 작업도 지렛대가 작업을 검사 가능하게 만든다면 지렛대를 가질 자격이 있습니다. `laziness-protocol`에 따라 일을 하거나 증명하는 가장 작은 스크립트를 만들고 프레임워크는 절대 만들지 않습니다. 반복되는 지시를 지속적인 가드레일로 만드는 `encode-lessons-in-structure`와 다릅니다. 이것은 눈앞의 작업의 처리량과 검토 가능성입니다.
+**균형.** 기준은 반복이 아니라 사소함입니다. 일회성 작업도 지렛대가 작업을 검사 가능하게 만든다면 지렛대를 가질 자격이 있습니다. `laziness-protocol`에 따라 일을 하거나 증명하는 가장 작은 스크립트를 만들고 프레임워크는 절대 만들지 않습니다. 반복되는 지시를 지속적인 가드레일로 만드는 `encode-lessons-in-structure`와 다릅니다. 이것은 눈앞의 작업의 처리량과 검토 가능성입니다. 안내서는 에이전트가 같은 일을 손으로 계속 하면 갖고 싶었던 도구나 스킬을 쓰라고 하고, 스크립트가 단계를 매번 같게 할 수 있으면 스크립트를 쓰고 에이전트는 판단에 남기라고 합니다.
 
 **적용과 예외.** 사소하지 않은 모든 작업이 기본 적용입니다. 예외는 사소한 작업, 즉 한눈에 보이는 뻔한 편집 두어 개입니다. 원문은 기준이 반복이 아니라 사소함이라고 밝힙니다. 일회성이어도 지렛대가 작업을 검사할 수 있게 만든다면 지렛대를 만듭니다.
 
@@ -749,7 +749,7 @@ separate before serializing shared state. 시도마다 자기 워크트리를 �
 - **그 숫자가 달리 잴 수 있는 것을 나열하고, 각각을 증거로 배제합니다.** 흔한 후보는 오류, 건너뛰거나 캐시된 일, 조율되지 않은 쪽, 잡음, 종단에서 보기에는 너무 작은 조각입니다.
 - **증거를 숫자와 함께 둡니다.** 실행 횟수, 퍼짐, 제한 요인을 노트나 링크된 산출물(artifact)에 두어 읽는 사람이 주장을 확인할 수 있게 합니다.
 
-성능 숫자이면 [benchmark-checklist](verification.md#skill-benchmark-checklist)의 절차 전체를 돌립니다. eval 결과이면 시행에 같은 질문을 합니다. 모든 실행이 과제를 했는지, 차이가 시행과 모델에 걸쳐 유지되는지, 그 시나리오가 중요한지입니다.
+성능 숫자이면 [benchmark-checklist](verification.md#skill-benchmark-checklist)의 절차 전체를 돌립니다. 안내서는 이 스킬이 원칙을 실행의 증거로 답하는 질문 일곱으로 만든다고 합니다. eval 결과이면 시행에 같은 질문을 합니다. 모든 실행이 과제를 했는지, 차이가 시행과 모델에 걸쳐 유지되는지, 그 시나리오가 중요한지입니다.
 
 이것을 건너뛴 자리는, 숫자 뒤의 증거에 실행 횟수나 퍼짐이나 이름 붙인 제한 요인이 없을 때, 또는 아낀 시간이 바뀐 조각이 쓰던 시간보다 클 때입니다.
 
@@ -860,7 +860,7 @@ separate before serializing shared state. 시도마다 자기 워크트리를 �
 
 **함정.** 원문이 이름 붙인 반패턴 세 가지가 있습니다. 인정만 하고 기록하지 않기("기억해 두겠습니다"는 남지 않음), 기록만 하고 경로를 정하지 않기, 한 사례만 고치고 반복되는 패턴을 그대로 두기. 교정은 일회성은 메모, 반복되는 수정은 스킬이나 린트, 시스템 문제는 원칙으로 보냅니다.
 
-**함께 보는 원칙.** `reflect`와 `show-me-your-work`가 이 원칙을 인용합니다. `reflect`는 린트나 스크립트로 더 안정적으로 강제될 항목을 Accepted에서 Backlog로 옮길 때, `show-me-your-work`는 커밋된 스크립트의 증거를 손으로 만든 것보다 선호할 때입니다. Authoring a skill, Orchestrate의 `preferences.md`, Worktree cleanup, Multi-phase plan의 `check-plan.mjs`도 이 원칙을 부릅니다. [`build-the-lever`](#skill-principle-build-the-lever)와의 구분은 위 항목을 봅니다.
+**함께 보는 원칙.** `reflect`와 `show-me-your-work`가 이 원칙을 인용합니다. `reflect`는 린트나 스크립트로 더 안정적으로 강제될 항목을 Accepted에서 Backlog로 옮길 때, `show-me-your-work`는 커밋된 스크립트의 증거를 손으로 만든 것보다 선호할 때입니다. Authoring a skill, Orchestrate의 `preferences.md`, Worktree cleanup, Multi-phase plan의 `check-plan.mjs`도 이 원칙을 부릅니다. 안내서는 [`/correct`](personal.md#skill-correct)가 이 원칙을 저장소 전체에 적용한다고 합니다. [`build-the-lever`](#skill-principle-build-the-lever)와의 구분은 위 항목을 봅니다.
 
 
 ## 원칙이 서로 당길 때 {#principles-interactions}

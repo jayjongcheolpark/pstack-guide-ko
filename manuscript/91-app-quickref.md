@@ -2,14 +2,14 @@
 
 원문: {{src:README.md}} {{src:skills/poteto-mode/SKILL.md}}
 
-이 표는 pstack 0.15.10(커밋 `4e5b1cf`)의 스킬 51개, 에이전트 2개, `poteto-mode` 플레이북 23개를 한곳에 모았습니다. 트리거 문구는 각 스킬의 `description`에 있는 문구를 그대로 두었고(`no-comments`처럼 `description`에 없는 곳은 `poteto-mode`의 규칙(non-negotiable)을 적었고), 영어 원문이 없는 곳(원칙(principle) 스킬 등)은 "언제 적용하는가"를 한국어로 적었습니다. 이름을 누르면 해당 절로 갑니다.
+이 표는 pstack 0.15.15(커밋 `df58112`)의 스킬 51개, 에이전트 2개, `poteto-mode` 플레이북 23개를 한곳에 모았습니다. 트리거 문구는 각 스킬의 `description`에 있는 문구를 그대로 두었고(`no-comments`처럼 `description`에 없는 곳은 `poteto-mode`의 규칙(non-negotiable)을 적었고), 영어 원문이 없는 곳(원칙(principle) 스킬 등)은 "언제 적용하는가"를 한국어로 적었습니다. 이름을 누르면 해당 절로 갑니다.
 
 ## 일반 스킬 27개
 
 | 스킬 | 한 줄 목적 | 트리거 문구 |
 | --- | --- | --- |
 | [`poteto-mode`](poteto-mode.md#skill-poteto-mode) | 진입점. 요청에 맞는 플레이북을 골라 필요한 스킬을 부르며 엄밀하게 끝냄 | `poteto`, `/poteto-mode`, 이 스타일로 일해 달라는 요청 |
-| [`poteto-help`](setup.md#skill-poteto-help) | pstack 사용법과 스킬 선택을 안내하고, 보낼 프롬프트를 건넴. 일은 시작하지 않음 | `/poteto-help`, 설치나 설정이나 쓰는 법, 어느 스킬이 맞는지. 일을 시키는 요청은 아님 |
+| [`poteto-help`](setup.md#skill-poteto-help) | pstack 사용법과 스킬 선택을 안내하고, 보낼 프롬프트를 건넴. 일은 시작하지 않음 | `/poteto-help`와 질문. 칠 때만 돎. 일을 시키는 요청은 아님 |
 | [`setup-pstack`](setup.md#skill-setup-pstack) | 역할별 모델과 추론 예산을 정하고 규칙(rule) 파일을 씀 | `/setup-pstack`, "configure pstack models", "pstack budget" |
 | [`how`](how.md#skill-how) | 코드가 어떻게 동작하는지, 어디에 두어야 하는지 설명 | "how does X work", 변경 전 코드 워크스루, "where should this live", "which package owns this", "is this the right layer" |
 | [`why`](why.md#skill-why) | 코드의 동기와 의도를 MCP 증거 범주별로 병렬 조사 | "why does X work this way", "why we picked Y", 설계 근거, 회귀, 포스트모템, 데이터로 뒷받침된 임계값 |
@@ -112,7 +112,7 @@ README의 "모든 스킬" 표가 스킬마다 붙인 한 줄 설명입니다(원
 | 명령 | 쓸 때 |
 | --- | --- |
 | `/poteto-mode` | 사소하지 않은 모든 작업의 기본 진입점 |
-| `/poteto-help` | pstack이 낯설거나 어느 스킬, 플레이북, 원칙이 맞는지 모르겠을 때. 무엇을 하려는지 알아내고 그 부분만 답하며, 칠 프롬프트를 건넴. pstack 사용법을 물으면 스스로도 로드됨 |
+| `/poteto-help` | pstack이 낯설거나 어느 스킬, 플레이북, 원칙이 맞는지 모르겠을 때. 무엇을 하려는지 알아내고 그 부분만 답하며, 칠 프롬프트를 건넴. `/poteto-help`를 칠 때만 돎 |
 | `/how` | 서브시스템이 어떻게 동작하는지 워크스루를 원할 때 |
 | `/why` | 왜 이렇게 만들었는지 알고 싶을 때. 런타임에 MCP를 발견하고 각 증거 범주를 병렬로 조회 |
 | `/recall` | 작업을 시작하거나 재개하며 주제에 대한 최근 맥락을 자신의 채팅 기록과 공유 기록에서 다시 세워 빡빡한 현재 상태 브리프로 받고 싶을 때 |
@@ -120,7 +120,7 @@ README의 "모든 스킬" 표가 스킬마다 붙인 한 줄 설명입니다(원
 | `/architect` | 함수 경계를 넘는 코드를 쓰기 전에 호출자의 사용, 타입, 모듈 모양을 먼저 정하고 싶을 때 |
 | `/arena` | 같은 일에 병렬 시도 N개를 만들고 각각의 좋은 부분을 가져오고 싶을 때 |
 | `/swarm` | 서로 다른 조각이나 경주에 병렬 작업자 N명을 두고 집계 보고서 하나를 받고 싶을 때 |
-| `/interrogate` | diff에 대해 서로 다른 모델 여럿이 엄격한 코드 품질 렌즈를 포함해 깨뜨려 보기를 원할 때 |
+| `/interrogate` | diff에 대해 서로 다른 모델이 엄격한 코드 품질 렌즈를 포함해 깨뜨려 보기를 원할 때 |
 | `/automate-me` | 실제로 일한 방식에서 초안한 자신만의 `-mode` 스킬을 원할 때 |
 | `/make-bot-ui` | 버튼이 웹훅으로 Grok Bot을 깨우는 페이지나 대시보드를 원할 때 |
 | `/setup-pstack` | pstack이 역할별로 쓸 모델을 고르고 싶을 때. 모델을 감지하고 설정 규칙을 씀 |

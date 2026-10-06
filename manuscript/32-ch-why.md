@@ -48,7 +48,7 @@
    | 제품 분석 웨어하우스 | Databricks, Snowflake, BigQuery, ClickHouse, dbt, Redshift | 코드를 빚은 제품과 데이터의 현실. 플래그로 감싼 코드, 실험 기반 출시, 데이터 마이그레이션, "이 숫자는 어디서 왔나"에 강함 |
 
    **조사자를 건너뛰는 경우**는 최종 "Sources Consulted" 절에 남기는 명시적 서면 정당화가 있을 때뿐이고, 유효한 이유는 둘입니다. 그 범주에 맞는 MCP가 없는 경우(선택이 아니라 공백으로 표시합니다. 예: "실시간 팀 채팅은 건너뜀. 맞는 MCP가 없어 대화 기록을 검색하지 못함"), 그리고 출처가 "아마 무관"이 아니라 명백히 무관한 경우(높은 기준(bar), 예: 런타임 코드 경로가 없는 빌드 타임 스크립트에서 오류 추적)입니다. 단일 커밋의 사소한 대상이고 PR 설명에 답이 다 있다면, 일곱 범주 검색이 모두 중복임을 확인한 뒤에만 직접 답할 수 있습니다. 이는 드물어야 합니다.
-4. **종합합니다.** 종합자 서브에이전트 하나를 띄웁니다. 모델은 `why synthesizer` 줄(기본 `claude-opus-5-5-max`)이고 `readonly: false`입니다. 종합자의 품질 점검이 인용을 표본 검증(verification)하는데 그때 MCP 접근이 필요할 수 있기 때문입니다. 종합자는 조사자 결과(널 결과와 정당화된 건너뜀 포함), 코드 앵커, 원래 질문, `references/epistemics.md`의 인식론 틀, `references/synthesizer-prompt.md`의 프롬프트 템플릿을 받습니다.
+4. **종합합니다.** 종합자 서브에이전트 하나를 띄웁니다. 모델은 `why synthesizer` 줄(기본 `claude-opus-5-5-xhigh`)이고 `readonly: false`입니다. 종합자의 품질 점검이 인용을 표본 검증(verification)하는데 그때 MCP 접근이 필요할 수 있기 때문입니다. 종합자는 조사자 결과(널 결과와 정당화된 건너뜀 포함), 코드 앵커, 원래 질문, `references/epistemics.md`의 인식론 틀, `references/synthesizer-prompt.md`의 프롬프트 템플릿을 받습니다.
 5. **제시합니다.** 종합자의 출력을 사용자에게 보여 줍니다. 명료성을 위한 가벼운 편집이나 대화 맥락 추가는 되지만 **신뢰도 표현은 다시 쓰지 않습니다.**
 
 출력 구조는 `references/synthesizer-prompt.md`의 것입니다. The Question, The Code in Question, What We Found, What We Can Reasonably Infer, Competing Hypotheses, What We Don't Know, Sources Consulted, Confidence Summary입니다. 필요하면 조정하되 신뢰도 구분은 그대로 유지하고, Sources Consulted는 조사자마다 한 줄씩(아무것도 못 찾았거나 건너뛴 것도 이유와 함께) 둡니다. Sources Consulted 뒤에, `why` 질문이 이 코드를 실제로 바꾸기 위한 전 단계라면, 계보 조사 결과를 변경 계획에 쓸 수 있는 Preserve / Change / Avoid / Risk 제약 집합으로 바꿉니다.

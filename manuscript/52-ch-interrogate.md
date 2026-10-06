@@ -8,9 +8,9 @@
 
 ### 언제 쓰는가
 
-원문의 `description`은 트리거로 "interrogate", "adversarial review", "multi-model review", "challenge this", "stress test this code", "find blind spots", "tear this apart"를 듭니다. 여러 LLM 리뷰어가 독립된 각도에서 변경에 도전합니다. `disable-model-invocation: true`입니다. `poteto-mode`는 논쟁적인 설계에 배포 전 이 스킬을 부르고, Feature 플레이북은 설계가 논쟁적이면 배포 전에, PR을 여는 서브에이전트는 `interrogate`를 돌리고 URL을 게시합니다. `architect`는 구현 전에 종합된 스케치에 적대적 압력이 필요할 때 이 스킬을 권합니다. README가 이 스킬을 요약하는 문장은 "diff가 있고 서로 다른 모델 여럿이 그것을 깨뜨리려 하기를 원할 때, 엄격한 코드 품질 관점을 포함해서"입니다.
+원문의 `description`은 트리거로 "interrogate", "adversarial review", "multi-model review", "challenge this", "stress test this code", "find blind spots", "tear this apart"를 듭니다. 여러 LLM 리뷰어가 독립된 각도에서 변경에 도전합니다. `disable-model-invocation: true`입니다. `poteto-mode`는 논쟁적인 설계에 배포 전 이 스킬을 부르고, Feature 플레이북은 설계가 논쟁적이면 배포 전에, PR을 여는 서브에이전트는 `interrogate`를 돌리고 URL을 게시합니다. `architect`는 구현 전에 종합된 스케치에 적대적 압력이 필요할 때 이 스킬을 권합니다. README가 이 스킬을 요약하는 문장은 "diff가 있고 서로 다른 모델이 그것을 깨뜨리려 하기를 원할 때, 엄격한 코드 품질 관점을 포함해서"입니다.
 
-안내서가 이 스킬을 설명하는 방식은 이렇습니다. 같은 diff, 의도, 루브릭을 서로 다른 모델 계열의 리뷰어 여럿에게 보냅니다. 모델 다양성이 핵심입니다. 모델마다 사각지대가 다르므로 두 모델이 독립적으로 낸 발견은 신뢰도가 높은 신호입니다. 리드는 모든 것을 `Act on`, `Consider`, `Noted`, `Dismissed`로 나누고 기각마다 이유를 달며, 자동으로 적용하는 것은 없습니다. 안내서는 기각도 읽으라고 권합니다. 리드는 실용적인 시니어 엔지니어이지 신탁이 아니고, 사용자가 뒤집을 수 있기 때문입니다.
+안내서가 이 스킬을 설명하는 방식은 이렇습니다. 같은 diff, 의도, 루브릭을 서로 다른 모델 계열의 리뷰어에게 보냅니다. 모델 다양성이 핵심입니다. 모델마다 사각지대가 다르므로 두 모델이 독립적으로 낸 발견은 신뢰도가 높은 신호입니다. 리드는 모든 것을 `Act on`, `Consider`, `Noted`, `Dismissed`로 나누고 기각마다 이유를 달며, 자동으로 적용하는 것은 없습니다. 안내서는 기각도 읽으라고 권합니다. 리드는 실용적인 시니어 엔지니어이지 신탁이 아니고, 사용자가 뒤집을 수 있기 때문입니다.
 
 ### 동작 방식
 
@@ -18,15 +18,14 @@
 
 1. **범위를 정합니다.** 맥락에서 리뷰할 대상을 식별합니다. 사용자가 특정 파일이나 diff를 가리키면 그것, 기능 브랜치라면 전체 변경 집합으로 `git diff main...HEAD`(또는 알맞은 베이스 브랜치), 사용자의 메시지가 최근 작업을 가리키면 관련 파일을 모읍니다. diff(또는 파일 내용)와 리뷰어가 코드를 이해하는 데 필요한 주변 맥락 파일을 포장합니다.
 2. **의도를 밝힙니다.** 리뷰어를 띄우기 전에 의도를 명시적으로 밝힙니다. 사용자의 메시지, 커밋 메시지, PR 설명(있으면), 코드 자체에서 도출합니다. 명확한 한 문단을 씁니다. 의도가 불확실하면 진행하기 전에 사용자에게 묻습니다.
-3. **리뷰어를 띄웁니다.** Task 도구로 모든 리뷰어를 한 메시지에 띄웁니다. `~/.cursor/rules/pstack-models.mdc`의 `interrogate reviewers` 줄을 씁니다. 항목마다 리뷰어 하나이고, 아래 Reviewer A/B/C 라벨을 설정된 항목 수에 맞춰 늘리거나 줄입니다. 규칙(rule)이나 그 줄이 없으면 표의 기본값을 씁니다.
+3. **리뷰어를 띄웁니다.** Task 도구로 모든 리뷰어를 한 메시지에 띄웁니다. `~/.cursor/rules/pstack-models.mdc`의 `interrogate reviewers` 줄을 씁니다. 항목마다 리뷰어 하나이고, 아래 Reviewer A/B 라벨을 설정된 항목 수에 맞춰 늘리거나 줄입니다. 규칙(rule)이나 그 줄이 없으면 표의 기본값을 씁니다.
 
    | 서브에이전트 | 기본 모델 |
    | --- | --- |
-   | Reviewer A | `claude-opus-5-5-max` |
-   | Reviewer B | `gpt-5.6-sol-max` |
-   | Reviewer C | `grok-4.7-xhigh-fast` |
+   | Reviewer A | `claude-opus-5-5-xhigh` |
+   | Reviewer B | `grok-4.7-xhigh-fast` |
 
-   리뷰어마다 `subagent_type: generalPurpose`, 모델은 설정된 `interrogate reviewers` 항목(설정된 줄이 없으면 표의 기본값, `auto`나 `inherit-parent` 항목이면 `model`을 생략해 그 리뷰어가 부모 모델로 돎), `readonly: true`입니다. Task 도구가 설정된 항목을 거부하면 그 리뷰어를 그 계열의 표 기본값으로 돌리고 그렇다고 말합니다. 계열은 접두사(`claude-*`, `gpt-*`, `grok-*`)로 나누고, 일치하는 계열이 없으면 Reviewer A의 기본값을 씁니다. 표 기본값이 거부되면 Task 도구의 오류 메시지에서 유효한 슬러그를 확인하고 가장 가까운 동등물(같은 계열의 가장 높은 추론 등급 선호)을 골라 띄우고, 기본값 표를 갱신하는 별도 PR을 엽니다. 슬러그 문제로 리뷰를 막지 않습니다. 별칭 항목을 거부된 슬러그로 취급하거나 어느 대체책도 적용하지 않습니다.
+   리뷰어마다 `subagent_type: generalPurpose`, 모델은 설정된 `interrogate reviewers` 항목(설정된 줄이 없으면 표의 기본값, `auto`나 `inherit-parent` 항목이면 `model`을 생략해 그 리뷰어가 부모 모델로 돎), `readonly: true`입니다. Task 도구가 설정된 항목을 거부하면 그 리뷰어를 그 계열의 표 기본값으로 돌리고 그렇다고 말합니다. 계열은 접두사(`claude-*`, `grok-*`)로 나누고, 일치하는 계열이 없으면 Reviewer A의 기본값을 씁니다. 표 기본값이 거부되면 Task 도구의 오류 메시지에서 유효한 슬러그를 확인하고 가장 가까운 동등물(같은 계열과 추론 등급 선호)을 골라 띄우고, 기본값 표를 갱신하는 별도 PR을 엽니다. 슬러그 문제로 리뷰를 막지 않습니다. 별칭 항목을 거부된 슬러그로 취급하거나 어느 대체책도 적용하지 않습니다.
 
    `references/reviewer-prompt.md`를 읽고 템플릿에 (1) 밝힌 의도, (2) diff나 파일 내용, (3) `references/rubric.md`의 리뷰 루브릭, (4) `references/code-quality-review.md`의 코드 품질 렌즈를 채웁니다. 같은 채운 템플릿이 모든 리뷰어에게 가므로 모든 모델이 코드 품질 렌즈를 적용합니다.
 4. **종합합니다.** 결과가 돌아오는 대로 하나의 그림을 만듭니다. (1) 리뷰어들의 모든 발견을 파싱합니다. (2) 합의를 식별합니다. 둘 이상의 모델이 독립적으로 낸 발견이 가장 강한 신호입니다. (3) 한 모델만 낸 발견을 식별합니다. 읽을 가치는 있지만 그만큼 가중합니다. (4) 중복을 제거합니다. 모델마다 같은 문제를 다르게 서술할 수 있으므로 합치고 어느 모델이 냈는지 적습니다. (5) 불일치를 적습니다. 한 모델이 무언가를 지적하는데 다른 모델이 명시적으로 반대를 말하면 판정에 유용한 맥락입니다.

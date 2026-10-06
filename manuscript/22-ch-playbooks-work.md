@@ -472,7 +472,13 @@ end 응답
 
 ### 언제 쓰는가
 
-cpuprofile, 트레이스, spindump, 힙 스냅숏을 나중에 넘겨받았을 때입니다. 실행 중인 프로세스를 계측하는 Runtime forensics와 달리 캡처가 이미 있습니다. 다시 돌리지 않고 읽습니다. 플레이북을 이식 가능하게 두려고 도구는 일반적으로 씁니다. cpuprofile과 `.json.gz`는 DevTools나 트레이스 파서, spindump는 텍스트 편집기, heapsnapshot은 자신의 힙 도구입니다.
+cpuprofile, 트레이스, spindump, 힙 스냅숏을 나중에 넘겨받았을 때입니다. 실행 중인 프로세스를 계측하는 Runtime forensics와 달리 캡처가 이미 있습니다. 다시 돌리지 않고 읽습니다. 안내서는 수정 없이 원인만 원할 때 이 플레이북을 쓰라고 합니다.
+
+```text
+/poteto-mode 느린 시작의 cpuprofile이야. 시간이 어디로 가고 어느 소스 줄이 소유하는지 말해 줘. 아직 고치지 마.
+```
+
+플레이북을 이식 가능하게 두려고 도구는 일반적으로 씁니다. cpuprofile과 `.json.gz`는 DevTools나 트레이스 파서, spindump는 텍스트 편집기, heapsnapshot은 자신의 힙 도구입니다.
 
 ### 동작 방식
 
