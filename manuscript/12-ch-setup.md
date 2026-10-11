@@ -231,6 +231,7 @@ pstack은 Cursor용입니다. 스킬은 Agent Skills 형식이라 다른 도구�
 | 코드가 왜 이 모양인지, 숫자가 어디서 왔는지 | [`/why`](why.md#skill-why) |
 | 변경이나 서브시스템을 평이하게 이해하고 싶다 | [`/teach`](teach-recall.md#skill-teach) |
 | 어떤 주제에 대한 자신의 최근 작업을 따라잡고 싶다 | [`/recall`](teach-recall.md#skill-recall) |
+| 이 채팅에서 마지막 메시지 이후를 따라잡고, 할 일 항목마다 결정할 맥락을 원한다 | [`/ketchup`](teach-recall.md#skill-ketchup) |
 | 작은 diff가 밖에서 무엇을 깨뜨릴 수 있는지 | [`/blast-radius`](tdd-blast.md#skill-blast-radius) |
 | 함수 경계를 넘는 코드 전에 타입과 모듈 모양을 정한다 | [`/architect`](architect.md#skill-architect) |
 | 같은 지시에 여러 시도를 돌려 좋은 부분을 합친다 | [`/arena`](arena-swarm.md#skill-arena) |
@@ -262,7 +263,7 @@ pstack은 Cursor용입니다. 스킬은 Agent Skills 형식이라 다른 도구�
 - `/arena`는 모든 작업자에게 같은 지시를 주고 좋은 부분을 합칩니다. `/swarm`은 조각을 나누거나 경주시키고 보고서 하나를 돌립니다.
 - `/architect`는 설계를 정한 뒤 바로 구현합니다. 코드를 쓰기 전에 설계를 보려면 "with checkpoint"를 붙입니다.
 - `/interrogate`는 diff를 리뷰합니다. `/blast-radius`는 diff 밖의 깨짐을 찾고, 변경을 안전하게 하는 사실 하나를 증명합니다.
-- `/recall`은 최근 채팅을 가로질러 맥락을 다시 세웁니다. 특정 채팅이나 브랜치 하나를 이어받는 것은 Session pickup 플레이북입니다.
+- `/recall`은 최근 채팅을 가로질러 맥락을 다시 세웁니다. `/ketchup`은 이 채팅에서 사용자의 마지막 메시지 이후만 다룹니다. 특정 채팅이나 브랜치 하나를 이어받는 것은 Session pickup 플레이북입니다.
 - `/figure-it-out`은 엄밀한 실행 하나를 설계합니다. Orchestrate 플레이북은 여러 날과 여러 PR에 걸친 프로그램을 돌립니다. Autonomous run 플레이북은 작업 하나를 끝 조건까지 밉니다.
 
 pstack에 없는 것입니다.

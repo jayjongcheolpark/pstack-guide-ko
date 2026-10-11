@@ -53,7 +53,7 @@
 
 #### 2. Principles (원칙 색인)
 
-리프 스킬을 전부 읽어야 적용할 수 있고, 항목마다 언제 적용하는지 적혀 있습니다. 원칙은 핵심(Core), 아키텍처(Architecture), 검증(Verification), 위임(Delegation), 메타(Meta) 다섯 묶음으로 나뉩니다. 24개의 내용은 [원칙 장](principles.md)에서 하나씩 다룹니다. 검증 묶음에는 측정한 숫자를 믿기 전에 무엇이 그 숫자를 제한하는지 밝히라는 `principle-explain-the-number`가 있습니다.
+리프 스킬을 전부 읽어야 적용할 수 있고, 항목마다 언제 적용하는지 적혀 있습니다. 각 리프는 제목을 kebab-case로 바꾼 `principle-<제목>` 스킬입니다. 하이픈은 남기고 다른 문장 부호는 뗍니다. 항목이 이름을 따로 밝히면 그 이름을 씁니다. 색인의 불릿은 제목만 두고 `principle-*`를 매 줄에 반복하지 않습니다. 원칙은 핵심(Core), 아키텍처(Architecture), 검증(Verification), 위임(Delegation), 메타(Meta) 다섯 묶음으로 나뉩니다. 24개의 내용은 [원칙 장](principles.md)에서 하나씩 다룹니다. 검증 묶음에는 측정한 숫자를 믿기 전에 무엇이 그 숫자를 제한하는지 밝히라는 `principle-explain-the-number`가 있습니다.
 
 #### 3. Autonomy (자율성)
 
@@ -89,7 +89,7 @@
 
 #### 7. Playbooks (플레이북 고르기)
 
-호출되면 맞는 플레이북의 단계를 그대로 복사해 할 일 목록의 첫 항목으로 열고, 그다음에 작업별 항목을 붙입니다. 하지 않기로 한 단계는 목록에 남기고 한 줄 `skip: <이유>`를 답니다.
+호출되면 맞는 플레이북의 단계를 그대로 복사해 할 일 목록의 첫 항목으로 열고, 그다음에 작업별 항목을 붙입니다. 하지 않기로 한 단계는 목록에 남기고 한 줄 `skip: <이유>`를 답니다. 플레이북 파일은 `playbooks/<제목>.md`입니다. 제목을 kebab-case로 바꾸고, 하이픈은 남기고 다른 문장 부호는 뗍니다. 항목이 경로를 따로 밝히면 그것을 씁니다. 예외는 Authoring or modifying a skill(`playbooks/authoring-a-skill.md`), Multi-phase or multi-PR plan(`playbooks/multi-phase-plan.md`), Worktree and simulator cleanup(`playbooks/worktree-cleanup.md`) 세 개입니다.
 
 크거나 여러 곳에 걸친 작업(호출 지점이 많은 마이그레이션, 야심찬 다부분 변경)이나 나중에 믿기로 하고 자리를 뜨는 작업은, Feature 같은 좁은 플레이북이 맞아도 `figure-it-out`으로 갑니다. 맞는 플레이북이 없을 때도 `figure-it-out`입니다. 그 작업만의 엄밀한 플레이북을 설계합니다. 며칠에 걸친 상시 프로젝트(많은 스택 PR, 한 조정자 아래의 서브에이전트 무리)는 `figure-it-out` 대신 Orchestrate로 갑니다. `figure-it-out`은 한 번의 맞춤 실행을 설계하고, orchestrate는 프로그램을 운영합니다.
 

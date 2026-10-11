@@ -120,7 +120,7 @@ end 응답
 
 ### 함정과 주의점
 
-- 재개할 특정 채팅 하나는 이 플레이북이고, 최근 채팅 여러 개에서 맥락을 모으는 것은 [`recall`](teach-recall.md#skill-recall)입니다.
+- 재개할 특정 채팅 하나는 이 플레이북이고, 최근 채팅 여러 개에서 맥락을 모으는 것은 [`recall`](teach-recall.md#skill-recall)입니다. 이 채팅에서 사용자의 마지막 메시지 이후만 따라잡는 것은 [`ketchup`](teach-recall.md#skill-ketchup)입니다.
 - 이전 기록을 못 믿어서 처음부터 다시 도출하지 않습니다. 단, 물려받은 주장은 실제 산출물로 검증합니다.
 
 ### 흐름도

@@ -24,6 +24,7 @@
 | 왜 이렇게 만들었는가, 이 임계값은 어디서 왔는가 | [`why`](why.md#skill-why) |
 | 요약이 아니라 실제로 이해하고 싶다, 평이하게 풀어서 설명해 줬으면 한다 | [`teach`](teach-recall.md#skill-teach) |
 | 내 최근 작업 맥락을 되살리고 싶다 | [`recall`](teach-recall.md#skill-recall) |
+| 이 채팅에서 마지막 메시지 이후를 따라잡고 지금 결정할 일을 알고 싶다 | [`ketchup`](teach-recall.md#skill-ketchup) |
 | 특정 채팅 하나를 이어받고 싶다 | [Session pickup](playbooks-long.md#playbook-session-pickup) |
 | 작은 diff가 다른 곳을 깨뜨릴까 걱정된다 | [`blast-radius`](tdd-blast.md#skill-blast-radius) |
 | 읽기 전용으로 질문에 답만 받고 싶다 | [Investigation](playbooks-work.md#playbook-investigation) |
