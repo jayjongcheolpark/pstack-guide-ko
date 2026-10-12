@@ -340,3 +340,9 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 - `watch-pr`는 리뷰 스레드를 페이지당 100개씩 끝까지 읽고, `check-plan.mjs`는 펜스 코드 블록 안의 문체를 건너뜁니다.
 - 일곱 스킬에서 토큰을 줄인 절 삭제는 리프 본문을 짧게 했습니다. `poteto-mode` 색인과 YAML `description`의 한 줄 트리거는 그대로입니다. 책은 리프에 남은 규칙과 색인의 한 줄을 구분해 적었습니다.
 - 0.15.17 절의 개수와 커밋은 그때의 기록으로 남겼습니다.
+
+### 실행한 검사
+
+- `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 52개와 플레이북 23개의 절 존재, 용어 병기 짝 29개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
+- `bun tools/check-layout.mjs`: 390px 폭에서 가로 넘침 없음.
+- `bun tools/build.mjs`: `pstack-guide-0.15.20.epub`, `pstack-guide-0.15.20.pdf` (464쪽).
