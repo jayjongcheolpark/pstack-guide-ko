@@ -1,6 +1,6 @@
 # 저작권 표기와 라이선스
 
-원문: {{src:LICENSE}} {{src:.cursor-plugin/plugin.json}} {{src:README.md}}
+원문: {{src:LICENSE}} {{src:.cursor-plugin/plugin.json}} {{src:plugin.json}} {{src:README.md}}
 
 ## 이 책의 성격
 
@@ -19,9 +19,9 @@
 | 저작권 | Copyright (c) 2026 Lauren Tan |
 | 라이선스 | MIT |
 | 원본 저장소 | https://github.com/cursor/plugins 의 `pstack/` 디렉터리 |
-| 이 책의 버전 | {{bookVersion}} (pstack {{version}}과 같습니다. 같은 pstack 버전에서 이 책만 고치면 `-ko.N`을 붙입니다), 커밋 `978ca6e9c0e012047cd5058b8e829240336e704e` |
+| 이 책의 버전 | {{bookVersion}} (pstack {{version}}과 같습니다. 같은 pstack 버전에서 이 책만 고치면 `-ko.N`을 붙입니다), 커밋 `1b6d44ff26d4e242f4e8f68c391e6d2f7ca16def` |
 
-pstack의 매니페스트(`.cursor-plugin/plugin.json`)는 작성자를 Lauren Tan, 라이선스를 MIT로 밝히고 저장소를 `https://github.com/cursor/plugins`로 가리킵니다. README는 "포크하고, 개선하고, 자기 것으로 만들라. PR을 환영한다"고 적습니다.
+pstack의 Cursor 매니페스트(`.cursor-plugin/plugin.json`)는 작성자를 Lauren Tan, 라이선스를 MIT로 밝히고 저장소를 `https://github.com/cursor/plugins`로 가리킵니다. 같은 디렉터리의 `plugin.json`은 Agent Plugins v1 루트 매니페스트이고, 스키마와 이름, 버전, 작성자, 라이선스, 키워드를 둡니다. README는 "포크하고, 개선하고, 자기 것으로 만들라. PR을 환영한다"고 적습니다.
 
 ## MIT 라이선스 전문
 

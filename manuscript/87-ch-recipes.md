@@ -150,7 +150,7 @@ prove it works를 적용해. 빌드 로그가 아니라 실제 출력을 보여 
 /ketchup
 ```
 
-이 채팅에서 사용자가 마지막으로 쓴 메시지 이후만 봅니다. 알림과 서브에이전트 결과는 그 메시지가 아닙니다. 할 일 항목마다 결정을 내릴 요약을 주고, 에이전트가 스스로 할 수 있는 일은 할 일 항목이 아닙니다. 최근 채팅 여러 개에서 주제를 불러오려면 `/recall`입니다. → [`ketchup`](teach-recall.md#skill-ketchup), [`recall`](teach-recall.md#skill-recall)
+이 채팅에서 사용자가 마지막으로 쓴 메시지 이후만 봅니다. 알림과 서브에이전트 결과는 그 메시지가 아닙니다. 할 일 항목마다 결정을 내릴 요약을 주고, 전후를 나란히 보여 줍니다. 에이전트가 스스로 할 수 있는 일은 할 일 항목이 아닙니다. 최근 채팅 여러 개에서 주제를 불러오려면 `/recall`입니다. → [`ketchup`](teach-recall.md#skill-ketchup), [`recall`](teach-recall.md#skill-recall)
 
 ## 단계별 프롬프트의 모양
 

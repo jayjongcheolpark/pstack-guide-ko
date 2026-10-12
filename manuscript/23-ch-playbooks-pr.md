@@ -161,9 +161,7 @@ babysit은 사용자가 요청할 때 시작합니다. 보통은 단계 하나�
 
    정지 조건은 포지마다 다릅니다.
    - **Origin.** 프런티어가 병합 준비 상태이면 `drive`를 멈춥니다. 체크가 초록이고 `origin pr view`가 병합 가능에 차단 요소 없음을 보고하고 `origin pr thread list`에 해결되지 않은 차단 요소가 없을 때입니다. Origin은 `READY`, `WAITING`, `ADVANCE`, `COMPLETE`를 기다리지 않습니다. 그것들은 GitHub 감시자의 판정입니다.
-   - **GitHub.** 단일 PR이나 스택 모드에서는 `READY`에서 멈춥니다. 대기열(queued) 모드는 `READY`를 절대 내지 않습니다. 차단 요소가 없는 프런티어는 종결이 아닌 `WAITING`이고 이유가 `merge-queue`입니다. 그 프런티어가 병합 준비됐다고 보고하고 감시자를 멈춥니다. 병합이 일어날 때까지 켜 두지 않습니다. 그것은 Shipping의 일입니다. 다른 행위자가 프런티어를 병합해 감시자가 `ADVANCE`를 보고하면 새 프런티어로 계속합니다. 다른 행위자가 대기열을 끝내면 `COMPLETE`가 종결입니다.
-
-   감시자를 다시 무장하는 것은 병합을 승인하지도 병합 시 자동 실행을 무장하지도 않습니다. 사용자가 병합, 랜딩, 배송, 준비되면 병합을 명시적으로 요청하지 않은 한 `origin pr merge`나 `gh pr merge`를 실행하지 않습니다. 그런 요청은 `playbooks/shipping.md`로 라우팅합니다. 필수 체크가 없는 부모를 가진 스택 PR은 병합 자동화가 무장되면 부모로 즉시 병합될 수 있습니다. 이는 리뷰 단위를 뭉개고, 참조 소실 경쟁이 부모 참조를 갱신하지 않은 채 병합됨으로 표시할 수도 있습니다.
+   - **GitHub.** 단일 PR이나 스택 모드에서는 `READY`에서 멈춥니다. 대기열(queued) 모드는 `READY`를 절대 내지 않습니다. 차단 요소가 없는 프런티어는 종결이 아닌 `WAITING`이고 이유가 `merge-queue`입니다. 그 프런티어가 병합 준비됐다고 보고하고 감시자를 멈춥니다. 병합이 일어날 때까지 켜 두지 않습니다. 그것은 Shipping의 일입니다. 다른 행위자가 프런티어를 병합해 감시자가 `ADVANCE`를 보고하면 새 프런티어로 계속합니다.    다른 행위자가 대기열을 끝내면 `COMPLETE`가 종결입니다.
 
    루프 중간의 사용자 질문에는 답하고 계속합니다. 포지의 정지 조건 전에 루프를 끝내는 것은 명시적 정지뿐입니다. GitHub 대기열 스택에서는 PR 목록을 아래에서 위 순서로 한 번만 잡아 매번 다시 무장할 때 같은 고정된 목록을 넘깁니다. 4단계에서 허용된 후속 PR에 한해서만 목록을 고칩니다. 끝에 붙이고 병합된 소유자를 빼고 정정된 스냅숏으로 다시 무장합니다.
 7. **재시도 전에 CI를 분류합니다.** 불안정(flake)이나 인프라 문제는 작업 재시도가 아니라 새 빌드 한 번입니다. 재시도는 한 번뿐입니다. 똑같은 두 번째 실패는 처음부터 flake가 아니었다는 뜻이므로 재분류하고 눈감고 재시도하는 대신 자식 로그를 읽습니다. diff가 건드리지 않은 코드의 실패는 낡은 베이스라는 뜻이므로 flake로 가정하기 전에 `git merge-base --is-ancestor`로 확인합니다. 낡은 베이스는 재시도를 소모하는 대신 리베이스가 필요하다고 보고합니다. diff 자신의 코드에서 난 실패만 커밋이 됩니다.
@@ -172,9 +170,7 @@ babysit은 사용자가 요청할 때 시작합니다. 보통은 단계 하나�
 
 `drive`는 병합 준비에서 끝납니다. 스택을 병합하는 것은 `playbooks/shipping.md`입니다.
 
-### 응답
-
-모드, 프런티어와 활성 포지의 상태, GitHub에서는 감시자의 네 열 표, 고친 것과 이유가 있는 기각한 것, 아직 대기 중인 것, 사람이 필요한 것.
+플레이북은 응답에 넣을 항목 목록을 따로 두지 않습니다. 응답은 `poteto-mode`의 Writing the reply 규칙(rule)을 따릅니다.
 
 ### 사용 예
 
@@ -209,7 +205,7 @@ babysit은 프런티어를 봅니다. 확인 모드로 감시 스크립트를 �
 
 원문: {{src:skills/poteto-mode/scripts/watch-pr/cli.ts}} {{src:skills/poteto-mode/scripts/watch-pr/policy.ts}} {{src:skills/poteto-mode/scripts/watch-pr/github.ts}} {{src:skills/poteto-mode/scripts/watch-pr/render.ts}} {{src:skills/poteto-mode/scripts/bootstrap.ts}} {{src:skills/poteto-mode/scripts/package.json}}
 
-`scripts/watch-pr/watch-pr`는 PR 하나, 연결된 스택, 고정된 "대기열 스택"을 지켜보고 판정을 JSON으로 내놓는 Bun 스크립트입니다. 읽기 전용입니다. `gh`와 GraphQL 조회만 하고 병합하거나 푸시하거나 댓글을 달지 않으며 디스크에 상태를 두지 않습니다. `gh`와 `git`이 필요합니다. 처음 실행할 때 `bootstrap.ts`가 `bun install --frozen-lockfile`로 의존성(`commander`)을 설치합니다.
+`scripts/watch-pr/watch-pr`는 PR 하나, 연결된 스택, 고정된 "대기열 스택"을 지켜보고 판정을 JSON으로 내놓는 Bun 스크립트입니다. 읽기 전용입니다. `gh`와 GraphQL 조회만 하고 병합하거나 푸시하거나 댓글을 달지 않으며 디스크에 상태를 두지 않습니다. `gh`와 `git`이 필요합니다. 처음 실행할 때 `bootstrap.ts`가 `bun install --frozen-lockfile`로 의존성(`commander`)을 설치합니다. 리뷰 스레드는 GraphQL `reviewThreads`를 페이지당 100개씩 읽고, `pageInfo`의 커서가 없을 때까지 이어 붙입니다. 첫 100개만 보고 멈추지 않습니다.
 
 플레이북이 쓰는 명령은 세 가지입니다.
 

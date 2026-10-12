@@ -259,9 +259,9 @@ end 응답
 
 ### 동작 방식
 
-부모는 디스크와 안전 관문을 책임집니다. 삭제는 되돌릴 수 없으므로 모든 단계가 사용 중이거나 커밋되지 않은 작업이 있는 것을 지우지 않도록 지킵니다.
+삭제는 되돌릴 수 없으므로 모든 단계가 사용 중이거나 커밋되지 않은 작업이 있는 것을 지우지 않도록 지킵니다.
 
-1. **스냅숏과 감사.** `df -h /`를 기록한 뒤 `scripts/worktree-audit.sh`를 돌립니다(`principle-build-the-lever`). 경로는 손으로 입력하지 않고 `git worktree list`에서 읽습니다. 손으로 쓴 `myrepo-worktrees/x`는 `.cursor/worktrees/myrepo/x`에 있는 것을 놓치기 때문입니다(`principle-encode-lessons-in-structure`). 이 스크립트는 워크트리마다 크기, 나이, 병합 상태, 커밋되지 않은 작업, PR 상태, 그것을 건드린 가장 최근 채팅을 분류하고 버킷을 제안합니다. 대화 기록 스캔은 느리므로 백그라운드로 돌립니다.
+1. **스냅숏과 감사.** `df -h /`를 기록한 뒤 `scripts/worktree-audit.sh [-b <pr-base-ref>] [repo-path]`를 돌립니다(`principle-build-the-lever`). `-b`가 없으면 `MERGED`는 `origin/HEAD`를 기준으로 하므로, PR이 다른 브랜치를 대상으로 하면 `-b origin/<branch>`를 넘깁니다. 경로는 손으로 입력하지 않고 `git worktree list`에서 읽습니다. 손으로 쓴 `myrepo-worktrees/x`는 `.cursor/worktrees/myrepo/x`에 있는 것을 놓치기 때문입니다(`principle-encode-lessons-in-structure`). 이 스크립트는 워크트리마다 크기, 나이, 병합 상태, 커밋되지 않은 작업, PR 상태, 그것을 건드린 가장 최근 채팅을 분류하고 버킷을 제안합니다. 대화 기록 스캔은 느리므로 백그라운드로 돌립니다.
 2. **버킷은 조언이지 허가가 아닙니다.** 고정된 채팅과 활성 채팅이 진짜 산출물입니다(`principle-prove-it-works`). 그 집합을 사용자나 사이드바에서 받아 모든 후보와 교차 확인합니다. 지렛대(스크립트)가 사용자가 고정해 둔 워크트리를 `safe`로 표시한 적이 있으므로, 고정 집합이 이깁니다.
 3. **삭제 전에 사용 여부를 검증합니다.** 모든 `verify-recent-chat` 행이나 의심스러운 것은 서브에이전트를 팬아웃해 대화 기록을 읽고 그 채팅이 고정되었거나 진행 중인지, 어느 워크트리를 건드리는지 보고하게 합니다(`principle-guard-the-context-window`, 대화 기록은 대용량입니다). 고정된 채팅은 백그라운드 서브에이전트로 arena와 재현 트리를 형제 워크트리에 만들고, 그 이름이 사이드바에 나타나지 않아도 사용 중입니다.
 4. **되돌릴 수 없는 손실 앞에서 멈춥니다.** `wip:N`은 추적되는 커밋되지 않은 편집 N개입니다. 깨끗한 워크트리는 브랜치에서 복구할 수 있지만 커밋되지 않은 작업은 사라지므로 diff를 보여 주고 결정을 먼저 받습니다. `scratch:N`은 추적되지 않는 일회용이라 버려도 안전하지만 파일 이름을 밝힙니다. Autonomy에 따라 깨끗하고 병합되었고 사용 중이 아니면 진행하고, `wip`와 사용 중이면 멈춥니다.
@@ -274,7 +274,7 @@ end 응답
 
 ### 보조 자료: worktree-audit.sh
 
-이 스크립트는 모든 git 워크트리를 감사하고 제안 버킷이 붙은 표를 출력합니다. 헤더 주석은 "아무것도 지우지 않는다"고 말합니다. 사용법은 `worktree-audit.sh [repo-path]`이고 기본은 `git rev-parse --show-toplevel`입니다. git 저장소가 아니면 종료 코드 1로 "not in a git repo; pass a repo path"를 냅니다. 메인 워크트리(`git worktree list --porcelain`의 첫 항목)는 건너뜁니다. 실행할 때 `git fetch origin main --quiet`로 병합 열이 오래되지 않게 하고(실패하면 경고), `gh pr list --author "@me" --state all --limit 1000`을 한 번 돌립니다. 내 PR만 보입니다.
+이 스크립트는 모든 git 워크트리를 감사하고 제안 버킷이 붙은 표를 출력합니다. 헤더 주석은 "아무것도 지우지 않는다"고 말합니다. 사용법은 `worktree-audit.sh [-b|--base <ref>] [repo-path]`이고 경로 기본은 `git rev-parse --show-toplevel`입니다. `-b`는 `MERGED` 열이 대조하는 참조입니다. 없으면 기준은 `origin/HEAD`, 그다음 `origin/main`, 그다음 `origin/master`입니다. `origin/HEAD`는 원격의 기본 브랜치이지, PR이 들어가는 브랜치와 다를 수 있으므로 다를 때는 `-b`를 넘깁니다. `-b`를 주지 않으면 stderr에 `MERGED`가 어떤 기준을 쓰는지 경고합니다. git 저장소가 아니면 종료 코드 1로 "not in a git repo; pass a repo path"를 냅니다. 메인 워크트리(`git worktree list --porcelain`의 첫 항목)는 건너뜁니다. 실행할 때 기준이 `origin/*`이면 그 참조를 fetch하고(실패하면 경고), `gh pr list --author "@me" --state all --limit 1000`을 한 번 돌립니다. 내 PR만 보입니다.
 
 출력은 탭으로 구분되고 헤더는 `SIZE AGE MERGED DIRTY REMOTE PR LAST_CHAT BUCKET WORKTREE`이며 크기순(큰 것이 위)으로 정렬됩니다.
 
@@ -282,19 +282,20 @@ end 응답
 | --- | --- |
 | `SIZE` | `du -sh` |
 | `AGE` | HEAD 커밋 이후 일수(`12d` 형식), 모르면 `?` |
-| `MERGED` | HEAD가 `origin/main`의 조상이면 `YES`, 아니면 `no`. 스쿼시 병합은 놓치므로 PR 상태가 더 강한 신호입니다 |
+| `MERGED` | HEAD가 기준 참조(`-b` 또는 `origin/HEAD`)의 조상이면 `YES`, 아니면 `no`. 스쿼시 병합은 놓치므로 PR 상태가 더 강한 신호입니다 |
 | `DIRTY` | `clean`, `wip:N`(추적되는 변경 N개), `scratch:N`(추적되지 않는 항목만 N개) |
 | `REMOTE` | `detached`, `pushed`, `ahead<N>`, `no-remote` |
 | `PR` | `#<number>/<STATE>` 또는 `-` |
 | `LAST_CHAT` | 워크트리 경로를 언급하는 대화 기록 파일 중 가장 최근에 수정된 것의 날짜, 없으면 `-`. `~/.cursor/projects/<repo-path-slug>/agent-transcripts` 아래를 `rg`로 검색하며, 경로 뒤에 `/`나 `"`가 와야 일치하므로 `glint-482`는 `glint-482-r37`과 일치하지 않습니다 |
 
-버킷 규칙(bucket)은 순서대로 적용됩니다. (1) DIRTY가 `wip:`로 시작하면 `hold-wip`. (2) PR에 `OPEN`이 들어 있으면 `hold-open-pr`. (3) 최근 4일 안에 채팅이 있으면 `verify-recent-chat`. (4) `MERGED=YES`이거나 PR이 하나라도 있으면(CLOSED 포함) `safe`. (5) 그 밖은 `review`. `git`, `gh`, `jq`, `rg`, `awk`, `sed`, `du`, `xargs`, `sort`, `mktemp`이 필요하고 BSD/macOS 형태의 `stat -f`와 `date -r`을 쓰므로 macOS 지향입니다. 부수 효과는 `origin/main` 원격 참조 갱신과 임시 파일뿐이고 아무것도 지우지 않습니다.
+버킷 규칙(bucket)은 순서대로 적용됩니다. (1) DIRTY가 `wip:`로 시작하면 `hold-wip`. (2) PR에 `OPEN`이 들어 있으면 `hold-open-pr`. (3) 최근 4일 안에 채팅이 있으면 `verify-recent-chat`. (4) `MERGED=YES`이거나 PR이 하나라도 있으면(CLOSED 포함) `safe`. (5) 그 밖은 `review`. `git`, `gh`, `jq`, `rg`, `awk`, `sed`, `du`, `xargs`, `sort`, `mktemp`이 필요하고 BSD/macOS 형태의 `stat -f`와 `date -r`을 쓰므로 macOS 지향입니다. 부수 효과는 기준 `origin/*` 원격 참조 갱신과 임시 파일뿐이고 아무것도 지우지 않습니다.
 
 ### 함정과 주의점
 
 - 버킷 `safe`를 삭제 허가로 읽지 않습니다. 고정된 채팅의 집합이 우선합니다.
 - `wip:N`은 diff를 보여 주고 결정을 받은 뒤에만 지웁니다.
 - 경로를 손으로 입력하지 않고 `git worktree list`에서 읽습니다.
+- PR이 원격 기본 브랜치가 아닌 브랜치를 대상으로 하면 `-b origin/<branch>`를 넘깁니다. 없으면 `MERGED`는 `origin/HEAD`를 봅니다.
 
 ### 흐름도
 
@@ -404,7 +405,7 @@ end 응답
 
 `node pstack/skills/poteto-mode/scripts/check-plan.mjs <plan.md>`는 이 계획서 형식을 검사합니다. 종료 코드는 인자가 없으면 2(stderr에 사용법), 문제가 있으면 1, 깨끗하면 0입니다. 출력은 stdout에 PR 절마다 요약 한 줄과 `<n> PR sections, <m> problems`, stderr에 문제마다 `file:line: message` 한 줄입니다. 검사 내용은 다음과 같습니다.
 
-- **문체(코드가 아닌 줄).** 긴 줄표(en dash, em dash), 곡선 따옴표, 문장 중간 콜론(`: ` 뒤에 공백이 아닌 글자)을 보고합니다. 인라인 코드, 이미지, 링크 대상은 먼저 벗깁니다.
+- **문체(코드가 아닌 줄).** 긴 줄표(en dash, em dash), 곡선 따옴표, 문장 중간 콜론(`: ` 뒤에 공백이 아닌 글자)을 보고합니다. 인라인 코드, 이미지, 링크 대상은 먼저 벗깁니다. 펜스 코드 블록(`` ``` `` 또는 `~~~`, CommonMark 열림/닫힘) 안의 줄은 문체 검사를 건너뜁니다. 백틱 세 개로 시작하는 모든 줄을 토글하지 않고, 정보 줄에 백틱이 있는 열림은 펜스로 보지 않습니다.
 - **최상위 구조.** H1 제목이 있어야 하고, H1과 첫 `## How to read this` 사이에 비어 있지 않은 줄 10개 미만, `## How to read this`(필수 문구 포함: "One box is one unit of work", "names the evidence", "Check a box only when its evidence exists", `playbooks/`, 그리고 검증 규칙 문장), `## Program checklist`, PR 절 하나 이상, `## Close the program`.
 - **Program checklist.** `###` 제목이 `Arm the program`, `Spawn owners`, `PR mechanics`, `Verdict and merge`, `Boot recipe`로 이 순서로 시작해야 하고, 본문에 `git show origin/main:`, `/loop 1h`, `status message`가 글자 그대로 들어 있어야 합니다.
 - **PR 절.** 위의 아홉 개 굵은 하위 블록이 정확히 이 순서로 있어야 합니다. `Depends on.`은 무언가를 밝혀야 하고, `Files.`, `Build.`, `You see.`, `Verify, unit.`, `Merge.`에는 체크박스가 하나 이상 있어야 합니다. 세 `Verify` 블록은 검증 규칙 문장으로 시작해야 합니다. `Verify, live.`는 "Ten lanes on `<model>` at the PR head"와 채워진 모델, 1에서 10까지 번호가 붙은 레인(`Lane N. `)이 필요하고 레인마다 ``Save `<file>` ``과 `Pass when`이 있어야 합니다. `Verify, perf.`의 상자는 정확히 `Metric.`, `Probe.`, `Baseline.`, `Rule.` 순서입니다. `Review gate.`는 `None.`으로 시작하고 상자가 없거나, 아니면 상자가 하나 이상 있고 `screenshot`, `video`, `operator`를 담아야 합니다.

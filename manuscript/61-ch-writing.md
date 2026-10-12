@@ -4,7 +4,7 @@
 
 원문: {{src:skills/unslop/SKILL.md}} {{src:docs/guide/05-build-and-clean.md}}
 
-> 어떤 글에서든 AI가 쓴 티를 걷어 냅니다. 원문의 `description`은 "Must always apply"라고 덧붙입니다.
+> 어떤 글에서든 AI가 쓴 티를 걷어 냅니다. 원문의 `description`은 "Cut AI tells from any writing."입니다.
 
 ### 언제 쓰는가
 

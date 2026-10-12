@@ -2,7 +2,7 @@
 
 ![/poteto-mode가 작업 요청을 BUG FIX, FEATURE, INVESTIGATION 관문으로 분기시키는 장면을 그린 일러스트](images/router.jpg)
 
-원문: {{src:README.md}} {{src:.cursor-plugin/plugin.json}} {{src:docs/guide/README.md}}
+원문: {{src:README.md}} {{src:.cursor-plugin/plugin.json}} {{src:plugin.json}} {{src:docs/guide/README.md}}
 
 ## 한 문단 요약
 
@@ -33,13 +33,14 @@ README는 "포크하고, 개선하고, 자기 것으로 만들라"고 권하고,
 | 구성 요소 | 내용 |
 | --- | --- |
 | `skills/` | 스킬 52개. 일반 스킬 28개와 `principle-*` 스킬 24개 |
-| `agents/` | 서브에이전트 정의 2개: `poteto-agent`, `Comment Sicko` |
+| `agents/` | 서브에이전트 정의 2개: `poteto-agent`, `Comment Sicko`(`name: comment-sicko`) |
 | `automations/` | 휴면 상태의 자동화 팩 `benny` |
 | `docs/guide/` | 열 장으로 된 사용 안내서와 삽화 |
-| `.cursor-plugin/plugin.json` | 플러그인 매니페스트 |
+| `.cursor-plugin/plugin.json` | Cursor용 플러그인 매니페스트. `skills`와 `agents` 디렉터리, 로고, 분류, 태그를 가리킴 |
+| `plugin.json` | Agent Plugins v1 루트 매니페스트. 스키마와 이름, 버전, 작성자, 라이선스, 키워드만 둠 |
 | `README.md`, `LICENSE` | 소개와 MIT 라이선스 |
 
-매니페스트는 이름 `pstack`, 버전 `{{version}}`, 작성자 Lauren Tan, 라이선스 MIT, 분류 `developer-tools`를 선언하고 `skills`와 `agents` 디렉터리를 가리킵니다. 태그는 `workflow`, `principles`, `review`, `planning`입니다. 훅이나 규칙(rule) 파일 같은 자동 실행 요소는 플러그인에 들어 있지 않습니다. 모델 설정 규칙은 `/setup-pstack`을 실행할 때 사용자 쪽에 생성됩니다. 자세한 내용은 [설치와 첫 사용](setup.md)에서 다룹니다.
+매니페스트는 둘이 나란히 있습니다. `.cursor-plugin/plugin.json`은 이름 `pstack`, 버전 `{{version}}`, 작성자 Lauren Tan, 라이선스 MIT, 분류 `developer-tools`를 선언하고 `skills`와 `agents` 디렉터리를 가리킵니다. 태그는 `workflow`, `principles`, `review`, `planning`입니다. 루트의 `plugin.json`은 Agent Plugins v1 스키마(`https://agent-plugins.org/schemas/1.0.0/plugin.schema.json`)를 따르고, 같은 이름과 버전과 작성자와 라이선스와 키워드를 두되 `skills`나 `agents`나 로고는 두지 않습니다. 훅이나 규칙(rule) 파일 같은 자동 실행 요소는 플러그인에 들어 있지 않습니다. 모델 설정 규칙은 `/setup-pstack`을 실행할 때 사용자 쪽에 생성됩니다. 자세한 내용은 [설치와 첫 사용](setup.md)에서 다룹니다.
 
 스킬은 하나의 디렉터리이고 그 안의 `SKILL.md`가 본문입니다. 어떤 스킬은 `references/`에 하위 프롬프트와 판단 기준을, `playbooks/`에 절차를, `scripts/`에 실행 도구를 함께 둡니다.
 
@@ -57,6 +58,8 @@ README는 "포크하고, 개선하고, 자기 것으로 만들라"고 권하고,
 1. 작업을 플레이북과 맞춰 보고, 첫 항목이 그 플레이북의 단계(그대로 복사한 것)인 할 일 목록을 엽니다.
 2. 단계가 진행되면서 필요한 스킬로 넘어갑니다.
 3. 슬롭을 뺀 응답을 씁니다. 응답은 사용하는 사람과 유지보수하는 사람의 입장에서 씁니다.
+
+README는 `/poteto-mode`를 받은 채팅이 플레이북과 할 일 목록과 모든 서브에이전트 spawn을 소유한다고 합니다. `poteto-agent`는 실행 중 위임용 래퍼이고, 플레이북 자체를 돌리려고 띄우지 않습니다.
 
 여러 턴에 걸쳐 `/poteto-mode`를 유지하려면 `/` 메뉴에서 고른 뒤 Enter가 아니라 Option+Enter(Mac) 또는 Alt+Enter(Windows)를 누릅니다. 그러면 Cursor의 Custom Mode가 됩니다. 매 턴 컨텍스트에 남고, 플레이북이 맞거나 작업에 엄밀함이 필요할 때 적용되며, 그렇지 않을 때는 방해하지 않습니다. Custom Mode는 Agents Window와 CLI에서 쓸 수 있습니다. Enter만 치면 그 메시지 하나에만 붙고 대화가 이어지면 사라집니다. 그만하라고 말하거나 모드를 나가면 꺼집니다. Cursor의 `/loop` 명령과 잘 어울려서, 엄밀함을 잃지 않고 에이전트를 몇 시간씩 일하게 할 수 있다고 README는 말합니다.
 

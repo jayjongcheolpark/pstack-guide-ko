@@ -4,7 +4,7 @@
 
 ## 원본
 
-`cursor/plugins`의 `pstack/`, 커밋 `978ca6e9c0e012047cd5058b8e829240336e704e` (0.15.17) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를 적은 기록입니다.
+`cursor/plugins`의 `pstack/`, 커밋 `1b6d44ff26d4e242f4e8f68c391e6d2f7ca16def` (0.15.20) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를 적은 기록입니다.
 
 ## 빌드와 검사
 
@@ -308,3 +308,35 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 - `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 52개와 플레이북 23개의 절 존재, 용어 병기 짝 29개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
 - `bun tools/check-layout.mjs`: 390px 폭에서 가로 넘침 없음.
 - `bun tools/build.mjs`: `pstack-guide-0.15.17.epub`, `pstack-guide-0.15.17.pdf` (465쪽).
+
+## 0.15.20
+
+원문을 `978ca6e9c0e012047cd5058b8e829240336e704e`(0.15.17)에서 `1b6d44ff26d4e242f4e8f68c391e6d2f7ca16def`(0.15.20)로 올렸습니다. pstack 트리에 닿은 커밋은 열한 개입니다.
+
+- `ea32d95` feat(pstack): show /ketchup decisions as before/after visuals (#570)
+- `08bd59b` refactor(pstack): cut unneeded sections from seven skills (#571)
+- `de2dba6` fix(pstack): rename Comment Sicko agent id so Grok can spawn it (#486)
+- `87c8103` fix(pstack): respect fenced code blocks in plan checks (#536)
+- `ff8f83d` fix(watch-pr): paginate review threads instead of reading only the first 100 (#484)
+- `bc697d0` fix(pstack): drop "Must always apply." from unslop description (#572)
+- `cf9a111` fix(pstack): worktree-audit checks MERGED against the default branch, not origin/main (#574)
+- `2bd5dd4` fix(pstack): make the /poteto-mode chat the runner, poteto-agent a delegate (#575)
+- `e5a02f8` feat(pstack): add Agent Plugins v1 root manifest (#576)
+- `c49b37a` fix(pstack): create-verification-skill readiness means the app is usable (#573)
+- `1b6d44f` chore(pstack): bump to 0.15.20 (#581)
+
+책 버전은 `BOOK_REVISION = 0`이라 pstack 버전과 같은 `0.15.20`입니다. 산출물 이름은 `pstack-guide-0.15.20.epub`, `pstack-guide-0.15.20.pdf`입니다.
+
+원고에서 반영한 내용입니다.
+
+- 스킬 수는 그대로 52개(일반 28, 원칙 24). `disable-model-invocation`은 `setup-pstack`만 없고 나머지 51개에 있습니다. 사용자의 말만으로 로드되는 스킬은 `/setup-pstack`뿐입니다.
+- `/poteto-mode`를 받은 채팅이 플레이북과 할 일 목록과 모든 `Task` 호출을 소유합니다. `poteto-agent`는 실행 중 위임이고 플레이북 러너가 아닙니다.
+- Comment Sicko의 `name`과 `subagent_type`은 `comment-sicko`입니다.
+- `/ketchup`은 할 일 항목마다 전후를 나란히 보여 줍니다. 이 턴은 답에 넣을 시각화 외에는 읽기 전용입니다. 숫자를 지어내지 않고, 캡처하지 않은 화면을 만들지 않습니다.
+- `create-verification-skill`의 준비됨은 쓸 수 있다는 뜻입니다. 빈 데이터 디렉터리에서 마이그레이션과 시드까지 가야 하고, 시드가 빠지면 여정을 약화하지 않으며, 대용 환경의 설정 단계는 진짜 대상에서 돌리기 전까지 검증되지 않은 채로 남습니다.
+- `worktree-audit.sh`의 `MERGED` 기본 기준은 `origin/HEAD`입니다. PR 베이스가 다르면 `-b`를 넘깁니다.
+- `unslop`의 `description`에서 "Must always apply."를 뺐습니다. `poteto-mode`는 글이 나오는 모든 표면에서 이 스킬을 그대로 요구합니다.
+- 루트 `plugin.json`은 Agent Plugins v1 매니페스트입니다. Cursor용 레이아웃은 `.cursor-plugin/plugin.json`에 남습니다.
+- `watch-pr`는 리뷰 스레드를 페이지당 100개씩 끝까지 읽고, `check-plan.mjs`는 펜스 코드 블록 안의 문체를 건너뜁니다.
+- 일곱 스킬에서 토큰을 줄인 절 삭제는 리프 본문을 짧게 했습니다. `poteto-mode` 색인과 YAML `description`의 한 줄 트리거는 그대로입니다. 책은 리프에 남은 규칙과 색인의 한 줄을 구분해 적었습니다.
+- 0.15.17 절의 개수와 커밋은 그때의 기록으로 남겼습니다.

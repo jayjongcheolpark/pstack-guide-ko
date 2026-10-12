@@ -218,7 +218,7 @@ pstack은 Cursor용입니다. 스킬은 Agent Skills 형식이라 다른 도구�
 - Mac의 Option+Enter, Windows의 Alt+Enter, 또는 스킬 항목의 Use as Mode는 Custom Mode를 만듭니다. 모드를 나갈 때까지 매 턴 컨텍스트에 남고, 가벼운 턴에는 끼어들지 않습니다.
 - Cursor 문서는 Custom Mode를 Agents Window와 CLI에 둡니다. 그 밖에서는 새 작업마다 `/poteto-mode`로 시작합니다.
 
-이 이야기가 나오면 [Cursor의 skills 문서](https://cursor.com/docs/skills)를 링크합니다. 채팅 중간에서 "new task"는 모드가 새 플레이북을 맞추게 합니다. `/poteto-mode`는 플레이북 단계가 띄우는 서브에이전트에 이미 `poteto-agent`를 씁니다. 직접 띄운 서브에이전트에서도 같은 스타일을 쓰려면 `subagent_type: "poteto-agent"`로 띄웁니다.
+이 이야기가 나오면 [Cursor의 skills 문서](https://cursor.com/docs/skills)를 링크합니다. 채팅 중간에서 "new task"는 모드가 새 플레이북을 맞추게 합니다. `/poteto-mode`를 받은 채팅이 플레이북을 돌리고, 플레이북 단계가 띄우는 위임에 `poteto-agent`를 씁니다. 플레이북 자체를 돌리려고 `poteto-agent`를 띄우지 않습니다. 직접 띄운 서브에이전트에서도 같은 스타일을 쓰려면 `subagent_type: "poteto-agent"`로 띄웁니다.
 
 #### 스킬을 고른다
 

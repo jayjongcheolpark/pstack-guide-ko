@@ -2,7 +2,7 @@
 
 원문: {{src:README.md}} {{src:skills/poteto-mode/SKILL.md}}
 
-이 표는 pstack 0.15.17(커밋 `978ca6e`)의 스킬 52개, 에이전트 2개, `poteto-mode` 플레이북 23개를 한곳에 모았습니다. 트리거 문구는 각 스킬의 `description`에 있는 문구를 그대로 두었고(`no-comments`처럼 `description`에 없는 곳은 `poteto-mode`의 규칙(non-negotiable)을 적었고), 영어 원문이 없는 곳(원칙(principle) 스킬 등)은 "언제 적용하는가"를 한국어로 적었습니다. 이름을 누르면 해당 절로 갑니다.
+이 표는 pstack 0.15.20(커밋 `1b6d44f`)의 스킬 52개, 에이전트 2개, `poteto-mode` 플레이북 23개를 한곳에 모았습니다. 트리거 문구는 각 스킬의 `description`에 있는 문구를 그대로 두었고(`no-comments`처럼 `description`에 없는 곳은 `poteto-mode`의 규칙(non-negotiable)을 적었고), 영어 원문이 없는 곳(원칙(principle) 스킬 등)은 "언제 적용하는가"를 한국어로 적었습니다. 이름을 누르면 해당 절로 갑니다.
 
 ## 일반 스킬 28개
 
@@ -15,7 +15,7 @@
 | [`why`](why.md#skill-why) | 코드의 동기와 의도를 MCP 증거 범주별로 병렬 조사 | "why does X work this way", "why we picked Y", 설계 근거, 회귀, 포스트모템, 데이터로 뒷받침된 임계값 |
 | [`teach`](teach-recall.md#skill-teach) | `how`와 `why`를 엮어 사람이 이해하도록 평이하게 설명 | "teach me this", "help me really understand X", "explain this change or subsystem to me" |
 | [`recall`](teach-recall.md#skill-recall) | 자신의 채팅 기록과 공유 기록에서 최근 맥락을 복원해 브리프로 | "recall my work on X", "catch me up", "what have I been working on", "where did I leave off" |
-| [`ketchup`](teach-recall.md#skill-ketchup) | 이 채팅에서 사용자의 마지막 메시지 이후를 평이한 말로 따라잡고, 할 일 항목마다 결정을 내릴 요약을 줌 | "Catch the user up on everything in this chat since their last message", `/ketchup` |
+| [`ketchup`](teach-recall.md#skill-ketchup) | 이 채팅에서 사용자의 마지막 메시지 이후를 평이한 말로 따라잡고, 할 일 항목마다 결정을 내릴 요약과 전후 시각화를 줌 | "Catch the user up on everything in this chat since their last message", `/ketchup` |
 | [`architect`](architect.md#skill-architect) | 코드 전에 타입, 시그니처, 모듈 구조를 스케치 | `/architect`, "architect this", "design this", 코드로 뛰어들면 잘못된 모양이 굳을 작업 |
 | [`arena`](arena-swarm.md#skill-arena) | 같은 과업에 후보 N개를 만들고 기준안을 고르고 이식 | `/arena`, "arena this", "throw it in the arena" |
 | [`swarm`](arena-swarm.md#skill-swarm) | 병렬 작업자 N명을 띄우고 보고서 하나로 집계 | `/swarm`, "swarm this", 병렬 커버리지, 경주, 관문 시험(gauntlet), 탐색 |
@@ -26,7 +26,7 @@
 | [`benchmark-checklist`](verification.md#skill-benchmark-checklist) | 성능 숫자를 보고하거나 그 숫자로 행동하기 전에 걸러 냄 | 벤치마크를 돌리거나, 자신이 측정한 속도 향상이나 회귀를 보고할 때 |
 | [`create-verification-skill`](verification.md#skill-create-verification-skill) | 앱을 사용자처럼 구동하는 프로젝트 전용 검증(verification) 스킬 생성 | `/create-verification-skill`, "make a control skill for this repo", 앱 동작을 증명할 스크립트된 방법이 없을 때 |
 | [`maintain-verification-skill`](verification.md#skill-maintain-verification-skill) | 검증 스킬과 기능 지도를 정직하게 유지 | `/maintain-verification-skill`, "audit the verify skill" |
-| [`unslop`](writing.md#skill-unslop) | 글에서 AI가 쓴 티를 걷어 냄 | 원문: "Must always apply" |
+| [`unslop`](writing.md#skill-unslop) | 글에서 AI가 쓴 티를 걷어 냄 | 원문: "Cut AI tells from any writing." |
 | [`technical-writing`](writing.md#skill-technical-writing) | 문서를 Diátaxis, Google 스타일, STE, Global English 층으로 씀 | `/technical-writing`, 문서, RFC, README, PR 설명, 커밋 메시지 쓰기와 리뷰 |
 | [`no-comments`](code-hygiene.md#skill-no-comments) | Comment Sicko로 주석을 걷어 내고 제약 주석에 인코딩을 제안 | 리뷰 전 (`poteto-mode`의 트리거) |
 | [`typescript-best-practices`](code-hygiene.md#skill-typescript-best-practices) | 타입 시스템 원칙을 TypeScript 문법으로 구체화 | `.ts`나 `.tsx` 파일을 읽거나 편집할 때. 스스로 로드되지 않으므로 `/typescript-best-practices`를 침 |
@@ -102,8 +102,8 @@
 
 | 이름 | 종류 | 절 |
 | --- | --- | --- |
-| `poteto-agent` | 서브에이전트. `poteto-mode`의 전체 스타일로 일함 | [poteto-mode](poteto-mode.md#agent-poteto-agent) |
-| `Comment Sicko` | 서브에이전트. 주석 리뷰어(애플리케이션 코드는 쓰지 않음) | [코드 정리](code-hygiene.md#agent-comment-sicko) |
+| `poteto-agent` | 서브에이전트. `/poteto-mode` 실행 중의 위임. 플레이북 러너가 아님 | [poteto-mode](poteto-mode.md#agent-poteto-agent) |
+| `Comment Sicko` | 서브에이전트. 주석 리뷰어(애플리케이션 코드는 쓰지 않음). `subagent_type: "comment-sicko"` | [코드 정리](code-hygiene.md#agent-comment-sicko) |
 | `benny` | 자동화 팩. 슬랙 이슈 제보 분류, 재현, 초안 수정 | [자동화](benny.md#automation-benny) |
 
 ## 슬래시 명령 요약
@@ -117,7 +117,7 @@ README의 "모든 스킬" 표가 스킬마다 붙인 한 줄 설명입니다(원
 | `/how` | 서브시스템이 어떻게 동작하는지 워크스루를 원할 때 |
 | `/why` | 왜 이렇게 만들었는지 알고 싶을 때. 런타임에 MCP를 발견하고 각 증거 범주를 병렬로 조회 |
 | `/recall` | 작업을 시작하거나 재개하며 주제에 대한 최근 맥락을 자신의 채팅 기록과 공유 기록에서 다시 세워 빡빡한 현재 상태 브리프로 받고 싶을 때 |
-| `/ketchup` | 이 채팅에서 마지막 메시지 이후의 모든 일을 평이한 말로 받고, 할 일 항목마다 결정을 내릴 수 있는 요약을 원할 때 |
+| `/ketchup` | 이 채팅에서 마지막 메시지 이후의 모든 일을 평이한 말로 받고, 할 일 항목마다 결정을 내릴 수 있는 요약과 전후 시각화를 원할 때 |
 | `/blast-radius` | 작아 보이는 변경이 다른 곳에서 무엇을 깨뜨릴 수 있는지, 안전하게 하는 사실 하나를 주장이 아니라 코드 실행으로 증명해서 알고 싶을 때 |
 | `/architect` | 함수 경계를 넘는 코드를 쓰기 전에 호출자의 사용, 타입, 모듈 모양을 먼저 정하고 싶을 때 |
 | `/arena` | 같은 일에 병렬 시도 N개를 만들고 각각의 좋은 부분을 가져오고 싶을 때 |
