@@ -20,7 +20,7 @@
 
 ### 동작 방식
 
-`SKILL.md`는 일곱 부분으로 이루어집니다. 위에서부터 순서대로 봅니다.
+`SKILL.md` 제목 바로 아래에 한 줄이 있습니다. 함께 실린 스킬은 이 파일 기준으로 `../<name>/SKILL.md`에 있으므로, 모든 `poteto-agent` 프롬프트에 이 파일의 절대 경로를 넣으라고 합니다. 그 아래는 일곱 부분으로 이루어집니다. 위에서부터 순서대로 봅니다.
 
 #### 1. Non-negotiables (지켜야 할 규칙)
 
@@ -64,7 +64,7 @@
 
 #### 4. Subagents (서브에이전트)
 
-- 플레이북 단계 안에서 띄우는 서브에이전트(코드를 쓰는 위임, 임시 도우미)는 `subagent_type: "poteto-agent"`를 씁니다. `/poteto-mode`를 받은 채팅이 플레이북을 돌립니다. 플레이북 자체를 돌리려고 `poteto-agent`를 띄우지 않습니다. `/poteto-mode`와 `poteto-agent`는 같은 래퍼를 지납니다. 반면 `how`, `why`, `interrogate`, `reflect`, `swarm`은 다양한 모델의 리뷰를 위해 자기 `subagent_type`을 정해 두므로, 스킬이 정한 것을 그대로 따르고 `poteto-agent`로 덮어쓰지 않습니다.
+- 플레이북 단계 안에서 띄우는 서브에이전트(코드를 쓰는 위임, 임시 도우미)는 `subagent_type: "poteto-agent"`를 씁니다. `/poteto-mode`를 받은 채팅이 플레이북을 돌립니다. 플레이북 자체를 돌리려고 `poteto-agent`를 띄우지 않습니다. `/poteto-mode`와 `poteto-agent`는 같은 래퍼를 지납니다. 부모는 모든 `poteto-agent` 프롬프트에 `poteto-mode` `SKILL.md`의 절대 경로를 넣습니다. 반면 `how`, `why`, `interrogate`, `reflect`, `swarm`은 다양한 모델의 리뷰를 위해 자기 `subagent_type`을 정해 두므로, 스킬이 정한 것을 그대로 따르고 `poteto-agent`로 덮어쓰지 않습니다.
 - 모든 `Task` 호출의 기본값은 이렇습니다. `run_in_background: true`, 에이전트 모드(읽기 전용은 MCP를 벗겨 냄), 맥락을 붙여 넣지 않고 파일 포인터를 넘김, 역할별 명시적 모델(`/setup-pstack`으로 설정. 기본값은 코드에 `grok-4.7-xhigh-fast`, 글과 판단에 `claude-opus-5-5-xhigh`). 코드 위임은 난이도별로 나눕니다. 가장 어려운 변경(교차 설계, 까다로운 동시성, 미묘한 알고리즘)은 가장 강한 판단 모델로 갑니다. 애매한 의도에 판단이 필요한 경우든, 글자 그대로 따라야 하는 정밀한 절차든 같습니다. 사소한 기계적 수정은 빠른 코드 모델로 갑니다. `/setup-pstack` 규칙(rule)의 역할별 줄은 이 기본값은 물론 `how`, `why`, `arena`, `swarm`, `architect`, `interrogate`, `reflect`가 스킬 안에 정해 둔 모델보다 우선합니다. 줄이 없는 역할은 기본값을 유지하고, 값이 `inherit-parent`나 `auto`이면 Task의 `model`을 생략해 부모 채팅 모델로 돌립니다. 코드 플레이북은 각자의 줄(`feature, refactoring`, `bug-fix`, `perf-issue`, `hillclimb`)을, 가장 어려운 변경은 `hardest tasks` 줄을, 글과 판단은 `judgment and prose` 줄을 읽습니다.
 - 부모가 모든 서브에이전트의 작업을 책임집니다. diff를 검토하고 요약은 직접 쓰지, 서브에이전트가 한 말을 그대로 넘기지 않습니다. 두 번째 의견은 같은 프롬프트를 다른 모델에 주는 것이고, 두 모델이 일치하면 신호가 강합니다.
 - **기본은 새 서브에이전트입니다.** 새 일은 통합한 범위(처음 브리프, 그 뒤의 모든 지시, 이전 에이전트의 보고와 브랜치)를 가진 새 서브에이전트에게 줍니다. 수정 라운드, 후속, 재시도, 대기열의 다음 항목이 모두 그렇습니다. 기존 서브에이전트를 재개하거나 메시지를 보내거나 후속을 큐에 넣는 것은, 새 일이 그 에이전트 안에만 있고 옮기기 비싼 상태가 꼭 필요할 때뿐입니다. 로컬 체크아웃, 커밋하지 않은 변경, 아직 돌고 있는 프로세스(개발 서버, 시뮬레이터, babysit 감시자)가 그런 상태입니다. 돌고 있는 에이전트에게 정지하거나 보류하라는 명령은 재사용이 아닙니다. PR 소유자 같은 역할은 에이전트보다 오래 삽니다. 그 에이전트가 돌아오면 역할의 다음 라운드는 새 에이전트가 맡습니다. 인터럽트로 이어 붙인 재개는 지시를 조용히 놓치므로, "끝났다"는 요약을 믿기보다 통합한 범위로 새 서브에이전트를 띄웁니다.
@@ -215,6 +215,6 @@ keep going until done
 
 > `/poteto-mode` 실행 중에 띄우는 위임 서브에이전트입니다. 플레이북 러너가 아닙니다.
 
-pstack은 실행 중 코드를 쓰거나 돕는 위임용 서브에이전트를 함께 싣습니다. `/poteto-mode`를 받은 채팅이 플레이북과 할 일 목록과 모든 `Task` 호출을 소유하고, `poteto-agent`는 그 위임 하나입니다. 플레이북 자체를 돌리려고 이 에이전트를 띄우지 않습니다. 부모 에이전트가 `subagent_type: "poteto-agent"`로 띄웁니다. 정의 파일은 짧습니다. 프런트매터의 `description`은 이 에이전트가 `/poteto-mode` 실행 중의 위임이며 러너가 아니고, 새 작업마다 새 `poteto-agent`를 띄우고, 재개는 poteto-mode의 Subagents 절이 이름 붙인 좁은 경우에만 하라고 말합니다. 그리고 `generalPurpose`로 바꿔 치면 읽기 단계를 건너뛰어 스타일이 어긋난다고 경고합니다. `is_background: true`입니다. 본문은 이렇습니다. `/poteto-mode`를 받은 채팅이 플레이북과 할 일 목록과 모든 `Task` 호출을 소유하고 이 에이전트는 그 위임 하나이며, 어떤 작업이든 시작하기 전에 `poteto-mode`의 `SKILL.md`를 인라인 원칙 색인까지 전부 읽고, 원칙을 적용할 때마다 리프 `principle-*` 스킬로 들어가라는 것입니다.
+pstack은 실행 중 코드를 쓰거나 돕는 위임용 서브에이전트를 함께 싣습니다. `/poteto-mode`를 받은 채팅이 플레이북과 할 일 목록과 모든 `Task` 호출을 소유하고, `poteto-agent`는 그 위임 하나입니다. 플레이북 자체를 돌리려고 이 에이전트를 띄우지 않습니다. 부모 에이전트가 `subagent_type: "poteto-agent"`로 띄웁니다. 정의 파일은 짧습니다. 프런트매터의 `description`은 이 에이전트가 `/poteto-mode` 실행 중의 위임이며 러너가 아니고, 새 작업마다 새 `poteto-agent`를 띄우고, 재개는 poteto-mode의 Subagents 절이 이름 붙인 좁은 경우에만 하라고 말합니다. 그리고 `generalPurpose`로 바꿔 치면 읽기 단계를 건너뛰어 스타일이 어긋난다고 경고합니다. `is_background: true`입니다. 본문은 이렇습니다. `/poteto-mode`를 받은 채팅이 플레이북과 할 일 목록과 모든 `Task` 호출을 소유하고 이 에이전트는 그 위임 하나이며, 어떤 작업이든 시작하기 전에 `poteto-mode`의 `SKILL.md`를 인라인 원칙 색인까지 전부 읽고, 원칙을 적용할 때마다 리프 `principle-*` 스킬로 들어가라는 것입니다. `SKILL.md`를 읽을 때는 부모가 준 절대 경로를 씁니다.
 
 같은 저장소의 다른 서브에이전트 `Comment Sicko`는 [코드 위생 장](code-hygiene.md#agent-comment-sicko)에서 다룹니다.

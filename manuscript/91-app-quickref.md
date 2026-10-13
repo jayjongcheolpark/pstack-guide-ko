@@ -2,7 +2,7 @@
 
 원문: {{src:README.md}} {{src:skills/poteto-mode/SKILL.md}}
 
-이 표는 pstack 0.15.20(커밋 `1b6d44f`)의 스킬 52개, 에이전트 2개, `poteto-mode` 플레이북 23개를 한곳에 모았습니다. 트리거 문구는 각 스킬의 `description`에 있는 문구를 그대로 두었고(`no-comments`처럼 `description`에 없는 곳은 `poteto-mode`의 규칙(non-negotiable)을 적었고), 영어 원문이 없는 곳(원칙(principle) 스킬 등)은 "언제 적용하는가"를 한국어로 적었습니다. 이름을 누르면 해당 절로 갑니다.
+이 표는 pstack 0.15.21(커밋 `997ffc7`)의 스킬 52개, 에이전트 2개, `poteto-mode` 플레이북 23개를 한곳에 모았습니다. 트리거 문구는 각 스킬의 `description`에 있는 문구를 그대로 두었고(`no-comments`처럼 `description`에 없는 곳은 `poteto-mode`의 규칙(non-negotiable)을 적었고), 영어 원문이 없는 곳(원칙(principle) 스킬 등)은 "언제 적용하는가"를 한국어로 적었습니다. 이름을 누르면 해당 절로 갑니다.
 
 ## 일반 스킬 28개
 
@@ -102,7 +102,7 @@
 
 | 이름 | 종류 | 절 |
 | --- | --- | --- |
-| `poteto-agent` | 서브에이전트. `/poteto-mode` 실행 중의 위임. 플레이북 러너가 아님 | [poteto-mode](poteto-mode.md#agent-poteto-agent) |
+| `poteto-agent` | 서브에이전트. `/poteto-mode` 실행 중의 위임. 플레이북 러너가 아님. 부모가 준 절대 경로로 `poteto-mode`를 읽음 | [poteto-mode](poteto-mode.md#agent-poteto-agent) |
 | `Comment Sicko` | 서브에이전트. 주석 리뷰어(애플리케이션 코드는 쓰지 않음). `subagent_type: "comment-sicko"` | [코드 정리](code-hygiene.md#agent-comment-sicko) |
 | `benny` | 자동화 팩. 슬랙 이슈 제보 분류, 재현, 초안 수정 | [자동화](benny.md#automation-benny) |
 

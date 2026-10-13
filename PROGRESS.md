@@ -4,7 +4,7 @@
 
 ## 원본
 
-`cursor/plugins`의 `pstack/`, 커밋 `1b6d44ff26d4e242f4e8f68c391e6d2f7ca16def` (0.15.20) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를 적은 기록입니다.
+`cursor/plugins`의 `pstack/`, 커밋 `997ffc7fe26bdaa6478a14e7f5b8d5f9ed747102` (0.15.21) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를, 0.15.20 절은 그때의 핀 `1b6d44f`를 적은 기록입니다.
 
 ## 빌드와 검사
 
@@ -346,3 +346,27 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 - `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 52개와 플레이북 23개의 절 존재, 용어 병기 짝 29개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
 - `bun tools/check-layout.mjs`: 390px 폭에서 가로 넘침 없음.
 - `bun tools/build.mjs`: `pstack-guide-0.15.20.epub`, `pstack-guide-0.15.20.pdf` (464쪽).
+
+## 0.15.21
+
+원문을 `1b6d44ff26d4e242f4e8f68c391e6d2f7ca16def`(0.15.20)에서 `997ffc7fe26bdaa6478a14e7f5b8d5f9ed747102`(0.15.21)로 올렸습니다. pstack 트리에 닿은 커밋은 두 개입니다.
+
+- `364a77e` fix(pstack): tell agents where bundled leaf skills live (#577)
+- `997ffc7` chore(pstack): bump to 0.15.21 (#584)
+
+책 버전은 `BOOK_REVISION = 0`이라 pstack 버전과 같은 `0.15.21`입니다. 산출물 이름은 `pstack-guide-0.15.21.epub`, `pstack-guide-0.15.21.pdf`입니다.
+
+원고에서 반영한 내용입니다.
+
+- 스킬 수는 그대로 52개(일반 28, 원칙 24). `disable-model-invocation`은 `setup-pstack`만 없고 나머지 51개에 있습니다. 사용자의 말만으로 로드되는 스킬은 `/setup-pstack`뿐입니다.
+- `poteto-mode`는 함께 실린 스킬이 자기 `SKILL.md` 기준으로 `../<name>/SKILL.md`에 있다고 밝히고, 모든 `poteto-agent` 프롬프트에 그 파일의 절대 경로를 넣으라고 합니다.
+- `poteto-agent`는 `poteto-mode`를 읽을 때 부모가 준 절대 경로를 씁니다.
+- 0.15.20 절의 개수와 커밋은 그때의 기록으로 남겼습니다.
+
+### 해석한 부분
+
+- 업스트림 커밋 메시지(#577)는 리프 스킬이 `disable-model-invocation`이라 경로가 보이지 않고, 띄운 `poteto-agent`도 `poteto-mode` 위치를 모른다고 설명합니다. `SKILL.md` 본문은 그 이유를 적지 않고 경로 규칙만 말합니다. 책은 경로 규칙만 옮겼습니다.
+
+### 실행한 검사
+
+- 이 절은 빌드와 검사 뒤에 채웁니다.
