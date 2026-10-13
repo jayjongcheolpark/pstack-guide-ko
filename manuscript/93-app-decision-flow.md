@@ -6,7 +6,7 @@
 
 ## 1단계: 그냥 `poteto-mode`로 시작해도 되는가
 
-**사소하지 않은 작업이고 엄밀함이 필요하다면 `/poteto-mode`로 목표와 확인 방법을 말합니다.** 이것이 기본 답입니다. 프롬프트에 스킬 이름을 나열하지 않습니다.
+**사소하지 않은 작업이고 엄밀함이 필요하다면 `/poteto-mode`로 목표와 확인 방법을 말합니다.** 이것이 기본 답입니다. 프롬프트에 스킬 이름을 나열하지 않습니다. 일을 시작하기 전에 에이전트가 목표와 문제를 자기 말로 다시 말하게 하려면 [`/in-your-own-words`](setup.md#skill-in-your-own-words)입니다.
 
 ```text
 /poteto-mode 내보내기가 재시도 중간에 중복 행을 씁니다. 먼저 재현하고, 고치고, 검증해 줘.
@@ -24,7 +24,8 @@
 | 왜 이렇게 만들었는가, 이 임계값은 어디서 왔는가 | [`why`](why.md#skill-why) |
 | 요약이 아니라 실제로 이해하고 싶다, 평이하게 풀어서 설명해 줬으면 한다 | [`teach`](teach-recall.md#skill-teach) |
 | 내 최근 작업 맥락을 되살리고 싶다 | [`recall`](teach-recall.md#skill-recall) |
-| 이 채팅에서 마지막 메시지 이후를 따라잡고 지금 결정할 일을 알고 싶다 | [`ketchup`](teach-recall.md#skill-ketchup) |
+| 이 채팅에서 마지막 메시지 이후 바뀐 것을 짧은 답과 시각으로 따라잡고 지금 결정할 일을 알고 싶다 | [`ketchup`](teach-recall.md#skill-ketchup) |
+| 일을 시작하기 전에 에이전트가 내 목표와 문제를 자기 말로 다시 말하게 하고 싶다 | [`in-your-own-words`](setup.md#skill-in-your-own-words) |
 | 특정 채팅 하나를 이어받고 싶다 | [Session pickup](playbooks-long.md#playbook-session-pickup) |
 | 작은 diff가 다른 곳을 깨뜨릴까 걱정된다 | [`blast-radius`](tdd-blast.md#skill-blast-radius) |
 | 읽기 전용으로 질문에 답만 받고 싶다 | [Investigation](playbooks-work.md#playbook-investigation) |

@@ -4,14 +4,14 @@
 
 ## 원본
 
-`cursor/plugins`의 `pstack/`, 커밋 `997ffc7fe26bdaa6478a14e7f5b8d5f9ed747102` (0.15.21) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를, 0.15.20 절은 그때의 핀 `1b6d44f`를 적은 기록입니다.
+`cursor/plugins`의 `pstack/`, 커밋 `dbf49813a39c1a5389c5e28cb8e4c1c2379e2454` (0.15.23) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를, 0.15.20 절은 그때의 핀 `1b6d44f`를, 0.15.21 절은 그때의 핀 `997ffc7`를 적은 기록입니다.
 
 ## 빌드와 검사
 
 ```shell
 bun install
 bun tools/build.mjs        # dist/pstack-guide-<버전>.epub, dist/pstack-guide-<버전>.pdf
-PSTACK_SRC=<클론 경로>/pstack bun tools/check.mjs   # 원고 규칙, 링크, 스킬 52개와 플레이북 23개의 절 존재, epubcheck
+PSTACK_SRC=<클론 경로>/pstack bun tools/check.mjs   # 원고 규칙, 링크, 스킬 53개와 플레이북 23개의 절 존재, epubcheck
 bun tools/check-layout.mjs                          # EPUB을 390px 폭에서 열어 가로 넘침 검사
 bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2,10,300   # PDF 페이지 수, 개요, 글꼴, 한글 텍스트, 선택한 페이지를 PNG로
 ```
@@ -26,7 +26,7 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 | 02-front-howto | 이 책을 읽는 방법 | | checked |
 | 10-part-start | 1부 시작하기 | | checked |
 | 11-ch-what-is-pstack | pstack이란 무엇인가 (README, 매니페스트, 구성) | | checked |
-| 12-ch-setup | 설치와 첫 사용 (`setup-pstack`, `poteto-help`) | | checked |
+| 12-ch-setup | 설치와 첫 사용 (`setup-pstack`, `poteto-help`, `in-your-own-words`) | | checked |
 | 20-part-entry | 2부 진입점 | | checked |
 | 21-ch-poteto-mode | `poteto-mode` 본체와 `poteto-agent` | | checked |
 | 22-ch-playbooks-work | 작업 플레이북 12개 (조사, 버그, 성능, 기능 등) | | checked |
@@ -73,10 +73,10 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 
 ## 해석한 부분 (원문이 모호했던 곳)
 
-- **원문 개수.** principle 스킬은 24개입니다(스킬 총 52개 = 일반 28개 + principle 24개). README도 24개라고 합니다. 책은 고정한 커밋의 디렉터리를 세어 얻은 수를 따릅니다. 0.15.5 핀에서는 23개와 47개, 0.15.9 핀에서는 26개와 50개, 0.15.15 핀에서는 27개와 51개였고, 그 기록은 아래 사실 확인에 남아 있습니다.
+- **원문 개수.** principle 스킬은 24개입니다(스킬 총 53개 = 일반 29개 + principle 24개). README도 24개라고 합니다. 책은 고정한 커밋의 디렉터리를 세어 얻은 수를 따릅니다. 0.15.5 핀에서는 23개와 47개, 0.15.9 핀에서는 26개와 50개, 0.15.15 핀에서는 27개와 51개, 0.15.17부터 0.15.21까지는 28개와 52개였고, 그 기록은 아래 사실 확인에 남아 있습니다.
 - **Comment Sicko의 읽기 전용 여부.** README와 안내서는 "read-only comment reviewer"라고 하지만 `agents/comment-sicko.md`는 스스로 주석을 지우고 삭제 수를 보고한다고 씁니다("I touch comments", "touched files, deletion count"). 애플리케이션 코드는 쓰지 않는다는 점은 일치합니다. 책은 정의 파일의 표현을 따르고 README의 표현을 함께 밝혔습니다.
 - **`/setup-pstack` 재실행의 보존 범위.** README와 안내서는 "기본값과 다른 역할을 유지"라고 하고, `setup-pstack/SKILL.md` 3(b)는 계열, 목록, 별칭으로 바꾼 역할을 유지하고 강도 토큰은 새 예산에 맞춰 다시 계산한다고 합니다. 책은 정밀한 쪽(스킬 본문)을 따릅니다.
-- **`poteto-mode`의 프런트매터 해석.** `mode: true`, `disable-model-invocation: true`, `reminder`는 스킬 파일에 뜻이 풀이되어 있지 않습니다. 0.15.10 README와 안내서는 더 이상 "sticky mode"라고 하지 않고, Enter는 한 메시지에만 붙고 Option+Enter/Alt+Enter(또는 Use as Mode)가 Custom Mode를 만든다고 적습니다. 책은 그 설명을 따릅니다. `disable-model-invocation`은 "모델이 자동으로 부르지 않는다"는 통상 뜻으로 적었습니다.
+- **`poteto-mode`의 프런트매터 해석.** 0.15.22에서 `mode`와 `reminder` 키를 뺐습니다. 커밋 메시지(#597)는 Cursor가 두 키를 무시해 reminder 문구가 모델에 닿지 않았다고 합니다. `disable-model-invocation: true`는 남습니다. 0.15.10 README와 안내서는 더 이상 "sticky mode"라고 하지 않고, Enter는 한 메시지에만 붙고 Option+Enter/Alt+Enter(또는 Use as Mode)가 Custom Mode를 만든다고 적습니다. 책은 그 설명을 따릅니다. `disable-model-invocation`은 "모델이 자동으로 부르지 않는다"는 통상 뜻으로 적었습니다.
 - **`benny`가 슬래시 스킬이 아니라는 점.** README가 "dormant", "not registered as slash skills"라고 밝힙니다. 책은 별도 부(자동화)에서 지시문의 내용을 원문 순서대로 옮겼습니다.
 - **`cursor-team-kit`.** 별개 플러그인이라 장으로 다루지 않았습니다. `poteto-mode`와 플레이북이 부르는 자리(`deslop`, `control-cli`, `control-ui`, `create-skill` 내장 기능 등)에서 출처만 밝혔습니다.
 - **Claude Code 포팅.** 저장소 원본에는 나오지 않는 외부 정보라서 저작권 표기 부록에서 존재만 언급하고 원본에서 확인하지 않았다고 밝혔습니다.
@@ -372,3 +372,35 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 - `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 52개와 플레이북 23개의 절 존재, 용어 병기 짝 29개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
 - `bun tools/check-layout.mjs`: 390px 폭에서 가로 넘침 없음.
 - `bun tools/build.mjs`: `pstack-guide-0.15.21.epub`, `pstack-guide-0.15.21.pdf` (464쪽).
+
+## 0.15.23
+
+원문을 `997ffc7fe26bdaa6478a14e7f5b8d5f9ed747102`(0.15.21)에서 `dbf49813a39c1a5389c5e28cb8e4c1c2379e2454`(0.15.23)로 올렸습니다. pstack 트리에 닿은 커밋은 여섯 개입니다.
+
+- `b93e811` fix(pstack): let poteto-agent find poteto-mode, drop ignored frontmatter, document the / menu (#597)
+- `7d8d909` feat(pstack): add /in-your-own-words to play back the goal before work (#602)
+- `d00ba6e` feat(pstack): shorten /ketchup replies and build them on real visuals (#595)
+- `36cecbf` feat(pstack): propose a cheap always-on signal after a deep debugging dig (#604)
+- `3177dab` chore(pstack): bump to 0.15.22 (#605)
+- `dbf4981` refactor(pstack): reword /in-your-own-words around goals and the problem (#606)
+
+책 버전은 `BOOK_REVISION = 0`이라 pstack 버전과 같은 `0.15.23`입니다. 산출물 이름은 `pstack-guide-0.15.23.epub`, `pstack-guide-0.15.23.pdf`입니다.
+
+원고에서 반영한 내용입니다.
+
+- 스킬 53개(일반 29, 원칙 24). 새 절은 `in-your-own-words`(설치 장)입니다. `disable-model-invocation`은 `setup-pstack`만 없고 나머지 52개에 있습니다. 사용자의 말만으로 로드되는 스킬은 `/setup-pstack`뿐입니다.
+- `/in-your-own-words`는 사용자의 목표가 무엇이고 어떤 문제를 풀려 한다고 이해한 바를 자기 말로 다시 말합니다. README와 `/poteto-help`는 쓸 때를 일을 시작하기 전이라고 하고, 칠 때만 돈다고 합니다. 레시피는 `/in-your-own-words <long or messy ask>`입니다.
+- `/ketchup`은 글을 250단어 미만으로 두고, 마크다운 표도 글로 셉니다. 일어난 일은 상태 시각 하나와 한 줄 결과 세 개까지입니다. 할 일 항목은 세 줄(결정, 추천과 이유, 답하지 않으면)이고, 선택지와 비용은 전후 시각에 둡니다. 시각은 그림이고 표는 시각이 아닙니다. 보이는 변화에 스크린숏이 없으면 `No screenshot yet`입니다. 보여줄 숫자는 출처와 맞춰 보고, 고치면 그렇게 말합니다.
+- `poteto-mode` 프런트매터에서 `mode`와 `reminder`를 뺐습니다. README는 작업을 치기 전에 `/` 메뉴에서 `/poteto-mode`를 고르라고 합니다. Custom Mode는 그대로입니다.
+- `poteto-agent`는 경로가 없으면 `~/.cursor/plugins/`에서 `skills/poteto-mode/SKILL.md`로 끝나는 파일을 찾고, 여러 사본이면 `plugin.json`의 `version`이 가장 높은 것을 씁니다. 없으면 멈추고 부모에게 말합니다.
+- `principle-fix-root-causes`는 깊게 파고들어서야 찾은 결정 사실에 대해, 처음 볼 때 그것을 보여 줬을 값싸고 항상 켜 두는 신호를 제안하라고 합니다.
+- 0.15.21 절의 개수와 커밋은 그때의 기록으로 남겼습니다.
+
+### 해석한 부분
+
+- `/in-your-own-words`의 0.15.22 본문은 확인을 기다린 뒤 시작하라고 했지만, 0.15.23(#606)은 그 문장을 빼고 목표와 문제를 다시 말하라는 한 줄만 남겼습니다. README와 `/poteto-help`는 여전히 "일을 시작하기 전"이라고 합니다. 책은 본문의 동작과 README의 쓸 때를 구분해 적었습니다.
+- 업스트림 커밋 메시지(#597)는 Cursor가 `mode`와 `reminder`를 무시한다고 설명합니다. `SKILL.md` 본문은 그 이유를 적지 않습니다. 책은 키가 없다는 사실과 README의 Custom Mode 안내만 옮겼습니다.
+
+### 실행한 검사
+
+- 검사 결과는 빌드 뒤에 적습니다.

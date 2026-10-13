@@ -12,11 +12,9 @@
 
 엄밀함이 필요한 작업을 시작할 때 씁니다. 원문의 `description`은 "poteto의 에이전트 스타일: 간결하고 상세한 응답, 신중한 서브에이전트, 슬롭을 뺀 글, 단순한 코드, 검증(verification)된 작업"이라고 하고, `poteto`, `/poteto-mode`, 이 스타일로 일해 달라는 요청을 트리거로 듭니다.
 
-프런트매터에 몇 가지 눈에 띄는 설정이 있습니다.
+프런트매터에는 `disable-model-invocation: true`가 있습니다. 모델이 알아서 이 스킬을 부르지 않고, 사용자가 `/poteto-mode`로 부릅니다. `mode`와 `reminder` 키는 없습니다.
 
-- `mode: true`. 스킬 파일은 이 플래그를 둡니다. README와 안내서는 유지 방법을 이렇게 말합니다. `/` 메뉴에서 Option+Enter(Mac) 또는 Alt+Enter(Windows)로 Custom Mode를 켜면 매 턴 컨텍스트에 남습니다. Enter만 치면 그 메시지 하나에만 붙고 대화가 이어지면 사라집니다. Custom Mode는 Agents Window와 CLI에서 쓸 수 있고, 그만하라고 말하거나 모드를 나가면 꺼집니다.
-- `disable-model-invocation: true`. 모델이 알아서 이 스킬을 부르지 않고, 사용자가 `/poteto-mode`로 부릅니다.
-- `reminder`. 모드가 켜진 동안 에이전트에게 주는 짧은 알림입니다. 새 작업이 오면 플레이북이 맞거나 엄밀함이 필요한지 보고 적용하고, 가벼운 대화이거나 사용자가 빠지겠다고 하면 적용하지 않습니다.
+README는 유지 방법을 이렇게 말합니다. 작업을 치기 전에 `/` 메뉴에서 `/poteto-mode`를 고르면 Cursor가 그 메시지에 스킬을 붙입니다. `/` 메뉴에서 Option+Enter(Mac) 또는 Alt+Enter(Windows)로 Custom Mode를 켜면 매 턴 컨텍스트에 남습니다. Enter만 치면 그 메시지 하나에만 붙고 대화가 이어지면 사라집니다. Custom Mode는 Agents Window와 CLI에서 쓸 수 있고, 그만하라고 말하거나 모드를 나가면 꺼집니다.
 
 ### 동작 방식
 
@@ -156,7 +154,7 @@
 /poteto-mode 이 스레드를 읽어. 밑의 문제를 평이한 영어로 네 말로 다시 말해. 아직 코드는 바꾸지 마.
 ```
 
-오독은 코드가 생기기 전, 다시 말한 자리에서 드러납니다. 거기서 고치면 메시지 하나이고, 틀린 수정 하나가 아닙니다.
+오독은 코드가 생기기 전, 다시 말한 자리에서 드러납니다. 거기서 고치면 메시지 하나이고, 틀린 수정 하나가 아닙니다. 그 한 가지만 시키려면 [`/in-your-own-words`](setup.md#skill-in-your-own-words)입니다. 레시피는 `/in-your-own-words <long or messy ask>`입니다.
 
 대화에 맥락이 이미 있으면 프롬프트는 거의 없어도 됩니다. 아래는 모두 충분합니다.
 
@@ -207,7 +205,7 @@ keep going until done
 
 ### 관련 스킬
 
-플레이북이 부르는 스킬은 [이해하기](how.md#skill-how), [설계하기](architect.md#skill-architect), [고치고 검증하기](tdd-blast.md#skill-tdd) 부에서 다룹니다. 모델 설정은 [`setup-pstack`](setup.md#skill-setup-pstack)에서, 원칙은 [원칙 장](principles.md)에서 다룹니다. 어느 스킬이나 플레이북이 맞는지 모르겠으면 [`poteto-help`](setup.md#skill-poteto-help)가 이 장을 가리킵니다.
+플레이북이 부르는 스킬은 [이해하기](how.md#skill-how), [설계하기](architect.md#skill-architect), [고치고 검증하기](tdd-blast.md#skill-tdd) 부에서 다룹니다. 모델 설정은 [`setup-pstack`](setup.md#skill-setup-pstack)에서, 원칙은 [원칙 장](principles.md)에서 다룹니다. 어느 스킬이나 플레이북이 맞는지 모르겠으면 [`poteto-help`](setup.md#skill-poteto-help)가 이 장을 가리킵니다. 일을 시작하기 전에 목표와 문제를 다시 듣기는 [`in-your-own-words`](setup.md#skill-in-your-own-words)입니다.
 
 ## poteto-agent {#agent-poteto-agent}
 
@@ -216,5 +214,7 @@ keep going until done
 > `/poteto-mode` 실행 중에 띄우는 위임 서브에이전트입니다. 플레이북 러너가 아닙니다.
 
 pstack은 실행 중 코드를 쓰거나 돕는 위임용 서브에이전트를 함께 싣습니다. `/poteto-mode`를 받은 채팅이 플레이북과 할 일 목록과 모든 `Task` 호출을 소유하고, `poteto-agent`는 그 위임 하나입니다. 플레이북 자체를 돌리려고 이 에이전트를 띄우지 않습니다. 부모 에이전트가 `subagent_type: "poteto-agent"`로 띄웁니다. 정의 파일은 짧습니다. 프런트매터의 `description`은 이 에이전트가 `/poteto-mode` 실행 중의 위임이며 러너가 아니고, 새 작업마다 새 `poteto-agent`를 띄우고, 재개는 poteto-mode의 Subagents 절이 이름 붙인 좁은 경우에만 하라고 말합니다. 그리고 `generalPurpose`로 바꿔 치면 읽기 단계를 건너뛰어 스타일이 어긋난다고 경고합니다. `is_background: true`입니다. 본문은 이렇습니다. `/poteto-mode`를 받은 채팅이 플레이북과 할 일 목록과 모든 `Task` 호출을 소유하고 이 에이전트는 그 위임 하나이며, 어떤 작업이든 시작하기 전에 `poteto-mode`의 `SKILL.md`를 인라인 원칙 색인까지 전부 읽고, 원칙을 적용할 때마다 리프 `principle-*` 스킬로 들어가라는 것입니다. `SKILL.md`를 읽을 때는 부모가 준 절대 경로를 씁니다.
+
+경로가 없으면, 다른 어떤 일보다 먼저 `~/.cursor/plugins/`에서 경로가 `skills/poteto-mode/SKILL.md`로 끝나는 파일을 찾습니다. 둘 이상이 맞으면 `.cursor-plugin/plugin.json`의 `version`이 가장 높은 사본을 씁니다. 스킬 목록에 이 스킬이 없다고 해서 pstack이 없는 것은 아닙니다. 그런 파일이 없으면 멈추고 부모에게 말합니다.
 
 같은 저장소의 다른 서브에이전트 `Comment Sicko`는 [코드 위생 장](code-hygiene.md#agent-comment-sicko)에서 다룹니다.
