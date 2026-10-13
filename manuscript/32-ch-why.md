@@ -93,16 +93,16 @@
 
 | 플레이북 | 담은 것과 검색 요령 | 대표적인 함정 |
 | --- | --- | --- |
-| `code-archaeology.md` (git, in-repo) | 커밋 이력, `gh`로 PR 설명과 리뷰, 인라인 주석, ADR, 테스트, CHANGELOG. 가장 믿을 만한 출처. `git log --follow`, 정확한 문자열을 넣거나 뺀 커밋을 찾는 `git log -S`(정규식은 `-G`), `git blame -L`, `gh pr view --json ...` | 스쿼시 병합으로 브랜치 커밋이 사라짐, "작은 리팩터링"이라는 오도하는 메시지, 이해 없이 복사된 패턴, 봇 커밋, 코드를 자기 의도의 증거로 취급 |
+| `code-archaeology.md` (git, in-repo) | 커밋 이력, PR 설명과 리뷰, 인라인 주석, ADR, 테스트, CHANGELOG. 가장 믿을 만한 출처. `git log --follow`, 정확한 문자열을 넣거나 뺀 커밋을 찾는 `git log -S`(정규식은 `-G`), `git blame -L`, `git show` | 이 파일은 함정 목록을 두지 않음 |
 | `linear.md` (Linear; Jira, GitHub Issues 등에 조정) | 이슈, 프로젝트 문서, 부모/하위 이슈, 댓글, 라벨. 제품과 비즈니스 맥락. 연결된 티켓을 먼저 `get_issue`로, 다음 키워드로 `list_issues`, 이슈 트리를 위로 걷기, `get_project`로 프로젝트 문서 | 범위 표류, 상투적 템플릿("사용자 경험 개선"), 낡은 티켓, 중복 종료 사슬, 접근할 수 없는 비공개 내용은 추측하지 말고 빈틈으로 |
 | `notion.md` (Notion; Confluence, Google Docs 등에 조정) | PRD, 기술 스펙, RFC, ADR, 회의록, 포스트모템, 런북. `notion-search`, `notion-fetch`로 전체 읽기, 하위 페이지와 백링크, 관련 데이터베이스 | 낡은 문서, 문서와 현실의 괴리, 상투적 "Why", 링크되지 않은 문서, 여러 초안, 접근 제한 페이지 |
-| `slack.md` (Slack; Discord, Teams 등에 조정) | 문제와 결정의 실시간 논의, 사고 채널, 설계 토론 스레드. 작성자 한정 검색, 키워드, PR URL, 오류 문자열, 채널 한정, 스레드 전체 가져오기. MCP 도구는 다양하고 인증이 필요할 수 있으며 인증 실패면 멈추고 빈틈으로 보고 | 보존 기간의 절벽, 검색되지 않는 DM, 농담을 결정으로 오인, 스레드 없는 단일 메시지의 맥락 붕괴, 인증 실패 시 발견을 지어내지 말 것 |
+| `slack.md` (Slack; Discord, Teams 등에 조정) | 작성자 한정 검색, PR URL, 오류 문자열. MCP 도구는 다양하고 인증이 필요할 수 있으며 인증 실패면 멈추고 빈틈으로 보고 | 보존 기간의 절벽, 검색되지 않는 DM, 농담을 결정으로 오인, 스레드 없는 단일 메시지의 맥락 붕괴, 인증 실패 시 발견을 지어내지 말 것 |
 | `datadog.md` (Datadog; New Relic, Grafana 등에 조정) | 메트릭, 모니터와 알림, 대시보드, APM 트레이스, 로그, 인시던트, 노트북. 프로덕션의 현실. 서비스를 찾고, 대시보드와 모니터를 먼저(임계값이 종종 "왜 N으로 제한됐나"의 답), 메트릭 궤적을 변경 날짜와 상관, 로그는 시간 제한 | 상관은 인과가 아님, 찾은 차트에 과적합, 사라진 텔레메트리(공백이지 널 결과가 아님), 대규모 노이즈, 계측됐다고 해서 그 때문에 생긴 코드는 아님 |
-| `sentry.md` (Sentry; Rollbar, Bugsnag 등에 조정) | 이슈, 이벤트, 릴리스, 리플레이. 가장 큰 가치는 시간 상관("이슈는 1/2 생성, 하루 500건 정점, 릴리스 v2.14.0 이후 사라짐"). `search_issues`, `search_issue_events`, first/last seen, 영향받은 릴리스, 빈도 궤적. Seer는 가설 생성기로만 | 그룹핑 표류, 릴리스에는 커밋이 많음, 상류 변경으로 오류가 멈춘 조용한 수정, resolved는 사람의 표시일 뿐, Seer 환각, 샘플링 |
+| `sentry.md` (Sentry; Rollbar, Bugsnag 등에 조정) | 이슈, 이벤트, 릴리스. `search_issues`, `search_issue_events`, first/last seen, 영향받은 릴리스, 빈도 궤적. Seer는 가설 생성기로만. 이슈마다 ID, 제목, first/last seen, 이벤트 수, 스택 조각, 링크를 되돌림 | 이 파일은 함정 목록을 두지 않음 |
 | `databricks.md` (Databricks SQL; Snowflake, BigQuery 등에 조정) | 제품 분석 이벤트, 사용과 과금 이벤트, 실험과 플래그 데이터, 시스템 테이블, dbt 계보. Datadog이 인프라와 런타임 관점이라면 이쪽은 제품과 데이터 관점. `execute_sql_read_only`, 쿼리 전에 `SHOW TABLES`와 `DESCRIBE`로 방향 잡기, 모든 쿼리를 시간 제한(보통 병합 전후 약 30일), 원시 테이블보다 타입 있는 dbt 모델 우선 | 계측됐다고 해서 원인은 아님, 조용한 계측 변경, 스키마 표류, dbt 갱신 지연, 회사별 테이블, 보존 기간의 절벽, 노트북은 SQL MCP로 조회 불가(빈틈으로) |
-| `incident-postmortem.md` (범주 교차) | 출처가 아니라 교차 관점. 대상이 방어적으로 보일 때 모든 사용 가능한 출처에서 인시던트 이력을 찾습니다. Notion의 포스트모템, Linear의 `incident`, `sev-*` 라벨, Slack의 `#sev-*`, `#incident-*`, git의 "fix for incident" 커밋, Datadog 인시던트, Sentry 이슈의 first/last-seen, Databricks의 오류 이벤트 감소. 인시던트 링크를 찾으면 포스트모템 전체를 가져오고, 특히 "Action Items"가 코드 변경과 직접 이어집니다 | 방어적이지 않은 코드에는 시간을 쓰지 않습니다 |
+| `incident-postmortem.md` (범주 교차) | Linear의 `incident`, `sev-*`, `postmortem-action-item`, `reliability` 라벨. Slack의 `#sev-*`, `#incident-*`. git의 "fix for incident", "add defensive check", "revert" 뒤 "re-apply with..." 커밋 | 이 파일은 함정 목록을 두지 않음 |
 
-출처 플레이북 일곱 개는 각각 끝에 "What to return"을 두어 조사자가 되돌려줄 항목(정확한 텍스트, 위치, 작성자와 날짜, 직접인지 정황인지)을 정해 둡니다. 범주 교차 플레이북 `incident-postmortem.md`에는 이 절이 없습니다.
+출처 플레이북 일곱 개 가운데 Linear, Notion, Datadog, Sentry, Databricks는 끝에 "What to return"을 두어 조사자가 되돌려줄 항목(정확한 텍스트, 위치, 작성자와 날짜, 직접인지 정황인지)을 정해 둡니다. `code-archaeology.md`와 `slack.md`와 범주 교차 플레이북 `incident-postmortem.md`에는 이 절이 없습니다.
 
 ### 사용 예
 

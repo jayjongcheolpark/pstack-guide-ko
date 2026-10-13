@@ -37,4 +37,4 @@
 
 ### 관련 스킬
 
-[`unslop`](writing.md#skill-unslop), 더 깊이 이해시키는 [`teach`](teach-recall.md#skill-teach)입니다.
+[`unslop`](writing.md#skill-unslop), 더 깊이 이해시키는 [`teach`](teach-recall.md#skill-teach)입니다. 이 채팅의 마지막 메시지 이후를 같은 평이한 목소리로 따라잡는 것은 [`ketchup`](teach-recall.md#skill-ketchup)입니다. `/ketchup`은 `/bro`의 다시 말하기 단계를 건너뜁니다.

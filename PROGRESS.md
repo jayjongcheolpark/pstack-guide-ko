@@ -4,14 +4,14 @@
 
 ## 원본
 
-`cursor/plugins`의 `pstack/`, 커밋 `df581122cde17e6e27686b5a448bde23e4ad4318` (0.15.15) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를 적은 기록입니다.
+`cursor/plugins`의 `pstack/`, 커밋 `997ffc7fe26bdaa6478a14e7f5b8d5f9ed747102` (0.15.21) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를, 0.15.20 절은 그때의 핀 `1b6d44f`를 적은 기록입니다.
 
 ## 빌드와 검사
 
 ```shell
 bun install
 bun tools/build.mjs        # dist/pstack-guide-<버전>.epub, dist/pstack-guide-<버전>.pdf
-PSTACK_SRC=<클론 경로>/pstack bun tools/check.mjs   # 원고 규칙, 링크, 스킬 51개와 플레이북 23개의 절 존재, epubcheck
+PSTACK_SRC=<클론 경로>/pstack bun tools/check.mjs   # 원고 규칙, 링크, 스킬 52개와 플레이북 23개의 절 존재, epubcheck
 bun tools/check-layout.mjs                          # EPUB을 390px 폭에서 열어 가로 넘침 검사
 bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2,10,300   # PDF 페이지 수, 개요, 글꼴, 한글 텍스트, 선택한 페이지를 PNG로
 ```
@@ -35,7 +35,7 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 | 30-part-understand | 3부 이해하기 | | checked |
 | 31-ch-how | `how` | | checked |
 | 32-ch-why | `why` | | checked |
-| 33-ch-teach-recall | `teach`, `recall` | | checked |
+| 33-ch-teach-recall | `teach`, `recall`, `ketchup` | | checked |
 | 40-part-design | 4부 설계하기 | | checked |
 | 41-ch-architect | `architect` | | checked |
 | 42-ch-arena-swarm | `arena`, `swarm`, `figure-it-out` | | checked |
@@ -69,17 +69,18 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 - 검증 스킬(`benchmark-checklist`, `create-verification-skill`, `maintain-verification-skill`)은 버그 수정과 검증이 같은 흐름이라서 고치고 검증하기 부의 마지막 장에 뒀습니다. `benchmark-checklist`는 플레이북이 아니라 스킬이라 플레이북 장이 아니라 이 장에 절이 있습니다.
 - cursor-team-kit의 스킬은 장으로 쓰지 않았습니다. 이 저장소의 pstack 파일이 그것을 부르는 자리에서 한두 문장으로만 언급합니다. 그래서 fix-ci, fix-merge-conflicts, PR 준비 스킬 장은 없고, PR 흐름은 poteto-mode 플레이북 장에서 다룹니다.
 - 원본의 `automations/benny`는 슬래시 스킬로 등록되지 않은 자동화 팩이라 별도 부(자동화)로 뒀습니다.
+- `ketchup`은 `/recall`과 가까운 짝이라 이해하기 부의 teach/recall 장에 절을 뒀습니다. README와 `/poteto-help`가 이 채팅의 마지막 메시지 이후(`/ketchup`)와 최근 채팅을 가로지르는 맥락(`/recall`)과 특정 채팅 이어받기(Session pickup)를 나란히 구분합니다.
 
 ## 해석한 부분 (원문이 모호했던 곳)
 
-- **원문 개수.** principle 스킬은 24개입니다(스킬 총 51개 = 일반 27개 + principle 24개). README도 24개라고 합니다. 책은 고정한 커밋의 디렉터리를 세어 얻은 수를 따릅니다. 0.15.5 핀에서는 23개와 47개, 0.15.9 핀에서는 26개와 50개였고, 그 기록은 아래 사실 확인에 남아 있습니다.
+- **원문 개수.** principle 스킬은 24개입니다(스킬 총 52개 = 일반 28개 + principle 24개). README도 24개라고 합니다. 책은 고정한 커밋의 디렉터리를 세어 얻은 수를 따릅니다. 0.15.5 핀에서는 23개와 47개, 0.15.9 핀에서는 26개와 50개, 0.15.15 핀에서는 27개와 51개였고, 그 기록은 아래 사실 확인에 남아 있습니다.
 - **Comment Sicko의 읽기 전용 여부.** README와 안내서는 "read-only comment reviewer"라고 하지만 `agents/comment-sicko.md`는 스스로 주석을 지우고 삭제 수를 보고한다고 씁니다("I touch comments", "touched files, deletion count"). 애플리케이션 코드는 쓰지 않는다는 점은 일치합니다. 책은 정의 파일의 표현을 따르고 README의 표현을 함께 밝혔습니다.
 - **`/setup-pstack` 재실행의 보존 범위.** README와 안내서는 "기본값과 다른 역할을 유지"라고 하고, `setup-pstack/SKILL.md` 3(b)는 계열, 목록, 별칭으로 바꾼 역할을 유지하고 강도 토큰은 새 예산에 맞춰 다시 계산한다고 합니다. 책은 정밀한 쪽(스킬 본문)을 따릅니다.
 - **`poteto-mode`의 프런트매터 해석.** `mode: true`, `disable-model-invocation: true`, `reminder`는 스킬 파일에 뜻이 풀이되어 있지 않습니다. 0.15.10 README와 안내서는 더 이상 "sticky mode"라고 하지 않고, Enter는 한 메시지에만 붙고 Option+Enter/Alt+Enter(또는 Use as Mode)가 Custom Mode를 만든다고 적습니다. 책은 그 설명을 따릅니다. `disable-model-invocation`은 "모델이 자동으로 부르지 않는다"는 통상 뜻으로 적었습니다.
 - **`benny`가 슬래시 스킬이 아니라는 점.** README가 "dormant", "not registered as slash skills"라고 밝힙니다. 책은 별도 부(자동화)에서 지시문의 내용을 원문 순서대로 옮겼습니다.
 - **`cursor-team-kit`.** 별개 플러그인이라 장으로 다루지 않았습니다. `poteto-mode`와 플레이북이 부르는 자리(`deslop`, `control-cli`, `control-ui`, `create-skill` 내장 기능 등)에서 출처만 밝혔습니다.
 - **Claude Code 포팅.** 저장소 원본에는 나오지 않는 외부 정보라서 저작권 표기 부록에서 존재만 언급하고 원본에서 확인하지 않았다고 밝혔습니다.
-- **`disable-model-invocation`.** `setup-pstack`만 이 프런트매터가 없고 나머지 50개 스킬에는 모두 있습니다. 0.15.11부터 `poteto-help`에도 붙었고, 사용자의 말만으로 로드되는 스킬은 `/setup-pstack`뿐입니다. 스킬 절에서는 있는 경우에 한해 언급했습니다.
+- **`disable-model-invocation`.** `setup-pstack`만 이 프런트매터가 없고 나머지 51개 스킬에는 모두 있습니다. 0.15.11부터 `poteto-help`에도 붙었고, 사용자의 말만으로 로드되는 스킬은 `/setup-pstack`뿐입니다. 스킬 절에서는 있는 경우에 한해 언급했습니다.
 
 ## 열린 질문
 
@@ -285,3 +286,89 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 - `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 51개와 플레이북 23개의 절 존재, 용어 병기 짝 29개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
 - `bun tools/check-layout.mjs`: 390px 폭에서 가로 넘침 없음.
 - `bun tools/build.mjs`: `pstack-guide-0.15.15.epub`, `pstack-guide-0.15.15.pdf` (461쪽).
+
+## 0.15.17
+
+원문을 `df581122cde17e6e27686b5a448bde23e4ad4318`(0.15.15)에서 `978ca6e9c0e012047cd5058b8e829240336e704e`(0.15.17)로 올렸습니다. pstack 트리에 닿은 커밋은 두 개입니다.
+
+- `00b14f1` refactor(pstack): distill skill prompts to cut tokens (#538) (0.15.16)
+- `978ca6e` feat(pstack): add /ketchup skill (#539) (0.15.17)
+
+책 버전은 `BOOK_REVISION = 0`이라 pstack 버전과 같은 `0.15.17`입니다. 산출물 이름은 `pstack-guide-0.15.17.epub`, `pstack-guide-0.15.17.pdf`입니다.
+
+원고에서 반영한 내용입니다.
+
+- 스킬 52개(일반 28, 원칙 24). 새 절은 `ketchup`(이해하기 부의 teach/recall 장)입니다. `disable-model-invocation`은 `setup-pstack`만 없고 나머지 51개에 있습니다. 사용자의 말만으로 로드되는 스킬은 `/setup-pstack`뿐입니다.
+- `/ketchup`은 이 채팅에서 사용자가 `/ketchup` 직전에 쓴 마지막 메시지 이후만 따라잡습니다. 알림과 서브에이전트 결과는 사용자의 메시지가 아닙니다. 글은 `/bro`의 평이한 목소리로 쓰고 다시 말하기 단계는 건너뜁니다. 이 턴은 읽기 전용입니다. 할 일 항목은 사용자만 할 수 있는 결정이고, 항목마다 결정을 내릴 요약을 줍니다. `/recall`은 최근 채팅을 가로지르고, Session pickup은 특정 채팅 하나를 이어받습니다.
+- 증류 리팩터(0.15.16)는 토큰을 줄이는 압축이 대부분입니다. 책에 반영한 규칙 변경은 이렇습니다. `interrogate` 루브릭 Complexity Budget에서 "중복 세 줄이 성급한 추상화보다 낫다"를 뺌. `technical-writing`은 코드 조각에 실제 경로만 요구하고 튜토리얼의 "가르치는 사람은 자신", "가르침의 멈춤" 문장을 뺌. `test-behavior-not-implementation` 검사는 `undefined`뿐 아니라 잘못된 값에도 적용. `explain-the-number` 후보에 실행되지 않은 코드와 기본 설정 그대로인 쪽을 명시. `poteto-mode` 색인은 `principle-<kebab-title>`과 `playbooks/<kebab-title>.md` 규칙을 밝히고, 경로를 따로 적는 플레이북은 세 개입니다.
+- 0.15.15 절의 개수와 커밋은 그때의 기록으로 남겼습니다.
+
+### 실행한 검사
+
+- `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 52개와 플레이북 23개의 절 존재, 용어 병기 짝 29개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
+- `bun tools/check-layout.mjs`: 390px 폭에서 가로 넘침 없음.
+- `bun tools/build.mjs`: `pstack-guide-0.15.17.epub`, `pstack-guide-0.15.17.pdf` (465쪽).
+
+## 0.15.20
+
+원문을 `978ca6e9c0e012047cd5058b8e829240336e704e`(0.15.17)에서 `1b6d44ff26d4e242f4e8f68c391e6d2f7ca16def`(0.15.20)로 올렸습니다. pstack 트리에 닿은 커밋은 열한 개입니다.
+
+- `ea32d95` feat(pstack): show /ketchup decisions as before/after visuals (#570)
+- `08bd59b` refactor(pstack): cut unneeded sections from seven skills (#571)
+- `de2dba6` fix(pstack): rename Comment Sicko agent id so Grok can spawn it (#486)
+- `87c8103` fix(pstack): respect fenced code blocks in plan checks (#536)
+- `ff8f83d` fix(watch-pr): paginate review threads instead of reading only the first 100 (#484)
+- `bc697d0` fix(pstack): drop "Must always apply." from unslop description (#572)
+- `cf9a111` fix(pstack): worktree-audit checks MERGED against the default branch, not origin/main (#574)
+- `2bd5dd4` fix(pstack): make the /poteto-mode chat the runner, poteto-agent a delegate (#575)
+- `e5a02f8` feat(pstack): add Agent Plugins v1 root manifest (#576)
+- `c49b37a` fix(pstack): create-verification-skill readiness means the app is usable (#573)
+- `1b6d44f` chore(pstack): bump to 0.15.20 (#581)
+
+책 버전은 `BOOK_REVISION = 0`이라 pstack 버전과 같은 `0.15.20`입니다. 산출물 이름은 `pstack-guide-0.15.20.epub`, `pstack-guide-0.15.20.pdf`입니다.
+
+원고에서 반영한 내용입니다.
+
+- 스킬 수는 그대로 52개(일반 28, 원칙 24). `disable-model-invocation`은 `setup-pstack`만 없고 나머지 51개에 있습니다. 사용자의 말만으로 로드되는 스킬은 `/setup-pstack`뿐입니다.
+- `/poteto-mode`를 받은 채팅이 플레이북과 할 일 목록과 모든 `Task` 호출을 소유합니다. `poteto-agent`는 실행 중 위임이고 플레이북 러너가 아닙니다.
+- Comment Sicko의 `name`과 `subagent_type`은 `comment-sicko`입니다.
+- `/ketchup`은 할 일 항목마다 전후를 나란히 보여 줍니다. 이 턴은 답에 넣을 시각화 외에는 읽기 전용입니다. 숫자를 지어내지 않고, 캡처하지 않은 화면을 만들지 않습니다.
+- `create-verification-skill`의 준비됨은 쓸 수 있다는 뜻입니다. 빈 데이터 디렉터리에서 마이그레이션과 시드까지 가야 하고, 시드가 빠지면 여정을 약화하지 않으며, 대용 환경의 설정 단계는 진짜 대상에서 돌리기 전까지 검증되지 않은 채로 남습니다.
+- `worktree-audit.sh`의 `MERGED` 기본 기준은 `origin/HEAD`입니다. PR 베이스가 다르면 `-b`를 넘깁니다.
+- `unslop`의 `description`에서 "Must always apply."를 뺐습니다. `poteto-mode`는 글이 나오는 모든 표면에서 이 스킬을 그대로 요구합니다.
+- 루트 `plugin.json`은 Agent Plugins v1 매니페스트입니다. Cursor용 레이아웃은 `.cursor-plugin/plugin.json`에 남습니다.
+- `watch-pr`는 리뷰 스레드를 페이지당 100개씩 끝까지 읽고, `check-plan.mjs`는 펜스 코드 블록 안의 문체를 건너뜁니다.
+- 일곱 스킬에서 토큰을 줄인 절 삭제는 리프 본문을 짧게 했습니다. `poteto-mode` 색인과 YAML `description`의 한 줄 트리거는 그대로입니다. 책은 리프에 남은 규칙과 색인의 한 줄을 구분해 적었습니다.
+- 0.15.17 절의 개수와 커밋은 그때의 기록으로 남겼습니다.
+
+### 실행한 검사
+
+- `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 52개와 플레이북 23개의 절 존재, 용어 병기 짝 29개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
+- `bun tools/check-layout.mjs`: 390px 폭에서 가로 넘침 없음.
+- `bun tools/build.mjs`: `pstack-guide-0.15.20.epub`, `pstack-guide-0.15.20.pdf` (464쪽).
+
+## 0.15.21
+
+원문을 `1b6d44ff26d4e242f4e8f68c391e6d2f7ca16def`(0.15.20)에서 `997ffc7fe26bdaa6478a14e7f5b8d5f9ed747102`(0.15.21)로 올렸습니다. pstack 트리에 닿은 커밋은 두 개입니다.
+
+- `364a77e` fix(pstack): tell agents where bundled leaf skills live (#577)
+- `997ffc7` chore(pstack): bump to 0.15.21 (#584)
+
+책 버전은 `BOOK_REVISION = 0`이라 pstack 버전과 같은 `0.15.21`입니다. 산출물 이름은 `pstack-guide-0.15.21.epub`, `pstack-guide-0.15.21.pdf`입니다.
+
+원고에서 반영한 내용입니다.
+
+- 스킬 수는 그대로 52개(일반 28, 원칙 24). `disable-model-invocation`은 `setup-pstack`만 없고 나머지 51개에 있습니다. 사용자의 말만으로 로드되는 스킬은 `/setup-pstack`뿐입니다.
+- `poteto-mode`는 함께 실린 스킬이 자기 `SKILL.md` 기준으로 `../<name>/SKILL.md`에 있다고 밝히고, 모든 `poteto-agent` 프롬프트에 그 파일의 절대 경로를 넣으라고 합니다.
+- `poteto-agent`는 `poteto-mode`를 읽을 때 부모가 준 절대 경로를 씁니다.
+- 0.15.20 절의 개수와 커밋은 그때의 기록으로 남겼습니다.
+
+### 해석한 부분
+
+- 업스트림 커밋 메시지(#577)는 리프 스킬이 `disable-model-invocation`이라 경로가 보이지 않고, 띄운 `poteto-agent`도 `poteto-mode` 위치를 모른다고 설명합니다. `SKILL.md` 본문은 그 이유를 적지 않고 경로 규칙만 말합니다. 책은 경로 규칙만 옮겼습니다.
+
+### 실행한 검사
+
+- `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 52개와 플레이북 23개의 절 존재, 용어 병기 짝 29개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
+- `bun tools/check-layout.mjs`: 390px 폭에서 가로 넘침 없음.
+- `bun tools/build.mjs`: `pstack-guide-0.15.21.epub`, `pstack-guide-0.15.21.pdf` (464쪽).
