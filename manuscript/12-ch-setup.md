@@ -2,7 +2,7 @@
 
 원문: {{src:docs/guide/01-setup.md}} {{src:docs/guide/README.md}} {{src:skills/setup-pstack/SKILL.md}} {{src:skills/poteto-help/SKILL.md}} {{src:README.md}}
 
-이 장에서는 플러그인을 설치하고, pstack이 쓸 모델을 고르고, 첫 작업을 실행합니다. 설정은 명령 한 줄과 짧은 대화면 끝납니다. 막혔거나 어느 스킬이 맞는지 모르겠으면 같은 장의 [`poteto-help`](#skill-poteto-help)가 안내서와 스킬을 가리킵니다.
+이 장에서는 플러그인을 설치하고, pstack이 쓸 모델을 고르고, 첫 작업을 실행합니다. 설정은 명령 한 줄과 짧은 대화면 끝납니다. 막혔거나 어느 스킬이 맞는지 모르겠으면 같은 장의 [`poteto-help`](#skill-poteto-help)가 안내서와 스킬을 가리킵니다. 일을 시작하기 전에 목표와 문제를 다시 듣기를 원하면 [`in-your-own-words`](#skill-in-your-own-words)를 칩니다.
 
 ## 플러그인 설치
 
@@ -62,6 +62,8 @@ pstack은 서브에이전트와 리뷰 패널에 토큰을 더 씁니다. 엄밀
 ```
 
 할 일 목록을 보십시오. 첫 항목들은 맞춰진 플레이북의 단계를 그대로 복사한 것이고, 이 프롬프트에서는 Feature 플레이북입니다. `/poteto-mode`가 어떤 단계를 건너뛰면 그 단계가 `skip: <이유>`와 함께 목록에 남으므로, 무엇을 하지 않기로 했는지 볼 수 있습니다.
+
+작업을 치기 전에 `/` 메뉴에서 `/poteto-mode`를 고르면 Cursor가 그 메시지에 스킬을 붙입니다. README가 그렇게 안내합니다.
 
 그다음부터는 평소처럼 후속 질문을 하면 됩니다. 대화 내내 `/poteto-mode`를 유지하려면 `/` 메뉴에서 Option+Enter(Mac) 또는 Alt+Enter(Windows)로 Custom Mode를 켭니다. Custom Mode는 모드를 나갈 때까지 매 턴 컨텍스트에 남습니다. Agents Window와 CLI에서 쓸 수 있습니다. Enter만 치면 그 메시지 하나에만 붙고 대화가 이어지면 사라집니다.
 
@@ -227,11 +229,12 @@ pstack은 Cursor용입니다. 스킬은 Agent Skills 형식이라 다른 도구�
 | 사용자가 원하는 것 | 스킬 |
 | --- | --- |
 | 사소하지 않은 작업을 엄밀하게 | [`/poteto-mode`](poteto-mode.md#skill-poteto-mode) |
+| 에이전트가 목표와 문제를 이해했는지 일을 시작하기 전에 확인한다 | [`/in-your-own-words`](#skill-in-your-own-words) |
 | 코드가 지금 어떻게 동작하는지, 새 코드가 어디에 살아야 하는지 | [`/how`](how.md#skill-how) |
 | 코드가 왜 이 모양인지, 숫자가 어디서 왔는지 | [`/why`](why.md#skill-why) |
 | 변경이나 서브시스템을 평이하게 이해하고 싶다 | [`/teach`](teach-recall.md#skill-teach) |
 | 어떤 주제에 대한 자신의 최근 작업을 따라잡고 싶다 | [`/recall`](teach-recall.md#skill-recall) |
-| 이 채팅에서 마지막 메시지 이후를 따라잡고, 할 일 항목마다 결정할 맥락을 원한다 | [`/ketchup`](teach-recall.md#skill-ketchup) |
+| 이 채팅에서 마지막 메시지 이후 바뀐 것을 짧은 답과 시각으로 따라잡고, 할 일 항목마다 결정할 맥락을 원한다 | [`/ketchup`](teach-recall.md#skill-ketchup) |
 | 작은 diff가 밖에서 무엇을 깨뜨릴 수 있는지 | [`/blast-radius`](tdd-blast.md#skill-blast-radius) |
 | 함수 경계를 넘는 코드 전에 타입과 모듈 모양을 정한다 | [`/architect`](architect.md#skill-architect) |
 | 같은 지시에 여러 시도를 돌려 좋은 부분을 합친다 | [`/arena`](arena-swarm.md#skill-arena) |
@@ -264,6 +267,7 @@ pstack은 Cursor용입니다. 스킬은 Agent Skills 형식이라 다른 도구�
 - `/architect`는 설계를 정한 뒤 바로 구현합니다. 코드를 쓰기 전에 설계를 보려면 "with checkpoint"를 붙입니다.
 - `/interrogate`는 diff를 리뷰합니다. `/blast-radius`는 diff 밖의 깨짐을 찾고, 변경을 안전하게 하는 사실 하나를 증명합니다.
 - `/recall`은 최근 채팅을 가로질러 맥락을 다시 세웁니다. `/ketchup`은 이 채팅에서 사용자의 마지막 메시지 이후만 다룹니다. 특정 채팅이나 브랜치 하나를 이어받는 것은 Session pickup 플레이북입니다.
+- `/in-your-own-words`는 목표와 문제를 자기 말로 다시 말합니다. `/bro`는 마지막 답을 평이하게 다시 말합니다.
 - `/figure-it-out`은 엄밀한 실행 하나를 설계합니다. Orchestrate 플레이북은 여러 날과 여러 PR에 걸친 프로그램을 돌립니다. Autonomous run 플레이북은 작업 하나를 끝 조건까지 밉니다.
 
 pstack에 없는 것입니다.
@@ -346,4 +350,43 @@ README가 든 예입니다. 스킬은 리뷰 질문을 알아차리고 [`/interr
 
 ### 관련 스킬
 
-설치와 모델은 [`setup-pstack`](#skill-setup-pstack), 작업의 입구는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode)입니다. 앱을 증명할 방법이 없으면 [`create-verification-skill`](verification.md#skill-create-verification-skill)입니다. 자기 방식은 [`automate-me`](personal.md#skill-automate-me), [`reflect`](personal.md#skill-reflect), [`correct`](personal.md#skill-correct)입니다. 사람이 따라갈 표는 [부록의 선택 흐름도](decision-flow.md)에 있습니다.
+설치와 모델은 [`setup-pstack`](#skill-setup-pstack), 작업의 입구는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode)입니다. 일을 시작하기 전에 목표와 문제를 다시 듣기는 [`in-your-own-words`](#skill-in-your-own-words)입니다. 앱을 증명할 방법이 없으면 [`create-verification-skill`](verification.md#skill-create-verification-skill)입니다. 자기 방식은 [`automate-me`](personal.md#skill-automate-me), [`reflect`](personal.md#skill-reflect), [`correct`](personal.md#skill-correct)입니다. 사람이 따라갈 표는 [부록의 선택 흐름도](decision-flow.md)에 있습니다.
+
+## in-your-own-words {#skill-in-your-own-words}
+
+원문: {{src:skills/in-your-own-words/SKILL.md}} {{src:README.md}} {{src:skills/poteto-help/SKILL.md}} {{src:skills/poteto-help/references/recipes.md}}
+
+> 에이전트가 사용자의 목표가 무엇이고 어떤 문제를 풀려 한다고 이해한 바를 자기 말로 다시 말합니다.
+
+### 언제 쓰는가
+
+일을 시작하기 전에 에이전트가 목표와 문제를 이해했는지 확인하고 싶을 때입니다. 원문의 `description`은 "Restate in your own words what you think the user's goals are and what problem they're trying to solve. Use for `/in-your-own-words`."입니다. `disable-model-invocation: true`입니다. README는 `/poteto-help` 다음에 이 스킬을 두고, 목표와 문제를 일을 시작하기 전에 다시 듣기를 원할 때이며 `/in-your-own-words`를 칠 때만 돈다고 합니다. `/poteto-help`의 표는 "에이전트가 목표와 문제를 이해했는지 일을 시작하기 전에 확인한다"고 짝을 짓습니다.
+
+### 동작 방식
+
+스킬 본문은 한 문장입니다. 사용자의 목표가 무엇이고 어떤 문제를 풀려 한다고 이해한 바를 자기 말로 다시 말합니다. 확인을 기다리라는 말은 본문에 없습니다.
+
+`references/recipes.md`의 예는 `/in-your-own-words <long or messy ask>`입니다. 길거나 뒤섞인 요청을 붙입니다.
+
+### 사용 예
+
+```text
+/in-your-own-words 이 스레드를 읽어. 알림이 재시도 뒤에 두 번 오고, 어떤 사용자는 아예 못 받는다고 해. 먼저 뭐가 깨진 건지부터 맞춰 보자.
+```
+
+> **예시 (이 책의 저자가 만든 것, 원본에 없음)**
+>
+> 상황: 위 요청을 칩니다.
+>
+> 1. 목표가 무엇이고 어떤 문제를 푸는지를 자기 말로 다시 말합니다. 목표는 알림이 재시도마다 한 번만, 빠짐없이 가게 하는 것이고, 문제는 재시도 뒤 중복과 일부 누락이 한 증상으로 섞여 있다는 것입니다.
+> 2. 본문은 그다음 확인이나 작업 시작을 지시하지 않습니다. 그 다음 행동은 사용자가 정합니다.
+
+### 함정과 주의점
+
+- 칠 때만 돕니다. 사용자의 말만으로 로드되지 않습니다.
+- 본문은 확인을 기다리거나 일을 시작하지 말라고 하지 않습니다. 다시 말하기가 전부입니다. README와 `/poteto-help`는 쓸 때를 "일을 시작하기 전"이라고 합니다.
+- 코드를 건드리지 않고 다시 말하게 하는 `/poteto-mode` 레시피(`read <thread>. restate the underlying issue in your own words`)와 가깝습니다. 그쪽은 플레이북 안에서 다시 말하고, 이 스킬은 그 한 가지만 합니다.
+
+### 관련 스킬
+
+입구는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode), 스킬을 고르는 안내는 [`poteto-help`](#skill-poteto-help)입니다. 마지막 답을 평이하게 다시 듣는 것은 [`bro`](utility.md#skill-bro)입니다. 이 채팅의 마지막 메시지 이후를 따라잡는 것은 [`ketchup`](teach-recall.md#skill-ketchup)입니다.

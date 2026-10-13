@@ -24,6 +24,14 @@
 
 오독은 다시 말한 자리에서 드러나고, 고치는 비용은 메시지 하나입니다. 에이전트가 자기 말을 하기 전에는 자신의 가설을 숨깁니다. → [poteto-mode](poteto-mode.md#skill-poteto-mode)
 
+**길거나 뒤섞인 요청을 자기 말로 다시 듣기.**
+
+```text
+/in-your-own-words 이 스레드를 읽어. 알림이 재시도 뒤에 두 번 오고, 어떤 사용자는 아예 못 받는다고 해. 먼저 뭐가 깨진 건지부터 맞춰 보자.
+```
+
+레시피는 `/in-your-own-words <long or messy ask>`입니다. 목표와 문제를 자기 말로 다시 말합니다. 본문은 확인을 기다리라고 하지 않습니다. → [`in-your-own-words`](setup.md#skill-in-your-own-words)
+
 **고르기 전에 프로토타입.**
 
 ```text
@@ -150,7 +158,7 @@ prove it works를 적용해. 빌드 로그가 아니라 실제 출력을 보여 
 /ketchup
 ```
 
-이 채팅에서 사용자가 마지막으로 쓴 메시지 이후만 봅니다. 알림과 서브에이전트 결과는 그 메시지가 아닙니다. 할 일 항목마다 결정을 내릴 요약을 주고, 전후를 나란히 보여 줍니다. 에이전트가 스스로 할 수 있는 일은 할 일 항목이 아닙니다. 최근 채팅 여러 개에서 주제를 불러오려면 `/recall`입니다. → [`ketchup`](teach-recall.md#skill-ketchup), [`recall`](teach-recall.md#skill-recall)
+이 채팅에서 사용자가 마지막으로 쓴 메시지 이후만 봅니다. 알림과 서브에이전트 결과는 그 메시지가 아닙니다. 글은 250단어 미만이고, 일어난 일은 상태 시각 하나와 한 줄 결과 세 개까지입니다. 할 일 항목마다 세 줄과 전후 시각을 줍니다. 마크다운 표는 시각이 아닙니다. 에이전트가 스스로 할 수 있는 일은 할 일 항목이 아닙니다. 최근 채팅 여러 개에서 주제를 불러오려면 `/recall`입니다. → [`ketchup`](teach-recall.md#skill-ketchup), [`recall`](teach-recall.md#skill-recall)
 
 ## 단계별 프롬프트의 모양
 
