@@ -4,14 +4,14 @@
 
 ## 원본
 
-`cursor/plugins`의 `pstack/`, 커밋 `dbf49813a39c1a5389c5e28cb8e4c1c2379e2454` (0.15.23) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를, 0.15.20 절은 그때의 핀 `1b6d44f`를, 0.15.21 절은 그때의 핀 `997ffc7`를 적은 기록입니다.
+`cursor/plugins`의 `pstack/`, 커밋 `1e5c90a4b6f249917bd21fe361b3a2a7deb741b8` (0.15.24) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를, 0.15.20 절은 그때의 핀 `1b6d44f`를, 0.15.21 절은 그때의 핀 `997ffc7`를, 0.15.23 절은 그때의 핀 `dbf4981`을 적은 기록입니다.
 
 ## 빌드와 검사
 
 ```shell
 bun install
 bun tools/build.mjs        # dist/pstack-guide-<버전>.epub, dist/pstack-guide-<버전>.pdf
-PSTACK_SRC=<클론 경로>/pstack bun tools/check.mjs   # 원고 규칙, 링크, 스킬 53개와 플레이북 23개의 절 존재, epubcheck
+PSTACK_SRC=<클론 경로>/pstack bun tools/check.mjs   # 원고 규칙, 링크, 스킬 54개와 플레이북 23개의 절 존재, epubcheck
 bun tools/check-layout.mjs                          # EPUB을 390px 폭에서 열어 가로 넘침 검사
 bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2,10,300   # PDF 페이지 수, 개요, 글꼴, 한글 텍스트, 선택한 페이지를 PNG로
 ```
@@ -73,14 +73,14 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 
 ## 해석한 부분 (원문이 모호했던 곳)
 
-- **원문 개수.** principle 스킬은 24개입니다(스킬 총 53개 = 일반 29개 + principle 24개). README도 24개라고 합니다. 책은 고정한 커밋의 디렉터리를 세어 얻은 수를 따릅니다. 0.15.5 핀에서는 23개와 47개, 0.15.9 핀에서는 26개와 50개, 0.15.15 핀에서는 27개와 51개, 0.15.17부터 0.15.21까지는 28개와 52개였고, 그 기록은 아래 사실 확인에 남아 있습니다.
+- **원문 개수.** principle 스킬은 24개입니다(스킬 총 54개 = 일반 30개 + principle 24개). README도 24개라고 합니다. 책은 고정한 커밋의 디렉터리를 세어 얻은 수를 따릅니다. 0.15.5 핀에서는 23개와 47개, 0.15.9 핀에서는 26개와 50개, 0.15.15 핀에서는 27개와 51개, 0.15.17부터 0.15.21까지는 28개와 52개, 0.15.23은 29개와 53개였고, 그 기록은 아래 사실 확인에 남아 있습니다.
 - **Comment Sicko의 읽기 전용 여부.** README와 안내서는 "read-only comment reviewer"라고 하지만 `agents/comment-sicko.md`는 스스로 주석을 지우고 삭제 수를 보고한다고 씁니다("I touch comments", "touched files, deletion count"). 애플리케이션 코드는 쓰지 않는다는 점은 일치합니다. 책은 정의 파일의 표현을 따르고 README의 표현을 함께 밝혔습니다.
 - **`/setup-pstack` 재실행의 보존 범위.** README와 안내서는 "기본값과 다른 역할을 유지"라고 하고, `setup-pstack/SKILL.md` 3(b)는 계열, 목록, 별칭으로 바꾼 역할을 유지하고 강도 토큰은 새 예산에 맞춰 다시 계산한다고 합니다. 책은 정밀한 쪽(스킬 본문)을 따릅니다.
 - **`poteto-mode`의 프런트매터 해석.** 0.15.22에서 `mode`와 `reminder` 키를 뺐습니다. 커밋 메시지(#597)는 Cursor가 두 키를 무시해 reminder 문구가 모델에 닿지 않았다고 합니다. `disable-model-invocation: true`는 남습니다. 0.15.10 README와 안내서는 더 이상 "sticky mode"라고 하지 않고, Enter는 한 메시지에만 붙고 Option+Enter/Alt+Enter(또는 Use as Mode)가 Custom Mode를 만든다고 적습니다. 책은 그 설명을 따릅니다. `disable-model-invocation`은 "모델이 자동으로 부르지 않는다"는 통상 뜻으로 적었습니다.
 - **`benny`가 슬래시 스킬이 아니라는 점.** README가 "dormant", "not registered as slash skills"라고 밝힙니다. 책은 별도 부(자동화)에서 지시문의 내용을 원문 순서대로 옮겼습니다.
 - **`cursor-team-kit`.** 별개 플러그인이라 장으로 다루지 않았습니다. `poteto-mode`와 플레이북이 부르는 자리(`deslop`, `control-cli`, `control-ui`, `create-skill` 내장 기능 등)에서 출처만 밝혔습니다.
 - **Claude Code 포팅.** 저장소 원본에는 나오지 않는 외부 정보라서 저작권 표기 부록에서 존재만 언급하고 원본에서 확인하지 않았다고 밝혔습니다.
-- **`disable-model-invocation`.** `setup-pstack`만 이 프런트매터가 없고 나머지 51개 스킬에는 모두 있습니다. 0.15.11부터 `poteto-help`에도 붙었고, 사용자의 말만으로 로드되는 스킬은 `/setup-pstack`뿐입니다. 스킬 절에서는 있는 경우에 한해 언급했습니다.
+- **`disable-model-invocation`.** `setup-pstack`만 이 프런트매터가 없고 나머지 53개 스킬에는 모두 있습니다. 0.15.11부터 `poteto-help`에도 붙었고, 사용자의 말만으로 로드되는 스킬은 `/setup-pstack`뿐입니다. 스킬 절에서는 있는 경우에 한해 언급했습니다.
 
 ## 열린 질문
 
@@ -406,3 +406,40 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 - `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 53개와 플레이북 23개의 절 존재, 용어 병기 짝 29개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
 - `bun tools/check-layout.mjs`: 390px 폭에서 가로 넘침 없음.
 - `bun tools/build.mjs`: `pstack-guide-0.15.23.epub`, `pstack-guide-0.15.23.pdf` (468쪽).
+
+## 0.15.24
+
+원문을 `dbf49813a39c1a5389c5e28cb8e4c1c2379e2454`(0.15.23)에서 `1e5c90a4b6f249917bd21fe361b3a2a7deb741b8`(0.15.24)로 올렸습니다. pstack 트리에 닿은 커밋은 다섯 개입니다.
+
+- `c86f349` refactor(pstack): make /ketchup read like /bro in 150 words (#609)
+- `ce649c0` feat(pstack): match subagent effort to the job, drop Graphite from orchestrate, and cut playbooks to principles (#613)
+- `8043881` pstack: autopilot loops catch the operator up with /ketchup (#616)
+- `79afd75` feat(pstack): add /sharpen (#615)
+- `1e5c90a` chore(pstack): bump to 0.15.24 (#617)
+
+책 버전은 `BOOK_REVISION = 0`이라 pstack 버전과 같은 `0.15.24`입니다. 산출물 이름은 `pstack-guide-0.15.24.epub`, `pstack-guide-0.15.24.pdf`입니다.
+
+원고에서 반영한 내용입니다.
+
+- 스킬 54개(일반 30, 원칙 24). 새 절은 `sharpen`(설치 장, `in-your-own-words` 다음). `disable-model-invocation`은 `setup-pstack`만 없고 나머지 53개에 있습니다. `/sharpen`은 칠 때만 돕니다. `poteto-mode`가 자동으로 부르지 않습니다.
+- `/ketchup`은 `/bro`의 목소리를 쓰고 다시 말하기 과업은 쓰지 않습니다. 답 전체는 150단어보다 훨씬 짧게 두고, 시각과 표 안의 단어도 셉니다. 일어난 일은 상자 넷까지인 시각 하나와 짧은 줄 세 개까지입니다. 할 일 항목은 두 줄이고, 묻지 않은 되돌릴 수 없는 단계는 한 줄이며 시각을 빼니다.
+- `poteto-mode` Subagents에 "일에 모델을 맞춥니다"가 있습니다. 역할의 줄에서 시작해 추론 강도와 속도를 고르고, 검증은 `swarm workers`에 남습니다.
+- `arena`와 `interrogate`의 grok 계열에 `cursor-grok-*`와 `composer-*`를 넣습니다. 거부된 `composer-*`는 arena에서 `grok-4.7-xhigh-fast`, interrogate에서 Reviewer B 기본값으로 돕니다.
+- 여러 단계 PR의 전체 swarm은 코드 준비 헤드에서 한 번입니다. 리베이스, 병합 충돌 해결, 작은 수정은 검증자 하나입니다.
+- Shipping과 Autopilot은 원칙으로 줄었습니다. 새 규칙에는 `--force-with-lease` 핀, 병합 결과 확인, 세 번째 리베이스에서 멈춤이 있습니다. Autopilot-stack은 네 단계이고 착륙만 빼면 Autopilot-full입니다.
+- Orchestrate 프런티어는 Graphite가 아니라 PR 베이스 사슬에서 계산합니다. `orch frontier set --forge origin`입니다. stacker만 토폴로지를 바꿉니다.
+- watch-pr는 이름이 정확히 `Code Review Gate`인 체크의 `ACTION_REQUIRED`를 소유자 승인 관문으로 봅니다.
+- worktree-audit는 Origin PR을 읽고, `*/open`과 `*/draft`를 `hold-open-pr`로 붙듭니다.
+- Autopilot tick이 운영자에게 바뀐 것을 말할 때 `/ketchup`을 씁니다.
+
+### 해석한 부분
+
+- `/sharpen`의 중간 커밋은 `poteto-mode`가 부르게 했지만, 핀 커밋의 최종 본문은 그렇지 않습니다. 책은 최종 본문을 따릅니다.
+- Autopilot-full의 옛 `children.tsv`와 15분 규칙, 라운드마다 전체 swarm은 0.15.24 본문에서 빠졌습니다. 책은 빠진 절차를 되살리지 않았습니다.
+- Orchestrate `frontier.json`의 초안은 `OPEN`으로 셉니다. `store.ts`가 `draft`를 `OPEN`으로 정규화합니다.
+
+### 실행한 검사
+
+- `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 54개와 플레이북 23개의 절 존재, 용어 병기 짝 29개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
+- `bun tools/check-layout.mjs`: 390px 폭에서 가로 넘침 없음.
+- `bun tools/build.mjs`: `pstack-guide-0.15.24.epub`, `pstack-guide-0.15.24.pdf` (471쪽).
