@@ -62,8 +62,9 @@ README는 유지 방법을 이렇게 말합니다. 작업을 치기 전에 `/` �
 
 #### 4. Subagents (서브에이전트)
 
-- 플레이북 단계 안에서 띄우는 서브에이전트(코드를 쓰는 위임, 임시 도우미)는 `subagent_type: "poteto-agent"`를 씁니다. `/poteto-mode`를 받은 채팅이 플레이북을 돌립니다. 플레이북 자체를 돌리려고 `poteto-agent`를 띄우지 않습니다. `/poteto-mode`와 `poteto-agent`는 같은 래퍼를 지납니다. 부모는 모든 `poteto-agent` 프롬프트에 `poteto-mode` `SKILL.md`의 절대 경로를 넣습니다. 반면 `how`, `why`, `interrogate`, `reflect`, `swarm`은 다양한 모델의 리뷰를 위해 자기 `subagent_type`을 정해 두므로, 스킬이 정한 것을 그대로 따르고 `poteto-agent`로 덮어쓰지 않습니다.
+- 플레이북 단계 안에서 띄우는 서브에이전트(코드를 쓰는 위임, 임시 도우미)는 `subagent_type: "poteto-agent"`를 씁니다. `/poteto-mode`를 받은 채팅이 플레이북을 돌립니다. 플레이북 자체를 돌리려고 `poteto-agent`를 띄우지 않습니다. 부모는 모든 `poteto-agent` 프롬프트에 `poteto-mode` `SKILL.md`의 절대 경로를 넣습니다. 반면 `how`, `why`, `interrogate`, `reflect`, `swarm`은 다양한 모델의 리뷰를 위해 자기 `subagent_type`을 정해 두므로, 스킬이 정한 것을 그대로 따르고 `poteto-agent`로 덮어쓰지 않습니다.
 - 모든 `Task` 호출의 기본값은 이렇습니다. `run_in_background: true`, 에이전트 모드(읽기 전용은 MCP를 벗겨 냄), 맥락을 붙여 넣지 않고 파일 포인터를 넘김, 역할별 명시적 모델(`/setup-pstack`으로 설정. 기본값은 코드에 `grok-4.7-xhigh-fast`, 글과 판단에 `claude-opus-5-5-xhigh`). 코드 위임은 난이도별로 나눕니다. 가장 어려운 변경(교차 설계, 까다로운 동시성, 미묘한 알고리즘)은 가장 강한 판단 모델로 갑니다. 애매한 의도에 판단이 필요한 경우든, 글자 그대로 따라야 하는 정밀한 절차든 같습니다. 사소한 기계적 수정은 빠른 코드 모델로 갑니다. `/setup-pstack` 규칙(rule)의 역할별 줄은 이 기본값은 물론 `how`, `why`, `arena`, `swarm`, `architect`, `interrogate`, `reflect`가 스킬 안에 정해 둔 모델보다 우선합니다. 줄이 없는 역할은 기본값을 유지하고, 값이 `inherit-parent`나 `auto`이면 Task의 `model`을 생략해 부모 채팅 모델로 돌립니다. 코드 플레이북은 각자의 줄(`feature, refactoring`, `bug-fix`, `perf-issue`, `hillclimb`)을, 가장 어려운 변경은 `hardest tasks` 줄을, 글과 판단은 `judgment and prose` 줄을 읽습니다.
+- **일에 모델을 맞춥니다.** 띄우기 전에 역할의 줄이나 기본값에서 시작해, 그 일이 필요로 하는 추론 강도와 속도를 고릅니다. `/setup-pstack` 예산이 역할의 시작 강도를 정하고, 기본은 `xhigh`입니다. 가장 어렵거나 미묘한 일은 한 단계 올리고, 상한은 `max`입니다. 판단은 한 단계 내리고, 일상 일은 두 단계 이상 내립니다. fast는 일이 급할 때만 씁니다. CI나 트렁크가 빨갛거나, 사람이 지금 그 결과에 막혀 있을 때입니다. 그렇지 않으면 `-fast`를 뺀 일반 속도입니다. 검증(verification)은 예외이고 `swarm workers` 모델과 속도에 남습니다(기본 `grok-4.7-xhigh-fast`). 바꾸는 것은 강도 토큰과 fast 여부뿐이고, 역할이 이름 붙인 계열은 유지해 다양한 패널이 다양하게 남게 합니다. 그 계열에 그 강도와 속도의 슬러그가 없으면 가장 가까운 슬러그를 씁니다. 역할이 `auto`나 `inherit-parent`이면 부모 모델에 남습니다. Task 도구가 맞춘 슬러그를 거부하면 다른 맞춘 슬러그를 시도하지 않습니다. 역할의 줄이나 기본값을 쓰고 그렇다고 말합니다.
 - 부모가 모든 서브에이전트의 작업을 책임집니다. diff를 검토하고 요약은 직접 쓰지, 서브에이전트가 한 말을 그대로 넘기지 않습니다. 두 번째 의견은 같은 프롬프트를 다른 모델에 주는 것이고, 두 모델이 일치하면 신호가 강합니다.
 - **기본은 새 서브에이전트입니다.** 새 일은 통합한 범위(처음 브리프, 그 뒤의 모든 지시, 이전 에이전트의 보고와 브랜치)를 가진 새 서브에이전트에게 줍니다. 수정 라운드, 후속, 재시도, 대기열의 다음 항목이 모두 그렇습니다. 기존 서브에이전트를 재개하거나 메시지를 보내거나 후속을 큐에 넣는 것은, 새 일이 그 에이전트 안에만 있고 옮기기 비싼 상태가 꼭 필요할 때뿐입니다. 로컬 체크아웃, 커밋하지 않은 변경, 아직 돌고 있는 프로세스(개발 서버, 시뮬레이터, babysit 감시자)가 그런 상태입니다. 돌고 있는 에이전트에게 정지하거나 보류하라는 명령은 재사용이 아닙니다. PR 소유자 같은 역할은 에이전트보다 오래 삽니다. 그 에이전트가 돌아오면 역할의 다음 라운드는 새 에이전트가 맡습니다. 인터럽트로 이어 붙인 재개는 지시를 조용히 놓치므로, "끝났다"는 요약을 믿기보다 통합한 범위로 새 서브에이전트를 띄웁니다.
 
@@ -205,7 +206,7 @@ keep going until done
 
 ### 관련 스킬
 
-플레이북이 부르는 스킬은 [이해하기](how.md#skill-how), [설계하기](architect.md#skill-architect), [고치고 검증하기](tdd-blast.md#skill-tdd) 부에서 다룹니다. 모델 설정은 [`setup-pstack`](setup.md#skill-setup-pstack)에서, 원칙은 [원칙 장](principles.md)에서 다룹니다. 어느 스킬이나 플레이북이 맞는지 모르겠으면 [`poteto-help`](setup.md#skill-poteto-help)가 이 장을 가리킵니다. 일을 시작하기 전에 목표와 문제를 다시 듣기는 [`in-your-own-words`](setup.md#skill-in-your-own-words)입니다.
+플레이북이 부르는 스킬은 [이해하기](how.md#skill-how), [설계하기](architect.md#skill-architect), [고치고 검증하기](tdd-blast.md#skill-tdd) 부에서 다룹니다. 모델 설정은 [`setup-pstack`](setup.md#skill-setup-pstack)에서, 원칙은 [원칙 장](principles.md)에서 다룹니다. 어느 스킬이나 플레이북이 맞는지 모르겠으면 [`poteto-help`](setup.md#skill-poteto-help)가 이 장을 가리킵니다. 일을 시작하기 전에 목표와 문제를 다시 듣기는 [`in-your-own-words`](setup.md#skill-in-your-own-words)입니다. 과업을 조인 뒤 일을 하는 것은 [`sharpen`](setup.md#skill-sharpen)입니다.
 
 ## poteto-agent {#agent-poteto-agent}
 

@@ -2,21 +2,22 @@
 
 원문: {{src:README.md}} {{src:skills/poteto-mode/SKILL.md}}
 
-이 표는 pstack 0.15.23(커밋 `dbf4981`)의 스킬 53개, 에이전트 2개, `poteto-mode` 플레이북 23개를 한곳에 모았습니다. 트리거 문구는 각 스킬의 `description`에 있는 문구를 그대로 두었고(`no-comments`처럼 `description`에 없는 곳은 `poteto-mode`의 규칙(non-negotiable)을 적었고), 영어 원문이 없는 곳(원칙(principle) 스킬 등)은 "언제 적용하는가"를 한국어로 적었습니다. 이름을 누르면 해당 절로 갑니다.
+이 표는 pstack 0.15.24(커밋 `1e5c90a`)의 스킬 54개, 에이전트 2개, `poteto-mode` 플레이북 23개를 한곳에 모았습니다. 트리거 문구는 각 스킬의 `description`에 있는 문구를 그대로 두었고(`no-comments`처럼 `description`에 없는 곳은 `poteto-mode`의 규칙(non-negotiable)을 적었고), 영어 원문이 없는 곳(원칙(principle) 스킬 등)은 "언제 적용하는가"를 한국어로 적었습니다. 이름을 누르면 해당 절로 갑니다.
 
-## 일반 스킬 29개
+## 일반 스킬 30개
 
 | 스킬 | 한 줄 목적 | 트리거 문구 |
 | --- | --- | --- |
 | [`poteto-mode`](poteto-mode.md#skill-poteto-mode) | 진입점. 요청에 맞는 플레이북을 골라 필요한 스킬을 부르며 엄밀하게 끝냄 | `poteto`, `/poteto-mode`, 이 스타일로 일해 달라는 요청 |
 | [`poteto-help`](setup.md#skill-poteto-help) | pstack 사용법과 스킬 선택을 안내하고, 보낼 프롬프트를 건넴. 일은 시작하지 않음 | `/poteto-help`와 질문. 칠 때만 돎. 일을 시키는 요청은 아님 |
 | [`in-your-own-words`](setup.md#skill-in-your-own-words) | 사용자의 목표와 풀려는 문제를 자기 말로 다시 말함 | "Restate in your own words what you think the user's goals are and what problem they're trying to solve", `/in-your-own-words` |
+| [`sharpen`](setup.md#skill-sharpen) | 일을 시작하기 전에 과업을 조임. 전문가의 접근, 사용자가 진짜 원하는 것, 알맞은 명세 수준 | "Sharpen a task before starting: the expert approach, what the user is really after, and the right level of specification", `/sharpen` |
 | [`setup-pstack`](setup.md#skill-setup-pstack) | 역할별 모델과 추론 예산을 정하고 규칙(rule) 파일을 씀 | `/setup-pstack`, "configure pstack models", "pstack budget" |
 | [`how`](how.md#skill-how) | 코드가 어떻게 동작하는지, 어디에 두어야 하는지 설명 | "how does X work", 변경 전 코드 워크스루, "where should this live", "which package owns this", "is this the right layer" |
 | [`why`](why.md#skill-why) | 코드의 동기와 의도를 MCP 증거 범주별로 병렬 조사 | "why does X work this way", "why we picked Y", 설계 근거, 회귀, 포스트모템, 데이터로 뒷받침된 임계값 |
 | [`teach`](teach-recall.md#skill-teach) | `how`와 `why`를 엮어 사람이 이해하도록 평이하게 설명 | "teach me this", "help me really understand X", "explain this change or subsystem to me" |
 | [`recall`](teach-recall.md#skill-recall) | 자신의 채팅 기록과 공유 기록에서 최근 맥락을 복원해 브리프로 | "recall my work on X", "catch me up", "what have I been working on", "where did I leave off" |
-| [`ketchup`](teach-recall.md#skill-ketchup) | 이 채팅에서 사용자의 마지막 메시지 이후 바뀐 것을 짧은 답과 실제 시각으로 따라잡고, 할 일 항목마다 결정할 맥락을 줌 | "Catch the user up on what changed in this chat since their last message, in a short reply built on real visuals", `/ketchup` |
+| [`ketchup`](teach-recall.md#skill-ketchup) | 이 채팅에서 사용자의 마지막 메시지 이후 바뀐 것을 평이한 몇 문장과 작은 시각으로 따라잡고, 할 일 항목마다 결정할 맥락을 줌 | "Catch the user up on what changed in this chat since their last message, in a few plain sentences and small visuals", `/ketchup` |
 | [`architect`](architect.md#skill-architect) | 코드 전에 타입, 시그니처, 모듈 구조를 스케치 | `/architect`, "architect this", "design this", 코드로 뛰어들면 잘못된 모양이 굳을 작업 |
 | [`arena`](arena-swarm.md#skill-arena) | 같은 과업에 후보 N개를 만들고 기준안을 고르고 이식 | `/arena`, "arena this", "throw it in the arena" |
 | [`swarm`](arena-swarm.md#skill-swarm) | 병렬 작업자 N명을 띄우고 보고서 하나로 집계 | `/swarm`, "swarm this", 병렬 커버리지, 경주, 관문 시험(gauntlet), 탐색 |
@@ -116,10 +117,11 @@ README의 "모든 스킬" 표가 스킬마다 붙인 한 줄 설명입니다(원
 | `/poteto-mode` | 사소하지 않은 모든 작업의 기본 진입점 |
 | `/poteto-help` | pstack이 낯설거나 어느 스킬, 플레이북, 원칙이 맞는지 모르겠을 때. 무엇을 하려는지 알아내고 그 부분만 답하며, 칠 프롬프트를 건넴. `/poteto-help`를 칠 때만 돎 |
 | `/in-your-own-words` | 에이전트가 목표와 문제를 일을 시작하기 전에 자기 말로 다시 말하게 하고 싶을 때. `/in-your-own-words`를 칠 때만 돎 |
+| `/sharpen` | 최상위 전문가처럼 접근하고 사용자가 진짜 원하는 것에 맞추되, 과잉 명세하거나 사용자의 선택을 대신하지 않기를 원할 때 |
 | `/how` | 서브시스템이 어떻게 동작하는지 워크스루를 원할 때 |
 | `/why` | 왜 이렇게 만들었는지 알고 싶을 때. 런타임에 MCP를 발견하고 각 증거 범주를 병렬로 조회 |
 | `/recall` | 작업을 시작하거나 재개하며 주제에 대한 최근 맥락을 자신의 채팅 기록과 공유 기록에서 다시 세워 빡빡한 현재 상태 브리프로 받고 싶을 때 |
-| `/ketchup` | 이 채팅에서 마지막 메시지 이후 바뀐 것을 짧은 답과 실제 시각으로 받고, 할 일 항목마다 결정을 내릴 맥락을 원할 때 |
+| `/ketchup` | 이 채팅에서 마지막 메시지 이후 바뀐 것을 평이한 몇 문장과 작은 시각으로 받고, 할 일 항목마다 결정을 내릴 맥락을 원할 때 |
 | `/blast-radius` | 작아 보이는 변경이 다른 곳에서 무엇을 깨뜨릴 수 있는지, 안전하게 하는 사실 하나를 주장이 아니라 코드 실행으로 증명해서 알고 싶을 때 |
 | `/architect` | 함수 경계를 넘는 코드를 쓰기 전에 호출자의 사용, 타입, 모듈 모양을 먼저 정하고 싶을 때 |
 | `/arena` | 같은 일에 병렬 시도 N개를 만들고 각각의 좋은 부분을 가져오고 싶을 때 |
