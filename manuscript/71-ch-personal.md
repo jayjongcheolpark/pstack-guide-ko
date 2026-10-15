@@ -232,7 +232,7 @@ ls -t <agent-transcripts>/*.jsonl <agent-transcripts>/*/*.jsonl <agent-transcrip
 
 1. **아키텍처로 없앱니다.** 상태 조각마다 소유자 하나, 일마다 지원하는 방법 하나를 둡니다. 잘못된 import가 실패하도록 내부를 숨깁니다. 손으로 맞추는 목록을 원천 하나로 바꿉니다. 에이전트가 복사할 옛 방법과 죽은 코드를 지웁니다.
 2. **나쁜 상태를 쓸 수 없도록 타입으로 강제합니다.** 나쁜 코드가 여전히 컴파일되면, 대신 쓸 파일이나 타입이나 함수를 오류가 이름 붙이는 린트나 CI 검사를 더합니다. 패턴이 이미 흔하면, 변경이 그것을 더 늘릴 때만 실패합니다.
-3. **동작을 테스트합니다.** 호출하는 함수가 모두 아무것도 반환해도 통과할 테스트는 고치거나 지웁니다.
+3. **동작을 테스트합니다.** 검사하는 동작이 깨져도 통과하거나, 내부만 바뀌면 실패하는 테스트는 고치거나 지웁니다.
 4. **판단이 필요한 곳에만, 마지막에 문서나 에이전트 규칙을 씁니다.** 에이전트가 이것을 건너뛰어도 실패하는 것은 없습니다.
 
 **고치고 증명합니다.** 가장 잦은 부류를 지금 고칩니다. 커밋은 부류마다 하나입니다. 새 검사마다 과거의 실제 실수에서 실패함을 증명합니다. 로컬과 CI에서 같은 명령을 돌립니다. 예외는 문제가 되는 줄에 이유, 만료 날짜, 사람의 승인과 함께 둡니다.
@@ -266,7 +266,7 @@ ls -t <agent-transcripts>/*.jsonl <agent-transcripts>/*/*.jsonl <agent-transcrip
 
 ### 관련 스킬
 
-[`architect`](architect.md#skill-architect)의 적신호 네 가지(소유 분할, 한 일에 두 길, 가져올 수 있는 내부, 손으로 맞추는 목록)는 이 스킬 1단계와 같은 모양입니다. 원문은 [`encode-lessons-in-structure`](principles.md#skill-principle-encode-lessons-in-structure)를 이름으로 인용하지 않습니다. 그 원칙은 반복되는 지시를 구조로 옮기라고 하고, 이 스킬은 그 순서를 아키텍처, 타입, 린트, 테스트, 문서로 못 박습니다. 대화 기록의 교훈을 스킬 산문으로 라우팅하는 쪽은 [`reflect`](#skill-reflect)입니다.
+[`architect`](architect.md#skill-architect)의 적신호 네 가지(소유 분할, 한 일에 두 길, 가져올 수 있는 내부, 손으로 맞추는 목록)는 이 스킬 1단계와 같은 모양입니다. 3단계의 테스트는 [`test-behavior-not-implementation`](principles.md#skill-principle-test-behavior-not-implementation)의 두 편집과 같은 말입니다. 원문은 [`encode-lessons-in-structure`](principles.md#skill-principle-encode-lessons-in-structure)를 이름으로 인용하지 않습니다. 그 원칙은 반복되는 지시를 구조로 옮기라고 하고, 이 스킬은 그 순서를 아키텍처, 타입, 린트, 테스트, 문서로 못 박습니다. 대화 기록의 교훈을 스킬 산문으로 라우팅하는 쪽은 [`reflect`](#skill-reflect)입니다.
 
 ## show-me-your-work {#skill-show-me-your-work}
 
