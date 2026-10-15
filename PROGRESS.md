@@ -4,7 +4,7 @@
 
 ## 원본
 
-`cursor/plugins`의 `pstack/`, 커밋 `1e5c90a4b6f249917bd21fe361b3a2a7deb741b8` (0.15.24) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를, 0.15.20 절은 그때의 핀 `1b6d44f`를, 0.15.21 절은 그때의 핀 `997ffc7`를, 0.15.23 절은 그때의 핀 `dbf4981`을 적은 기록입니다.
+`cursor/plugins`의 `pstack/`, 커밋 `e5136d82418d2db3165ea1050d17577cd618cc05` (0.15.25) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를, 0.15.20 절은 그때의 핀 `1b6d44f`를, 0.15.21 절은 그때의 핀 `997ffc7`를, 0.15.23 절은 그때의 핀 `dbf4981`을, 0.15.24 절은 그때의 핀 `1e5c90a`를 적은 기록입니다.
 
 ## 빌드와 검사
 
@@ -443,3 +443,35 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 - `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 54개와 플레이북 23개의 절 존재, 용어 병기 짝 29개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
 - `bun tools/check-layout.mjs`: 390px 폭에서 가로 넘침 없음.
 - `bun tools/build.mjs`: `pstack-guide-0.15.24.epub`, `pstack-guide-0.15.24.pdf` (471쪽).
+
+## 0.15.25
+
+원문을 `1e5c90a4b6f249917bd21fe361b3a2a7deb741b8`(0.15.24)에서 `e5136d82418d2db3165ea1050d17577cd618cc05`(0.15.25)로 올렸습니다. pstack 트리에 닿은 커밋은 세 개입니다.
+
+- `afd51cf` feat(pstack): have /ketchup explain changes with screenshots, videos, and diagrams (#628)
+- `6ce45c5` chore(pstack): bump to 0.15.25 (#614)
+- `e5136d8` pstack: restate four overspecified principles as reasoning, not rules (#633)
+
+책 버전은 `BOOK_REVISION = 0`이라 pstack 버전과 같은 `0.15.25`입니다. 산출물 이름은 `pstack-guide-0.15.25.epub`, `pstack-guide-0.15.25.pdf`입니다.
+
+원고에서 반영한 내용입니다.
+
+- 스킬 수는 그대로 54개(일반 30, 원칙 24). `disable-model-invocation`은 `setup-pstack`만 없고 나머지 53개에 있습니다. 사용자의 말만으로 로드되는 스킬은 `/setup-pstack`뿐입니다.
+- `/ketchup`은 위치만이 아니라 각 변경을 이해하게 돕습니다. 답의 글은 150단어보다 훨씬 짧게 두고, 시각 안의 단어는 세지 않으며 표 안의 단어는 셉니다. 일어난 일은 그림부터 보여 줍니다. 작업이 만든 스크린숏과 영상을 인라인으로 넣고, 그림이 문장보다 빠르면 그립니다. 상태 목록이나 잇지 않은 상자는 그리지 않습니다. 요약은 짧은 불릿입니다. 할 일 항목은 평이한 불릿이고 다이어그램으로 그리지 않습니다. 선택은 목록 뒤에 두고, 스크린숏이 이미 선택지를 보여 주면 그 아래에 얻는 것과 비용을 씁니다. 보이는 변화에 스크린숏이 없으면 그 요약 줄에 `No screenshot yet`이라고 씁니다.
+- `test-behavior-not-implementation`은 단언 이름 목록을 빼고, 동작을 깨는 편집과 내부를 바꾸는 편집 둘로 판단합니다. 동작은 사용자가 관찰하는 것이고, 계약이 단언의 모양보다 앞섭니다.
+- `fix-root-causes`는 증상이 잘못된 상태가 보인 곳이고, 근본 원인은 시스템이 처음 틀린 곳입니다. 가드는 다루는 상태가 정당할 때만 수정입니다.
+- `attack-the-premise`는 행위자별 센서스를 규칙으로 두지 않습니다. 전제를 적어 직접 시험하고, 증거가 전제를 깨면 원인을 다른 곳에서 찾습니다.
+- `make-operations-idempotent`는 PID 잠금 같은 장치를 규칙으로 두지 않습니다. 지금 있는 상태에서 단계를 끌어내고, 남긴 것은 다음 실행이 낡은 것임을 판단할 수 있어야 합니다.
+- `/correct`의 테스트 단계는 위 두 편집과 같은 말입니다. 검사하는 동작이 깨져도 통과하거나 내부만 바뀌면 실패하는 테스트를 고치거나 지웁니다.
+- 원칙 색인, README, 안내서의 한 줄 요약이 위 네 원칙과 맞춰졌습니다.
+
+### 해석한 부분
+
+- `#628`의 중간 커밋은 할 일 항목을 전후 다이어그램으로 두거나, 요약 상자를 요구하거나, 시각 단어를 150단어에 넣었습니다. 핀 커밋의 최종 본문은 그렇지 않습니다. 책은 최종 본문을 따릅니다.
+- 네 원칙은 특정 장치(matcher 이름, nil 검사 금지, 센서스, PID 잠금)를 빼고 에이전트가 이름을 붙이지 않은 자리에서도 끌어낼 생각으로 다시 적혔습니다. 책은 그 생각을 옮기고, 빠진 장치를 규칙으로 되살리지 않았습니다.
+
+### 실행한 검사
+
+- `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 54개와 플레이북 23개의 절 존재, 용어 병기 짝 29개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
+- `bun tools/check-layout.mjs`: 390px 폭에서 가로 넘침 없음.
+- `bun tools/build.mjs`: `pstack-guide-0.15.25.epub`, `pstack-guide-0.15.25.pdf` (470쪽).

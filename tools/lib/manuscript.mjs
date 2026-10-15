@@ -13,8 +13,8 @@ import { renderFlow } from "./flow.mjs";
 
 export const SOURCE = {
   repo: "https://github.com/cursor/plugins",
-  sha: "1e5c90a4b6f249917bd21fe361b3a2a7deb741b8",
-  version: "0.15.24",
+  sha: "e5136d82418d2db3165ea1050d17577cd618cc05",
+  version: "0.15.25",
   dir: "pstack",
 };
 // The book version starts from the pstack version it covers. A book-only fix, while
@@ -32,7 +32,7 @@ export const BOOK = {
   subtitle: "Cursor 플러그인 스킬 54종 해설",
   language: "ko",
   identifier: "urn:uuid:5f6d1c1e-4a0b-4c7e-9a52-7d1b3c0e9a11",
-  date: "2026-10-14",
+  date: "2026-10-15",
 };
 
 // Worked examples written for this book (not from the source) open with this label.
