@@ -2,7 +2,7 @@
 
 원문: {{src:README.md}} {{src:skills/poteto-mode/SKILL.md}}
 
-이 표는 pstack 0.15.25(커밋 `e5136d8`)의 스킬 54개, 에이전트 2개, `poteto-mode` 플레이북 23개를 한곳에 모았습니다. 트리거 문구는 각 스킬의 `description`에 있는 문구를 그대로 두었고(`no-comments`처럼 `description`에 없는 곳은 `poteto-mode`의 규칙(non-negotiable)을 적었고), 영어 원문이 없는 곳(원칙(principle) 스킬 등)은 "언제 적용하는가"를 한국어로 적었습니다. 이름을 누르면 해당 절로 갑니다.
+이 표는 pstack 0.15.25(커밋 `99743e9`)의 스킬 54개, 에이전트 2개, `poteto-mode` 플레이북 23개를 한곳에 모았습니다. 트리거 문구는 각 스킬의 `description`에 있는 문구를 그대로 두었고(`no-comments`처럼 `description`에 없는 곳은 `poteto-mode`의 규칙(non-negotiable)을 적었고), 영어 원문이 없는 곳(원칙(principle) 스킬 등)은 "언제 적용하는가"를 한국어로 적었습니다. 이름을 누르면 해당 절로 갑니다.
 
 ## 일반 스킬 30개
 
