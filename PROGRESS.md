@@ -499,4 +499,6 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 
 ### 실행한 검사
 
-- 빌드와 `check.mjs`, `check-layout.mjs`는 이 개정에서 다시 돌립니다.
+- `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 54개와 플레이북 23개의 절 존재, 용어 병기 짝 29개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
+- `CHROME_PATH=/usr/bin/google-chrome bun tools/check-layout.mjs`: 390px 폭에서 가로 넘침 없음.
+- `CHROME_PATH=/usr/bin/google-chrome bun tools/build.mjs`: `pstack-guide-0.15.25-ko.1.epub`, `pstack-guide-0.15.25-ko.1.pdf` (469쪽, 0.15.25는 470쪽).
