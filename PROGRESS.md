@@ -4,7 +4,7 @@
 
 ## 원본
 
-`cursor/plugins`의 `pstack/`, 커밋 `99743e9c151c8537cbbf1f98bb38f34ef3368453` (0.15.25) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를, 0.15.20 절은 그때의 핀 `1b6d44f`를, 0.15.21 절은 그때의 핀 `997ffc7`를, 0.15.23 절은 그때의 핀 `dbf4981`을, 0.15.24 절은 그때의 핀 `1e5c90a`를, 0.15.25 절은 그때의 핀 `e5136d8`를 적은 기록입니다.
+`cursor/plugins`의 `pstack/`, 커밋 `182f2ce414e83224915c190d2f63239c1608d0a5` (0.15.25) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를, 0.15.20 절은 그때의 핀 `1b6d44f`를, 0.15.21 절은 그때의 핀 `997ffc7`를, 0.15.23 절은 그때의 핀 `dbf4981`을, 0.15.24 절은 그때의 핀 `1e5c90a`를, 0.15.25 절은 그때의 핀 `e5136d8`를, 0.15.25-ko.1 절은 그때의 핀 `99743e9`를 적은 기록입니다.
 
 ## 빌드와 검사
 
@@ -63,6 +63,7 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 ## 구성 변경과 이유
 
 - 원본의 `docs/guide`는 10장짜리 사용 안내서입니다. 이 책은 스킬을 주제별로 묶는 구성을 유지하되, 가이드의 흐름(설정, 라우팅, 이해, 설계, 빌드와 정리, 검증과 배포, 밤새 돌리기, 원칙, 나만의 방식, 레시피)을 각 부에 나눠 담았습니다.
+- 원본의 `docs/harness/claude-code.md`는 설치와 Cursor 이름 대응이므로 시작하기 부의 설치 장에서 다룹니다. `docs/guide/01-setup.md`와 같은 자리입니다.
 - `poteto-mode`는 SKILL.md와 플레이북 23개, references, scripts로 분량이 가장 큽니다. 다른 부의 항목으로 두면 균형이 무너져서 시작하기 다음에 독립된 부(진입점)로 세웠습니다.
 - `setup-pstack`은 설치와 설정이 주제라서 시작하기 부의 설치 장에서 스킬 절로 다룹니다.
 - `principle-*` 스킬은 독립된 장(설계하기 부)으로 묶었습니다.
@@ -79,7 +80,7 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 - **`poteto-mode`의 프런트매터 해석.** 0.15.22에서 `mode`와 `reminder` 키를 뺐습니다. 커밋 메시지(#597)는 Cursor가 두 키를 무시해 reminder 문구가 모델에 닿지 않았다고 합니다. `disable-model-invocation: true`는 남습니다. 0.15.10 README와 안내서는 더 이상 "sticky mode"라고 하지 않고, Enter는 한 메시지에만 붙고 Option+Enter/Alt+Enter(또는 Use as Mode)가 Custom Mode를 만든다고 적습니다. 책은 그 설명을 따릅니다. `disable-model-invocation`은 "모델이 자동으로 부르지 않는다"는 통상 뜻으로 적었습니다.
 - **`benny`가 슬래시 스킬이 아니라는 점.** README가 "dormant", "not registered as slash skills"라고 밝힙니다. 책은 별도 부(자동화)에서 지시문의 내용을 원문 순서대로 옮겼습니다.
 - **`cursor-team-kit`.** 별개 플러그인이라 장으로 다루지 않았습니다. `poteto-mode`와 플레이북이 부르는 자리(`deslop`, `control-cli`, `control-ui`, `create-skill` 내장 기능 등)에서 출처만 밝혔습니다.
-- **Claude Code 포팅.** 저장소 원본에는 나오지 않는 외부 정보라서 저작권 표기 부록에서 존재만 언급하고 원본에서 확인하지 않았다고 밝혔습니다.
+- **Claude Code.** 0.15.25-ko.2부터 원본 README와 `docs/harness/claude-code.md`가 공식 설치와 이름 대응을 밝히므로 설치 장에서 그 범위만 다룹니다. 비공식 포팅(`michael-denyer/pstack-claude`)은 여전히 원본에 없는 외부 정보라서 저작권 표기 부록에서 존재만 언급하고 원본에서 확인하지 않았다고 밝혔습니다. 저장소 루트의 생성 트리 `harness/pstack/`은 `pstack/` 밖이라 원문으로 쓰지 않았습니다.
 - **`disable-model-invocation`.** `setup-pstack`만 이 프런트매터가 없고 나머지 53개 스킬에는 모두 있습니다. 0.15.11부터 `poteto-help`에도 붙었고, 사용자의 말만으로 로드되는 스킬은 `/setup-pstack`뿐입니다. 스킬 절에서는 있는 경우에 한해 언급했습니다.
 
 ## 열린 질문
@@ -502,3 +503,33 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 - `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 54개와 플레이북 23개의 절 존재, 용어 병기 짝 29개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
 - `CHROME_PATH=/usr/bin/google-chrome bun tools/check-layout.mjs`: 390px 폭에서 가로 넘침 없음.
 - `CHROME_PATH=/usr/bin/google-chrome bun tools/build.mjs`: `pstack-guide-0.15.25-ko.1.epub`, `pstack-guide-0.15.25-ko.1.pdf` (469쪽, 0.15.25는 470쪽).
+
+## 0.15.25-ko.2
+
+원문을 `99743e9c151c8537cbbf1f98bb38f34ef3368453`(0.15.25)에서 `182f2ce414e83224915c190d2f63239c1608d0a5`(0.15.25)로 올렸습니다. pstack 버전은 그대로이고, 핀과 책만 움직입니다. pstack 트리에 닿은 커밋은 하나입니다.
+
+- `182f2ce` feat(pstack): install pstack in Claude Code from a generated tree (#637), 2026-10-16
+
+책 버전은 `BOOK_REVISION = 2`라 `0.15.25-ko.2`입니다. 산출물 이름은 `pstack-guide-0.15.25-ko.2.epub`, `pstack-guide-0.15.25-ko.2.pdf`입니다.
+
+확인한 사실입니다. `plugin.json`과 `.cursor-plugin/plugin.json` 버전은 둘 다 0.15.25입니다. `#637`이 `pstack/`에서 바꾼 파일은 README와 새 `docs/harness/claude-code.md`입니다. 스킬, 플레이북, 매니페스트 본문은 바뀌지 않았습니다. 커밋은 저장소 루트에 생성 트리 `harness/pstack/claude-code/`와 생성 스크립트도 더했지만, 그 트리는 `pstack/` 밖이라 원문으로 쓰지 않았습니다.
+
+원고에서 반영한 내용입니다.
+
+- 스킬 수는 그대로 54개(일반 30, 원칙 24). 플레이북 23개.
+- README 설치 절에 Claude Code 명령 두 줄이 붙었습니다. `/plugin marketplace add cursor/plugins`, `/plugin install pstack@cursor-plugins`. 명령과 에이전트 이름 앞에 접두사를 붙이므로 `/poteto-mode`는 `/pstack:poteto-mode`입니다. 나머지 Cursor 이름은 `docs/harness/claude-code.md`가 대응합니다. Claude Code가 설치하는 것은 저장소 루트 `harness/pstack/`의 생성 복사본입니다. `skills/`, `agents/`, `docs/harness/claude-code.md`, `plugin.json`을 바꾼 뒤에는 `node scripts/generate-pstack-harness-trees.mjs`를 실행하고 커밋합니다.
+- README는 benny가 Cursor 자동화 위에서 돌므로 Cursor 전용이라고 한 줄을 더했습니다.
+- `docs/harness/claude-code.md`는 세션마다 한 번 읽고 Cursor 이름을 표로 바꾸라고 합니다. 도구(`Task`는 `Agent`, `AskQuestion`은 `AskUserQuestion`, 스킬 실행은 `Read`와 `/pstack:<name>`), 서브에이전트 필드, 모델, 경로를 대응합니다. `pstack-models.mdc`는 Claude Code가 읽지 않으므로 `setup-pstack`은 쓸 것이 없고 멈춥니다. 역할 줄을 `CLAUDE.md`나 `AGENTS.md`에 넣지 않습니다. 자동화, Bugbot, Cursor 클라우드 에이전트, Cursor의 풀 리퀘스트 도구는 대응이 없으면 건너뜁니다.
+- 하니스 문서는 설치 장에 두었습니다. `docs/guide`를 주제별 장에 나누는 것과 같고, `docs/guide/01-setup.md`와 같은 자리입니다.
+
+### 해석한 부분
+
+- 스킬 본문은 Cursor 이름을 그대로 둡니다. 책은 스킬 절을 Cursor로 설명하고, Claude Code 대응은 설치 장의 어댑터 절에만 모았습니다. 원문에 없는 Claude Code 동작은 짓지 않았습니다.
+- `poteto-help`는 여전히 "pstack은 Cursor용입니다"라고 합니다. 스킬 본문이 바뀌지 않았으므로 그 문장을 유지하고, README가 별도로 Claude Code 설치를 밝힌다고 한 줄을 덧붙였습니다.
+- 생성 트리와 마켓플레이스 매니페스트는 `pstack/` 밖입니다. README가 가리키는 설치 경로와 생성 명령만 적었습니다.
+
+### 실행한 검사
+
+- `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 54개와 플레이북 23개의 절 존재, 용어 병기 짝 29개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
+- `CHROME_PATH=/usr/bin/google-chrome bun tools/check-layout.mjs`: 390px 폭에서 가로 넘침 없음.
+- `CHROME_PATH=/usr/bin/google-chrome bun tools/build.mjs`: `pstack-guide-0.15.25-ko.2.epub`, `pstack-guide-0.15.25-ko.2.pdf` (474쪽, 0.15.25-ko.1은 469쪽).

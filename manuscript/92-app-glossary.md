@@ -51,7 +51,7 @@
 | mode / sticky mode | 모드 / 스티키 모드 | `poteto-mode` 프런트매터에는 `mode` 키가 없습니다. 매 턴 유지하려면 Custom Mode로 켭니다. Enter만 치면 한 메시지에만 붙습니다 |
 | Custom Mode | Custom Mode | Cursor 기능. `/` 메뉴에서 Option+Enter(Mac) 또는 Alt+Enter(Windows)로 스킬을 모드로 붙입니다. Agents Window와 CLI에서 제공합니다 |
 | agent / subagent | 에이전트 / 서브에이전트 | 작업하는 모델 인스턴스 / 부모가 띄워 일을 맡기는 에이전트 |
-| harness | 하니스 | 앱을 구동해 검사하거나 지표를 재는 테스트 도구 |
+| harness | 하니스 | 앱을 구동해 검사하거나 지표를 재는 테스트 도구. `docs/harness/`에서는 에이전트가 도는 환경(Cursor, Claude Code)을 가리킵니다 |
 | role | 역할 | 자기 모델 선택을 가진 위임 작업 단위(`arena runners` 등) |
 | panel | 패널 | 다중 모델 스킬이 쓰는 서로 다른 모델의 묶음. 기본은 opus, grok |
 | model slug | 모델 슬러그 | 모델을 가리키는 식별 문자열(`claude-opus-5-5-xhigh` 등) |

@@ -2,7 +2,7 @@
 
 ![/poteto-mode가 작업 요청을 BUG FIX, FEATURE, INVESTIGATION 관문으로 분기시키는 장면을 그린 일러스트](images/router.jpg)
 
-원문: {{src:README.md}} {{src:.cursor-plugin/plugin.json}} {{src:plugin.json}} {{src:docs/guide/README.md}}
+원문: {{src:README.md}} {{src:.cursor-plugin/plugin.json}} {{src:plugin.json}} {{src:docs/guide/README.md}} {{src:docs/harness/claude-code.md}}
 
 ## 한 문단 요약
 
@@ -36,6 +36,7 @@ README는 "포크하고, 개선하고, 자기 것으로 만들라"고 권하고,
 | `agents/` | 서브에이전트 정의 2개: `poteto-agent`, `Comment Sicko`(`name: comment-sicko`) |
 | `automations/` | 휴면 상태의 자동화 팩 `benny` |
 | `docs/guide/` | 열 장으로 된 사용 안내서와 삽화 |
+| `docs/harness/` | Claude Code에서 Cursor 이름을 대응하는 어댑터 문서 |
 | `.cursor-plugin/plugin.json` | Cursor용 플러그인 매니페스트. `skills`와 `agents` 디렉터리, 로고, 분류, 태그를 가리킴 |
 | `plugin.json` | Agent Plugins v1 루트 매니페스트. 스키마와 이름, 버전, 작성자, 라이선스, 키워드만 둠 |
 | `README.md`, `LICENSE` | 소개와 MIT 라이선스 |
@@ -45,6 +46,8 @@ README는 "포크하고, 개선하고, 자기 것으로 만들라"고 권하고,
 스킬은 하나의 디렉터리이고 그 안의 `SKILL.md`가 본문입니다. 어떤 스킬은 `references/`에 하위 프롬프트와 판단 기준을, `playbooks/`에 절차를, `scripts/`에 실행 도구를 함께 둡니다.
 
 ## 사용 방식
+
+README는 Cursor에서 `/add-plugin pstack`으로 설치하고, Claude Code에서는 마켓플레이스를 더한 뒤 `/plugin install pstack@cursor-plugins`로 설치한다고 합니다. Claude Code는 플러그인 명령과 에이전트 이름 앞에 접두사를 붙이므로 `/poteto-mode`는 `/pstack:poteto-mode`가 됩니다. 나머지 Cursor 이름과 설치 세부는 [설치와 첫 사용](setup.md)에서 다룹니다.
 
 두 단계면 됩니다. README는 이렇게 안내합니다.
 
