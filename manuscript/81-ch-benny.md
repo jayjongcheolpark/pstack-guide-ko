@@ -86,7 +86,7 @@ sudo tailscale up --hostname=<short-name> --accept-dns=false --ssh=false
 
 ### 무엇인가
 
-README는 이렇게 설명합니다. benny는 슬랙 이슈 제보를 위한 Cursor 자동화 두 개를 줍니다. 하나는 각 제보를 분류(triage)하고, 다른 하나는 확인된 버그를 재현하고 작은 초안 수정을 준비할 수 있습니다. 이 디렉터리의 파일은 휴면 상태의 설정과 자동화 원본이고 슬래시 스킬로 나타나지 않습니다. 저자는 README에서 이것이 "실제 UI 증거로 확인된 버그를 재현하고 고친다"고 요약합니다.
+README는 이렇게 설명합니다. benny는 슬랙 이슈 제보를 위한 Cursor 자동화 두 개를 줍니다. 하나는 각 제보를 분류(triage)하고, 다른 하나는 확인된 버그를 재현하고 작은 초안 수정을 준비할 수 있습니다. 이 디렉터리의 파일은 휴면 상태의 설정과 자동화 원본이고 슬래시 스킬로 나타나지 않습니다. 저자는 README에서 이것이 "실제 UI 증거로 확인된 버그를 재현하고 고친다"고 요약합니다. README는 benny가 Cursor 자동화 위에서 돌므로 Cursor 전용이라고 합니다.
 
 benny의 `SKILL.md` 세 개(`setup-benny`, `triage-issue-reports`, `reproduce-and-fix-issues`)는 플러그인에 등록된 스킬이 아니라 자동화가 직접 읽는 지시문입니다. 플러그인 매니페스트는 pstack의 일반 스킬 루트만 노출합니다. `FOR_AGENTS.md`는 `.cursor/automations/benny/skills/`를 플러그인 매니페스트에 추가하지 말라고도 적습니다. 프런트매터가 있어도 `disable-model-invocation: true`이고, 사용자가 `FOR_AGENTS.md`를 가리키는 것으로 설정에 들어갑니다.
 

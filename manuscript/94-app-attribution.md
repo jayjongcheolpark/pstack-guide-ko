@@ -19,7 +19,7 @@
 | 저작권 | Copyright (c) 2026 Lauren Tan |
 | 라이선스 | MIT |
 | 원본 저장소 | https://github.com/cursor/plugins 의 `pstack/` 디렉터리 |
-| 이 책의 버전 | {{bookVersion}} (pstack {{version}}에서 시작합니다. 같은 pstack 버전에서 이 책만 고치면 `-ko.N`을 붙입니다), 커밋 `99743e9c151c8537cbbf1f98bb38f34ef3368453` |
+| 이 책의 버전 | {{bookVersion}} (pstack {{version}}에서 시작합니다. 같은 pstack 버전에서 이 책만 고치면 `-ko.N`을 붙입니다), 커밋 `182f2ce414e83224915c190d2f63239c1608d0a5` |
 
 pstack의 Cursor 매니페스트(`.cursor-plugin/plugin.json`)는 작성자를 Lauren Tan, 라이선스를 MIT로 밝히고 저장소를 `https://github.com/cursor/plugins`로 가리킵니다. 같은 디렉터리의 `plugin.json`은 Agent Plugins v1 루트 매니페스트이고, 스키마와 이름, 버전, 작성자, 라이선스, 키워드를 둡니다. README는 "포크하고, 개선하고, 자기 것으로 만들라. PR을 환영한다"고 적습니다.
 
@@ -60,7 +60,7 @@ SOFTWARE.
 ## 언급만 하고 다루지 않은 것
 
 - `cursor-team-kit`은 같은 저장소(`cursor/plugins`)의 별개 플러그인입니다. pstack의 파일이 그 스킬(`deslop`, `control-cli`, `control-ui` 등)을 부르는 자리에서 그 출처를 밝히며 언급했을 뿐, 이 책은 그 플러그인의 스킬을 장으로 다루거나 옮기지 않았습니다.
-- pstack을 Claude Code로 옮긴 포팅(`michael-denyer/pstack-claude`)이 별도로 존재한다고 알려져 있습니다. 이 사실은 이 책의 원본(`cursor/plugins`의 `pstack/`)에는 나오지 않는 외부 정보이며 원본에서 확인하지 않았습니다. 이 책은 그 포팅을 원본으로 쓰지 않았고 그 동작을 설명하지 않습니다. Cursor용 원본만을 다룹니다.
+- 원본 README와 `docs/harness/claude-code.md`가 Claude Code 설치와 Cursor 이름 대응을 밝힙니다. 그 내용은 [설치와 첫 사용](setup.md)에서 다룹니다. 저장소 루트의 생성 트리 `harness/pstack/`은 `pstack/` 밖이라 원문으로 쓰지 않았고, README가 밝히는 설치 경로로만 적었습니다. pstack을 Claude Code로 옮긴 비공식 포팅(`michael-denyer/pstack-claude`)은 원본에 나오지 않는 외부 정보이며 원본에서 확인하지 않았습니다. 이 책은 그 포팅을 원본으로 쓰지 않았고 그 동작을 설명하지 않습니다.
 - Cursor, Slack, Linear, Notion, Datadog, Sentry, Databricks, Tailscale, GitHub 등의 이름은 각 소유자의 상표이며 해당 도구를 가리킬 때만 썼습니다.
 
 ## 빌드 도구와 글꼴

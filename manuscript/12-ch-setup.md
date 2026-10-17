@@ -1,6 +1,6 @@
 # 설치와 첫 사용
 
-원문: {{src:docs/guide/01-setup.md}} {{src:docs/guide/README.md}} {{src:skills/setup-pstack/SKILL.md}} {{src:skills/poteto-help/SKILL.md}} {{src:README.md}}
+원문: {{src:docs/guide/01-setup.md}} {{src:docs/guide/README.md}} {{src:skills/setup-pstack/SKILL.md}} {{src:skills/poteto-help/SKILL.md}} {{src:README.md}} {{src:docs/harness/claude-code.md}}
 
 이 장에서는 플러그인을 설치하고, pstack이 쓸 모델을 고르고, 첫 작업을 실행합니다. 설정은 명령 한 줄과 짧은 대화면 끝납니다. 막혔거나 어느 스킬이 맞는지 모르겠으면 같은 장의 [`poteto-help`](#skill-poteto-help)가 안내서와 스킬을 가리킵니다. 일을 시작하기 전에 목표와 문제를 다시 듣기를 원하면 [`in-your-own-words`](#skill-in-your-own-words)를 칩니다. 과업을 최상위 전문가처럼 조이고 사용자가 진짜 원하는 것에 맞추려면 [`sharpen`](#skill-sharpen)을 칩니다.
 
@@ -13,6 +13,74 @@ Cursor 채팅에서 다음을 실행합니다.
 ```
 
 Cursor가 설치되었다는 확인을 보여 줍니다.
+
+### Claude Code에 설치
+
+README는 Claude Code에서 이렇게 설치하라고 합니다.
+
+```text
+/plugin marketplace add cursor/plugins
+/plugin install pstack@cursor-plugins
+```
+
+Claude Code는 플러그인 명령과 에이전트 이름 앞에 접두사를 붙이므로 `/poteto-mode`는 `/pstack:poteto-mode`가 됩니다. 나머지 Cursor 이름은 아래 [Claude Code 어댑터](#claude-code-adapter)가 대응합니다.
+
+Claude Code가 설치하는 것은 저장소 루트의 [`harness/pstack/`](https://github.com/cursor/plugins/tree/182f2ce414e83224915c190d2f63239c1608d0a5/harness/pstack)에서 생성한 복사본입니다. `skills/`, `agents/`, `docs/harness/claude-code.md`, `plugin.json`을 바꾼 뒤에는 저장소 루트에서 `node scripts/generate-pstack-harness-trees.mjs`를 실행하고 그 결과를 커밋합니다. CI는 그렇게 하기 전까지 실패합니다. 이 생성 트리는 `pstack/` 밖이므로 이 책의 원문 범위에는 넣지 않았고, README가 밝히는 설치 경로로만 적습니다.
+
+## Claude Code 어댑터 {#claude-code-adapter}
+
+원문: {{src:docs/harness/claude-code.md}}
+
+pstack 스킬은 Cursor 이름을 씁니다. Claude Code에서는 세션마다 이 파일을 한 번 읽고, 스킬에 나온 Cursor 이름을 아래 표로 바꿉니다. `<pstack>`은 `skills/`와 `docs/`를 담은 폴더입니다. 표에 없는 Cursor 필드는 빼고 그렇게 말합니다. 도구 스키마가 거절하는 필드나 값은 넘기지 않습니다.
+
+### 도구
+
+| Cursor | Claude Code |
+| --- | --- |
+| `Task` | `Agent` |
+| `AskQuestion` | `AskUserQuestion`. `-p` 모드에는 없으므로 평문으로 묻습니다 |
+| 할 일 목록을 연다 | 세션이 주면 `TodoWrite`. 없으면 답에 목록을 두고 단계마다 고칩니다 |
+| 다른 pstack 스킬을 실행 (`/name` 또는 "the **name** skill") | `<pstack>/skills/<name>/SKILL.md`를 `Read`하고 따릅니다. `Skill` 도구는 pstack 스킬 대부분을 거절합니다. 사용자에게 치라고 할 때는 `/pstack:<name>` |
+| `Grep`, `Glob` | 세션에 `Grep`이나 `Glob`가 없으면 `Bash`로 `rg` |
+
+### 서브에이전트 필드
+
+| Cursor | Claude Code |
+| --- | --- |
+| `subagent_type: generalPurpose` | `subagent_type: "general-purpose"` |
+| `poteto-agent`, `comment-sicko` | `pstack:poteto-agent`, `pstack:comment-sicko` |
+| `readonly: true` | `subagent_type: "Explore"`. `Bash`는 남으므로 브리프에 "do not edit files"를 쓰고, 뒤에 `git status`를 확인합니다 |
+| `readonly: false` | `general-purpose`. 세션의 MCP 서버를 유지합니다 |
+| `environment: "cloud"` | `isolation: "worktree"`. 작업자가 체크아웃할 브랜치나 커밋을 밝힙니다 |
+| `environment: "local"` | 생략합니다 |
+| `cloud_base_branch: <b>` | 작업자에게 먼저 `<b>`를 체크아웃하라고 합니다 |
+| `run_in_background: true` | 생략합니다. 서브에이전트는 기본으로 뒤에서 돌고 끝나면 알립니다 |
+| `resume` | 새 에이전트를 띄우고 이전 결과를 브리프에 붙입니다 |
+| `file_attachments` | 경로를 브리프에 나열합니다 |
+
+### 모델
+
+| Cursor | Claude Code |
+| --- | --- |
+| `claude-<family>-<version>-<effort>[-fast]`, 예: `claude-opus-5-5-xhigh` | `model: "opus"`와 `effort: "xhigh"`. `model`은 `opus`, `sonnet`, `haiku`, `fable`만. `-fast`는 뺍니다 |
+| `grok-*`, `gpt-*`, 그 밖의 비 Claude 슬러그 | `model`을 생략해 세션 모델로 돌리고, 그렇게 말합니다 |
+| `auto` 또는 `inherit-parent` | `model`을 생략합니다 |
+| `pstack-models.mdc` 규칙 | Claude Code는 읽지 않습니다. 스킬 기본 슬러그를 위 행으로 대응합니다. `setup-pstack`이 쓸 것이 없으므로 그렇게 말하고 멈춥니다. 역할 줄을 `CLAUDE.md`나 `AGENTS.md`에 넣지 않습니다 |
+
+### 경로
+
+| Cursor | Claude Code |
+| --- | --- |
+| `.cursor/skills/`, `~/.cursor/skills/` | `.claude/skills/`, `~/.claude/skills/` |
+| `~/.cursor/plugins/`, `.cursor-plugin/plugin.json` | `~/.claude/plugins/`, `.claude-plugin/plugin.json` |
+| `.cursor/rules/*.mdc`, 항상 적용 규칙 | `CLAUDE.md`. 없으면 `AGENTS.md`. Claude Code는 `.mdc`를 읽지 않습니다 |
+| `~/.cursor/projects/<slug>/agent-transcripts/` | `~/.claude/projects/<slug>/<session>.jsonl` |
+
+기록의 슬러그는 워크스페이스 경로의 `/`와 `.`를 `-`로 바꾼 것입니다. 예: `/Users/you/proj`는 `-Users-you-proj`. 그 폴더 바로 아래의 가장 새 `.jsonl`이 현재 세션입니다. 서브에이전트 기록은 `<session>/subagents/`에 있습니다. 이 워크스페이스 폴더만 읽습니다.
+
+### Cursor에만 있는 기능
+
+자동화, Bugbot, Cursor 클라우드 에이전트, Cursor의 풀 리퀘스트 도구는 Claude Code에 대응이 없습니다. 그렇게 말하고 그 단계를 건너뛴 뒤 이어 갑니다.
 
 ## 모델 고르기
 
@@ -208,7 +276,7 @@ interrogate reviewers: claude-opus-5-5-xhigh, grok-4.7-xhigh-fast
 
 비용이 걱정이면 토큰이 어디로 가는지와 덜 쓰는 법을 말합니다. pstack은 서브에이전트와 리뷰 패널에 토큰을 더 씁니다. `/setup-pstack`을 다시 돌려 더 작은 예산이나 더 싼 모델을 고릅니다. 역할을 `auto`나 `inherit-parent`로 두면 채팅 모델로 돌아가므로, 채팅이 Auto이거나 더 싼 모델일 때 토큰을 줄입니다. 패널 목록을 짧게 하면 항목마다 뜨는 서브에이전트가 줄어듭니다. 엄밀함이 필요한 일에만 `/poteto-mode`를 씁니다.
 
-pstack은 Cursor용입니다. 스킬은 Agent Skills 형식이라 다른 도구도 읽을 수 있습니다. 다만 `/poteto-mode`, `/how`, `/why`, `/teach`를 포함한 대부분의 워크플로 스킬은 역할별 모델을 가진 Cursor 서브에이전트를 띄우고, Custom Mode와 `/loop`는 Cursor 기능이므로 그 부분은 다른 도구에서 동작하지 않을 수 있습니다.
+pstack은 Cursor용입니다. 스킬은 Agent Skills 형식이라 다른 도구도 읽을 수 있습니다. 다만 `/poteto-mode`, `/how`, `/why`, `/teach`를 포함한 대부분의 워크플로 스킬은 역할별 모델을 가진 Cursor 서브에이전트를 띄우고, Custom Mode와 `/loop`는 Cursor 기능이므로 그 부분은 다른 도구에서 동작하지 않을 수 있습니다. README는 이와 별도로 Claude Code 설치와 [Claude Code 어댑터](#claude-code-adapter)를 밝힙니다.
 
 #### `/poteto-mode`로 작업을 시작한다
 
