@@ -4,14 +4,14 @@
 
 ## 원본
 
-`cursor/plugins`의 `pstack/`, 커밋 `182f2ce414e83224915c190d2f63239c1608d0a5` (0.15.25) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를, 0.15.20 절은 그때의 핀 `1b6d44f`를, 0.15.21 절은 그때의 핀 `997ffc7`를, 0.15.23 절은 그때의 핀 `dbf4981`을, 0.15.24 절은 그때의 핀 `1e5c90a`를, 0.15.25 절은 그때의 핀 `e5136d8`를, 0.15.25-ko.1 절은 그때의 핀 `99743e9`를 적은 기록입니다.
+`cursor/plugins`의 `pstack/`, 커밋 `0b8e952052d482ee6de06deebf14d590d77b1b34` (0.15.26) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를, 0.15.20 절은 그때의 핀 `1b6d44f`를, 0.15.21 절은 그때의 핀 `997ffc7`를, 0.15.23 절은 그때의 핀 `dbf4981`을, 0.15.24 절은 그때의 핀 `1e5c90a`를, 0.15.25 절은 그때의 핀 `e5136d8`를, 0.15.25-ko.1 절은 그때의 핀 `99743e9`를, 0.15.25-ko.2 절은 그때의 핀 `182f2ce`를 적은 기록입니다.
 
 ## 빌드와 검사
 
 ```shell
 bun install
 bun tools/build.mjs        # dist/pstack-guide-<버전>.epub, dist/pstack-guide-<버전>.pdf
-PSTACK_SRC=<클론 경로>/pstack bun tools/check.mjs   # 원고 규칙, 링크, 스킬 54개와 플레이북 23개의 절 존재, epubcheck
+PSTACK_SRC=<클론 경로>/pstack bun tools/check.mjs   # 원고 규칙, 링크, 스킬 55개와 플레이북 23개의 절 존재, epubcheck
 bun tools/check-layout.mjs                          # EPUB을 390px 폭에서 열어 가로 넘침 검사
 bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2,10,300   # PDF 페이지 수, 개요, 글꼴, 한글 텍스트, 선택한 페이지를 PNG로
 ```
@@ -43,7 +43,7 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 | 50-part-fix | 5부 고치고 검증하기 | | checked |
 | 51-ch-tdd-blast | `tdd`, `blast-radius` | | checked |
 | 52-ch-interrogate | `interrogate` | | checked |
-| 53-ch-verification | `benchmark-checklist`, `create-verification-skill`, `maintain-verification-skill` | | checked |
+| 53-ch-verification | `benchmark-checklist`, `create-verification-skill`, `maintain-verification-skill`, `create-formal-verification-skill` | | checked |
 | 60-part-clean | 6부 글과 코드 정리 | | checked |
 | 61-ch-writing | `unslop`, `technical-writing` | | checked |
 | 62-ch-code-hygiene | `no-comments`, `typescript-best-practices` | | checked |
@@ -67,21 +67,21 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 - `poteto-mode`는 SKILL.md와 플레이북 23개, references, scripts로 분량이 가장 큽니다. 다른 부의 항목으로 두면 균형이 무너져서 시작하기 다음에 독립된 부(진입점)로 세웠습니다.
 - `setup-pstack`은 설치와 설정이 주제라서 시작하기 부의 설치 장에서 스킬 절로 다룹니다.
 - `principle-*` 스킬은 독립된 장(설계하기 부)으로 묶었습니다.
-- 검증 스킬(`benchmark-checklist`, `create-verification-skill`, `maintain-verification-skill`)은 버그 수정과 검증이 같은 흐름이라서 고치고 검증하기 부의 마지막 장에 뒀습니다. `benchmark-checklist`는 플레이북이 아니라 스킬이라 플레이북 장이 아니라 이 장에 절이 있습니다.
+- 검증 스킬(`benchmark-checklist`, `create-verification-skill`, `maintain-verification-skill`, `create-formal-verification-skill`)은 버그 수정과 검증이 같은 흐름이라서 고치고 검증하기 부의 마지막 장에 뒀습니다. `benchmark-checklist`는 플레이북이 아니라 스킬이라 플레이북 장이 아니라 이 장에 절이 있습니다. `create-formal-verification-skill`은 앱을 구동하는 검증 스킬이 아니라 테스트가 잘 닿지 않는 속성 하나를 형식 검증(formal verification)하는 프로젝트 전용 스킬을 남기므로 같은 장에 절을 뒀습니다.
 - cursor-team-kit의 스킬은 장으로 쓰지 않았습니다. 이 저장소의 pstack 파일이 그것을 부르는 자리에서 한두 문장으로만 언급합니다. 그래서 fix-ci, fix-merge-conflicts, PR 준비 스킬 장은 없고, PR 흐름은 poteto-mode 플레이북 장에서 다룹니다.
 - 원본의 `automations/benny`는 슬래시 스킬로 등록되지 않은 자동화 팩이라 별도 부(자동화)로 뒀습니다.
 - `ketchup`은 `/recall`과 가까운 짝이라 이해하기 부의 teach/recall 장에 절을 뒀습니다. README와 `/poteto-help`가 이 채팅의 마지막 메시지 이후(`/ketchup`)와 최근 채팅을 가로지르는 맥락(`/recall`)과 특정 채팅 이어받기(Session pickup)를 나란히 구분합니다.
 
 ## 해석한 부분 (원문이 모호했던 곳)
 
-- **원문 개수.** principle 스킬은 24개입니다(스킬 총 54개 = 일반 30개 + principle 24개). README도 24개라고 합니다. 책은 고정한 커밋의 디렉터리를 세어 얻은 수를 따릅니다. 0.15.5 핀에서는 23개와 47개, 0.15.9 핀에서는 26개와 50개, 0.15.15 핀에서는 27개와 51개, 0.15.17부터 0.15.21까지는 28개와 52개, 0.15.23은 29개와 53개였고, 그 기록은 아래 사실 확인에 남아 있습니다.
+- **원문 개수.** principle 스킬은 24개입니다(스킬 총 55개 = 일반 31개 + principle 24개). README도 24개라고 합니다. 책은 고정한 커밋의 디렉터리를 세어 얻은 수를 따릅니다. 0.15.5 핀에서는 23개와 47개, 0.15.9 핀에서는 26개와 50개, 0.15.15 핀에서는 27개와 51개, 0.15.17부터 0.15.21까지는 28개와 52개, 0.15.23은 29개와 53개, 0.15.24부터 0.15.25까지는 30개와 54개였고, 그 기록은 아래 사실 확인에 남아 있습니다.
 - **Comment Sicko의 읽기 전용 여부.** README와 안내서는 "read-only comment reviewer"라고 하지만 `agents/comment-sicko.md`는 스스로 주석을 지우고 삭제 수를 보고한다고 씁니다("I touch comments", "touched files, deletion count"). 애플리케이션 코드는 쓰지 않는다는 점은 일치합니다. 책은 정의 파일의 표현을 따르고 README의 표현을 함께 밝혔습니다.
 - **`/setup-pstack` 재실행의 보존 범위.** README와 안내서는 "기본값과 다른 역할을 유지"라고 하고, `setup-pstack/SKILL.md` 3(b)는 계열, 목록, 별칭으로 바꾼 역할을 유지하고 강도 토큰은 새 예산에 맞춰 다시 계산한다고 합니다. 책은 정밀한 쪽(스킬 본문)을 따릅니다.
 - **`poteto-mode`의 프런트매터 해석.** 0.15.22에서 `mode`와 `reminder` 키를 뺐습니다. 커밋 메시지(#597)는 Cursor가 두 키를 무시해 reminder 문구가 모델에 닿지 않았다고 합니다. `disable-model-invocation: true`는 남습니다. 0.15.10 README와 안내서는 더 이상 "sticky mode"라고 하지 않고, Enter는 한 메시지에만 붙고 Option+Enter/Alt+Enter(또는 Use as Mode)가 Custom Mode를 만든다고 적습니다. 책은 그 설명을 따릅니다. `disable-model-invocation`은 "모델이 자동으로 부르지 않는다"는 통상 뜻으로 적었습니다.
 - **`benny`가 슬래시 스킬이 아니라는 점.** README가 "dormant", "not registered as slash skills"라고 밝힙니다. 책은 별도 부(자동화)에서 지시문의 내용을 원문 순서대로 옮겼습니다.
 - **`cursor-team-kit`.** 별개 플러그인이라 장으로 다루지 않았습니다. `poteto-mode`와 플레이북이 부르는 자리(`deslop`, `control-cli`, `control-ui`, `create-skill` 내장 기능 등)에서 출처만 밝혔습니다.
-- **Claude Code.** 0.15.25-ko.2부터 원본 README와 `docs/harness/claude-code.md`가 공식 설치와 이름 대응을 밝히므로 설치 장에서 그 범위만 다룹니다. 비공식 포팅(`michael-denyer/pstack-claude`)은 여전히 원본에 없는 외부 정보라서 저작권 표기 부록에서 존재만 언급하고 원본에서 확인하지 않았다고 밝혔습니다. 저장소 루트의 생성 트리 `harness/pstack/`은 `pstack/` 밖이라 원문으로 쓰지 않았습니다.
-- **`disable-model-invocation`.** `setup-pstack`만 이 프런트매터가 없고 나머지 53개 스킬에는 모두 있습니다. 0.15.11부터 `poteto-help`에도 붙었고, 사용자의 말만으로 로드되는 스킬은 `/setup-pstack`뿐입니다. 스킬 절에서는 있는 경우에 한해 언급했습니다.
+- **Claude Code.** 원본 README와 `docs/harness/claude-code.md`가 공식 설치와 이름 대응을 밝히므로 설치 장에서 그 범위만 다룹니다. `/pstack:setup-pstack`은 `~/.claude/rules/pstack-models.md`를 씁니다. Cursor에만 있는 기능이 필요한 단계는 `Skipped in Claude Code: <step>. <reason>.` 한 줄과 함께 건너뜁니다. 생성 복사는 README와 안내서를 포함하고, GitHub main의 pstack 링크는 로컬 복사본으로 읽습니다. 비공식 포팅(`michael-denyer/pstack-claude`)은 원본에 없는 외부 정보라서 저작권 표기 부록에서 존재만 언급하고 원본에서 확인하지 않았다고 밝혔습니다. 저장소 루트의 생성 트리 `harness/pstack/`은 `pstack/` 밖이라 원문으로 쓰지 않았습니다.
+- **`disable-model-invocation`.** `setup-pstack`만 이 프런트매터가 없고 나머지 54개 스킬에는 모두 있습니다. 0.15.11부터 `poteto-help`에도 붙었고, 사용자의 말만으로 로드되는 스킬은 `/setup-pstack`뿐입니다. 스킬 절에서는 있는 경우에 한해 언급했습니다.
 
 ## 열린 질문
 
@@ -533,3 +533,40 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 - `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 54개와 플레이북 23개의 절 존재, 용어 병기 짝 29개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
 - `CHROME_PATH=/usr/bin/google-chrome bun tools/check-layout.mjs`: 390px 폭에서 가로 넘침 없음.
 - `CHROME_PATH=/usr/bin/google-chrome bun tools/build.mjs`: `pstack-guide-0.15.25-ko.2.epub`, `pstack-guide-0.15.25-ko.2.pdf` (474쪽, 0.15.25-ko.1은 469쪽).
+
+## 0.15.26
+
+원문을 `182f2ce414e83224915c190d2f63239c1608d0a5`(0.15.25)에서 `0b8e952052d482ee6de06deebf14d590d77b1b34`(0.15.26)로 올렸습니다. pstack 트리에 닿은 커밋은 여덟 개입니다.
+
+- `0317eb8` fix(pstack): make a brand with a type guard, not as (#700)
+- `a968159` fix(pstack): name every skill after its folder (#702)
+- `1b80080` fix(pstack): close three gaps in the Claude Code plugin (#705)
+- `019a6a2` pstack: refresh the docs and add a docs-vs-tree check (#704)
+- `16541c6` fix(pstack): list every waiting item so each ketchup call is decidable (#692)
+- `bc14437` fix(pstack): say outright that ketchup never cuts items to stay under a word count (#708)
+- `4382e68` feat(pstack): add /create-formal-verification-skill (#709)
+- `0b8e952` chore(pstack): bump to 0.15.26 (#710)
+
+책 버전은 `BOOK_REVISION = 0`이라 pstack 버전과 같은 `0.15.26`입니다. 산출물 이름은 `pstack-guide-0.15.26.epub`, `pstack-guide-0.15.26.pdf`입니다.
+
+원고에서 반영한 내용입니다.
+
+- 스킬 55개(일반 31, 원칙 24). 새 절은 `create-formal-verification-skill`(검증 장). `disable-model-invocation`은 `setup-pstack`만 없고 나머지 54개에 있습니다.
+- `/ketchup`은 사용자를 기다리는 항목을 답만으로 결정할 수 있게 모두 나열합니다. 단어는 결정에 쓰고, 일어난 일은 그림의 단어를 세지 않고 100단어 아래로 둡니다. 항목마다 약 30단어이고, 답은 항목 수와 함께 커집니다. 단어 수에 맞추려고 항목을 자르거나 줄이지 않습니다. 위험이 낮아도 항목마다 위험을 쓰고, 결정이 가리키는 PR마다 번호나 링크를 둡니다.
+- `/create-formal-verification-skill`은 버그 비용이 크고 테스트가 잘 닿지 않는 속성 하나를, 질문에 맞는 도구로 형식 검증하고, 다음 에이전트가 다시 돌릴 프로젝트 전용 스킬을 남깁니다. 지금 코드가 속성을 깨면 발견으로 보고하고 속성을 약하게 만들지 않습니다.
+- 브랜드 타입은 검증하는 타입 가드에서 오고 `as`에서는 오지 않습니다.
+- Claude Code에서 `/pstack:setup-pstack`은 `~/.claude/rules/pstack-models.md`를 씁니다. Cursor에만 있는 단계는 `Skipped in Claude Code: <step>. <reason>.` 한 줄과 함께 건너뜁니다. 생성 복사는 README와 안내서를 포함합니다.
+- Custom Mode는 모드를 나갈 때까지 매 턴 컨텍스트에 남습니다. README는 Cursor 내장 `/autopilot`이 PR을 감시하고, `poteto-mode` 안에서는 PR 상태 요청이 babysit 플레이북으로 간다고 합니다.
+- `poteto-mode`와 `make-bot-ui`의 프런트매터 `name`은 폴더 이름과 같습니다.
+
+### 해석한 부분
+
+- `#704`의 `scripts/check-pstack-docs.mjs`는 저장소 루트에 있어 `pstack/` 밖입니다. 책은 원문으로 쓰지 않았습니다.
+- `#702`는 표시 이름 `Poteto Mode`, `Make Bot UI`를 폴더 이름과 맞춥니다. 책은 스킬을 폴더 이름으로 부르므로 스킬 절 제목은 그대로입니다.
+- `#709`의 핸드오프 증명은 지금 코드가 이미 속성을 깨면 그 발견에서만 실패하는 기준선을 받아들이라고 합니다. 책은 그 최종 본문을 따릅니다.
+
+### 실행한 검사
+
+- `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 55개와 플레이북 23개의 절 존재, 용어 병기 짝 29개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
+- `CHROME_PATH=/usr/bin/google-chrome bun tools/check-layout.mjs`: 390px 폭에서 가로 넘침 없음.
+- `CHROME_PATH=/usr/bin/google-chrome bun tools/build.mjs`: `pstack-guide-0.15.26.epub`, `pstack-guide-0.15.26.pdf` (483쪽, 0.15.25-ko.2는 474쪽).

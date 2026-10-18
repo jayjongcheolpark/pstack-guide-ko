@@ -56,7 +56,7 @@
 | panel | 패널 | 다중 모델 스킬이 쓰는 서로 다른 모델의 묶음. 기본은 opus, grok |
 | model slug | 모델 슬러그 | 모델을 가리키는 식별 문자열(`claude-opus-5-5-xhigh` 등) |
 | reasoning budget / effort | 추론 예산 / 추론 강도 | `/setup-pstack`이 정하는 unlimited, large, medium, small과 모델 이름의 `max`, `xhigh` 같은 등급 |
-| rule file | 규칙 파일 | `~/.cursor/rules/pstack-models.mdc`. 역할별 모델을 정하는 항상 적용 규칙 |
+| rule file | 규칙 파일 | `~/.cursor/rules/pstack-models.mdc`. 역할별 모델을 정하는 항상 적용 규칙. Claude Code에서는 `~/.claude/rules/pstack-models.md` |
 | inherit-parent / auto | inherit-parent / auto | 모델 필드를 생략해 서브에이전트가 부모 모델을 쓰게 하는 별칭 |
 | control skill | control 스킬 | UI, CLI를 구동해 증명하는 스킬. cursor-team-kit의 `control-cli`, `control-ui` |
 | cursor-team-kit | cursor-team-kit | pstack과 별개인 Cursor 플러그인. `deslop` 등이 여기 있음 |

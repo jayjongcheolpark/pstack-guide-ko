@@ -14,7 +14,7 @@
 
 프런트매터에는 `disable-model-invocation: true`가 있습니다. 모델이 알아서 이 스킬을 부르지 않고, 사용자가 `/poteto-mode`로 부릅니다. `mode`와 `reminder` 키는 없습니다.
 
-README는 유지 방법을 이렇게 말합니다. 작업을 치기 전에 `/` 메뉴에서 `/poteto-mode`를 고르면 Cursor가 그 메시지에 스킬을 붙입니다. `/` 메뉴에서 Option+Enter(Mac) 또는 Alt+Enter(Windows)로 Custom Mode를 켜면 매 턴 컨텍스트에 남습니다. Enter만 치면 그 메시지 하나에만 붙고 대화가 이어지면 사라집니다. Custom Mode는 Agents Window와 CLI에서 쓸 수 있고, 그만하라고 말하거나 모드를 나가면 꺼집니다.
+README는 유지 방법을 이렇게 말합니다. 작업을 치기 전에 `/` 메뉴에서 `/poteto-mode`를 고르면 Cursor가 그 메시지에 스킬을 붙입니다. `/` 메뉴에서 Option+Enter(Mac) 또는 Alt+Enter(Windows)로 Custom Mode를 켜면 모드를 나갈 때까지 매 턴 컨텍스트에 남습니다. Enter만 치면 그 메시지 하나에만 붙고 대화가 이어지면 사라집니다. Custom Mode는 Agents Window와 CLI에서 쓸 수 있습니다.
 
 ### 동작 방식
 

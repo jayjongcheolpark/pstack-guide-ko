@@ -2,9 +2,9 @@
 
 원문: {{src:README.md}} {{src:skills/poteto-mode/SKILL.md}}
 
-이 표는 pstack 0.15.25(커밋 `182f2ce`)의 스킬 54개, 에이전트 2개, `poteto-mode` 플레이북 23개를 한곳에 모았습니다. 트리거 문구는 각 스킬의 `description`에 있는 문구를 그대로 두었고(`no-comments`처럼 `description`에 없는 곳은 `poteto-mode`의 규칙(non-negotiable)을 적었고), 영어 원문이 없는 곳(원칙(principle) 스킬 등)은 "언제 적용하는가"를 한국어로 적었습니다. 이름을 누르면 해당 절로 갑니다.
+이 표는 pstack 0.15.26(커밋 `0b8e952`)의 스킬 55개, 에이전트 2개, `poteto-mode` 플레이북 23개를 한곳에 모았습니다. 트리거 문구는 각 스킬의 `description`에 있는 문구를 그대로 두었고(`no-comments`처럼 `description`에 없는 곳은 `poteto-mode`의 규칙(non-negotiable)을 적었고), 영어 원문이 없는 곳(원칙(principle) 스킬 등)은 "언제 적용하는가"를 한국어로 적었습니다. 이름을 누르면 해당 절로 갑니다.
 
-## 일반 스킬 30개
+## 일반 스킬 31개
 
 | 스킬 | 한 줄 목적 | 트리거 문구 |
 | --- | --- | --- |
@@ -17,7 +17,7 @@
 | [`why`](why.md#skill-why) | 코드의 동기와 의도를 MCP 증거 범주별로 병렬 조사 | "why does X work this way", "why we picked Y", 설계 근거, 회귀, 포스트모템, 데이터로 뒷받침된 임계값 |
 | [`teach`](teach-recall.md#skill-teach) | `how`와 `why`를 엮어 사람이 이해하도록 평이하게 설명 | "teach me this", "help me really understand X", "explain this change or subsystem to me" |
 | [`recall`](teach-recall.md#skill-recall) | 자신의 채팅 기록과 공유 기록에서 최근 맥락을 복원해 브리프로 | "recall my work on X", "catch me up", "what have I been working on", "where did I leave off" |
-| [`ketchup`](teach-recall.md#skill-ketchup) | 이 채팅에서 사용자의 마지막 메시지 이후 바뀐 것을 평이한 몇 문장과 작은 시각으로 따라잡고, 할 일 항목마다 결정할 맥락을 줌 | "Catch the user up on what changed in this chat since their last message, in a few plain sentences and small visuals", `/ketchup` |
+| [`ketchup`](teach-recall.md#skill-ketchup) | 이 채팅에서 사용자의 마지막 메시지 이후 바뀐 것을 평이한 말과 작은 시각으로 따라잡고, 기다리는 항목을 답만으로 결정할 수 있게 모두 나열 | "Catch the user up on what changed in this chat since their last message, in plain words and small visuals", `/ketchup` |
 | [`architect`](architect.md#skill-architect) | 코드 전에 타입, 시그니처, 모듈 구조를 스케치 | `/architect`, "architect this", "design this", 코드로 뛰어들면 잘못된 모양이 굳을 작업 |
 | [`arena`](arena-swarm.md#skill-arena) | 같은 과업에 후보 N개를 만들고 기준안을 고르고 이식 | `/arena`, "arena this", "throw it in the arena" |
 | [`swarm`](arena-swarm.md#skill-swarm) | 병렬 작업자 N명을 띄우고 보고서 하나로 집계 | `/swarm`, "swarm this", 병렬 커버리지, 경주, 관문 시험(gauntlet), 탐색 |
@@ -28,6 +28,7 @@
 | [`benchmark-checklist`](verification.md#skill-benchmark-checklist) | 성능 숫자를 보고하거나 그 숫자로 행동하기 전에 걸러 냄 | 벤치마크를 돌리거나, 자신이 측정한 속도 향상이나 회귀를 보고할 때 |
 | [`create-verification-skill`](verification.md#skill-create-verification-skill) | 앱을 사용자처럼 구동하는 프로젝트 전용 검증(verification) 스킬 생성 | `/create-verification-skill`, "make a control skill for this repo", 앱 동작을 증명할 스크립트된 방법이 없을 때 |
 | [`maintain-verification-skill`](verification.md#skill-maintain-verification-skill) | 검증 스킬과 기능 지도를 정직하게 유지 | `/maintain-verification-skill`, "audit the verify skill" |
+| [`create-formal-verification-skill`](verification.md#skill-create-formal-verification-skill) | 테스트가 잘 닿지 않는 코드에서 속성 하나를 형식 검증하는 프로젝트 전용 스킬 생성 | `/create-formal-verification-skill`, "model-check this race", "prove this invariant", 동시성, 재시도, 상태 기계, 파서, 안전하지 않은 코드에 테스트만으로는 모자랄 때 |
 | [`unslop`](writing.md#skill-unslop) | 글에서 AI가 쓴 티를 걷어 냄 | 원문: "Cut AI tells from any writing." |
 | [`technical-writing`](writing.md#skill-technical-writing) | 문서를 Diátaxis, Google 스타일, STE, Global English 층으로 씀 | `/technical-writing`, 문서, RFC, README, PR 설명, 커밋 메시지 쓰기와 리뷰 |
 | [`no-comments`](code-hygiene.md#skill-no-comments) | Comment Sicko로 주석을 걷어 내고 제약 주석에 인코딩을 제안 | 리뷰 전 (`poteto-mode`의 트리거) |
@@ -121,7 +122,7 @@ README의 "모든 스킬" 표가 스킬마다 붙인 한 줄 설명입니다(원
 | `/how` | 서브시스템이 어떻게 동작하는지 워크스루를 원할 때 |
 | `/why` | 왜 이렇게 만들었는지 알고 싶을 때. 런타임에 MCP를 발견하고 각 증거 범주를 병렬로 조회 |
 | `/recall` | 작업을 시작하거나 재개하며 주제에 대한 최근 맥락을 자신의 채팅 기록과 공유 기록에서 다시 세워 빡빡한 현재 상태 브리프로 받고 싶을 때 |
-| `/ketchup` | 이 채팅에서 마지막 메시지 이후 바뀐 것을 평이한 몇 문장과 작은 시각으로 받고, 할 일 항목마다 결정을 내릴 맥락을 원할 때 |
+| `/ketchup` | 이 채팅에서 마지막 메시지 이후 바뀐 것을 평이한 말과 작은 시각으로 받고, 기다리는 항목을 답만으로 결정할 수 있게 모두 나열하기를 원할 때. 항목이 많아 답이 길어져도 그렇게 함 |
 | `/blast-radius` | 작아 보이는 변경이 다른 곳에서 무엇을 깨뜨릴 수 있는지, 안전하게 하는 사실 하나를 주장이 아니라 코드 실행으로 증명해서 알고 싶을 때 |
 | `/architect` | 함수 경계를 넘는 코드를 쓰기 전에 호출자의 사용, 타입, 모듈 모양을 먼저 정하고 싶을 때 |
 | `/arena` | 같은 일에 병렬 시도 N개를 만들고 각각의 좋은 부분을 가져오고 싶을 때 |
@@ -141,6 +142,7 @@ README의 "모든 스킬" 표가 스킬마다 붙인 한 줄 설명입니다(원
 | `/show-me-your-work` | 검토 가능한 결정 기록을 원할 때. 커밋할 수 있는 TSV에 결정을 기록 |
 | `/create-verification-skill` | 프로젝트에 앱 동작을 증명할 스크립트된 방법이 없을 때. 기능 지도가 있는 프로젝트 전용 verify 스킬을 생성 |
 | `/maintain-verification-skill` | verify 스킬의 기능 지도가 앱과 어긋났을 때. 소스 웨이브와 라이브 패스 한 번, 최대 증명된 교정 PR 하나 |
+| `/create-formal-verification-skill` | 테스트가 경쟁, 재시도, 상태 기계, 파서, 안전하지 않은 코드를 깨는 경우에 닿지 못할 때. 맞는 도구로 속성 하나를 검증하고, 변경마다 다시 검사하는 프로젝트 전용 스킬을 생성 |
 | `/unslop` | 글을 다듬을 때. AI의 티를 제거 |
 | `/bro` | 마지막 메시지를 전문 용어 없이 사람 말로 다시 듣고 싶을 때 |
 | `/technical-writing` | 문서, RFC, README, PR 설명, 커밋 메시지를 위한 층화된 문서 기준(standard). Diátaxis + Google 개발자 스타일 + STE + Global English |
