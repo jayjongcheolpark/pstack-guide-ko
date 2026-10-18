@@ -88,7 +88,7 @@ pstack은 `Comment Sicko`라는 주석 리뷰어(README는 읽기 전용이라�
 | 규칙 | 요약 |
 | --- | --- |
 | Discriminated unions | 불가능한 상태가 표현될 수 없도록 `kind` 리터럴 판별자로 변형을 모델링합니다. 선택 필드 주머니는 안 됩니다 |
-| Branded types | 원시 타입을 `& { readonly __brand: "X" }`로 브랜딩해 서로 섞이지 않게 합니다. 경계에서 한 번 검증(validation)합니다 |
+| Branded types | 원시 타입을 `& { readonly __brand: "X" }`로 브랜딩해 서로 섞이지 않게 합니다. 경계에서 한 번 검증(validation)합니다. 브랜드는 검증하는 타입 가드(`input is AgentId`)에서 오고, `as`에서는 오지 않습니다 |
 | Constructive modeling | 불법 값을 만들 수 없게 모양을 짭니다. 비어 있지 않음은 `[T, ...T[]]`, 짝수 길이는 `[T, T][]`, 범위는 `start`와 `duration`. 런타임 가드도 정제 타입에 대한 소망도 아닙니다 |
 | Simplest total type | 모든 연산이 전체(total)인 동안은 `T[]`를 유지합니다. 느슨한 타입이 `!`, 캐스트, "일어나면 안 되는" throw를 강제하는 곳에서만 `NonEmpty<T>`로 강화합니다 |
 | `unknown` over `any` | 외부 데이터는 `unknown`입니다 |
@@ -106,14 +106,18 @@ pstack은 `Comment Sicko`라는 주석 리뷰어(README는 읽기 전용이라�
 
 #### 코드 예제(`references/patterns.md`)
 
-**브랜드 타입.** `AgentId`는 밑바닥이 문자열이지만 섞이면 안 됩니다. 경계에서 한 번 검증(validation)하고 아래에서는 타입을 믿습니다. `readonly __brand: 'X'` 모양을 맞추고 새 관례를 만들지 않습니다.
+**브랜드 타입.** `AgentId`는 밑바닥이 문자열이지만 섞이면 안 됩니다. 경계에서 한 번 검증(validation)하고 아래에서는 타입을 믿습니다. `readonly __brand: 'X'` 모양을 맞추고 새 관례를 만들지 않습니다. 브랜드는 검증하는 타입 가드에서 오고, `as`에서는 오지 않습니다.
 
 ```ts
 type AgentId = string & { readonly __brand: "AgentId" };
 
+function isAgentId(input: string): input is AgentId {
+  return isUUID(input);
+}
+
 function parseAgentId(input: string): AgentId {
-  if (!isUUID(input)) throw new Error(`Invalid agent id: ${input}`);
-  return input as AgentId;
+  if (!isAgentId(input)) throw new Error(`Invalid agent id: ${input}`);
+  return input;
 }
 
 function focusAgent(id: AgentId): void {

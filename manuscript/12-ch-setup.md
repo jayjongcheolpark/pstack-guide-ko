@@ -25,7 +25,7 @@ README는 Claude Code에서 이렇게 설치하라고 합니다.
 
 Claude Code는 플러그인 명령과 에이전트 이름 앞에 접두사를 붙이므로 `/poteto-mode`는 `/pstack:poteto-mode`가 됩니다. 나머지 Cursor 이름은 아래 [Claude Code 어댑터](#claude-code-adapter)가 대응합니다.
 
-Claude Code가 설치하는 것은 저장소 루트의 [`harness/pstack/`](https://github.com/cursor/plugins/tree/182f2ce414e83224915c190d2f63239c1608d0a5/harness/pstack)에서 생성한 복사본입니다. `skills/`, `agents/`, `docs/harness/claude-code.md`, `plugin.json`을 바꾼 뒤에는 저장소 루트에서 `node scripts/generate-pstack-harness-trees.mjs`를 실행하고 그 결과를 커밋합니다. CI는 그렇게 하기 전까지 실패합니다. 이 생성 트리는 `pstack/` 밖이므로 이 책의 원문 범위에는 넣지 않았고, README가 밝히는 설치 경로로만 적습니다.
+Claude Code가 설치하는 것은 저장소 루트의 [`harness/pstack/`](https://github.com/cursor/plugins/tree/0b8e952052d482ee6de06deebf14d590d77b1b34/harness/pstack)에서 생성한 복사본이고, README와 안내서도 포함합니다. pstack을 바꾼 뒤에는 저장소 루트에서 `node scripts/generate-pstack-harness-trees.mjs`를 실행하고 그 결과를 커밋합니다. 생성 복사가 뒤처져 있으면 CI가 실패합니다. 이 생성 트리는 `pstack/` 밖이므로 이 책의 원문 범위에는 넣지 않았고, README가 밝히는 설치 경로로만 적습니다. Claude Code에서 `/pstack:setup-pstack`은 모델 선택을 `~/.claude/rules/pstack-models.md`에 쓰고, Bugbot이나 자동화처럼 Cursor에만 있는 기능이 필요한 단계는 한 줄 메모와 함께 건너뜁니다.
 
 ## Claude Code 어댑터 {#claude-code-adapter}
 
@@ -65,7 +65,16 @@ pstack 스킬은 Cursor 이름을 씁니다. Claude Code에서는 세션마다 �
 | `claude-<family>-<version>-<effort>[-fast]`, 예: `claude-opus-5-5-xhigh` | `model: "opus"`와 `effort: "xhigh"`. `model`은 `opus`, `sonnet`, `haiku`, `fable`만. `-fast`는 뺍니다 |
 | `grok-*`, `gpt-*`, 그 밖의 비 Claude 슬러그 | `model`을 생략해 세션 모델로 돌리고, 그렇게 말합니다 |
 | `auto` 또는 `inherit-parent` | `model`을 생략합니다 |
-| `pstack-models.mdc` 규칙 | Claude Code는 읽지 않습니다. 스킬 기본 슬러그를 위 행으로 대응합니다. `setup-pstack`이 쓸 것이 없으므로 그렇게 말하고 멈춥니다. 역할 줄을 `CLAUDE.md`나 `AGENTS.md`에 넣지 않습니다 |
+| `pstack-models.mdc` 규칙, `~/.cursor/rules/pstack-models.mdc` | `~/.claude/rules/pstack-models.md`. Claude Code가 새 세션마다 로드하므로 역할 줄은 이미 컨텍스트에 있습니다. 없으면 그 파일을 읽습니다. 파일이나 그 역할의 줄이 없으면 스킬 기본 슬러그를 씁니다 |
+| 역할 값 `<model> <effort>`, 예: `opus high` | `model: "opus"`와 `effort: "high"` |
+
+### setup-pstack
+
+Claude Code는 `~/.claude/rules/`의 `.md` 파일을 새 세션마다 로드하므로, `setup-pstack`은 규칙을 그곳에 씁니다. 단계는 그대로 따르되 아래만 바꿉니다.
+
+- 감지. 감지된 모델은 `Agent` 도구 스키마가 나열하는 `model` 값이고, 각각 `effort` 값에서 강도를 하나 고릅니다. 실제 모델은 `opus xhigh`처럼 `<model> <effort>`로 씁니다. 강도는 마지막 토큰이므로 예산 단계는 본문대로 동작합니다.
+- 기본값. 기본 슬러그는 위 행으로 대응합니다. `claude-opus-5-5-xhigh`는 `opus xhigh`, `grok-4.7-xhigh-fast`는 `inherit-parent`입니다.
+- 쓰기. `~/.claude/rules/pstack-models.md`를 프런트매터 없이 쓰고, 주석 줄, `# budget` 줄, 5단계의 역할마다 한 줄을 둡니다. 파일 전체를 덮어씁니다. 역할 줄을 `CLAUDE.md`나 `AGENTS.md`에 넣지 않습니다.
 
 ### 경로
 
@@ -73,14 +82,22 @@ pstack 스킬은 Cursor 이름을 씁니다. Claude Code에서는 세션마다 �
 | --- | --- |
 | `.cursor/skills/`, `~/.cursor/skills/` | `.claude/skills/`, `~/.claude/skills/` |
 | `~/.cursor/plugins/`, `.cursor-plugin/plugin.json` | `~/.claude/plugins/`, `.claude-plugin/plugin.json` |
-| `.cursor/rules/*.mdc`, 항상 적용 규칙 | `CLAUDE.md`. 없으면 `AGENTS.md`. Claude Code는 `.mdc`를 읽지 않습니다 |
+| `.cursor/rules/*.mdc`, 항상 적용 규칙 | `CLAUDE.md`. 없으면 `AGENTS.md`. Claude Code는 `.mdc`를 읽지 않습니다. 모델 규칙은 예외입니다. 위 모델 표를 봅니다 |
+| `https://github.com/cursor/plugins/blob/main/pstack/<path>` | 그 파일이 있으면 `<pstack>/<path>`. 플러그인이 스킬과 `docs/guide/`, `README.md`를 싣습니다. 로컬 복사본을 읽고 가져오지 않습니다. 사용자가 링크가 필요할 때만 URL을 줍니다 |
 | `~/.cursor/projects/<slug>/agent-transcripts/` | `~/.claude/projects/<slug>/<session>.jsonl` |
 
 기록의 슬러그는 워크스페이스 경로의 `/`와 `.`를 `-`로 바꾼 것입니다. 예: `/Users/you/proj`는 `-Users-you-proj`. 그 폴더 바로 아래의 가장 새 `.jsonl`이 현재 세션입니다. 서브에이전트 기록은 `<session>/subagents/`에 있습니다. 이 워크스페이스 폴더만 읽습니다.
 
 ### Cursor에만 있는 기능
 
-자동화, Bugbot, Cursor 클라우드 에이전트, Cursor의 풀 리퀘스트 도구는 Claude Code에 대응이 없습니다. 그렇게 말하고 그 단계를 건너뛴 뒤 이어 갑니다.
+Claude Code에는 Cursor 자동화, Bugbot, Cursor 클라우드 에이전트, 내장 PR 도구가 없습니다. 단계가 그중 하나를 필요로 하면 답에 `Skipped in Claude Code: <step>. <reason>.` 한 줄을 두고 다음 단계로 갑니다. 멈추거나 묻거나 재시도하지 않습니다. 이후 단계가 건너뛴 단계가 만든 URL이나 키를 필요로 하면 자리표시자를 남기고 그 줄에 이름을 답니다.
+
+| Cursor | Claude Code |
+| --- | --- |
+| Cursor 자동화: 루틴, `update_state` 루틴 호출, `api2.cursor.sh/automations` 웹훅, 루틴 깨우기, `SendToUser` 비밀 요청 | 그 줄로 건너뜁니다 |
+| Bugbot | GitHub PR의 Bugbot 댓글은 보통 리뷰 스레드이므로, 단계가 주는 포지 명령으로 분류합니다. PR에 Bugbot 검사나 댓글이 없는데 Bugbot을 시작하거나 기다리거나 설정하는 단계는 건너뜁니다 |
+| Cursor 클라우드 에이전트 | `environment: "cloud"`는 서브에이전트 필드의 워크트리로 대응합니다. 대시보드 상태나 그 머신처럼 클라우드 에이전트 자체가 필요한 단계는 건너뜁니다 |
+| 내장 PR 도구 | 단계가 주는 포지 명령, 예: `gh pr create`를 씁니다. 이것은 건너뛰기가 아니므로 줄을 쓰지 않습니다 |
 
 ## 모델 고르기
 
@@ -285,10 +302,10 @@ pstack은 Cursor용입니다. 스킬은 Agent Skills 형식이라 다른 도구�
 `/poteto-mode`가 남는지는 시작하는 방식에 달립니다.
 
 - `/poteto-mode`에서 Enter를 치면 그 메시지 하나에만 붙고, 대화가 이어지면 사라집니다.
-- Mac의 Option+Enter, Windows의 Alt+Enter, 또는 스킬 항목의 Use as Mode는 Custom Mode를 만듭니다. 모드를 나갈 때까지 매 턴 컨텍스트에 남고, 가벼운 턴에는 끼어들지 않습니다.
+- Mac의 Option+Enter, Windows의 Alt+Enter, 또는 스킬 항목의 Use as Mode는 Custom Mode를 만듭니다. 모드를 나갈 때까지 매 턴 컨텍스트에 남습니다.
 - Cursor 문서는 Custom Mode를 Agents Window와 CLI에 둡니다. 그 밖에서는 새 작업마다 `/poteto-mode`로 시작합니다.
 
-이 이야기가 나오면 [Cursor의 skills 문서](https://cursor.com/docs/skills)를 링크합니다. 채팅 중간에서 "new task"는 모드가 새 플레이북을 맞추게 합니다. `/poteto-mode`를 받은 채팅이 플레이북을 돌리고, 플레이북 단계가 띄우는 위임에 `poteto-agent`를 씁니다. 플레이북 자체를 돌리려고 `poteto-agent`를 띄우지 않습니다. 직접 띄운 서브에이전트에서도 같은 스타일을 쓰려면 `subagent_type: "poteto-agent"`로 띄웁니다.
+이 이야기가 나오면 [Cursor의 skills 문서](https://cursor.com/docs/skills#using-a-skill-as-a-custom-mode)를 링크합니다. 채팅 중간에서 "new task"는 모드가 새 플레이북을 맞추게 합니다. `/poteto-mode`를 받은 채팅이 플레이북을 돌리고, 플레이북 단계가 띄우는 위임에 `poteto-agent`를 씁니다. 플레이북 자체를 돌리려고 `poteto-agent`를 띄우지 않습니다. 직접 띄운 서브에이전트에서도 같은 스타일을 쓰려면 `subagent_type: "poteto-agent"`로 띄웁니다.
 
 #### 스킬을 고른다
 
@@ -303,7 +320,7 @@ pstack은 Cursor용입니다. 스킬은 Agent Skills 형식이라 다른 도구�
 | 코드가 왜 이 모양인지, 숫자가 어디서 왔는지 | [`/why`](why.md#skill-why) |
 | 변경이나 서브시스템을 평이하게 이해하고 싶다 | [`/teach`](teach-recall.md#skill-teach) |
 | 어떤 주제에 대한 자신의 최근 작업을 따라잡고 싶다 | [`/recall`](teach-recall.md#skill-recall) |
-| 이 채팅에서 마지막 메시지 이후 바뀐 것을 평이한 몇 문장과 작은 시각으로 따라잡고, 할 일 항목마다 결정할 맥락을 원한다 | [`/ketchup`](teach-recall.md#skill-ketchup) |
+| 이 채팅에서 마지막 메시지 이후 바뀐 것을 평이한 말과 작은 시각으로 따라잡고, 사용자를 기다리는 항목을 답만으로 결정할 수 있게 모두 나열한다 | [`/ketchup`](teach-recall.md#skill-ketchup) |
 | 작은 diff가 밖에서 무엇을 깨뜨릴 수 있는지 | [`/blast-radius`](tdd-blast.md#skill-blast-radius) |
 | 함수 경계를 넘는 코드 전에 타입과 모듈 모양을 정한다 | [`/architect`](architect.md#skill-architect) |
 | 같은 지시에 여러 시도를 돌려 좋은 부분을 합친다 | [`/arena`](arena-swarm.md#skill-arena) |
@@ -317,6 +334,7 @@ pstack은 Cursor용입니다. 스킬은 Agent Skills 형식이라 다른 도구�
 | 마지막 답을 평이한 말로 다시 듣는다 | [`/bro`](utility.md#skill-bro) |
 | 에이전트가 앱을 스크립트로 돌리고 동작을 증명하게 | [`/create-verification-skill`](verification.md#skill-create-verification-skill) |
 | 검증 스킬과 기능 지도를 앱에 다시 맞춘다 | [`/maintain-verification-skill`](verification.md#skill-maintain-verification-skill) |
+| 테스트가 잘 닿지 않는 경쟁, 불변식, 그 밖의 속성을 형식 검증한다 | [`/create-formal-verification-skill`](verification.md#skill-create-formal-verification-skill) |
 | 성능 숫자를 보고하거나 그 숫자로 행동하기 전에 걸러 낸다 | [`/benchmark-checklist`](verification.md#skill-benchmark-checklist) |
 | 크거나 가로지르는 변경, 또는 자리를 뜬 뒤 검토할 변경 | [`/figure-it-out`](arena-swarm.md#skill-figure-it-out) |
 | 실행 중 결정 기록을 남기고 나중에 검토한다 | [`/show-me-your-work`](personal.md#skill-show-me-your-work) |
@@ -419,7 +437,7 @@ README가 든 예입니다. 스킬은 리뷰 질문을 알아차리고 [`/interr
 
 ### 관련 스킬
 
-설치와 모델은 [`setup-pstack`](#skill-setup-pstack), 작업의 입구는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode)입니다. 일을 시작하기 전에 목표와 문제를 다시 듣기는 [`in-your-own-words`](#skill-in-your-own-words)입니다. 과업을 조인 뒤 일을 하는 것은 [`sharpen`](#skill-sharpen)입니다. 앱을 증명할 방법이 없으면 [`create-verification-skill`](verification.md#skill-create-verification-skill)입니다. 자기 방식은 [`automate-me`](personal.md#skill-automate-me), [`reflect`](personal.md#skill-reflect), [`correct`](personal.md#skill-correct)입니다. 사람이 따라갈 표는 [부록의 선택 흐름도](decision-flow.md)에 있습니다.
+설치와 모델은 [`setup-pstack`](#skill-setup-pstack), 작업의 입구는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode)입니다. 일을 시작하기 전에 목표와 문제를 다시 듣기는 [`in-your-own-words`](#skill-in-your-own-words)입니다. 과업을 조인 뒤 일을 하는 것은 [`sharpen`](#skill-sharpen)입니다. 앱을 증명할 방법이 없으면 [`create-verification-skill`](verification.md#skill-create-verification-skill)입니다. 테스트가 잘 닿지 않는 속성은 [`create-formal-verification-skill`](verification.md#skill-create-formal-verification-skill)로 형식 검증(formal verification)합니다. 자기 방식은 [`automate-me`](personal.md#skill-automate-me), [`reflect`](personal.md#skill-reflect), [`correct`](personal.md#skill-correct)입니다. 사람이 따라갈 표는 [부록의 선택 흐름도](decision-flow.md)에 있습니다.
 
 ## in-your-own-words {#skill-in-your-own-words}
 

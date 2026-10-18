@@ -24,7 +24,7 @@
 | 왜 이렇게 만들었는가, 이 임계값은 어디서 왔는가 | [`why`](why.md#skill-why) |
 | 요약이 아니라 실제로 이해하고 싶다, 평이하게 풀어서 설명해 줬으면 한다 | [`teach`](teach-recall.md#skill-teach) |
 | 내 최근 작업 맥락을 되살리고 싶다 | [`recall`](teach-recall.md#skill-recall) |
-| 이 채팅에서 마지막 메시지 이후 바뀐 것을 평이한 몇 문장과 작은 시각으로 따라잡고 지금 결정할 일을 알고 싶다 | [`ketchup`](teach-recall.md#skill-ketchup) |
+| 이 채팅에서 마지막 메시지 이후 바뀐 것을 평이한 말과 작은 시각으로 따라잡고, 기다리는 항목을 답만으로 결정하고 싶다 | [`ketchup`](teach-recall.md#skill-ketchup) |
 | 일을 시작하기 전에 에이전트가 내 목표와 문제를 자기 말로 다시 말하게 하고 싶다 | [`in-your-own-words`](setup.md#skill-in-your-own-words) |
 | 일을 시작하기 전에 과업을 더 전문가답게 조이고, 사용자가 진짜 원하는 것에 맞추되 선택을 대신하지 않게 하고 싶다 | [`sharpen`](setup.md#skill-sharpen) |
 | 특정 채팅 하나를 이어받고 싶다 | [Session pickup](playbooks-long.md#playbook-session-pickup) |
@@ -67,6 +67,7 @@
 | diff를 여러 모델이 깨뜨려 보게 하고 싶다 | [`interrogate`](interrogate.md#skill-interrogate) |
 | 프로젝트에 앱을 구동해 증명할 방법이 없다 | [`create-verification-skill`](verification.md#skill-create-verification-skill) |
 | 검증 스킬의 기능 지도가 낡았다 | [`maintain-verification-skill`](verification.md#skill-maintain-verification-skill) |
+| 테스트가 잘 닿지 않는 경쟁, 불변식, 재시도, 상태 기계, 파서를 형식 검증하고 싶다 | [`create-formal-verification-skill`](verification.md#skill-create-formal-verification-skill) |
 | 끝났다고 선언하기 전이다 | [`principle-prove-it-works`](principles.md#skill-principle-prove-it-works) |
 | 테스트를 쓰거나 남기려 한다 | [`principle-test-behavior-not-implementation`](principles.md#skill-principle-test-behavior-not-implementation) |
 | 측정한 숫자를 믿거나 보고하거나 그 숫자로 행동하기 전이다 | [`benchmark-checklist`](verification.md#skill-benchmark-checklist), [`principle-explain-the-number`](principles.md#skill-principle-explain-the-number) |

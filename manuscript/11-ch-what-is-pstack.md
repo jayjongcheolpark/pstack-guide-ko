@@ -32,7 +32,7 @@ README는 "포크하고, 개선하고, 자기 것으로 만들라"고 권하고,
 
 | 구성 요소 | 내용 |
 | --- | --- |
-| `skills/` | 스킬 54개. 일반 스킬 30개와 `principle-*` 스킬 24개 |
+| `skills/` | 스킬 55개. 일반 스킬 31개와 `principle-*` 스킬 24개 |
 | `agents/` | 서브에이전트 정의 2개: `poteto-agent`, `Comment Sicko`(`name: comment-sicko`) |
 | `automations/` | 휴면 상태의 자동화 팩 `benny` |
 | `docs/guide/` | 열 장으로 된 사용 안내서와 삽화 |
@@ -66,7 +66,7 @@ README는 Cursor에서 `/add-plugin pstack`으로 설치하고, Claude Code에�
 
 README는 `/poteto-mode`를 받은 채팅이 플레이북과 할 일 목록과 모든 서브에이전트 spawn을 소유한다고 합니다. `poteto-agent`는 실행 중 위임용 래퍼이고, 플레이북 자체를 돌리려고 띄우지 않습니다.
 
-여러 턴에 걸쳐 `/poteto-mode`를 유지하려면 `/` 메뉴에서 고른 뒤 Enter가 아니라 Option+Enter(Mac) 또는 Alt+Enter(Windows)를 누릅니다. 그러면 Cursor의 Custom Mode가 됩니다. 매 턴 컨텍스트에 남고, 플레이북이 맞거나 작업에 엄밀함이 필요할 때 적용되며, 그렇지 않을 때는 방해하지 않습니다. Custom Mode는 Agents Window와 CLI에서 쓸 수 있습니다. Enter만 치면 그 메시지 하나에만 붙고 대화가 이어지면 사라집니다. 그만하라고 말하거나 모드를 나가면 꺼집니다. Cursor의 `/loop` 명령과 잘 어울려서, 엄밀함을 잃지 않고 에이전트를 몇 시간씩 일하게 할 수 있다고 README는 말합니다.
+여러 턴에 걸쳐 `/poteto-mode`를 유지하려면 `/` 메뉴에서 고른 뒤 Enter가 아니라 Option+Enter(Mac) 또는 Alt+Enter(Windows)를 누릅니다. 그러면 Cursor의 Custom Mode가 됩니다. 모드를 나갈 때까지 매 턴 컨텍스트에 남습니다. Custom Mode는 Agents Window와 CLI에서 쓸 수 있습니다. Enter만 치면 그 메시지 하나에만 붙고 대화가 이어지면 사라집니다. Cursor의 `/loop` 명령과 잘 어울려서, 엄밀함을 잃지 않고 에이전트를 몇 시간씩 일하게 할 수 있다고 README는 말합니다.
 
 스킬을 직접 부르는 예도 있습니다.
 
@@ -104,13 +104,13 @@ README에는 "왜 계획 스킬이 없는가"라는 절이 있습니다. Cursor�
 
 - `/deslop`과 `deslop` 스킬은 `cursor-team-kit` 플러그인에 있습니다.
 - CLI와 TUI를 다루는 `control-cli`, 브라우저, Electron, 웹을 다루는 `control-ui`도 `cursor-team-kit`에 있습니다.
-- `/create-skill`은 Cursor의 내장 기능입니다. Cursor에는 내장 `/babysit`도 있는데, `poteto-mode` 안에서는 PR 상태 요청에 대해 babysit 플레이북이 내장 스킬보다 우선합니다.
+- `/create-skill`은 Cursor의 내장 기능입니다. Cursor에는 PR을 감시하는 내장 `/autopilot`도 있는데, `poteto-mode` 안에서는 PR 상태 요청이 babysit 플레이북으로 갑니다.
 
 전체 세트를 쓰려면 pstack과 함께 `cursor-team-kit`을 설치하라고 README는 안내합니다. 이 책은 `cursor-team-kit`의 스킬을 장으로 다루지 않고, 언급이 필요한 자리에서만 그 출처를 밝힙니다.
 
 ## 스킬 지도
 
-54개 스킬을 이 책은 다음과 같이 나눕니다. 전체 목록과 트리거 문구는 [부록의 빠른 참조표](quickref.md)에 있습니다.
+55개 스킬을 이 책은 다음과 같이 나눕니다. 전체 목록과 트리거 문구는 [부록의 빠른 참조표](quickref.md)에 있습니다.
 
 | 부 | 스킬 |
 | --- | --- |
@@ -118,9 +118,9 @@ README에는 "왜 계획 스킬이 없는가"라는 절이 있습니다. Cursor�
 | 진입점 | `poteto-mode` (플레이북 23개 포함) |
 | 이해하기 | `how`, `why`, `teach`, `recall`, `ketchup` |
 | 설계하기 | `architect`, `arena`, `swarm`, `figure-it-out`, `principle-*` 24개 |
-| 고치고 검증하기 | `tdd`, `blast-radius`, `interrogate`, `benchmark-checklist`, `create-verification-skill`, `maintain-verification-skill` |
+| 고치고 검증하기 | `tdd`, `blast-radius`, `interrogate`, `benchmark-checklist`, `create-verification-skill`, `maintain-verification-skill`, `create-formal-verification-skill` |
 | 글과 코드 정리 | `unslop`, `technical-writing`, `no-comments`, `typescript-best-practices` |
 | 나만의 방식과 유틸리티 | `automate-me`, `reflect`, `correct`, `show-me-your-work`, `bro` |
 | 자동화 | `make-bot-ui` |
 
-수를 세면 4 + 1 + 5 + 28 + 6 + 4 + 5 + 1 = 54개입니다. 표의 설계하기 행은 일반 스킬 4개와 원칙 24개를 합쳐 28개입니다.
+수를 세면 4 + 1 + 5 + 28 + 7 + 4 + 5 + 1 = 55개입니다. 표의 설계하기 행은 일반 스킬 4개와 원칙 24개를 합쳐 28개입니다.
