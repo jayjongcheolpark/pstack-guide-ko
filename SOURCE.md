@@ -6,13 +6,13 @@
 | --- | --- |
 | 저장소 | https://github.com/cursor/plugins |
 | 디렉터리 | `pstack/` |
-| 커밋 (전체 SHA) | `0b8e952052d482ee6de06deebf14d590d77b1b34` |
-| 플러그인 버전 | 0.15.26 (`pstack/.cursor-plugin/plugin.json`과 `pstack/plugin.json`). 이 책의 버전은 이 값에서 시작합니다. 같은 pstack 버전에서 이 책만 고치면 `0.15.26-ko.N`처럼 개정 번호가 붙습니다(`tools/lib/manuscript.mjs`의 `BOOK_REVISION`. 0이면 접미사 없음). 현재 책 버전은 `0.15.26`입니다 |
+| 커밋 (전체 SHA) | `d457567332aa6989e753ea289f30ea2bfbc80bc0` |
+| 플러그인 버전 | 0.15.28 (`pstack/.cursor-plugin/plugin.json`과 `pstack/plugin.json`). 이 책의 버전은 이 값에서 시작합니다. 같은 pstack 버전에서 이 책만 고치면 `0.15.28-ko.N`처럼 개정 번호가 붙습니다(`tools/lib/manuscript.mjs`의 `BOOK_REVISION`. 0이면 접미사 없음). 현재 책 버전은 `0.15.28`입니다 |
 | 기본 브랜치 | `main` |
-| 클론 날짜 | 2026-10-18 |
+| 클론 날짜 | 2026-10-19 |
 | 저작권 | MIT, Copyright (c) 2026 Lauren Tan (`pstack/LICENSE`) |
 
-범위는 `pstack/` 아래 전부입니다: `skills/`(55개), `agents/`, `automations/`, `docs/`(`docs/guide`와 `docs/harness`), `README.md`, `.cursor-plugin/plugin.json`, `plugin.json`(Agent Plugins v1 루트 매니페스트), `LICENSE`. 저장소 루트의 생성 트리 `harness/pstack/`은 `pstack/` 밖이라 원문으로 쓰지 않고, README가 밝히는 설치 경로로만 적습니다. 별개 플러그인인 `cursor-team-kit`(deslop, fix-ci, fix-merge-conflicts, get-pr-comments, make-pr-easy-to-review, thermo-nuclear-code-quality-review, what-did-i-get-done 등)은 장으로 다루지 않고, pstack 파일이 그것을 부르는 곳에서 한두 문장으로 언급합니다.
+범위는 `pstack/` 아래 전부입니다: `skills/`(56개), `agents/`, `automations/`, `docs/`(`docs/guide`와 `docs/harness`), `README.md`, `.cursor-plugin/plugin.json`, `plugin.json`(Agent Plugins v1 루트 매니페스트), `LICENSE`. 저장소 루트의 생성 트리 `harness/pstack/`은 `pstack/` 밖이라 원문으로 쓰지 않고, README가 밝히는 설치 경로로만 적습니다. 별개 플러그인인 `cursor-team-kit`(deslop, fix-ci, fix-merge-conflicts, get-pr-comments, make-pr-easy-to-review, thermo-nuclear-code-quality-review, what-did-i-get-done 등)은 장으로 다루지 않고, pstack 파일이 그것을 부르는 곳에서 한두 문장으로 언급합니다.
 
 ## 읽는 방법
 
@@ -21,7 +21,7 @@
 ```shell
 git clone https://github.com/cursor/plugins.git <저장소 밖 임시 경로>/cursor-plugins
 cd <저장소 밖 임시 경로>/cursor-plugins
-git checkout 0b8e952052d482ee6de06deebf14d590d77b1b34
+git checkout d457567332aa6989e753ea289f30ea2bfbc80bc0
 chmod -R a-w .
 ```
 
@@ -30,7 +30,7 @@ chmod -R a-w .
 각 스킬 절 제목 아래의 `원문` 줄은 이 커밋에 고정한 GitHub permalink입니다.
 
 ```text
-https://github.com/cursor/plugins/blob/0b8e952052d482ee6de06deebf14d590d77b1b34/pstack/skills/<name>/SKILL.md
+https://github.com/cursor/plugins/blob/d457567332aa6989e753ea289f30ea2bfbc80bc0/pstack/skills/<name>/SKILL.md
 ```
 
 글에서 다룬 다른 파일(`references/`, `playbooks/`, `scripts/`, `agents/`, `docs/`, `automations/`)도 같은 커밋의 permalink로 적습니다.
