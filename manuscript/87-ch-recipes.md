@@ -22,7 +22,7 @@
 /poteto-mode 이 스레드를 읽어. 밑의 문제를 평이한 영어로 네 말로 다시 말해. 아직 코드는 바꾸지 마.
 ```
 
-오독은 다시 말한 자리에서 드러나고, 고치는 비용은 메시지 하나입니다. 에이전트가 자기 말을 하기 전에는 자신의 가설을 숨깁니다. → [poteto-mode](poteto-mode.md#skill-poteto-mode)
+오독은 다시 말한 자리에서 드러나고, 고치는 비용은 메시지 하나입니다. 에이전트가 자기 말을 하기 전에는 자신의 가설을 숨깁니다. 플레이북 없이 다시 말하기만 시키려면 `/in-your-own-words`입니다. → [poteto-mode](poteto-mode.md#skill-poteto-mode), [`in-your-own-words`](setup.md#skill-in-your-own-words)
 
 **길거나 뒤섞인 요청을 자기 말로 다시 듣기.**
 
@@ -38,7 +38,7 @@
 /sharpen 검색이 느린 이유를 찾아서 고쳐 줘. 인덱스를 더하는 쪽이든 쿼리를 바꾸는 쪽이든 괜찮아.
 ```
 
-레시피는 `/sharpen <your task>`입니다. 최상위 전문가처럼 접근하고, 사용자가 진짜 원하는 것에 맞추되 과잉 명세하거나 사용자의 선택을 대신하지 않습니다. 조인 뒤 일을 하고, 다시 쓴 프롬프트를 돌려주지 않습니다. → [`sharpen`](setup.md#skill-sharpen)
+레시피는 `/sharpen <your task>`입니다. 최상위 전문가처럼 접근하고, 사용자가 진짜 원하는 것에 맞추되 과잉 명세하거나 사용자의 선택을 대신하지 않습니다. 바깥에서 확인하는 검사 하나를 남긴 뒤 일을 합니다. → [`sharpen`](setup.md#skill-sharpen)
 
 **고르기 전에 프로토타입.**
 
@@ -95,6 +95,14 @@
 ```
 
 "main에서 재현되면"은 버그가 이미 없으면 일찍 멈추게 합니다. 영상으로 diff를 읽기 전에 수정을 확인합니다. → [`create-verification-skill`](verification.md#skill-create-verification-skill)
+
+**테스트가 잘 닿지 않는 속성을 형식 검증하기.**
+
+```text
+/create-formal-verification-skill 재시도 큐. 메시지가 두 번 전달되면 안 돼.
+```
+
+말한 범위의 모든 경우에서 속성 하나를 검사하고, 지금 코드가 이미 깨면 코드의 말로 된 반례를 받으며, 그 코드를 건드리는 변경마다 다음 에이전트가 돌릴 프로젝트 스킬이 남습니다. 그 코드의 병합이나 리팩터 뒤에는 `/maintain-formal-verification-skill`입니다. → [`create-formal-verification-skill`](verification.md#skill-create-formal-verification-skill), [`maintain-formal-verification-skill`](verification.md#skill-maintain-formal-verification-skill)
 
 **숫자를 올리기 전에 걸러 내기.**
 
@@ -166,7 +174,7 @@ prove it works를 적용해. 빌드 로그가 아니라 실제 출력을 보여 
 /ketchup
 ```
 
-이 채팅에서 사용자가 마지막으로 쓴 메시지 이후만 봅니다. 알림과 서브에이전트 결과는 그 메시지가 아닙니다. 목소리는 [`/bro`](utility.md#skill-bro)의 평이한 말투이고, 다시 말하기 과업은 아닙니다. 위치만이 아니라 각 변경을 이해하게 돕고, 사용자를 기다리는 항목을 답만으로 결정할 수 있게 모두 나열합니다. 단어는 결정에 쓰고, 일어난 일은 그림의 단어를 세지 않고 100단어 아래로 둡니다. 항목마다 약 30단어이고, 답은 항목 수와 함께 커집니다. 단어 수에 맞추려고 항목을 자르지 않습니다. 일어난 일은 그림부터 보여 주고, 요약은 짧은 불릿입니다. 상태 목록이나 할 일 목록이나 잇지 않은 상자는 그리지 않습니다. 항목의 모양은 결정에 맞추고, 묻지 않은 되돌릴 수 없는 단계는 한 줄입니다. 마크다운 표는 시각이 아닙니다. 에이전트가 스스로 할 수 있는 일은 할 일 항목이 아닙니다. 최근 채팅 여러 개에서 주제를 불러오려면 `/recall`입니다. → [`ketchup`](teach-recall.md#skill-ketchup), [`recall`](teach-recall.md#skill-recall)
+이 채팅에서 사용자가 마지막으로 쓴 메시지 이후만 봅니다. 알림과 서브에이전트 결과는 그 메시지가 아닙니다. 보고하는 동안 아무것도 바꾸지 않습니다. 목소리는 [`/bro`](utility.md#skill-bro)의 평이한 말투이고, 다시 말하기 과업은 아닙니다. 위치만이 아니라 각 변경을 이해하게 돕고, 사용자를 기다리는 항목을 답만으로 결정할 수 있게 모두 나열합니다. 단어는 결정에 쓰고, 일어난 일은 그림의 단어를 세지 않고 100단어 아래로 둡니다. 항목마다 약 30단어이고, 답은 항목 수와 함께 커집니다. 단어 수에 맞추려고 항목을 자르지 않습니다. 일어난 일은 그림부터 보여 주고, 요약은 짧은 불릿입니다. 상태 목록이나 할 일 목록이나 잇지 않은 상자는 그리지 않습니다. 항목의 모양은 결정에 맞추고, 묻지 않은 되돌릴 수 없는 단계는 한 줄입니다. 마크다운 표는 시각이 아닙니다. 에이전트가 스스로 할 수 있는 일은 할 일 항목이 아닙니다. 최근 채팅 여러 개에서 주제를 불러오려면 `/recall`입니다. → [`ketchup`](teach-recall.md#skill-ketchup), [`recall`](teach-recall.md#skill-recall)
 
 ## 단계별 프롬프트의 모양
 

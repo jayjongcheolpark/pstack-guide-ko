@@ -13,8 +13,8 @@ import { renderFlow } from "./flow.mjs";
 
 export const SOURCE = {
   repo: "https://github.com/cursor/plugins",
-  sha: "0b8e952052d482ee6de06deebf14d590d77b1b34",
-  version: "0.15.26",
+  sha: "d457567332aa6989e753ea289f30ea2bfbc80bc0",
+  version: "0.15.28",
   dir: "pstack",
 };
 // The book version starts from the pstack version it covers. A book-only fix, while
@@ -29,10 +29,10 @@ export const srcUrl = (path) => `${SOURCE.repo}/blob/${SOURCE.sha}/${SOURCE.dir}
 
 export const BOOK = {
   title: "pstack 가이드",
-  subtitle: "Cursor 플러그인 스킬 55종 해설",
+  subtitle: "Cursor 플러그인 스킬 56종 해설",
   language: "ko",
   identifier: "urn:uuid:5f6d1c1e-4a0b-4c7e-9a52-7d1b3c0e9a11",
-  date: "2026-10-18",
+  date: "2026-10-19",
 };
 
 // Worked examples written for this book (not from the source) open with this label.

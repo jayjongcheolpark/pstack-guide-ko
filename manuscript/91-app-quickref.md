@@ -2,9 +2,9 @@
 
 원문: {{src:README.md}} {{src:skills/poteto-mode/SKILL.md}}
 
-이 표는 pstack 0.15.26(커밋 `0b8e952`)의 스킬 55개, 에이전트 2개, `poteto-mode` 플레이북 23개를 한곳에 모았습니다. 트리거 문구는 각 스킬의 `description`에 있는 문구를 그대로 두었고(`no-comments`처럼 `description`에 없는 곳은 `poteto-mode`의 규칙(non-negotiable)을 적었고), 영어 원문이 없는 곳(원칙(principle) 스킬 등)은 "언제 적용하는가"를 한국어로 적었습니다. 이름을 누르면 해당 절로 갑니다.
+이 표는 pstack 0.15.28(커밋 `d457567`)의 스킬 56개, 에이전트 2개, `poteto-mode` 플레이북 23개를 한곳에 모았습니다. 트리거 문구는 각 스킬의 `description`에 있는 문구를 그대로 두었고(`no-comments`처럼 `description`에 없는 곳은 `poteto-mode`의 규칙(non-negotiable)을 적었고), 영어 원문이 없는 곳(원칙(principle) 스킬 등)은 "언제 적용하는가"를 한국어로 적었습니다. 이름을 누르면 해당 절로 갑니다.
 
-## 일반 스킬 31개
+## 일반 스킬 32개
 
 | 스킬 | 한 줄 목적 | 트리거 문구 |
 | --- | --- | --- |
@@ -29,6 +29,7 @@
 | [`create-verification-skill`](verification.md#skill-create-verification-skill) | 앱을 사용자처럼 구동하는 프로젝트 전용 검증(verification) 스킬 생성 | `/create-verification-skill`, "make a control skill for this repo", 앱 동작을 증명할 스크립트된 방법이 없을 때 |
 | [`maintain-verification-skill`](verification.md#skill-maintain-verification-skill) | 검증 스킬과 기능 지도를 정직하게 유지 | `/maintain-verification-skill`, "audit the verify skill" |
 | [`create-formal-verification-skill`](verification.md#skill-create-formal-verification-skill) | 테스트가 잘 닿지 않는 코드에서 속성 하나를 형식 검증하는 프로젝트 전용 스킬 생성 | `/create-formal-verification-skill`, "model-check this race", "prove this invariant", 동시성, 재시도, 상태 기계, 파서, 안전하지 않은 코드에 테스트만으로는 모자랄 때 |
+| [`maintain-formal-verification-skill`](verification.md#skill-maintain-formal-verification-skill) | 덮는 코드가 바뀐 뒤 형식 검증을 코드에 다시 맞추고, 실패가 표류인지 버그인지 가림 | `/maintain-formal-verification-skill`, "is the model still true to the code", 검증한 코드를 다시 검사하지 않고 병합하거나 리팩터한 뒤 |
 | [`unslop`](writing.md#skill-unslop) | 글에서 AI가 쓴 티를 걷어 냄 | 원문: "Cut AI tells from any writing." |
 | [`technical-writing`](writing.md#skill-technical-writing) | 문서를 Diátaxis, Google 스타일, STE, Global English 층으로 씀 | `/technical-writing`, 문서, RFC, README, PR 설명, 커밋 메시지 쓰기와 리뷰 |
 | [`no-comments`](code-hygiene.md#skill-no-comments) | Comment Sicko로 주석을 걷어 내고 제약 주석에 인코딩을 제안 | 리뷰 전 (`poteto-mode`의 트리거) |
@@ -143,6 +144,7 @@ README의 "모든 스킬" 표가 스킬마다 붙인 한 줄 설명입니다(원
 | `/create-verification-skill` | 프로젝트에 앱 동작을 증명할 스크립트된 방법이 없을 때. 기능 지도가 있는 프로젝트 전용 verify 스킬을 생성 |
 | `/maintain-verification-skill` | verify 스킬의 기능 지도가 앱과 어긋났을 때. 소스 웨이브와 라이브 패스 한 번, 최대 증명된 교정 PR 하나 |
 | `/create-formal-verification-skill` | 테스트가 경쟁, 재시도, 상태 기계, 파서, 안전하지 않은 코드를 깨는 경우에 닿지 못할 때. 맞는 도구로 속성 하나를 검증하고, 변경마다 다시 검사하는 프로젝트 전용 스킬을 생성 |
+| `/maintain-formal-verification-skill` | 형식 검증이 덮는 코드가 마지막으로 검사한 뒤로 바뀌었을 때. 모델이나 하니스나 속성을 코드에 맞추고 다시 돌린 뒤, 실패가 검증의 표류인지 코드의 버그인지 말함 |
 | `/unslop` | 글을 다듬을 때. AI의 티를 제거 |
 | `/bro` | 마지막 메시지를 전문 용어 없이 사람 말로 다시 듣고 싶을 때 |
 | `/technical-writing` | 문서, RFC, README, PR 설명, 커밋 메시지를 위한 층화된 문서 기준(standard). Diátaxis + Google 개발자 스타일 + STE + Global English |

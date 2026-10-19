@@ -915,7 +915,7 @@ end 응답
 
 ### 언제 쓰는가
 
-스킬을 새로 쓰거나 고칠 때입니다. 예: "이 저장소의 데이터베이스 마이그레이션을 검증하는 스킬을 써 줘". 안내서는 `SKILL.md`를 손으로 그냥 쓰지 말고 이 플레이북으로 보내라고 권합니다. 에이전트용 글은 사람용 글보다 기준이 높습니다. 도움이 안 되는 문장 하나가 미래의 에이전트가 따르는 지시가 되기 때문입니다.
+스킬을 새로 쓰거나 고칠 때입니다. 예: "이 저장소의 데이터베이스 마이그레이션을 검증하는 스킬을 써 줘". 안내서는 `SKILL.md`를 손으로 그냥 쓰지 말고 이 플레이북으로 보내라고 권합니다. 에이전트용 글은 사람용 글보다 기준이 높습니다. 도움이 안 되는 문장 하나가 미래의 에이전트가 따르는 지시가 되기 때문입니다. 생성기가 따로 있는 경우는 둘입니다. 앱을 구동해 동작을 증명하는 스킬은 [`/create-verification-skill`](verification.md#skill-create-verification-skill)과 [`/maintain-verification-skill`](verification.md#skill-maintain-verification-skill)입니다. 모델 검사기, 증명, 또는 다른 검증기로 코드의 속성을 검사하는 스킬은 [`/create-formal-verification-skill`](verification.md#skill-create-formal-verification-skill)과 [`/maintain-formal-verification-skill`](verification.md#skill-maintain-formal-verification-skill)입니다.
 
 ### 동작 방식
 

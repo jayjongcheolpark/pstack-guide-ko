@@ -25,7 +25,7 @@ README는 Claude Code에서 이렇게 설치하라고 합니다.
 
 Claude Code는 플러그인 명령과 에이전트 이름 앞에 접두사를 붙이므로 `/poteto-mode`는 `/pstack:poteto-mode`가 됩니다. 나머지 Cursor 이름은 아래 [Claude Code 어댑터](#claude-code-adapter)가 대응합니다.
 
-Claude Code가 설치하는 것은 저장소 루트의 [`harness/pstack/`](https://github.com/cursor/plugins/tree/0b8e952052d482ee6de06deebf14d590d77b1b34/harness/pstack)에서 생성한 복사본이고, README와 안내서도 포함합니다. pstack을 바꾼 뒤에는 저장소 루트에서 `node scripts/generate-pstack-harness-trees.mjs`를 실행하고 그 결과를 커밋합니다. 생성 복사가 뒤처져 있으면 CI가 실패합니다. 이 생성 트리는 `pstack/` 밖이므로 이 책의 원문 범위에는 넣지 않았고, README가 밝히는 설치 경로로만 적습니다. Claude Code에서 `/pstack:setup-pstack`은 모델 선택을 `~/.claude/rules/pstack-models.md`에 쓰고, Bugbot이나 자동화처럼 Cursor에만 있는 기능이 필요한 단계는 한 줄 메모와 함께 건너뜁니다.
+Claude Code가 설치하는 것은 저장소 루트의 [`harness/pstack/`](https://github.com/cursor/plugins/tree/d457567332aa6989e753ea289f30ea2bfbc80bc0/harness/pstack)에서 생성한 복사본이고, README와 안내서도 포함합니다. pstack을 바꾼 뒤에는 저장소 루트에서 `node scripts/generate-pstack-harness-trees.mjs`를 실행하고 그 결과를 커밋합니다. 생성 복사가 뒤처져 있으면 CI가 실패합니다. 이 생성 트리는 `pstack/` 밖이므로 이 책의 원문 범위에는 넣지 않았고, README가 밝히는 설치 경로로만 적습니다. Claude Code에서 `/pstack:setup-pstack`은 모델 선택을 `~/.claude/rules/pstack-models.md`에 쓰고, Bugbot이나 자동화처럼 Cursor에만 있는 기능이 필요한 단계는 한 줄 메모와 함께 건너뜁니다.
 
 ## Claude Code 어댑터 {#claude-code-adapter}
 
@@ -127,6 +127,8 @@ README가 밝히는 기본 구성은 모델의 강점에 따라 작업을 나누
 
 승낙하면 `.cursor/skills/verify-<app>/`를 씁니다. 에이전트가 사용자처럼 앱을 구동하는 법을 알려 주는 프로젝트 전용 스킬입니다. 넘겨주기 전에 그 스킬이 실제로 동작하는지 한 번 증명합니다. 거절하면 설정은 그냥 넘어갑니다. `/create-verification-skill`은 언제든 직접 실행할 수 있고, 이 스킬은 [검증 스킬 장](verification.md)에서 다룹니다. 안내서는 pstack이 처음이면 승낙하라고 합니다. 자기 일을 확인할 수 있는 에이전트는 검사가 통과할 때까지 가고, 그렇지 않으면 결과를 사람에게 넘깁니다. 안내서가 이 가이드에서 가장 이득이 큰 것이라고 부르는 것이 검증 스킬입니다.
 
+그다음 설정은 프로젝트에 형식 검증(formal verification) 스킬이 이미 있는지 봅니다. 코드에 대해 모델 검사기, 증명, 또는 다른 검증기를 돌리는 프로젝트 스킬입니다. 없으면 `/create-formal-verification-skill`로 하나 만들지 한 번 묻습니다. 테스트는 누군가 생각해 둔 경우를 검사합니다. 형식 검증 스킬은 "한 작업이 동시에 두 번 돌지 않는다"처럼 코드의 핵심 속성 하나를, 말한 범위의 모든 경우에서 검사합니다. 동시성, 재시도, 상태 기계, 파서가 있고 버그 비용이 크며 테스트가 그 깨지는 경우에 잘 닿지 않을 때 승낙합니다. 아니면 거절하고, 나중에 그렇게 바뀌면 그때 돌립니다. 자세한 내용은 [검증 스킬 장](verification.md#skill-create-formal-verification-skill)에 있습니다.
+
 설정이 끝나면 새 채팅을 시작하십시오. 모델 규칙은 새 세션에 적용됩니다.
 
 ## 비용을 줄이려면
@@ -164,7 +166,7 @@ pstack은 서브에이전트와 리뷰 패널에 토큰을 더 씁니다. 엄밀
 
 ### 동작 방식
 
-이 스킬이 하는 일은 `~/.cursor/rules/pstack-models.mdc`를 쓰는 것입니다. 항상 적용되는(always-applied) 규칙으로, 역할마다 모델을 정합니다. 단계는 일곱 개입니다.
+이 스킬이 하는 일은 `~/.cursor/rules/pstack-models.mdc`를 쓰는 것입니다. 항상 적용되는(always-applied) 규칙으로, 역할마다 모델을 정합니다. 단계는 여덟 개입니다.
 
 1. **사용 가능한 모델 감지.** 이 세션에서 `Task` 서브에이전트에 넘길 수 있는 모델 슬러그를 나열합니다. 이것이 믿을 만한 출처입니다. Cursor가 사용자가 쓸 수 있는 모델을 나열하는 API나 CLI를 따로 제공하면 완전성을 위해 그쪽을 우선합니다. 하나도 감지하지 못하면 사용자에게 접근 가능한 슬러그를 붙여 넣게 합니다. 확인하지 못한 실제 슬러그는 절대 쓰지 않습니다. 별칭 `inherit-parent`와 `auto`는 감지된 슬러그가 아니지만 항상 유효합니다.
 2. **현재 상태 읽기.** 기본 역할-모델 매핑은 5단계에 나오는 규칙의 모양입니다. `~/.cursor/rules/pstack-models.mdc`가 이미 있으면 읽어서 `# budget` 줄과 역할 값을 현재 선택으로 취급합니다. 없으면 기본값에서 시작합니다. 5단계에 없는 역할의 줄(예: `how critics`)은 폐지된 역할이므로 버립니다.
@@ -176,6 +178,7 @@ pstack은 서브에이전트와 리뷰 패널에 토큰을 더 씁니다. 엄밀
 5. **규칙 쓰기.** `alwaysApply: true`, 선택한 라벨과 목표 강도를 담은 `# budget` 줄, 그리고 역할당 한 줄을 씁니다. 파일 전체를 덮어써서 다시 실행해도 결과가 같게 합니다.
 6. **확인.** 규칙을 썼고 새 세션부터 적용된다고 알립니다. 스킬을 다시 실행하면 갱신됩니다.
 7. **검증(verification) 스킬 제안(선택).** 프로젝트에 실제 앱을 구동해 증명하는 방법(`verify-*` 스킬이나 기존 하니스)이 있는지 확인합니다. 없으면 한 번만 제안합니다. 승낙하면 `/create-verification-skill`을 호출하고, 거절하면 더 권하지 않고 넘어갑니다.
+8. **형식 검증 스킬 제안(선택).** 프로젝트에 이미 형식 검증 스킬(코드에 대해 모델 검사기, 증명, 또는 다른 검증기를 돌리는 프로젝트 스킬)이 있는지 확인합니다. 없으면 한 번만 제안합니다. 승낙하면 `/create-formal-verification-skill`을 호출하고, 거절하면 더 권하지 않고 넘어갑니다.
 
 #### 예산 선택지
 
@@ -245,7 +248,7 @@ interrogate reviewers: claude-opus-5-5-xhigh, grok-4.7-xhigh-fast
 
 ### 관련 스킬
 
-[`poteto-mode`](poteto-mode.md#skill-poteto-mode)가 이 규칙을 읽어 서브에이전트의 모델을 정합니다. 마지막 단계에서 [`create-verification-skill`](verification.md#skill-create-verification-skill)을 제안합니다. 설치와 첫 프롬프트가 막히면 [`poteto-help`](#skill-poteto-help)가 이 장을 가리킵니다.
+[`poteto-mode`](poteto-mode.md#skill-poteto-mode)가 이 규칙을 읽어 서브에이전트의 모델을 정합니다. 마지막 단계에서 [`create-verification-skill`](verification.md#skill-create-verification-skill)과 [`create-formal-verification-skill`](verification.md#skill-create-formal-verification-skill)을 각각 한 번씩 제안합니다. 설치와 첫 프롬프트가 막히면 [`poteto-help`](#skill-poteto-help)가 이 장을 가리킵니다.
 
 ## poteto-help {#skill-poteto-help}
 
@@ -277,6 +280,7 @@ interrogate reviewers: claude-opus-5-5-xhigh, grok-4.7-xhigh-fast
 
 - `~/.cursor/rules/pstack-models.mdc`가 없으면 이 사용자에게 `/setup-pstack`이 아직 돌지 않은 것이고, 모든 역할이 기본 모델을 씁니다.
 - 프로젝트에 `verify-*` 스킬이나 다른 앱 하니스가 없으면 에이전트에게 앱을 스크립트로 돌릴 길이 없습니다. 변경이 동작하는지 증명하는 질문이면 [`/create-verification-skill`](verification.md#skill-create-verification-skill)을 말합니다.
+- 프로젝트에 형식 검증 스킬이 없으면 테스트가 닿는 것 너머의 속성은 검사되지 않습니다. 경쟁, 불변식, 테스트가 잘 닿지 않는 다른 경우에 대한 질문이면 [`/create-formal-verification-skill`](verification.md#skill-create-formal-verification-skill)을 말합니다. 이미 있고 그것이 덮는 코드가 마지막 동기화로 기록한 커밋 뒤에 바뀌었으면, 그 코드에 닿는 질문에 [`/maintain-formal-verification-skill`](verification.md#skill-maintain-formal-verification-skill)을 말합니다.
 
 모델 규칙이 없고 그것이 답을 바꿀 때는, 역할마다 모델과 추론 예산을 지금 고를지 묻습니다. 처음이거나, 질문이 설정이나 비용이거나, 답이 어떤 모델이 도는지에 달릴 때입니다. 채팅마다 한 번만 묻습니다. 필요도 흐리면 두 질문을 함께 합니다. 선택지는 둘입니다.
 
@@ -286,14 +290,16 @@ interrogate reviewers: claude-opus-5-5-xhigh, grok-4.7-xhigh-fast
 #### 설정을 한다
 
 1. 채팅에서 `/add-plugin pstack`으로 설치하거나, 사이드바 Customize에서 설치합니다.
-2. [`/setup-pstack`](#skill-setup-pstack)을 돌립니다. 추론 예산을 묻고, 역할마다 모델을 정하고, 규칙을 씁니다. 규칙은 새 채팅에 적용됩니다.
+2. [`/setup-pstack`](#skill-setup-pstack)을 돌립니다. 추론 예산을 묻고, 역할마다 모델을 정하고, 규칙을 씁니다. 규칙은 새 채팅에 적용됩니다. 그다음 프로젝트에 검증 스킬과 형식 검증 스킬이 없으면 각각 한 번씩 생성할지 묻습니다.
 3. 진짜 작업을 `/poteto-mode`로 시작합니다. 목표와, 통과하거나 실패할 수 있는 확인을 함께 줍니다.
 
 설치만으로는 아무것도 바뀌지 않습니다. 스킬을 불러야 합니다. 사용자의 말만으로 로드되는 것은 `/setup-pstack`뿐입니다. 자세한 내용은 README와 안내서 1장에 있습니다. 첫 프롬프트를 함께 다듬겠다고 제안하되, 그때는 `references/prompting.md`를 따릅니다.
 
 비용이 걱정이면 토큰이 어디로 가는지와 덜 쓰는 법을 말합니다. pstack은 서브에이전트와 리뷰 패널에 토큰을 더 씁니다. `/setup-pstack`을 다시 돌려 더 작은 예산이나 더 싼 모델을 고릅니다. 역할을 `auto`나 `inherit-parent`로 두면 채팅 모델로 돌아가므로, 채팅이 Auto이거나 더 싼 모델일 때 토큰을 줄입니다. 패널 목록을 짧게 하면 항목마다 뜨는 서브에이전트가 줄어듭니다. 엄밀함이 필요한 일에만 `/poteto-mode`를 씁니다.
 
-pstack은 Cursor용입니다. 스킬은 Agent Skills 형식이라 다른 도구도 읽을 수 있습니다. 다만 `/poteto-mode`, `/how`, `/why`, `/teach`를 포함한 대부분의 워크플로 스킬은 역할별 모델을 가진 Cursor 서브에이전트를 띄우고, Custom Mode와 `/loop`는 Cursor 기능이므로 그 부분은 다른 도구에서 동작하지 않을 수 있습니다. README는 이와 별도로 Claude Code 설치와 [Claude Code 어댑터](#claude-code-adapter)를 밝힙니다.
+pstack은 Cursor용이고, Claude Code에도 `/plugin marketplace add cursor/plugins` 다음에 `/plugin install pstack@cursor-plugins`로 설치합니다. 거기서는 명령마다 `pstack:` 접두사가 붙으므로 `/poteto-mode`는 `/pstack:poteto-mode`입니다. [Claude Code 어댑터](#claude-code-adapter)가 Cursor 이름을 대응하고, Bugbot이나 자동화처럼 Cursor에만 있는 기능이 필요한 단계는 한 줄 메모와 함께 건너뜁니다.
+
+다른 도구도 스킬을 읽을 수 있습니다. Agent Skills 형식이기 때문입니다. 다만 `/poteto-mode`, `/how`, `/why`, `/teach`를 포함한 대부분의 워크플로 스킬은 역할별 모델을 가진 Cursor 서브에이전트를 띄우고, Custom Mode와 `/loop`는 Cursor 기능이므로 그 부분은 다른 도구에서 동작하지 않을 수 있습니다.
 
 #### `/poteto-mode`로 작업을 시작한다
 
@@ -335,6 +341,7 @@ pstack은 Cursor용입니다. 스킬은 Agent Skills 형식이라 다른 도구�
 | 에이전트가 앱을 스크립트로 돌리고 동작을 증명하게 | [`/create-verification-skill`](verification.md#skill-create-verification-skill) |
 | 검증 스킬과 기능 지도를 앱에 다시 맞춘다 | [`/maintain-verification-skill`](verification.md#skill-maintain-verification-skill) |
 | 테스트가 잘 닿지 않는 경쟁, 불변식, 그 밖의 속성을 형식 검증한다 | [`/create-formal-verification-skill`](verification.md#skill-create-formal-verification-skill) |
+| 덮는 코드가 바뀐 뒤 형식 검증을 코드에 다시 맞추고, 실패가 표류인지 버그인지 가린다 | [`/maintain-formal-verification-skill`](verification.md#skill-maintain-formal-verification-skill) |
 | 성능 숫자를 보고하거나 그 숫자로 행동하기 전에 걸러 낸다 | [`/benchmark-checklist`](verification.md#skill-benchmark-checklist) |
 | 크거나 가로지르는 변경, 또는 자리를 뜬 뒤 검토할 변경 | [`/figure-it-out`](arena-swarm.md#skill-figure-it-out) |
 | 실행 중 결정 기록을 남기고 나중에 검토한다 | [`/show-me-your-work`](personal.md#skill-show-me-your-work) |
@@ -354,7 +361,7 @@ pstack은 Cursor용입니다. 스킬은 Agent Skills 형식이라 다른 도구�
 - `/architect`는 설계를 정한 뒤 바로 구현합니다. 코드를 쓰기 전에 설계를 보려면 "with checkpoint"를 붙입니다.
 - `/interrogate`는 diff를 리뷰합니다. `/blast-radius`는 diff 밖의 깨짐을 찾고, 변경을 안전하게 하는 사실 하나를 증명합니다.
 - `/recall`은 최근 채팅을 가로질러 맥락을 다시 세웁니다. `/ketchup`은 이 채팅에서 사용자의 마지막 메시지 이후만 다룹니다. 특정 채팅이나 브랜치 하나를 이어받는 것은 Session pickup 플레이북입니다.
-- `/in-your-own-words`는 목표와 문제를 자기 말로 다시 말합니다. `/sharpen`은 과업을 조인 뒤 일을 하고, 다시 쓴 프롬프트를 돌려주지 않습니다. `/bro`는 마지막 답을 평이하게 다시 말합니다.
+- `/in-your-own-words`는 목표와 문제를 자기 말로 다시 말합니다. `/sharpen`은 과업을 조인 뒤 일을 합니다. `/bro`는 마지막 답을 평이하게 다시 말합니다.
 - `/figure-it-out`은 엄밀한 실행 하나를 설계합니다. Orchestrate 플레이북은 여러 날과 여러 PR에 걸친 프로그램을 돌립니다. Autonomous run 플레이북은 작업 하나를 끝 조건까지 밉니다.
 
 pstack에 없는 것입니다.
@@ -437,7 +444,7 @@ README가 든 예입니다. 스킬은 리뷰 질문을 알아차리고 [`/interr
 
 ### 관련 스킬
 
-설치와 모델은 [`setup-pstack`](#skill-setup-pstack), 작업의 입구는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode)입니다. 일을 시작하기 전에 목표와 문제를 다시 듣기는 [`in-your-own-words`](#skill-in-your-own-words)입니다. 과업을 조인 뒤 일을 하는 것은 [`sharpen`](#skill-sharpen)입니다. 앱을 증명할 방법이 없으면 [`create-verification-skill`](verification.md#skill-create-verification-skill)입니다. 테스트가 잘 닿지 않는 속성은 [`create-formal-verification-skill`](verification.md#skill-create-formal-verification-skill)로 형식 검증(formal verification)합니다. 자기 방식은 [`automate-me`](personal.md#skill-automate-me), [`reflect`](personal.md#skill-reflect), [`correct`](personal.md#skill-correct)입니다. 사람이 따라갈 표는 [부록의 선택 흐름도](decision-flow.md)에 있습니다.
+설치와 모델은 [`setup-pstack`](#skill-setup-pstack), 작업의 입구는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode)입니다. 일을 시작하기 전에 목표와 문제를 다시 듣기는 [`in-your-own-words`](#skill-in-your-own-words)입니다. 과업을 조인 뒤 일을 하는 것은 [`sharpen`](#skill-sharpen)입니다. 앱을 증명할 방법이 없으면 [`create-verification-skill`](verification.md#skill-create-verification-skill)입니다. 테스트가 잘 닿지 않는 속성은 [`create-formal-verification-skill`](verification.md#skill-create-formal-verification-skill)로 형식 검증(formal verification)합니다. 덮는 코드가 바뀐 뒤의 유지는 [`maintain-formal-verification-skill`](verification.md#skill-maintain-formal-verification-skill)입니다. 자기 방식은 [`automate-me`](personal.md#skill-automate-me), [`reflect`](personal.md#skill-reflect), [`correct`](personal.md#skill-correct)입니다. 사람이 따라갈 표는 [부록의 선택 흐름도](decision-flow.md)에 있습니다.
 
 ## in-your-own-words {#skill-in-your-own-words}
 
@@ -490,7 +497,7 @@ README가 든 예입니다. 스킬은 리뷰 질문을 알아차리고 [`/interr
 
 ### 동작 방식
 
-스킬 본문은 한 단락입니다. 시작하기 전에 세 가지를 묻습니다. 최상위 전문가가 이 과업에 어떻게 접근할지(그들이 보는 원자료, 그들이 쓰는 실제 방법, 결과가 맞는지 바깥에서 확인하는 검사), 사용자가 진짜 원하는 것, 과업이 과잉 명세인지 과소 명세인지입니다. 목표에 도움이 되지 않는 제약은 도움이 되는 제약을 더하는 것만큼 쉽게 풉니다. 사용자가 정할 선택은 대신 정하지 않고 열어 둡니다. 일을 더 크게가 아니라 더 좋게 만드는 것만 넣고, 결과가 맞는지 바깥에서 확인하는 검사는 항상 하나 남깁니다. 그 틀을 설명하지 않고 일을 합니다. 다시 쓴 프롬프트를 돌려주지 않습니다.
+스킬 본문은 한 단락입니다. 시작하기 전에 세 가지를 묻습니다. 최상위 전문가가 이 과업에 어떻게 접근할지(그들이 보는 원자료, 그들이 쓰는 실제 방법, 결과가 맞는지 바깥에서 확인하는 검사), 사용자가 진짜 원하는 것, 과업이 과잉 명세인지 과소 명세인지입니다. 목표에 도움이 되지 않는 제약은 도움이 되는 제약을 더하는 것만큼 쉽게 풉니다. 사용자가 정할 선택은 대신 정하지 않고 열어 둡니다. 일을 더 크게가 아니라 더 좋게 만드는 것만 넣고, 결과가 맞는지 바깥에서 확인하는 검사는 항상 하나 남깁니다. 그 틀을 설명하지 않고 일을 합니다.
 
 `references/recipes.md`의 예는 `/sharpen <your task>`입니다. 과업을 붙입니다.
 
@@ -506,12 +513,12 @@ README가 든 예입니다. 스킬은 리뷰 질문을 알아차리고 [`/interr
 >
 > 1. 최상위 전문가라면 원자료(프로파일, 느린 쿼리 로그)를 먼저 보고, 실제 방법으로 병목을 재현한 뒤, 고친 뒤 같은 질의로 바깥에서 확인한다고 조입니다.
 > 2. 사용자가 진짜 원하는 것은 검색이 빨라지는 것이고, 인덱스냐 쿼리냐는 사용자가 연 선택입니다. 그 선택을 대신하지 않습니다.
-> 3. 과잉 명세를 풀고 바깥 검사 하나를 남긴 뒤, 틀을 설명하지 않고 일을 합니다. 다시 쓴 프롬프트를 돌려주지 않습니다.
+> 3. 과잉 명세를 풀고 바깥 검사 하나를 남긴 뒤, 틀을 설명하지 않고 일을 합니다.
 
 ### 함정과 주의점
 
 - 칠 때만 돕니다. 사용자의 말만으로 로드되지 않습니다. `poteto-mode`가 이 스킬을 자동으로 부르지 않습니다.
-- 다시 쓴 프롬프트를 돌려주지 않습니다. 조인 뒤 일을 합니다.
+- 조인 뒤 일을 합니다. 틀을 설명하지 않습니다.
 - 사용자가 정할 선택을 대신 정하지 않습니다. 목표에 도움이 되지 않는 제약은 풉니다.
 - 바깥에서 확인하는 검사는 항상 하나 남깁니다. 일을 더 크게 만들려고 검사를 더하지는 않습니다.
 - [`in-your-own-words`](#skill-in-your-own-words)는 목표와 문제를 다시 말하고 멈추고, 이 스킬은 조인 뒤 일을 합니다.
