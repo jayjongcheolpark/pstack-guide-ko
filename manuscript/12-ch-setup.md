@@ -321,7 +321,7 @@ pstack은 Cursor용이고, Claude Code에도 `/plugin marketplace add cursor/plu
 | --- | --- |
 | 사소하지 않은 작업을 엄밀하게 | [`/poteto-mode`](poteto-mode.md#skill-poteto-mode) |
 | 에이전트가 목표와 문제를 이해했는지 일을 시작하기 전에 확인한다 | [`/in-your-own-words`](#skill-in-your-own-words) |
-| 보내기 전에 프롬프트를 더 깊게, 더 크게는 아니게 다시 받는다. 프롬프트를 돌려주고 과업은 하지 않는다 | [`/sharpen`](#skill-sharpen) |
+| 보내기 전에 프롬프트를 더 깊게, 더 크게는 아니게 다시 받는다. 최상위 전문가가 더할 것, 원자료와 방법, 바깥 검사. 과업은 하지 않는다 | [`/sharpen`](#skill-sharpen) |
 | 코드가 지금 어떻게 동작하는지, 새 코드가 어디에 살아야 하는지 | [`/how`](how.md#skill-how) |
 | 코드가 왜 이 모양인지, 숫자가 어디서 왔는지 | [`/why`](why.md#skill-why) |
 | 변경이나 서브시스템을 평이하게 이해하고 싶다 | [`/teach`](teach-recall.md#skill-teach) |
@@ -504,7 +504,7 @@ README가 든 예입니다. 스킬은 리뷰 질문을 알아차리고 [`/interr
 3. 그들이 쓸 구체적인 방법과 도구를 이름 붙입니다.
 4. 사용자나 에이전트가 아닌 무엇이 결과가 맞다는 것을 보여 줄지 말합니다.
 
-그다음 바로 그것을 묻는 프롬프트로 다시 씁니다. 사용자가 정할 선택은 대신 정하지 않고 열어 둡니다. 안내서 2장은 다시 쓴 것을 읽고, 맞으면 `/poteto-mode`로 보내라고 합니다. 과업은 하지 않습니다.
+그다음 바로 그것을 묻는 프롬프트로 다시 씁니다. 사용자가 정할 선택은 대신 정하지 않고 열어 둡니다. 안내서 2장은 다시 쓴 것을 읽고, 맞으면 보내라고 합니다. 예는 `/poteto-mode`입니다. 과업은 하지 않습니다.
 
 `references/recipes.md`의 예는 `/sharpen <the prompt you're about to send>`입니다. 보내려는 프롬프트를 붙입니다.
 
@@ -520,7 +520,7 @@ README가 든 예입니다. 스킬은 리뷰 질문을 알아차리고 [`/interr
 >
 > 1. 최상위 전문가라면 프로파일과 느린 쿼리 로그처럼 날것 자료를 먼저 보고, 그들이 쓰는 방법과 도구로 병목을 재현하며, 고친 뒤 같은 질의의 시간으로 바깥에서 확인한다고 말합니다.
 > 2. 인덱스냐 쿼리냐는 사용자가 연 선택이므로 대신 정하지 않습니다.
-> 3. 그 네 가지를 넣은 프롬프트를 돌려주고, 검색을 고치지는 않습니다. 사용자는 다시 쓴 것을 읽고 `/poteto-mode`로 보냅니다.
+> 3. 그 네 가지를 넣은 프롬프트를 돌려주고, 검색을 고치지는 않습니다. 사용자는 다시 쓴 것을 읽고, 예를 들어 `/poteto-mode`로 보냅니다.
 
 ### 함정과 주의점
 
@@ -532,4 +532,4 @@ README가 든 예입니다. 스킬은 리뷰 질문을 알아차리고 [`/interr
 
 ### 관련 스킬
 
-일을 시작하기 전에 목표와 문제를 다시 듣기는 [`in-your-own-words`](#skill-in-your-own-words)입니다. 입구는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode), 스킬을 고르는 안내는 [`poteto-help`](#skill-poteto-help)입니다. 다시 쓴 프롬프트를 보내는 자리는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode)입니다.
+일을 시작하기 전에 목표와 문제를 다시 듣기는 [`in-your-own-words`](#skill-in-your-own-words)입니다. 입구는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode), 스킬을 고르는 안내는 [`poteto-help`](#skill-poteto-help)입니다. 다시 쓴 프롬프트를 보내는 한 가지 예는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode)입니다.
