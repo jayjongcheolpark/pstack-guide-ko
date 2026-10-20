@@ -20,8 +20,7 @@ export const SOURCE = {
 // The book version starts from the pstack version it covers. A book-only fix, while
 // pstack stays at the same version, sets BOOK_REVISION to 1, 2, ... and the version
 // becomes ${SOURCE.version}-ko.${BOOK_REVISION}. BOOK_REVISION 0 means this release
-// is the pstack version itself. SOURCE.version and BOOK_REVISION are the only places
-// either is written down.
+// is the pstack version itself.
 export const BOOK_REVISION = 0;
 export const BOOK_VERSION = BOOK_REVISION > 0 ? `${SOURCE.version}-ko.${BOOK_REVISION}` : SOURCE.version;
 export const bookFile = (ext) => `pstack-guide-${BOOK_VERSION}.${ext}`;
