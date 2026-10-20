@@ -157,13 +157,13 @@ README는 유지 방법을 이렇게 말합니다. 작업을 치기 전에 `/` �
 
 오독은 코드가 생기기 전, 다시 말한 자리에서 드러납니다. 거기서 고치면 메시지 하나이고, 틀린 수정 하나가 아닙니다. 그 한 가지만 시키려면 [`/in-your-own-words`](setup.md#skill-in-your-own-words)입니다. 레시피는 `/in-your-own-words <long or messy ask>`입니다.
 
-과업이 맞는지 확신이 없으면 앞에 [`/sharpen`](setup.md#skill-sharpen)을 둡니다.
+프롬프트가 맞는지 확신이 없으면 보내기 전에 [`/sharpen`](setup.md#skill-sharpen)을 칩니다.
 
 ```text
 /sharpen v2 설정 형식의 마이그레이션 가이드를 써 줘.
 ```
 
-시작하기 전에 최상위 전문가가 그 과업을 어떻게 할지, 사용자가 진짜 원하는 것, 요청이 과잉 명세인지 과소 명세인지를 묻습니다. 목표에 도움이 되지 않는 제약은 더하는 것만큼 쉽게 풀고, 사용자의 선택은 열어 두고, 결과가 맞는지 바깥에서 확인하는 검사 하나를 남긴 뒤 일을 합니다.
+에이전트는 최상위 전문가가 묻지 않은 것, 그들이 시작할 가장 날것의 자료, 방법과 도구, 사용자나 에이전트가 아닌 무엇이 결과가 맞다는 것을 보여 줄지를 말합니다. 그다음 바로 그것을 묻는 프롬프트로 다시 쓰고, 사용자의 선택은 열어 둡니다. 과업은 하지 않습니다. 안내서는 다시 쓴 것을 읽고, 맞으면 `/poteto-mode`로 보내라고 합니다.
 
 대화에 맥락이 이미 있으면 프롬프트는 거의 없어도 됩니다. 아래는 모두 충분합니다.
 
@@ -214,7 +214,7 @@ keep going until done
 
 ### 관련 스킬
 
-플레이북이 부르는 스킬은 [이해하기](how.md#skill-how), [설계하기](architect.md#skill-architect), [고치고 검증하기](tdd-blast.md#skill-tdd) 부에서 다룹니다. 모델 설정은 [`setup-pstack`](setup.md#skill-setup-pstack)에서, 원칙은 [원칙 장](principles.md)에서 다룹니다. 어느 스킬이나 플레이북이 맞는지 모르겠으면 [`poteto-help`](setup.md#skill-poteto-help)가 이 장을 가리킵니다. 일을 시작하기 전에 목표와 문제를 다시 듣기는 [`in-your-own-words`](setup.md#skill-in-your-own-words)입니다. 과업을 조인 뒤 일을 하는 것은 [`sharpen`](setup.md#skill-sharpen)입니다.
+플레이북이 부르는 스킬은 [이해하기](how.md#skill-how), [설계하기](architect.md#skill-architect), [고치고 검증하기](tdd-blast.md#skill-tdd) 부에서 다룹니다. 모델 설정은 [`setup-pstack`](setup.md#skill-setup-pstack)에서, 원칙은 [원칙 장](principles.md)에서 다룹니다. 어느 스킬이나 플레이북이 맞는지 모르겠으면 [`poteto-help`](setup.md#skill-poteto-help)가 이 장을 가리킵니다. 일을 시작하기 전에 목표와 문제를 다시 듣기는 [`in-your-own-words`](setup.md#skill-in-your-own-words)입니다. 보내기 전에 프롬프트를 다시 쓰는 것은 [`sharpen`](setup.md#skill-sharpen)입니다.
 
 ## poteto-agent {#agent-poteto-agent}
 

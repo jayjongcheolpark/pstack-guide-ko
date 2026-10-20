@@ -2,7 +2,7 @@
 
 원문: {{src:docs/guide/01-setup.md}} {{src:docs/guide/README.md}} {{src:skills/setup-pstack/SKILL.md}} {{src:skills/poteto-help/SKILL.md}} {{src:README.md}} {{src:docs/harness/claude-code.md}}
 
-이 장에서는 플러그인을 설치하고, pstack이 쓸 모델을 고르고, 첫 작업을 실행합니다. 설정은 명령 한 줄과 짧은 대화면 끝납니다. 막혔거나 어느 스킬이 맞는지 모르겠으면 같은 장의 [`poteto-help`](#skill-poteto-help)가 안내서와 스킬을 가리킵니다. 일을 시작하기 전에 목표와 문제를 다시 듣기를 원하면 [`in-your-own-words`](#skill-in-your-own-words)를 칩니다. 과업을 최상위 전문가처럼 조이고 사용자가 진짜 원하는 것에 맞추려면 [`sharpen`](#skill-sharpen)을 칩니다.
+이 장에서는 플러그인을 설치하고, pstack이 쓸 모델을 고르고, 첫 작업을 실행합니다. 설정은 명령 한 줄과 짧은 대화면 끝납니다. 막혔거나 어느 스킬이 맞는지 모르겠으면 같은 장의 [`poteto-help`](#skill-poteto-help)가 안내서와 스킬을 가리킵니다. 일을 시작하기 전에 목표와 문제를 다시 듣기를 원하면 [`in-your-own-words`](#skill-in-your-own-words)를 칩니다. 보내기 전에 프롬프트를 더 깊게, 더 크게는 아니게 다시 쓰려면 [`sharpen`](#skill-sharpen)을 칩니다.
 
 ## 플러그인 설치
 
@@ -25,7 +25,7 @@ README는 Claude Code에서 이렇게 설치하라고 합니다.
 
 Claude Code는 플러그인 명령과 에이전트 이름 앞에 접두사를 붙이므로 `/poteto-mode`는 `/pstack:poteto-mode`가 됩니다. 나머지 Cursor 이름은 아래 [Claude Code 어댑터](#claude-code-adapter)가 대응합니다.
 
-Claude Code가 설치하는 것은 저장소 루트의 [`harness/pstack/`](https://github.com/cursor/plugins/tree/d457567332aa6989e753ea289f30ea2bfbc80bc0/harness/pstack)에서 생성한 복사본이고, README와 안내서도 포함합니다. pstack을 바꾼 뒤에는 저장소 루트에서 `node scripts/generate-pstack-harness-trees.mjs`를 실행하고 그 결과를 커밋합니다. 생성 복사가 뒤처져 있으면 CI가 실패합니다. 이 생성 트리는 `pstack/` 밖이므로 이 책의 원문 범위에는 넣지 않았고, README가 밝히는 설치 경로로만 적습니다. Claude Code에서 `/pstack:setup-pstack`은 모델 선택을 `~/.claude/rules/pstack-models.md`에 쓰고, Bugbot이나 자동화처럼 Cursor에만 있는 기능이 필요한 단계는 한 줄 메모와 함께 건너뜁니다.
+Claude Code가 설치하는 것은 저장소 루트의 [`harness/pstack/`](https://github.com/cursor/plugins/tree/88d47514b82e7c44f00f2b2a72ff6dd12158038c/harness/pstack)에서 생성한 복사본이고, README와 안내서도 포함합니다. pstack을 바꾼 뒤에는 저장소 루트에서 `node scripts/generate-pstack-harness-trees.mjs`를 실행하고 그 결과를 커밋합니다. 생성 복사가 뒤처져 있으면 CI가 실패합니다. 이 생성 트리는 `pstack/` 밖이므로 이 책의 원문 범위에는 넣지 않았고, README가 밝히는 설치 경로로만 적습니다. Claude Code에서 `/pstack:setup-pstack`은 모델 선택을 `~/.claude/rules/pstack-models.md`에 쓰고, Bugbot이나 자동화처럼 Cursor에만 있는 기능이 필요한 단계는 한 줄 메모와 함께 건너뜁니다.
 
 ## Claude Code 어댑터 {#claude-code-adapter}
 
@@ -321,7 +321,7 @@ pstack은 Cursor용이고, Claude Code에도 `/plugin marketplace add cursor/plu
 | --- | --- |
 | 사소하지 않은 작업을 엄밀하게 | [`/poteto-mode`](poteto-mode.md#skill-poteto-mode) |
 | 에이전트가 목표와 문제를 이해했는지 일을 시작하기 전에 확인한다 | [`/in-your-own-words`](#skill-in-your-own-words) |
-| 일을 시작하기 전에 과업을 더 높게 조인다. 더 전문가답게, 결과에 맞추고, 과잉 명세하지 않는다 | [`/sharpen`](#skill-sharpen) |
+| 보내기 전에 프롬프트를 더 깊게, 더 크게는 아니게 다시 받는다. 프롬프트를 돌려주고 과업은 하지 않는다 | [`/sharpen`](#skill-sharpen) |
 | 코드가 지금 어떻게 동작하는지, 새 코드가 어디에 살아야 하는지 | [`/how`](how.md#skill-how) |
 | 코드가 왜 이 모양인지, 숫자가 어디서 왔는지 | [`/why`](why.md#skill-why) |
 | 변경이나 서브시스템을 평이하게 이해하고 싶다 | [`/teach`](teach-recall.md#skill-teach) |
@@ -361,7 +361,7 @@ pstack은 Cursor용이고, Claude Code에도 `/plugin marketplace add cursor/plu
 - `/architect`는 설계를 정한 뒤 바로 구현합니다. 코드를 쓰기 전에 설계를 보려면 "with checkpoint"를 붙입니다.
 - `/interrogate`는 diff를 리뷰합니다. `/blast-radius`는 diff 밖의 깨짐을 찾고, 변경을 안전하게 하는 사실 하나를 증명합니다.
 - `/recall`은 최근 채팅을 가로질러 맥락을 다시 세웁니다. `/ketchup`은 이 채팅에서 사용자의 마지막 메시지 이후만 다룹니다. 특정 채팅이나 브랜치 하나를 이어받는 것은 Session pickup 플레이북입니다.
-- `/in-your-own-words`는 목표와 문제를 자기 말로 다시 말합니다. `/sharpen`은 과업을 조인 뒤 일을 합니다. `/bro`는 마지막 답을 평이하게 다시 말합니다.
+- `/in-your-own-words`는 목표와 문제를 자기 말로 다시 말합니다. `/sharpen`은 보내기 전에 프롬프트를 더 깊게 다시 쓰고 과업은 하지 않습니다. `/bro`는 마지막 답을 평이하게 다시 말합니다.
 - `/figure-it-out`은 엄밀한 실행 하나를 설계합니다. Orchestrate 플레이북은 여러 날과 여러 PR에 걸친 프로그램을 돌립니다. Autonomous run 플레이북은 작업 하나를 끝 조건까지 밉니다.
 
 pstack에 없는 것입니다.
@@ -444,7 +444,7 @@ README가 든 예입니다. 스킬은 리뷰 질문을 알아차리고 [`/interr
 
 ### 관련 스킬
 
-설치와 모델은 [`setup-pstack`](#skill-setup-pstack), 작업의 입구는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode)입니다. 일을 시작하기 전에 목표와 문제를 다시 듣기는 [`in-your-own-words`](#skill-in-your-own-words)입니다. 과업을 조인 뒤 일을 하는 것은 [`sharpen`](#skill-sharpen)입니다. 앱을 증명할 방법이 없으면 [`create-verification-skill`](verification.md#skill-create-verification-skill)입니다. 테스트가 잘 닿지 않는 속성은 [`create-formal-verification-skill`](verification.md#skill-create-formal-verification-skill)로 형식 검증(formal verification)합니다. 덮는 코드가 바뀐 뒤의 유지는 [`maintain-formal-verification-skill`](verification.md#skill-maintain-formal-verification-skill)입니다. 자기 방식은 [`automate-me`](personal.md#skill-automate-me), [`reflect`](personal.md#skill-reflect), [`correct`](personal.md#skill-correct)입니다. 사람이 따라갈 표는 [부록의 선택 흐름도](decision-flow.md)에 있습니다.
+설치와 모델은 [`setup-pstack`](#skill-setup-pstack), 작업의 입구는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode)입니다. 일을 시작하기 전에 목표와 문제를 다시 듣기는 [`in-your-own-words`](#skill-in-your-own-words)입니다. 보내기 전에 프롬프트를 다시 쓰는 것은 [`sharpen`](#skill-sharpen)입니다. 앱을 증명할 방법이 없으면 [`create-verification-skill`](verification.md#skill-create-verification-skill)입니다. 테스트가 잘 닿지 않는 속성은 [`create-formal-verification-skill`](verification.md#skill-create-formal-verification-skill)로 형식 검증(formal verification)합니다. 덮는 코드가 바뀐 뒤의 유지는 [`maintain-formal-verification-skill`](verification.md#skill-maintain-formal-verification-skill)입니다. 자기 방식은 [`automate-me`](personal.md#skill-automate-me), [`reflect`](personal.md#skill-reflect), [`correct`](personal.md#skill-correct)입니다. 사람이 따라갈 표는 [부록의 선택 흐름도](decision-flow.md)에 있습니다.
 
 ## in-your-own-words {#skill-in-your-own-words}
 
@@ -483,23 +483,30 @@ README가 든 예입니다. 스킬은 리뷰 질문을 알아차리고 [`/interr
 
 ### 관련 스킬
 
-입구는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode), 스킬을 고르는 안내는 [`poteto-help`](#skill-poteto-help)입니다. 과업을 조인 뒤 일을 하는 것은 [`sharpen`](#skill-sharpen)입니다. 마지막 답을 평이하게 다시 듣는 것은 [`bro`](utility.md#skill-bro)입니다. 이 채팅의 마지막 메시지 이후를 따라잡는 것은 [`ketchup`](teach-recall.md#skill-ketchup)입니다.
+입구는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode), 스킬을 고르는 안내는 [`poteto-help`](#skill-poteto-help)입니다. 보내기 전에 프롬프트를 다시 쓰는 것은 [`sharpen`](#skill-sharpen)입니다. 마지막 답을 평이하게 다시 듣는 것은 [`bro`](utility.md#skill-bro)입니다. 이 채팅의 마지막 메시지 이후를 따라잡는 것은 [`ketchup`](teach-recall.md#skill-ketchup)입니다.
 
 ## sharpen {#skill-sharpen}
 
-원문: {{src:skills/sharpen/SKILL.md}} {{src:README.md}} {{src:skills/poteto-help/SKILL.md}} {{src:skills/poteto-help/references/recipes.md}}
+원문: {{src:skills/sharpen/SKILL.md}} {{src:README.md}} {{src:skills/poteto-help/SKILL.md}} {{src:skills/poteto-help/references/recipes.md}} {{src:docs/guide/02-poteto-mode.md}} {{src:docs/guide/10-recipes-and-pitfalls.md}}
 
-> 일을 시작하기 전에 과업을 조입니다. 최상위 전문가의 접근, 사용자가 진짜 원하는 것, 알맞은 명세 수준입니다.
+> 과업을 더 깊게, 더 크게는 아니게 만든 뒤 프롬프트를 다시 씁니다.
 
 ### 언제 쓰는가
 
-일을 시작하기 전에 과업을 더 높게 조이고 싶을 때입니다. 원문의 `description`은 "Sharpen a task before starting: the expert approach, what the user is really after, and the right level of specification. Use for `/sharpen`."입니다. `disable-model-invocation: true`입니다. README는 `/in-your-own-words` 다음에 이 스킬을 두고, 최상위 전문가처럼 접근하고 사용자가 진짜 원하는 것에 맞추되 과잉 명세하거나 사용자의 선택을 대신하지 않기를 원할 때라고 합니다. `/poteto-help`의 표는 "일을 시작하기 전에 과업을 더 높게 조인다. 더 전문가답게, 결과에 맞추고, 과잉 명세하지 않는다"고 짝을 짓습니다. 칠 때만 돕니다.
+보내기 전에 프롬프트를 더 깊게 만들고 싶을 때입니다. 원문의 `description`은 "Make a task deeper, not bigger, then rewrite the prompt. Use for `/sharpen`."입니다. `disable-model-invocation: true`입니다. README는 `/in-your-own-words` 다음에 이 스킬을 두고, 보내기 전에 프롬프트를 더 깊게, 더 크게는 아니게 만들고 싶을 때라고 합니다. 최상위 전문가가 묻지 않은 것, 그들이 시작하는 원자료, 방법과 도구, 결과가 맞는지 바깥에서 확인하는 검사를 넣고, 다시 쓴 프롬프트를 돌려주며, 사용자의 선택은 열어 두고, 과업은 하지 않는다고 합니다. `/poteto-help`의 표는 "보내기 전에 프롬프트를 더 깊게, 더 크게는 아니게 다시 받는다. 최상위 전문가가 더할 것, 원자료와 방법, 바깥 검사. 프롬프트를 돌려주고 과업은 하지 않는다"고 짝을 짓습니다. 칠 때만 돕니다.
 
 ### 동작 방식
 
-스킬 본문은 한 단락입니다. 시작하기 전에 세 가지를 묻습니다. 최상위 전문가가 이 과업에 어떻게 접근할지(그들이 보는 원자료, 그들이 쓰는 실제 방법, 결과가 맞는지 바깥에서 확인하는 검사), 사용자가 진짜 원하는 것, 과업이 과잉 명세인지 과소 명세인지입니다. 목표에 도움이 되지 않는 제약은 도움이 되는 제약을 더하는 것만큼 쉽게 풉니다. 사용자가 정할 선택은 대신 정하지 않고 열어 둡니다. 일을 더 크게가 아니라 더 좋게 만드는 것만 넣고, 결과가 맞는지 바깥에서 확인하는 검사는 항상 하나 남깁니다. 그 틀을 설명하지 않고 일을 합니다.
+스킬 본문은 다시 쓰기 전에 네 가지를 하라고 합니다.
 
-`references/recipes.md`의 예는 `/sharpen <your task>`입니다. 과업을 붙입니다.
+1. 이 분야에서 최상위 전문가가 여기서 할 일 가운데 사용자가 묻지 않은 것을 말합니다.
+2. 이미 소화해 준 것 대신, 그들이 시작할 가장 날것의 자료를 이름 붙입니다.
+3. 그들이 쓸 구체적인 방법과 도구를 이름 붙입니다.
+4. 사용자나 에이전트가 아닌 무엇이 결과가 맞다는 것을 보여 줄지 말합니다.
+
+그다음 바로 그것을 묻는 프롬프트로 다시 씁니다. 사용자가 정할 선택은 대신 정하지 않고 열어 둡니다. 안내서 2장은 다시 쓴 것을 읽고, 맞으면 `/poteto-mode`로 보내라고 합니다. 과업은 하지 않습니다.
+
+`references/recipes.md`의 예는 `/sharpen <the prompt you're about to send>`입니다. 보내려는 프롬프트를 붙입니다.
 
 ### 사용 예
 
@@ -511,18 +518,18 @@ README가 든 예입니다. 스킬은 리뷰 질문을 알아차리고 [`/interr
 >
 > 상황: 위 요청을 칩니다.
 >
-> 1. 최상위 전문가라면 원자료(프로파일, 느린 쿼리 로그)를 먼저 보고, 실제 방법으로 병목을 재현한 뒤, 고친 뒤 같은 질의로 바깥에서 확인한다고 조입니다.
-> 2. 사용자가 진짜 원하는 것은 검색이 빨라지는 것이고, 인덱스냐 쿼리냐는 사용자가 연 선택입니다. 그 선택을 대신하지 않습니다.
-> 3. 과잉 명세를 풀고 바깥 검사 하나를 남긴 뒤, 틀을 설명하지 않고 일을 합니다.
+> 1. 최상위 전문가라면 프로파일과 느린 쿼리 로그처럼 날것 자료를 먼저 보고, 그들이 쓰는 방법과 도구로 병목을 재현하며, 고친 뒤 같은 질의의 시간으로 바깥에서 확인한다고 말합니다.
+> 2. 인덱스냐 쿼리냐는 사용자가 연 선택이므로 대신 정하지 않습니다.
+> 3. 그 네 가지를 넣은 프롬프트를 돌려주고, 검색을 고치지는 않습니다. 사용자는 다시 쓴 것을 읽고 `/poteto-mode`로 보냅니다.
 
 ### 함정과 주의점
 
 - 칠 때만 돕니다. 사용자의 말만으로 로드되지 않습니다. `poteto-mode`가 이 스킬을 자동으로 부르지 않습니다.
-- 조인 뒤 일을 합니다. 틀을 설명하지 않습니다.
-- 사용자가 정할 선택을 대신 정하지 않습니다. 목표에 도움이 되지 않는 제약은 풉니다.
-- 바깥에서 확인하는 검사는 항상 하나 남깁니다. 일을 더 크게 만들려고 검사를 더하지는 않습니다.
-- [`in-your-own-words`](#skill-in-your-own-words)는 목표와 문제를 다시 말하고 멈추고, 이 스킬은 조인 뒤 일을 합니다.
+- 다시 쓴 프롬프트를 돌려줍니다. 과업은 하지 않습니다.
+- 사용자가 정할 선택은 대신 정하지 않습니다.
+- 일을 더 크게 만들지 않습니다. 더 깊게만 만듭니다.
+- [`in-your-own-words`](#skill-in-your-own-words)는 목표와 문제를 다시 말하고 멈추고, 이 스킬은 프롬프트를 다시 쓴 뒤 멈춥니다. 둘 다 일을 시작하지 않습니다.
 
 ### 관련 스킬
 
-일을 시작하기 전에 목표와 문제를 다시 듣기는 [`in-your-own-words`](#skill-in-your-own-words)입니다. 입구는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode), 스킬을 고르는 안내는 [`poteto-help`](#skill-poteto-help)입니다.
+일을 시작하기 전에 목표와 문제를 다시 듣기는 [`in-your-own-words`](#skill-in-your-own-words)입니다. 입구는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode), 스킬을 고르는 안내는 [`poteto-help`](#skill-poteto-help)입니다. 다시 쓴 프롬프트를 보내는 자리는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode)입니다.

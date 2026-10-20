@@ -32,13 +32,13 @@
 
 레시피는 `/in-your-own-words <long or messy ask>`입니다. 목표와 문제를 자기 말로 다시 말합니다. 본문은 확인을 기다리라고 하지 않습니다. → [`in-your-own-words`](setup.md#skill-in-your-own-words)
 
-**과업을 조인 뒤 일을 시키기.**
+**보내기 전에 프롬프트를 조이기.**
 
 ```text
 /sharpen 검색이 느린 이유를 찾아서 고쳐 줘. 인덱스를 더하는 쪽이든 쿼리를 바꾸는 쪽이든 괜찮아.
 ```
 
-레시피는 `/sharpen <your task>`입니다. 최상위 전문가처럼 접근하고, 사용자가 진짜 원하는 것에 맞추되 과잉 명세하거나 사용자의 선택을 대신하지 않습니다. 바깥에서 확인하는 검사 하나를 남긴 뒤 일을 합니다. → [`sharpen`](setup.md#skill-sharpen)
+레시피는 `/sharpen <the prompt you're about to send>`입니다. 최상위 전문가가 묻지 않은 것, 원자료, 방법과 도구, 바깥 검사를 넣고 프롬프트를 다시 씁니다. 다시 쓴 것을 돌려주고 과업은 하지 않습니다. 맞으면 그 프롬프트를 보냅니다. → [`sharpen`](setup.md#skill-sharpen)
 
 **고르기 전에 프로토타입.**
 
