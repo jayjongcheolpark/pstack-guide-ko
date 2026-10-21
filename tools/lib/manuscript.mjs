@@ -13,15 +13,14 @@ import { renderFlow } from "./flow.mjs";
 
 export const SOURCE = {
   repo: "https://github.com/cursor/plugins",
-  sha: "d457567332aa6989e753ea289f30ea2bfbc80bc0",
-  version: "0.15.28",
+  sha: "88d47514b82e7c44f00f2b2a72ff6dd12158038c",
+  version: "0.15.29",
   dir: "pstack",
 };
 // The book version starts from the pstack version it covers. A book-only fix, while
 // pstack stays at the same version, sets BOOK_REVISION to 1, 2, ... and the version
 // becomes ${SOURCE.version}-ko.${BOOK_REVISION}. BOOK_REVISION 0 means this release
-// is the pstack version itself. SOURCE.version and BOOK_REVISION are the only places
-// either is written down.
+// is the pstack version itself.
 export const BOOK_REVISION = 0;
 export const BOOK_VERSION = BOOK_REVISION > 0 ? `${SOURCE.version}-ko.${BOOK_REVISION}` : SOURCE.version;
 export const bookFile = (ext) => `pstack-guide-${BOOK_VERSION}.${ext}`;
@@ -32,7 +31,7 @@ export const BOOK = {
   subtitle: "Cursor 플러그인 스킬 56종 해설",
   language: "ko",
   identifier: "urn:uuid:5f6d1c1e-4a0b-4c7e-9a52-7d1b3c0e9a11",
-  date: "2026-10-19",
+  date: "2026-10-20",
 };
 
 // Worked examples written for this book (not from the source) open with this label.
