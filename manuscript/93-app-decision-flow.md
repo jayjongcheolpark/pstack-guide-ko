@@ -69,6 +69,7 @@
 | 검증 스킬의 기능 지도가 낡았다 | [`maintain-verification-skill`](verification.md#skill-maintain-verification-skill) |
 | 테스트가 잘 닿지 않는 경쟁, 불변식, 재시도, 상태 기계, 파서를 형식 검증하고 싶다 | [`create-formal-verification-skill`](verification.md#skill-create-formal-verification-skill) |
 | 형식 검증이 덮는 코드가 바뀐 뒤 검사를 코드에 다시 맞추고, 실패가 표류인지 버그인지 알고 싶다 | [`maintain-formal-verification-skill`](verification.md#skill-maintain-formal-verification-skill) |
+| 사용자가 보는 동작을 PM이나 디자이너에게 모델이 검사한 차트로 보이고 싶다 | [`statechart`](verification.md#skill-statechart) |
 | 끝났다고 선언하기 전이다 | [`principle-prove-it-works`](principles.md#skill-principle-prove-it-works) |
 | 테스트를 쓰거나 남기려 한다 | [`principle-test-behavior-not-implementation`](principles.md#skill-principle-test-behavior-not-implementation) |
 | 측정한 숫자를 믿거나 보고하거나 그 숫자로 행동하기 전이다 | [`benchmark-checklist`](verification.md#skill-benchmark-checklist), [`principle-explain-the-number`](principles.md#skill-principle-explain-the-number) |

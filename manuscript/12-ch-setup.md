@@ -25,7 +25,7 @@ README는 Claude Code에서 이렇게 설치하라고 합니다.
 
 Claude Code는 플러그인 명령과 에이전트 이름 앞에 접두사를 붙이므로 `/poteto-mode`는 `/pstack:poteto-mode`가 됩니다. 나머지 Cursor 이름은 아래 [Claude Code 어댑터](#claude-code-adapter)가 대응합니다.
 
-Claude Code가 설치하는 것은 저장소 루트의 [`harness/pstack/`](https://github.com/cursor/plugins/tree/88d47514b82e7c44f00f2b2a72ff6dd12158038c/harness/pstack)에서 생성한 복사본이고, README와 안내서도 포함합니다. pstack을 바꾼 뒤에는 저장소 루트에서 `node scripts/generate-pstack-harness-trees.mjs`를 실행하고 그 결과를 커밋합니다. 생성 복사가 뒤처져 있으면 CI가 실패합니다. 이 생성 트리는 `pstack/` 밖이므로 이 책의 원문 범위에는 넣지 않았고, README가 밝히는 설치 경로로만 적습니다. Claude Code에서 `/pstack:setup-pstack`은 모델 선택을 `~/.claude/rules/pstack-models.md`에 쓰고, Bugbot이나 자동화처럼 Cursor에만 있는 기능이 필요한 단계는 한 줄 메모와 함께 건너뜁니다.
+Claude Code가 설치하는 것은 저장소 루트의 [`harness/pstack/`](https://github.com/cursor/plugins/tree/eb4db2b55b2b7dec3d9282754cddf0a56bf4ff10/harness/pstack)에서 생성한 복사본이고, README와 안내서도 포함합니다. pstack을 바꾼 뒤에는 저장소 루트에서 `node scripts/generate-pstack-harness-trees.mjs`를 실행하고 그 결과를 커밋합니다. 생성 복사가 뒤처져 있으면 CI가 실패합니다. 이 생성 트리는 `pstack/` 밖이므로 이 책의 원문 범위에는 넣지 않았고, README가 밝히는 설치 경로로만 적습니다. Claude Code에서 `/pstack:setup-pstack`은 모델 선택을 `~/.claude/rules/pstack-models.md`에 쓰고, Bugbot이나 자동화처럼 Cursor에만 있는 기능이 필요한 단계는 한 줄 메모와 함께 건너뜁니다.
 
 ## Claude Code 어댑터 {#claude-code-adapter}
 
@@ -342,6 +342,7 @@ pstack은 Cursor용이고, Claude Code에도 `/plugin marketplace add cursor/plu
 | 검증 스킬과 기능 지도를 앱에 다시 맞춘다 | [`/maintain-verification-skill`](verification.md#skill-maintain-verification-skill) |
 | 테스트가 잘 닿지 않는 경쟁, 불변식, 그 밖의 속성을 형식 검증한다 | [`/create-formal-verification-skill`](verification.md#skill-create-formal-verification-skill) |
 | 덮는 코드가 바뀐 뒤 형식 검증을 코드에 다시 맞추고, 실패가 표류인지 버그인지 가린다 | [`/maintain-formal-verification-skill`](verification.md#skill-maintain-formal-verification-skill) |
+| 사용자가 보는 것을 모델이 검사한 차트로 PM이나 디자이너에게 보이고 버그마다 번호 붙은 경로로 그린다, 합의한 차트를 TLA+ 뼈대(skeleton)로 바꾼다, 또는 TLA+ 명세에 비춰 코드를 감사한다 | [`/statechart`](verification.md#skill-statechart) |
 | 성능 숫자를 보고하거나 그 숫자로 행동하기 전에 걸러 낸다 | [`/benchmark-checklist`](verification.md#skill-benchmark-checklist) |
 | 크거나 가로지르는 변경, 또는 자리를 뜬 뒤 검토할 변경 | [`/figure-it-out`](arena-swarm.md#skill-figure-it-out) |
 | 실행 중 결정 기록을 남기고 나중에 검토한다 | [`/show-me-your-work`](personal.md#skill-show-me-your-work) |
@@ -444,7 +445,7 @@ README가 든 예입니다. 스킬은 리뷰 질문을 알아차리고 [`/interr
 
 ### 관련 스킬
 
-설치와 모델은 [`setup-pstack`](#skill-setup-pstack), 작업의 입구는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode)입니다. 일을 시작하기 전에 목표와 문제를 다시 듣기는 [`in-your-own-words`](#skill-in-your-own-words)입니다. 보내기 전에 프롬프트를 다시 쓰는 것은 [`sharpen`](#skill-sharpen)입니다. 앱을 증명할 방법이 없으면 [`create-verification-skill`](verification.md#skill-create-verification-skill)입니다. 테스트가 잘 닿지 않는 속성은 [`create-formal-verification-skill`](verification.md#skill-create-formal-verification-skill)로 형식 검증(formal verification)합니다. 덮는 코드가 바뀐 뒤의 유지는 [`maintain-formal-verification-skill`](verification.md#skill-maintain-formal-verification-skill)입니다. 자기 방식은 [`automate-me`](personal.md#skill-automate-me), [`reflect`](personal.md#skill-reflect), [`correct`](personal.md#skill-correct)입니다. 사람이 따라갈 표는 [부록의 선택 흐름도](decision-flow.md)에 있습니다.
+설치와 모델은 [`setup-pstack`](#skill-setup-pstack), 작업의 입구는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode)입니다. 일을 시작하기 전에 목표와 문제를 다시 듣기는 [`in-your-own-words`](#skill-in-your-own-words)입니다. 보내기 전에 프롬프트를 다시 쓰는 것은 [`sharpen`](#skill-sharpen)입니다. 앱을 증명할 방법이 없으면 [`create-verification-skill`](verification.md#skill-create-verification-skill)입니다. 테스트가 잘 닿지 않는 속성은 [`create-formal-verification-skill`](verification.md#skill-create-formal-verification-skill)로 형식 검증(formal verification)합니다. 덮는 코드가 바뀐 뒤의 유지는 [`maintain-formal-verification-skill`](verification.md#skill-maintain-formal-verification-skill)입니다. TLA+ 모델에서 사용자가 보는 것을 차트로 그려 PM이나 디자이너에게 보이는 것은 [`statechart`](verification.md#skill-statechart)입니다. 자기 방식은 [`automate-me`](personal.md#skill-automate-me), [`reflect`](personal.md#skill-reflect), [`correct`](personal.md#skill-correct)입니다. 사람이 따라갈 표는 [부록의 선택 흐름도](decision-flow.md)에 있습니다.
 
 ## in-your-own-words {#skill-in-your-own-words}
 

@@ -8,11 +8,11 @@
 | --- | --- |
 | 원본 저장소 | https://github.com/cursor/plugins 의 `pstack/` 디렉터리 |
 | 플러그인 버전 | {{version}} |
-| 커밋 | `88d47514b82e7c44f00f2b2a72ff6dd12158038c` (짧게 `88d4751`) |
-| 스킬 수 | 56개 (일반 스킬 32개, `principle-*` 24개) |
+| 커밋 | `eb4db2b55b2b7dec3d9282754cddf0a56bf4ff10` (짧게 `eb4db2b`) |
+| 스킬 수 | 57개 (일반 스킬 33개, `principle-*` 24개) |
 | 저작권 | MIT, Copyright (c) 2026 Lauren Tan |
 | 이 책의 버전 | {{bookVersion}} (pstack {{version}}에서 시작합니다. 같은 pstack 버전에서 이 책만 고치면 `-ko.N`을 붙입니다) |
-| 집필 시점 | 2026년 10월 20일 (0.15.29으로 갱신. 초판은 2026년 9월 28일) |
+| 집필 시점 | 2026년 10월 22일 (0.15.30으로 갱신. 초판은 2026년 9월 28일) |
 
 본문의 동작 설명은 위 커밋의 소스를 읽고 확인한 내용입니다. 예외는 이 책의 저자가 원칙(principle)과 플레이북 절에 덧붙인 예시와 해설입니다. 이들은 원본에 없고, 점선 테두리의 블록에 "예시 (이 책의 저자가 만든 것, 원본에 없음)" 또는 "해설 (이 책의 해석, 원본에 없음)"이라는 첫 줄을 붙여 구분했습니다. 이 블록에 나오는 요청, 코드, 대화는 pstack의 문구가 아닙니다. 각 스킬 절 제목 아래의 `원문` 줄은 이 커밋에 고정한 GitHub 링크입니다. 원본은 https://github.com/cursor/plugins/tree/main/pstack 이고, 이 책은 위 커밋에 고정한 판을 기준으로 합니다. 원본은 이 책의 저장소에 복사하지 않았습니다. 이후 버전에서는 스킬의 문구, 기본 모델, 플레이북 절차가 달라질 수 있습니다.
 
@@ -24,7 +24,7 @@
 
 ## 범위
 
-다루는 것은 `pstack/` 아래의 스킬 56개, 에이전트 2개, 자동화 팩 1개(benny), 사용 안내서(`docs/guide`), 하니스 문서(`docs/harness`), README, 플러그인 매니페스트입니다. 같은 저장소의 별개 플러그인인 `cursor-team-kit`(`deslop`, `fix-ci`, `fix-merge-conflicts` 등)은 다루지 않습니다. pstack의 파일이 그 스킬을 부르는 자리에서만 "cursor-team-kit의 스킬"이라고 밝히며 한두 문장으로 언급합니다.
+다루는 것은 `pstack/` 아래의 스킬 57개, 에이전트 2개, 자동화 팩 1개(benny), 사용 안내서(`docs/guide`), 하니스 문서(`docs/harness`), README, 플러그인 매니페스트입니다. 같은 저장소의 별개 플러그인인 `cursor-team-kit`(`deslop`, `fix-ci`, `fix-merge-conflicts` 등)은 다루지 않습니다. pstack의 파일이 그 스킬을 부르는 자리에서만 "cursor-team-kit의 스킬"이라고 밝히며 한두 문장으로 언급합니다.
 
 ## 라이선스
 
