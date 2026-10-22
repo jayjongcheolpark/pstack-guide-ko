@@ -1,8 +1,8 @@
-# 검증 스킬: benchmark-checklist, create-verification-skill, maintain-verification-skill, create-formal-verification-skill, maintain-formal-verification-skill
+# 검증 스킬: benchmark-checklist, create-verification-skill, maintain-verification-skill, create-formal-verification-skill, maintain-formal-verification-skill, statechart
 
 ![원형 비행기가 시험 코스를 나는 것을 타이머로 재고 로봇들이 촬영하고 체크리스트를 확인하는 일러스트. 터미널에 verify: pass, evidence: captured라고 적혀 있다](images/verification.jpg)
 
-측정한 숫자를 그대로 믿으면, 실패한 요청이나 한 번뿐인 실행이 속도 향상으로 남습니다. 앱을 실제로 구동해 동작을 증명하는 스크립트된 방법이 없으면, 에이전트는 "컴파일된다" 이상을 증명하기 어렵습니다. 테스트가 생각한 경우만 검사하는 자리에서는, 경쟁이나 불변식처럼 잘 닿지 않는 속성이 남습니다. 이 장의 다섯 스킬은 그 자리를 다룹니다. `benchmark-checklist`는 성능 숫자를 보고하거나 그 숫자로 행동하기 전에 걸러 냅니다. `create-verification-skill`은 프로젝트 전용 검증(verification) 스킬과 기능 지도를 생성하고, `maintain-verification-skill`은 앱이 바뀜에 따라 낡아 가는 그 지도를 정직하게 유지합니다. `create-formal-verification-skill`은 테스트가 잘 닿지 않는 속성 하나를 형식 검증(formal verification)하는 프로젝트 전용 스킬을 남기고, `maintain-formal-verification-skill`은 그 검사가 덮는 코드가 바뀐 뒤 검증을 코드에 다시 맞춥니다.
+측정한 숫자를 그대로 믿으면, 실패한 요청이나 한 번뿐인 실행이 속도 향상으로 남습니다. 앱을 실제로 구동해 동작을 증명하는 스크립트된 방법이 없으면, 에이전트는 "컴파일된다" 이상을 증명하기 어렵습니다. 테스트가 생각한 경우만 검사하는 자리에서는, 경쟁이나 불변식처럼 잘 닿지 않는 속성이 남습니다. 이 장의 여섯 스킬은 그 자리를 다룹니다. `benchmark-checklist`는 성능 숫자를 보고하거나 그 숫자로 행동하기 전에 걸러 냅니다. `create-verification-skill`은 프로젝트 전용 검증(verification) 스킬과 기능 지도를 생성하고, `maintain-verification-skill`은 앱이 바뀜에 따라 낡아 가는 그 지도를 정직하게 유지합니다. `create-formal-verification-skill`은 테스트가 잘 닿지 않는 속성 하나를 형식 검증(formal verification)하는 프로젝트 전용 스킬을 남기고, `maintain-formal-verification-skill`은 그 검사가 덮는 코드가 바뀐 뒤 검증을 코드에 다시 맞춥니다. `statechart`는 TLA+ 모델에서 사용자가 보는 것을 Mermaid statechart로 그려, 동작을 책임지는 PM이나 디자이너가 버그를 자기 말로 보게 합니다.
 
 안내서가 짚는 전제는 이렇습니다. `prove-it-works` 원칙(principle)은 에이전트가 성공을 보고하기 전에 실제 산출물(artifact)을 확인하게 하고, 사용자의 몫은 "실제 산출물"을 검사할 수 있게 만드는 것입니다. 검증은 대부분의 에이전트 일에서 가장 느린 단계입니다. 대개 사람을 기다리기 때문입니다. 에이전트가 할 수 있게 만들면 병목이 사라지고, 건너뛰면 에이전트를 더 돌려도 확인하지 않은 일만 늘어납니다. UI 변경을 검증하려면 에이전트에게 앱을 구동할 스크립트된 방법이 필요합니다. 프로젝트에 그것이 있으면 좋고 없으면 이 스킬로 만듭니다. 테스트가 잘 닿지 않는 속성, 겹치는 재시도나 순서 어긋난 상태 변화처럼 아무도 구동하지 않는 경로의 버그는 형식 검증 스킬이 맡습니다. 참조와 픽셀 단위로 맞아야 하면 [Visual parity](playbooks-work.md#playbook-visual-parity)가 눈으로 판단하지 않고 언 기준선과 스크린숏을 비교합니다. `poteto-mode`의 UI, IDE, CLI 배포 규칙(non-negotiable)은 cursor-team-kit의 control 스킬(`control-cli`, `control-ui`)을 씁니다. 숫자를 보고하는 자리는 그 규칙과 별개로 `benchmark-checklist`가 먼저입니다. 증명은 스스로 검사할 수 있는 산출물로 달라고 합니다. 실패한 테스트와 그다음 통과한 테스트, 전후 영상, 트레이스, 스크린숏입니다. 수정이 이미 병합됐으면 main에서 같은 검사를 다시 달라고 합니다.
 
@@ -293,7 +293,7 @@
 
 ### 관련 스킬
 
-앱을 사용자처럼 구동해 동작을 증명하는 스킬은 [`create-verification-skill`](#skill-create-verification-skill)입니다. 그 지도를 유지하는 것은 [`maintain-verification-skill`](#skill-maintain-verification-skill)입니다. 이 스킬이 남긴 검사를 코드에 다시 맞추는 것은 [`maintain-formal-verification-skill`](#skill-maintain-formal-verification-skill)입니다. 성공을 보고하기 전에 실제 산출물을 확인하라는 원칙(principle)은 [`prove-it-works`](principles.md#skill-principle-prove-it-works)입니다. 스킬을 고르는 가까운 짝은 [`poteto-help`](setup.md#skill-poteto-help)에 있습니다.
+앱을 사용자처럼 구동해 동작을 증명하는 스킬은 [`create-verification-skill`](#skill-create-verification-skill)입니다. 그 지도를 유지하는 것은 [`maintain-verification-skill`](#skill-maintain-verification-skill)입니다. 이 스킬이 남긴 검사를 코드에 다시 맞추는 것은 [`maintain-formal-verification-skill`](#skill-maintain-formal-verification-skill)입니다. TLA+ 모델에서 사용자가 보는 것을 차트로 그려 PM이나 디자이너에게 보이는 것은 [`statechart`](#skill-statechart)입니다. 성공을 보고하기 전에 실제 산출물을 확인하라는 원칙(principle)은 [`prove-it-works`](principles.md#skill-principle-prove-it-works)입니다. 스킬을 고르는 가까운 짝은 [`poteto-help`](setup.md#skill-poteto-help)에 있습니다.
 
 ## maintain-formal-verification-skill {#skill-maintain-formal-verification-skill}
 
@@ -384,4 +384,84 @@
 
 ### 관련 스킬
 
-[`create-formal-verification-skill`](#skill-create-formal-verification-skill)이 생성한 검사를 유지합니다. 앱을 사용자처럼 구동하는 스킬의 유지는 [`maintain-verification-skill`](#skill-maintain-verification-skill)입니다. 성공을 보고하기 전에 실제 산출물을 확인하라는 원칙(principle)은 [`prove-it-works`](principles.md#skill-principle-prove-it-works)입니다. 스킬을 고르는 가까운 짝은 [`poteto-help`](setup.md#skill-poteto-help)에 있습니다.
+[`create-formal-verification-skill`](#skill-create-formal-verification-skill)이 생성한 검사를 유지합니다. 앱을 사용자처럼 구동하는 스킬의 유지는 [`maintain-verification-skill`](#skill-maintain-verification-skill)입니다. TLA+ 모델에서 사용자가 보는 것을 차트로 그려 PM이나 디자이너에게 보이는 것은 [`statechart`](#skill-statechart)입니다. 성공을 보고하기 전에 실제 산출물을 확인하라는 원칙(principle)은 [`prove-it-works`](principles.md#skill-principle-prove-it-works)입니다. 스킬을 고르는 가까운 짝은 [`poteto-help`](setup.md#skill-poteto-help)에 있습니다.
+
+## statechart {#skill-statechart}
+
+원문: {{src:skills/statechart/SKILL.md}} {{src:skills/statechart/scripts/statechart.mjs}} {{src:README.md}} {{src:skills/poteto-help/SKILL.md}} {{src:docs/guide/06-verify-and-ship.md}}
+
+> 앱의 사용자가 보는 것을 TLA+ 모델에서 Mermaid statechart로 그립니다. 상태는 동작하면 회색, 아직 틀리면 빨강, 고쳐졌으면 초록이고, TLC가 찾은 버그는 하나하나 번호 붙은 경로가 됩니다.
+
+### 언제 쓰는가
+
+원문의 `description`은 트리거로 `/statechart`, "show the PM the bug", 그리고 합의한 차트를 TLA+ 뼈대(skeleton)로 바꿀 때를 듭니다. `disable-model-invocation: true`입니다. README는 동작을 책임지는 사람이 명세를 읽는 대신 그 동작을 봐야 할 때라고 하고, 기존 명세에 비춰 코드를 감사하는 일도 듭니다. `/poteto-help`는 PM이나 디자이너에게 사용자가 보는 것을 모델이 검사한 차트로 보이고 버그마다 번호 붙은 경로로 그리고 싶을 때, 합의한 차트를 TLA+ 뼈대로 바꾸고 싶을 때, TLA+ 명세에 비춰 코드를 감사하고 싶을 때 이 스킬을 가리킵니다.
+
+안내서는 이 스킬을 형식 검증 다음에 둡니다. 모델의 말로 된 반례는 개발자를 설득합니다. 동작을 책임지는 PM이나 디자이너는 그것을 자기 말로 봐야 합니다. 차트는 TLA+ 모델에서 생성하므로 그림과 검사한 모델이 서로 어긋나지 않습니다. PM이 정한 규칙은 TLA+ 모델 검사기 TLC가 불변식으로 검사합니다.
+
+```text
+/statechart what the user sees when they edit a note offline
+```
+
+### 동작 방식
+
+**차트는 사용자가 보는 것입니다.** PM이 차트를 읽고 그 동작이 맞는지 정합니다. 상태마다 화면에 있는 것을 레이블로 붙입니다. 원문의 예는 "Paying"입니다. 단계마다 사용자가 하는 일이나 사용자가 일어나는 것을 보는 일을 레이블로 붙입니다. 원문의 예는 "tap Pay"와 "the charge goes through"입니다. 변수와 액션 이름은 레이블에 넣지 않습니다. 스크립트는 이 사용자를 reader라고 부릅니다. `readerActions`와 reader 단계가 그 이름입니다.
+
+명령과 차트 읽는 법은 `node <skill dir>/scripts/statechart.mjs --help`가 알려 줍니다. 작업은 저장소 밖의 스크래치 폴더에서 합니다. 명령은 입력 파일 옆에 파일을 씁니다.
+
+**방향을 고릅니다.** TLA+ 모델이 있거나 코드가 모델로 옮길 만큼 구체적이면 `from-spec`을 씁니다. 모델이 없고, 누가 코드를 쓰거나 바꾸기 전에 PM이 동작에 먼저 합의해야 하면 `from-chart`를 씁니다.
+
+코드에 이미 TLA+ 명세가 있으면 그 명세의 사본에서 시작합니다. 사용자가 보는 변수를 더하고, 명세에 있던 불변식은 그대로 둡니다. 그 명세에 비춰 코드를 감사하려면, 사본이 코드가 하는 일을 모델링하게 만들고 원래 명세를 바꾸지 않은 채 `--against`로 넘깁니다. 새 명세에서는 모든 변수와 액션을 리뷰어가 열 수 있는 코드에 묶고, 이름도 그 코드에서 가져옵니다. 액션 하나는 코드에서 나눌 수 없는 단계 하나입니다.
+
+**명세에서 차트로.**
+
+1. 차트의 상태를 고릅니다. 화면이 보여 주지 않는 것을 PM이 신경 쓰면 상태 이름에 넣습니다. 원문의 예는 화면이 아직 "Paying"인데 두 번째 결제가 일어난 경우의 "Paying, charged twice"입니다. 상태는 적게 시작하고, 나눠야 두 버그가 갈라질 때만 상태를 나눕니다.
+2. PM이 동의하는 규칙마다 불변식 하나로 쓰고, PM의 문장을 그 주석으로 둡니다. 모든 것이 가라앉은 뒤에 적용되는 규칙에는 `Settled == ~ENABLED System`을 정의합니다. `System`은 사용자가 하지 않는 액션들의 논리합입니다. 깨진 규칙은 하나하나 버그로 보고합니다. 차트를 통과시키려고 규칙을 약하게 만들지 않습니다.
+3. `from-spec`을 돌리고, 그것이 쓰는 매핑 파일을 채웁니다. 레이블은 `state`와 `step`에 두고, 사용자의 액션은 액션 이름으로 `readerActions`에 나열합니다. 두 버그가 서로 다른 코드 경로로 같은 화면에서 끝나면 `cause`를 더해 그 코드 경로의 이름을 붙입니다. "Toast shown"처럼 PM이 신경 쓰는 것으로 상태에 색을 칠하려면 `group`에서 그 묶음을 돌려줍니다. 범례가 묶음의 이름을 보이고, 규칙을 깨는 상태는 여전히 빨간 테두리를 얻습니다.
+4. 열린 수정이 있으면 코드에서 그것을 모델링하고 그 모델을 `--fixed`로 넘깁니다.
+5. 차트마다 `--png`로 렌더하고 모든 PNG를 봅니다. 번호 붙은 경로마다 순서대로 읽히는지 확인합니다. 레이블이 코드처럼 읽히면 `state`나 `step`을 고치고 명령을 다시 돌립니다.
+6. 버그마다 그 이야기를 실제 코드에 대고 다시 재생합니다. 테스트나 라이브 재현으로, 모델 액션 하나에 한 단계씩입니다. 버그가 재현되지 않으면, 그렇지 않다고 보일 때까지 모델이 틀렸다고 봅니다. 규칙이 아니라 모델을 고칩니다.
+
+**차트에서 명세로.**
+
+1. PM이 동의하는 차트를 그립니다. 따로 바뀌는 것마다 영역 하나를 씁니다. 원문의 예는 연결 상태와 동기화 배지입니다. 규칙마다 PM의 문장을 담은 `%% never` 줄 하나를 더합니다. 앱이 닫히는 일은 사용자가 다음에 보는 상태로 가는 간선으로 그립니다.
+2. `from-chart`를 돌립니다. 규칙이 깨지면 합의한 차트에 설계 버그가 있는 것입니다. 그 버그를 PM에게 가져갑니다.
+3. `from-chart`가 쓴 명세에 실제 코드의 가드와 변수를 더하고 `from-chart`를 다시 돌립니다. 그것이 출력하는 차이마다, 코드가 틀렸는지 차트를 고쳐야 하는지 PM에게 묻습니다.
+
+**넘깁니다.** PM에게 차트마다 PNG와 Mermaid 소스를 줍니다. 버그마다 한 줄을 더합니다. 그 버그가 깨는 규칙, 차트가 번호 붙인 단계, 재현되었는지, 열린 수정이 고치는지입니다. 인용하는 모든 개수는 `summary.json`에서 가져옵니다. `stories.md`와 모든 것을 다시 생성하는 명령을 붙입니다. 모델이 빼 둔 것을 말합니다.
+
+### 사용 예
+
+```text
+/statechart what the user sees when they edit a note offline
+```
+
+안내서가 설명하는 흐름은 이렇습니다. 에이전트가 TLA+ 모델에서 사용자가 보는 것의 Mermaid statechart를 그립니다. 차트를 읽는 사람의 규칙, 예를 들어 "you never see Synced while you're offline"은 불변식이 됩니다. TLC가 찾은 버그는 읽는 사람의 말로 된 번호 붙은 경로이고, 상태마다 동작함, 아직 틀림, 열린 PR이 고침 중 하나로 표시됩니다. 넘기기 전에 에이전트가 버그 경로마다 실제 코드에서 재현하므로, 모델링 오류가 버그로 읽는 사람에게 가지 않습니다.
+
+반대 방향도 있습니다. 동작을 차트로 스케치하고 읽는 사람과 합의하면, 스킬이 그 차트에서 TLA+ 뼈대를 씁니다. TLC는 코드가 있기 전에 합의한 차트의 규칙을 검사합니다. 실제 코드의 가드가 명세에 들어가면서, 코드가 차트와 다른 자리마다 읽는 사람이 정할 차이로 드러납니다.
+
+코드에 이미 TLA+ 명세가 있으면 그 명세에 비춰 코드를 감사할 수 있습니다. 에이전트가 코드가 하는 일을 모델링하고, 바꾸지 않은 명세 옆에서 그 모델을 검사합니다. 차트는 둘이 다른 단계를 표시하고, 어느 쪽이든 깨는 규칙은 하나하나 번호 붙은 경로가 됩니다.
+
+> **예시 (이 책의 저자가 만든 것, 원본에 없음)**
+>
+> 상황: 노트 앱에 오프라인 편집이 있습니다. 오프라인인데도 동기화 배지가 "Synced"를 보인다는 제보가 있고, 고치는 PR이 열려 있습니다. 코드에 TLA+ 명세는 없습니다.
+>
+> 1. 코드가 모델로 옮길 만큼 구체적이므로 `from-spec`을 고릅니다. 저장소 밖 스크래치 폴더에서 동기화 코드를 모델링하는 명세를 씁니다. 변수와 액션의 이름은 코드에서 가져오고, 액션 하나는 코드에서 나눌 수 없는 단계 하나입니다.
+> 2. PM의 문장 "you never see Synced while you're offline"을 주석으로 단 불변식 하나를 씁니다.
+> 3. `from-spec`을 돌리고 매핑 파일을 채웁니다. `state`에는 "Editing offline", "Synced" 같은 화면을, `step`에는 "go offline", "edit the note" 같은 사용자 단계를 두고, 사용자의 액션을 `readerActions`에 나열합니다.
+> 4. 열린 PR의 수정을 코드에서 모델링해 `--fixed`로 넘기고 `--png`로 렌더합니다. 규칙을 깨는 상태가 빨강이면 그 수정이 아직 고치지 못한 것이고, 초록이면 고친 것입니다.
+> 5. 버그 경로를 실제 코드에서 모델 액션 하나에 한 단계씩 재현합니다. 재현되지 않으면 규칙이 아니라 모델을 고칩니다.
+> 6. PM에게 PNG와 Mermaid 소스, 버그마다 한 줄, `summary.json`에서 가져온 개수, `stories.md`, 다시 생성하는 명령, 모델이 빼 둔 것을 넘깁니다.
+
+### 함정과 주의점
+
+- 레이블에 변수나 액션 이름을 넣지 않습니다. 레이블이 코드처럼 읽히면 `state`나 `step`을 고치고 다시 돌립니다.
+- 차트를 통과시키려고 규칙을 약하게 만들지 않습니다. 깨진 규칙은 버그로 보고합니다.
+- 기존 명세에 비춰 코드를 감사할 때는 사본이 코드를 모델링하고, 원래 명세는 바꾸지 않은 채 `--against`로 넘깁니다. 사본에서도 명세에 있던 불변식은 그대로 둡니다.
+- 재현되지 않는 버그는 그렇지 않다고 보일 때까지 모델이 틀린 것으로 봅니다. 모델을 고치고 규칙은 그대로 둡니다.
+- 상태는 적게 시작합니다. 나눠야 두 버그가 갈라질 때만 나눕니다.
+- 인용하는 개수는 `summary.json`에서 가져오고, 모델이 빼 둔 것을 넘길 때 말합니다.
+- 저장소 안이 아니라 스크래치 폴더에서 작업합니다. 명령은 입력 파일 옆에 파일을 씁니다.
+
+### 관련 스킬
+
+테스트가 잘 닿지 않는 속성 하나를 형식 검증하는 프로젝트 전용 스킬은 [`create-formal-verification-skill`](#skill-create-formal-verification-skill)이 남기고, 그 검사가 덮는 코드가 바뀐 뒤의 유지는 [`maintain-formal-verification-skill`](#skill-maintain-formal-verification-skill)입니다. 안내서는 이 스킬을 그 둘 다음에 둡니다. 성공을 보고하기 전에 실제 산출물을 확인하라는 원칙(principle)은 [`prove-it-works`](principles.md#skill-principle-prove-it-works)입니다. 스킬을 고르는 가까운 짝은 [`poteto-help`](setup.md#skill-poteto-help)에 있습니다.

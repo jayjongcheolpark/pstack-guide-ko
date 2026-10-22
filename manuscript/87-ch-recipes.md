@@ -104,6 +104,14 @@
 
 말한 범위의 모든 경우에서 속성 하나를 검사하고, 지금 코드가 이미 깨면 코드의 말로 된 반례를 받으며, 그 코드를 건드리는 변경마다 다음 에이전트가 돌릴 프로젝트 스킬이 남습니다. 그 코드의 병합이나 리팩터 뒤에는 `/maintain-formal-verification-skill`입니다. → [`create-formal-verification-skill`](verification.md#skill-create-formal-verification-skill), [`maintain-formal-verification-skill`](verification.md#skill-maintain-formal-verification-skill)
 
+**사용자가 보는 동작을 PM에게 차트로 보이기.**
+
+```text
+/statechart what the user sees when they edit a note offline
+```
+
+TLA+ 모델에서 생성한 Mermaid statechart를 받습니다. 상태마다 동작함, 아직 틀림, 열린 PR이 고침 중 하나로 표시되고, TLC가 찾은 버그는 PM이나 디자이너의 말로 된 번호 붙은 경로입니다. 넘기기 전에 에이전트가 버그 경로마다 실제 코드에서 재현하므로 모델링 오류가 버그로 넘어가지 않습니다. → [`statechart`](verification.md#skill-statechart)
+
 **숫자를 올리기 전에 걸러 내기.**
 
 ```text
