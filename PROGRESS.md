@@ -680,3 +680,9 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 - `#776`은 `--config`, `--fixed-config`, `--expect-broken`과 PROPERTY 검사, TLC 워커 수도 더합니다. `SKILL.md`가 이름 붙인 새 옵션은 `--against-config`뿐입니다. 책은 0.15.30과 같이 `SKILL.md`와 안내서가 이름 붙인 명령과 옵션만 적었습니다. `--help`가 나머지를 알려 줍니다.
 - `#779`는 스크립트 헬퍼 이름을 바꿉니다. `checkTlcOutput`은 `tlcOutputWarning`, `quote`는 `escapeMermaidQuotes`입니다. `SKILL.md`의 `readerActions`는 그대로입니다. 책은 스크립트 내부 이름을 적지 않았습니다.
 - 안내서와 README와 `/poteto-help`는 이 구간에서 바뀌지 않았습니다. 사용 예와 빠른 참조표와 레시피는 핀만 올렸습니다.
+
+### 실행한 검사
+
+- `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 57개와 플레이북 23개의 절 존재, 용어 병기 짝 29개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
+- `CHROME_PATH=/usr/bin/google-chrome bun tools/check-layout.mjs`: 390px에서 가로 넘침 없음.
+- `CHROME_PATH=/usr/bin/google-chrome bun tools/build.mjs`: `pstack-guide-0.15.30-ko.1.epub`, `pstack-guide-0.15.30-ko.1.pdf` (500쪽, 0.15.30은 499쪽).
