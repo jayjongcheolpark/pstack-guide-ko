@@ -4,7 +4,7 @@
 
 ## 원본
 
-`cursor/plugins`의 `pstack/`, 커밋 `eb4db2b55b2b7dec3d9282754cddf0a56bf4ff10` (0.15.30) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를, 0.15.20 절은 그때의 핀 `1b6d44f`를, 0.15.21 절은 그때의 핀 `997ffc7`를, 0.15.23 절은 그때의 핀 `dbf4981`을, 0.15.24 절은 그때의 핀 `1e5c90a`를, 0.15.25 절은 그때의 핀 `e5136d8`를, 0.15.25-ko.1 절은 그때의 핀 `99743e9`를, 0.15.25-ko.2 절은 그때의 핀 `182f2ce`를, 0.15.26 절은 그때의 핀 `0b8e952`를, 0.15.28 절은 그때의 핀 `d457567`를, 0.15.29 절은 그때의 핀 `88d4751`을 적은 기록입니다.
+`cursor/plugins`의 `pstack/`, 커밋 `4ec7ffa173eaa70d3d9467a627baf0954645a353` (0.15.30) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를, 0.15.20 절은 그때의 핀 `1b6d44f`를, 0.15.21 절은 그때의 핀 `997ffc7`를, 0.15.23 절은 그때의 핀 `dbf4981`을, 0.15.24 절은 그때의 핀 `1e5c90a`를, 0.15.25 절은 그때의 핀 `e5136d8`를, 0.15.25-ko.1 절은 그때의 핀 `99743e9`를, 0.15.25-ko.2 절은 그때의 핀 `182f2ce`를, 0.15.26 절은 그때의 핀 `0b8e952`를, 0.15.28 절은 그때의 핀 `d457567`를, 0.15.29 절은 그때의 핀 `88d4751`을, 0.15.30 절은 그때의 핀 `eb4db2b`를, 0.15.30-ko.1 절은 그때의 핀 `4ec7ffa`를 적은 기록입니다.
 
 ## 빌드와 검사
 
@@ -655,3 +655,28 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 - `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 57개와 플레이북 23개의 절 존재, 용어 병기 짝 29개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
 - `CHROME_PATH=/usr/bin/google-chrome bun tools/check-layout.mjs`: 390px에서 가로 넘침 없음.
 - `CHROME_PATH=/usr/bin/google-chrome bun tools/build.mjs`: `pstack-guide-0.15.30.epub`, `pstack-guide-0.15.30.pdf` (499쪽, 0.15.29는 491쪽).
+
+## 0.15.30-ko.1
+
+원문을 `eb4db2b55b2b7dec3d9282754cddf0a56bf4ff10`(0.15.30)에서 `4ec7ffa173eaa70d3d9467a627baf0954645a353`(0.15.30)로 올렸습니다. pstack 버전은 그대로이고, 핀과 책만 움직입니다. pstack 트리에 닿은 커밋은 두 개입니다.
+
+- `7698375` fix(pstack): bring the statechart skill up to date with six fixes (#776)
+- `4ec7ffa` refactor(pstack): delete statechart comments that repeat the code, and rename helpers (#779)
+
+책 버전은 `BOOK_REVISION = 1`이라 `0.15.30-ko.1`입니다. 산출물 이름은 `pstack-guide-0.15.30-ko.1.epub`, `pstack-guide-0.15.30-ko.1.pdf`입니다.
+
+확인한 사실입니다. `plugin.json`과 `.cursor-plugin/plugin.json` 버전은 둘 다 0.15.30입니다. `eb4db2b..4ec7ffa`에서 `pstack/`에 닿은 파일은 다섯 개이고, 모두 `skills/statechart/` 아래입니다. `SKILL.md`, `scripts/lib.mjs`, `scripts/statechart.mjs`, `scripts/tlc-to-chart.mjs`, `scripts/test/statechart.test.mjs`. README, `/poteto-help`, 안내서, 플레이북은 바뀌지 않았습니다. 스킬 수는 57개, 플레이북은 23개로 그대로입니다.
+
+원고에서 반영한 내용입니다.
+
+- 핀과 permalink, 산출물 이름을 `4ec7ffa` / `0.15.30-ko.1`로 올렸습니다.
+- 검증 장의 `/statechart` 절을 새 `SKILL.md`에 맞췄습니다. 기존 명세에 비춰 코드를 감사할 때는 작성자가 통과한다고 한 설정으로 검사하고, 그 설정이 명세와 같은 파일 이름을 쓰지 않으면 `--against-config`로 넘깁니다. 매핑은 두 모델이 둘 다 가진 변수만 레이블합니다. 코드를 모델링하는 명세와 새 명세는 액션의 조건마다 파일과 줄 주석을 답니다. 원문의 예는 `\* pay.ts:120`입니다.
+- 규칙마다 화면에서 사용자가 보는 것이나 요청에서 받는 것, 그리고 그것을 바꿀 수 있는 코드를 이름 붙입니다. 둘 중 하나가 없으면 그 규칙을 받지 않습니다.
+- 재현은 사용자나 클라이언트가 닿는 진입점만 구동하고, 그들이 보는 것만 단언합니다. 스스로 세운 플래그를 단언하거나 소스 텍스트를 검색하는 테스트는 증명으로 치지 않습니다. 실행과 코드 읽기가 이야기의 다른 부분을 증명하면 어느 쪽인지 말합니다. 가져올 수 없어 복사한 코드는 커밋과 줄 범위, 빼 둔 것을 적습니다.
+- `--against`로 넘길 때는 명세가 이미 그 버그를 적었는지도 말합니다. 명령이 파일과 줄이 없는 조건을 나열하는 동안에는 규칙이 성립한다고 보고하지 않습니다.
+
+### 해석한 부분
+
+- `#776`은 `--config`, `--fixed-config`, `--expect-broken`과 PROPERTY 검사, TLC 워커 수도 더합니다. `SKILL.md`가 이름 붙인 새 옵션은 `--against-config`뿐입니다. 책은 0.15.30과 같이 `SKILL.md`와 안내서가 이름 붙인 명령과 옵션만 적었습니다. `--help`가 나머지를 알려 줍니다.
+- `#779`는 스크립트 헬퍼 이름을 바꿉니다. `checkTlcOutput`은 `tlcOutputWarning`, `quote`는 `escapeMermaidQuotes`입니다. `SKILL.md`의 `readerActions`는 그대로입니다. 책은 스크립트 내부 이름을 적지 않았습니다.
+- 안내서와 README와 `/poteto-help`는 이 구간에서 바뀌지 않았습니다. 사용 예와 빠른 참조표와 레시피는 핀만 올렸습니다.
