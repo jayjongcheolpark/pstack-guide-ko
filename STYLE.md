@@ -4,7 +4,7 @@
 
 ## 기준 원본
 
-- 유일한 원본: GitHub `cursor/plugins`의 `pstack/` 디렉터리, 커밋 `4ec7ffa173eaa70d3d9467a627baf0954645a353` (pstack 0.15.30). 자세한 내용은 `SOURCE.md`.
+- 유일한 원본: GitHub `cursor/plugins`의 `pstack/` 디렉터리, 커밋 `e73df471cd4bd918367e99f3dd9c51bd53ddf5f0` (pstack 0.15.32). 자세한 내용은 `SOURCE.md`.
 - 저장소 밖에 읽기 전용으로 클론해서 읽습니다. 포팅이나 다른 버전, 설치본의 자료는 사용하지 않습니다.
 - 스킬 본문은 Cursor 이름을 쓰므로 스킬 절도 Cursor로 설명합니다. 원본 README와 `docs/harness/`가 밝히는 Claude Code 설치와 이름 대응은 설치 장에서 다룹니다. 원문에 없는 Claude Code 동작은 지어내지 않습니다. 비공식 포팅은 다루지 않습니다.
 - cursor-team-kit 스킬(deslop, fix-ci 등)은 장으로 쓰지 않고, 언급할 때 "cursor-team-kit 플러그인에 속한다"고 밝힙니다.

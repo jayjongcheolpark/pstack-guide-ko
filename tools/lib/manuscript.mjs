@@ -13,25 +13,25 @@ import { renderFlow } from "./flow.mjs";
 
 export const SOURCE = {
   repo: "https://github.com/cursor/plugins",
-  sha: "4ec7ffa173eaa70d3d9467a627baf0954645a353",
-  version: "0.15.30",
+  sha: "e73df471cd4bd918367e99f3dd9c51bd53ddf5f0",
+  version: "0.15.32",
   dir: "pstack",
 };
 // The book version starts from the pstack version it covers. A book-only fix, while
 // pstack stays at the same version, sets BOOK_REVISION to 1, 2, ... and the version
 // becomes ${SOURCE.version}-ko.${BOOK_REVISION}. BOOK_REVISION 0 means this release
 // is the pstack version itself.
-export const BOOK_REVISION = 1;
+export const BOOK_REVISION = 0;
 export const BOOK_VERSION = BOOK_REVISION > 0 ? `${SOURCE.version}-ko.${BOOK_REVISION}` : SOURCE.version;
 export const bookFile = (ext) => `pstack-guide-${BOOK_VERSION}.${ext}`;
 export const srcUrl = (path) => `${SOURCE.repo}/blob/${SOURCE.sha}/${SOURCE.dir}/${path}`;
 
 export const BOOK = {
   title: "pstack 가이드",
-  subtitle: "Cursor 플러그인 스킬 57종 해설",
+  subtitle: "Cursor 플러그인 스킬 58종 해설",
   language: "ko",
   identifier: "urn:uuid:5f6d1c1e-4a0b-4c7e-9a52-7d1b3c0e9a11",
-  date: "2026-10-23",
+  date: "2026-10-24",
 };
 
 // Worked examples written for this book (not from the source) open with this label.

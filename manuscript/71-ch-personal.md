@@ -143,7 +143,7 @@ ls -t <agent-transcripts>/*.jsonl <agent-transcripts>/*/*.jsonl <agent-transcrip
 
 **4. 구조적 강제 점검.** 종합자의 Accepted 목록을 점검합니다. 린트 규칙(rule), 스크립트, 메타데이터 플래그, 런타임 검사가 더 믿을 만하게 강제할 항목은 Accepted에서 Backlog로 옮깁니다(`encode-lessons-in-structure` 원칙(principle)).
 
-**5. 적용합니다.** Accepted 수정을 적용하기 전에 종합자의 Accepted/Rejected/Backlog 출력을 사용자에게 전부 보여 주고 명시적 승인을 기다립니다. 사용자가 적용할 부분집합을 고르고 라우팅을 바꿀 수 있습니다. 스킬 변경은 조직의 모든 미래 에이전트에 영향을 주므로 자동 적용하지 않습니다. Backlog 항목은 팀이 쓰는 devex나 백로그 추적기에 자동으로 등록합니다. Accepted만 승인을 기다립니다. 승인된 Accepted 항목마다 Routing 필드를 정확히 따릅니다.
+**5. 적용합니다.** Accepted 수정을 적용하기 전에 종합자의 Accepted/Rejected/Backlog 출력을 사용자에게 전부 보여 주고 명시적 승인을 기다립니다. 사용자가 적용할 부분집합을 고르고 라우팅을 바꿀 수 있습니다. 스킬 변경은 조직의 모든 미래 에이전트에 영향을 주므로 자동 적용하지 않습니다. Backlog 항목은 팀이 쓰는 devex나 백로그 추적기에 자동으로 등록합니다. Accepted만 승인을 기다립니다. `plugins/cache/` 아래의 스킬은 편집하지 않습니다. 승인 전에는 도착지를 보여 줍니다. `.cursor/skills/<skill>/` 또는 `~/.cursor/skills/<skill>/`입니다. 승인 뒤에는 그 스킬 폴더를 그곳으로 복사하고 복사본을 편집합니다. PR을 열거나 푸시하지 않습니다. 승인된 Accepted 항목마다 Routing 필드를 정확히 따릅니다.
 
 | 라우팅 | 처리 |
 | --- | --- |
@@ -198,6 +198,7 @@ ls -t <agent-transcripts>/*.jsonl <agent-transcripts>/*/*.jsonl <agent-transcrip
 ### 함정과 주의점
 
 - 사용자 승인 없이 스킬을 바꾸지 않습니다. 스킬 변경은 조직의 모든 미래 에이전트에 영향을 줍니다. Backlog만 자동으로 등록됩니다.
+- `plugins/cache/` 아래의 스킬은 편집하지 않습니다. 승인 전에는 도착지를 보여 주고, 승인 뒤에는 그곳으로 복사한 뒤 복사본을 편집합니다. PR을 열거나 푸시하지 않습니다.
 - 일회성은 배움이 아닙니다. 사소한 대화, 주제를 벗어난 대화, 이미 덮인 대화에서는 건너뜁니다.
 - 부모가 쓰지 않은 스킬로의 추측성 라우팅은 세지 않습니다.
 - 린트나 스크립트가 강제할 수 있는 규칙은 스킬 산문이 아니라 Backlog로 보냅니다.

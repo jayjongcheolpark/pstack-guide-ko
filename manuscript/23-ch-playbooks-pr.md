@@ -217,7 +217,7 @@ scripts/watch-pr/watch-pr --queued-stack --stack-prs <bottom>
 
 첫째는 상태를 한 번 읽고 종료하는 `check` 모드, 둘째는 종결 판정이 나올 때까지 폴링하는 `drive` 모드, 셋째는 Shipping이 깨우는 신호로만 쓰는 대기열 모드입니다.
 
-**옵션.** `--owner`, `--repo`, `--pr <number>`, `--stack`, `--queued-stack`, `--stack-prs <n,...>`(아래에서 위로 고정된 목록. `--queued-stack`이 필요), `--interval <seconds>`(기본 60), `--sweep-interval <seconds>`(기본 300), `--timeout <seconds>`(기본 0, 0이면 기한 없음), `--max-query-errors <count>`(기본 5), `--status-only`, `--allow-draft`, `--pretty`. `--stack`과 `--queued-stack`은 함께 쓸 수 없습니다. 모드는 `--queued-stack`이 있으면 `queued-stack`, 아니면 `--stack`이 있으면 `stack`, 아니면 `single`입니다. `--pr`을 생략하면 현재 브랜치의 PR을 `gh pr view`로 찾고, `--stack-prs` 없이 `--stack`이나 `--queued-stack`을 쓰면 열린 PR 300개(`gh pr list --state open --limit 300`)에서 스택을 발견합니다.
+**옵션.** `--owner`, `--repo`, `--pr <number>`, `--stack`, `--queued-stack`, `--stack-prs <n,...>`(아래에서 위로 고정된 목록. `--queued-stack`이 필요), `--interval <seconds>`(기본 60), `--sweep-interval <seconds>`(기본 300), `--timeout <seconds>`(기본 0, 0이면 기한 없음), `--max-query-errors <count>`(기본 5), `--status-only`, `--allow-draft`, `--pretty`. `--stack`과 `--queued-stack`은 함께 쓸 수 없습니다. 모드는 `--queued-stack`이 있으면 `queued-stack`, 아니면 `--stack`이 있으면 `stack`, 아니면 `single`입니다. `--pr`을 생략하면 현재 브랜치의 PR을 `gh pr view`로 찾고, `--stack-prs` 없이 `--stack`이나 `--queued-stack`을 쓰면 열린 PR 300개(`gh pr list --state open --limit 300`)에서 스택을 발견합니다. 목록은 `isCrossRepository`를 읽고, 포크의 헤드는 같은 이름이어도 부모로 쓰지 않습니다. 베이스 참조는 이 저장소의 것이기 때문입니다.
 
 **차단 요소(blocker) 분류와 종료 코드.** 순서와 우선순위가 정해져 있습니다.
 
@@ -240,7 +240,7 @@ GitHub가 병합을 거부하는 조건은 `mergeStateStatus`가 `BLOCKED`이고
 
 대기열 모드는 상태 기계입니다. `QUEUE`를 한 번 내 고정된 목록을 알리고, 전체 스택 스윕(모든 미병합 PR을 순서대로 읽음)과 프런티어 폴링(가장 낮은 미병합 PR만 읽음)을 번갈아 합니다. 스윕이 먼저이고 이후 `--sweep-interval`이 지날 때마다 돕니다. 사이에는 프런티어만 갱신하므로 상위 스냅숏은 최대 스윕 간격만큼 오래되었을 수 있습니다. 가장 낮은 미병합 PR이 병합되어 바뀌면 `ADVANCE`(`merged`, `frontier`, `remaining`)를 내고 잠들지 않고 계속합니다. 차단 요소가 없으면 `WAITING`을 냅니다. 이유는 프런티어에 진행 중인 체크가 있으면 `pending-checks`, 아니면 `merge-queue`(프런티어에는 차단 요소가 없고 GitHub가 병합하기를 기다림)입니다. 모든 PR이 병합되면 `COMPLETE`(종료 코드 0)로 끝나고, 아니면 차단 요소나 타임아웃으로 끝납니다.
 
-**폴링과 재시도.** 재시도 가능한 실패는 `RETRY` 이벤트를 내고 `min(max(interval, 60) * 2^(실패 횟수 - 1), 300)`초 동안 기다립니다. 실패 횟수는 성공하는 단계마다 리셋됩니다. 실패가 `--max-query-errors`에 이르거나 재시도 불가능하면 `status-query`(종료 코드 7)입니다.
+**폴링과 재시도.** 재시도 가능한 실패는 `RETRY` 이벤트를 내고 `min(max(interval, 60) * 2^(실패 횟수 - 1), 300)`초 동안 기다립니다. 실패 횟수는 성공하는 단계마다 리셋됩니다. 실패가 `--max-query-errors`에 이르거나 재시도 불가능하면 `status-query`(종료 코드 7)입니다. `--timeout`이 있으면 잠드는 시간은 남은 기한을 넘지 않습니다.
 
 **출력.** 폴링 중에는 줄마다 JSON 객체 하나(NDJSON)를 stdout에 냅니다. 모든 판정에 `schemaVersion: 1`, `sequence`, `observedAt`, `mode`, `kind`가 들어 있고, 종결 판정에는 `exitCode`가 붙습니다. 진행 중 종류는 `QUEUE`, `STATUS`, `WAITING`, `ADVANCE`, `RETRY`, 종결 종류는 `STATUS`(`--status-only`), `READY`, `COMPLETE`, `BLOCKER`, `TIMEOUT`입니다. 마지막 줄은 언제나 종결 판정입니다. `--pretty`는 사람이 읽는 텍스트로 바꾸고, `STATUS`에서는 `| PR | CI | Review | Merge |` 네 열 표를 그립니다.
 

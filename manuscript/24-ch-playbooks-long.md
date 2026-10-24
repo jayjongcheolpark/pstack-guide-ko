@@ -288,7 +288,7 @@ end 응답
 | `PR` | `#<number>/<STATE>` 또는 `-` |
 | `LAST_CHAT` | 워크트리 경로를 언급하는 대화 기록 파일 중 가장 최근에 수정된 것의 날짜, 없으면 `-`. `~/.cursor/projects/<repo-path-slug>/agent-transcripts` 아래를 `rg`로 검색하며, 경로 뒤에 `/`나 `"`가 와야 일치하므로 `glint-482`는 `glint-482-r37`과 일치하지 않습니다 |
 
-버킷 규칙(bucket)은 순서대로 적용됩니다. (1) DIRTY가 `wip:`로 시작하면 `hold-wip`. (2) PR이 `*/open`이거나 `*/draft`이면 `hold-open-pr`. 초안은 열린 PR과 같이 붙듭니다. (3) 최근 4일 안에 채팅이 있으면 `verify-recent-chat`. (4) `MERGED=YES`이거나 PR이 하나라도 있으면(CLOSED 포함) `safe`. (5) 그 밖은 `review`. `git`, `jq`, `rg`, `awk`, `sed`, `du`, `xargs`, `sort`, `mktemp`이 필요하고, Origin 또는 `gh` 중 하나가 PR 목록을 채웁니다. BSD/macOS 형태의 `stat -f`와 `date -r`을 쓰므로 macOS 지향입니다. 부수 효과는 기준 `origin/*` 원격 참조 갱신과 임시 파일뿐이고 아무것도 지우지 않습니다.
+버킷 규칙(bucket)은 순서대로 적용됩니다. (1) DIRTY가 `wip:`로 시작하면 `hold-wip`. (2) PR이 `*/open`이거나 `*/draft`이면 `hold-open-pr`. 초안은 열린 PR과 같이 붙듭니다. (3) 최근 4일 안에 채팅이 있으면 `verify-recent-chat`. (4) `MERGED=YES`이거나 PR이 하나라도 있으면(CLOSED 포함) `safe`. (5) 그 밖은 `review`. `git`, `jq`, `rg`, `awk`, `sed`, `du`, `xargs`, `sort`, `mktemp`이 필요하고, Origin 또는 `gh` 중 하나가 PR 목록을 채웁니다. 대화 기록의 수정 시각은 GNU coreutils면 `stat -c`와 `date -d`, 아니면 `stat -f`와 `date -r`입니다. 한 번 골라 씁니다. 부수 효과는 기준 `origin/*` 원격 참조 갱신과 임시 파일뿐이고 아무것도 지우지 않습니다.
 
 ### 함정과 주의점
 
@@ -405,7 +405,7 @@ end 응답
 
 `node pstack/skills/poteto-mode/scripts/check-plan.mjs <plan.md>`는 이 계획서 형식을 검사합니다. 종료 코드는 인자가 없으면 2(stderr에 사용법), 문제가 있으면 1, 깨끗하면 0입니다. 출력은 stdout에 PR 절마다 요약 한 줄과 `<n> PR sections, <m> problems`, stderr에 문제마다 `file:line: message` 한 줄입니다. 검사 내용은 다음과 같습니다.
 
-- **문체(코드가 아닌 줄).** 긴 줄표(en dash, em dash), 곡선 따옴표, 문장 중간 콜론(`: ` 뒤에 공백이 아닌 글자)을 보고합니다. 인라인 코드, 이미지, 링크 대상은 먼저 벗깁니다. 펜스 코드 블록(`` ``` `` 또는 `~~~`, CommonMark 열림/닫힘) 안의 줄은 문체 검사를 건너뜁니다. 백틱 세 개로 시작하는 모든 줄을 토글하지 않고, 정보 줄에 백틱이 있는 열림은 펜스로 보지 않습니다.
+- **문체(코드가 아닌 줄).** 긴 줄표(en dash, em dash), 곡선 따옴표, 문장 중간 콜론(`: ` 뒤에 공백이 아닌 글자)을 보고합니다. 인라인 코드, 이미지, 링크 대상은 먼저 벗깁니다. 인라인 코드는 같은 길이의 열림과 닫힘 백틱만 벗깁니다. 펜스 코드 블록(`` ``` `` 또는 `~~~`, CommonMark 열림/닫힘) 안의 줄은 문체 검사를 건너뜁니다. 백틱 세 개로 시작하는 모든 줄을 토글하지 않고, 정보 줄에 백틱이 있는 열림은 펜스로 보지 않습니다.
 - **최상위 구조.** H1 제목이 있어야 하고, H1과 첫 `## How to read this` 사이에 비어 있지 않은 줄 10개 미만, `## How to read this`(필수 문구 포함: "One box is one unit of work", "names the evidence", "Check a box only when its evidence exists", `playbooks/`, 그리고 검증 규칙 문장), `## Program checklist`, PR 절 하나 이상, `## Close the program`.
 - **Program checklist.** `###` 제목이 `Arm the program`, `Spawn owners`, `PR mechanics`, `Verdict and merge`, `Boot recipe`로 이 순서로 시작해야 하고, 본문에 `git show origin/main:`, `/loop 1h`, `status message`가 글자 그대로 들어 있어야 합니다.
 - **PR 절.** 위의 아홉 개 굵은 하위 블록이 정확히 이 순서로 있어야 합니다. `Depends on.`은 무언가를 밝혀야 하고, `Files.`, `Build.`, `You see.`, `Verify, unit.`, `Merge.`에는 체크박스가 하나 이상 있어야 합니다. 세 `Verify` 블록은 검증 규칙 문장으로 시작해야 합니다. `Verify, live.`는 "Ten lanes on `<model>` at the PR head"와 채워진 모델, 1에서 10까지 번호가 붙은 레인(`Lane N. `)이 필요하고 레인마다 ``Save `<file>` ``과 `Pass when`이 있어야 합니다. `Verify, perf.`의 상자는 정확히 `Metric.`, `Probe.`, `Baseline.`, `Rule.` 순서입니다. `Review gate.`는 `None.`으로 시작하고 상자가 없거나, 아니면 상자가 하나 이상 있고 `screenshot`, `video`, `operator`를 담아야 합니다.
@@ -561,7 +561,7 @@ end 운영자의 명시적인 go 이후에 실행이 시작됨
 
 #### 스택 안전
 
-- 프런티어는 서사가 아니라 계산된 객체입니다. 병합과 스택 변경 뒤마다 `frontier.json`을 다시 계산합니다. 순서 있는 PR 목록, 브랜치 이름, 헤드 SHA, 세대 번호, 가장 낮은 미병합 PR을 담습니다. 명령은 체크아웃의 현재 브랜치에서 PR 베이스 사슬을 걷고, 사슬 순서와 PR 상태는 포지에서 옵니다. 기본은 `gh`입니다. 프로그램이 포지를 Origin으로 정했으면 `--forge origin`을 넘깁니다. 헤드 SHA는 로컬 브랜치 참조에서 오므로 stacker의 클론에서 해결합니다. PR이 없는 브랜치는 추측하지 않고 오류를 냅니다.
+- 프런티어는 서사가 아니라 계산된 객체입니다. 병합과 스택 변경 뒤마다 `frontier.json`을 다시 계산합니다. 순서 있는 PR 목록, 브랜치 이름, 헤드 SHA, 세대 번호, 가장 낮은 미병합 PR을 담습니다. 명령은 체크아웃의 현재 브랜치에서 PR 베이스 사슬을 걷고, 사슬 순서와 PR 상태는 포지에서 옵니다. 기본은 `gh`입니다. 프로그램이 포지를 Origin으로 정했으면 `--forge origin`을 넘깁니다. 헤드 SHA는 로컬 브랜치 참조에서 오므로 stacker의 클론에서 해결합니다. PR이 없는 브랜치는 추측하지 않고 오류를 냅니다. 브랜치에 PR이 여러 개이면 열린 PR 하나만 고릅니다. 스택 수술 뒤에 닫히거나 병합된 이력이 남을 수 있기 때문입니다. 열린 것이 없으면 그 이력을 씁니다. 후보가 둘 이상이면 오류입니다.
 - 스택당 정확히 하나의 stacker만 토폴로지를 바꿉니다. 사슬 리베이스, 강제 푸시, 베이스 재지정, 병합입니다. 스택 안에서 직렬화됩니다. 소유자를 상시 지시에 기록합니다. 사슬 리베이스는 클라우드에서 돕니다. 이 규모의 로컬 리베이스는 노트북을 죽입니다.
 - 작업자는 리베이스하지 않고 PR을 재지정하거나 병합하지 않습니다. babysitter는 `playbooks/babysit.md`를 따르고, 스택당 하나이며, 불변의 프런티어 세대 하나로 범위가 정해집니다. 충돌은 리베이스하지 않고 stacker에게 보고합니다.
 - PR 닫기와 재지정은 stacker를 통해서만 합니다. 베이스 PR을 닫으면 그 위의 모든 사슬이 고아가 됩니다. 병합과 스택 수술은 다른 단위와 같이 브리프가 있는 단위입니다.

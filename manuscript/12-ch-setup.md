@@ -25,7 +25,7 @@ README는 Claude Code에서 이렇게 설치하라고 합니다.
 
 Claude Code는 플러그인 명령과 에이전트 이름 앞에 접두사를 붙이므로 `/poteto-mode`는 `/pstack:poteto-mode`가 됩니다. 나머지 Cursor 이름은 아래 [Claude Code 어댑터](#claude-code-adapter)가 대응합니다.
 
-Claude Code가 설치하는 것은 저장소 루트의 [`harness/pstack/`](https://github.com/cursor/plugins/tree/4ec7ffa173eaa70d3d9467a627baf0954645a353/harness/pstack)에서 생성한 복사본이고, README와 안내서도 포함합니다. pstack을 바꾼 뒤에는 저장소 루트에서 `node scripts/generate-pstack-harness-trees.mjs`를 실행하고 그 결과를 커밋합니다. 생성 복사가 뒤처져 있으면 CI가 실패합니다. 이 생성 트리는 `pstack/` 밖이므로 이 책의 원문 범위에는 넣지 않았고, README가 밝히는 설치 경로로만 적습니다. Claude Code에서 `/pstack:setup-pstack`은 모델 선택을 `~/.claude/rules/pstack-models.md`에 쓰고, Bugbot이나 자동화처럼 Cursor에만 있는 기능이 필요한 단계는 한 줄 메모와 함께 건너뜁니다.
+Claude Code가 설치하는 것은 저장소 루트의 [`harness/pstack/`](https://github.com/cursor/plugins/tree/e73df471cd4bd918367e99f3dd9c51bd53ddf5f0/harness/pstack)에서 생성한 복사본이고, README와 안내서도 포함합니다. pstack을 바꾼 뒤에는 저장소 루트에서 `node scripts/generate-pstack-harness-trees.mjs`를 실행하고 그 결과를 커밋합니다. 생성 복사가 뒤처져 있으면 CI가 실패합니다. 이 생성 트리는 `pstack/` 밖이므로 이 책의 원문 범위에는 넣지 않았고, README가 밝히는 설치 경로로만 적습니다. Claude Code는 서드파티 마켓플레이스의 자동 업데이트를 끄므로, pstack은 설치한 버전에 머뭅니다. 켜려면 `/plugin`의 **marketplaces** 탭에서 `cursor-plugins`를 고르고 **enable auto-update**를 선택합니다. 한 번만 손으로 올리려면 `claude plugin update pstack@cursor-plugins`입니다. Claude Code에서 `/pstack:setup-pstack`은 모델 선택을 `~/.claude/rules/pstack-models.md`에 쓰고, Bugbot이나 자동화처럼 Cursor에만 있는 기능이 필요한 단계는 한 줄 메모와 함께 건너뜁니다.
 
 ## Claude Code 어댑터 {#claude-code-adapter}
 
@@ -327,6 +327,7 @@ pstack은 Cursor용이고, Claude Code에도 `/plugin marketplace add cursor/plu
 | 변경이나 서브시스템을 평이하게 이해하고 싶다 | [`/teach`](teach-recall.md#skill-teach) |
 | 어떤 주제에 대한 자신의 최근 작업을 따라잡고 싶다 | [`/recall`](teach-recall.md#skill-recall) |
 | 이 채팅에서 마지막 메시지 이후 바뀐 것을 평이한 말과 작은 시각으로 따라잡고, 사용자를 기다리는 항목을 답만으로 결정할 수 있게 모두 나열한다 | [`/ketchup`](teach-recall.md#skill-ketchup) |
+| `/ketchup`처럼 따라잡되, 일어난 일은 짧은 무음 슬라이드 영상으로 보고 기다리는 호출은 그 아래 글로 받는다 | [`/ketchup-video`](teach-recall.md#skill-ketchup-video) |
 | 작은 diff가 밖에서 무엇을 깨뜨릴 수 있는지 | [`/blast-radius`](tdd-blast.md#skill-blast-radius) |
 | 함수 경계를 넘는 코드 전에 타입과 모듈 모양을 정한다 | [`/architect`](architect.md#skill-architect) |
 | 같은 지시에 여러 시도를 돌려 좋은 부분을 합친다 | [`/arena`](arena-swarm.md#skill-arena) |
@@ -361,7 +362,7 @@ pstack은 Cursor용이고, Claude Code에도 `/plugin marketplace add cursor/plu
 - `/arena`는 모든 작업자에게 같은 지시를 주고 좋은 부분을 합칩니다. `/swarm`은 조각을 나누거나 경주시키고 보고서 하나를 돌립니다.
 - `/architect`는 설계를 정한 뒤 바로 구현합니다. 코드를 쓰기 전에 설계를 보려면 "with checkpoint"를 붙입니다.
 - `/interrogate`는 diff를 리뷰합니다. `/blast-radius`는 diff 밖의 깨짐을 찾고, 변경을 안전하게 하는 사실 하나를 증명합니다.
-- `/recall`은 최근 채팅을 가로질러 맥락을 다시 세웁니다. `/ketchup`은 이 채팅에서 사용자의 마지막 메시지 이후만 다룹니다. 특정 채팅이나 브랜치 하나를 이어받는 것은 Session pickup 플레이북입니다.
+- `/recall`은 최근 채팅을 가로질러 맥락을 다시 세웁니다. `/ketchup`은 이 채팅에서 사용자의 마지막 메시지 이후만 다룹니다. 그 따라잡기를 짧은 무음 슬라이드 영상으로 보려면 `/ketchup-video`입니다. 특정 채팅이나 브랜치 하나를 이어받는 것은 Session pickup 플레이북입니다.
 - `/in-your-own-words`는 목표와 문제를 자기 말로 다시 말합니다. `/sharpen`은 보내기 전에 프롬프트를 더 깊게 다시 쓰고 과업은 하지 않습니다. `/bro`는 마지막 답을 평이하게 다시 말합니다.
 - `/figure-it-out`은 엄밀한 실행 하나를 설계합니다. Orchestrate 플레이북은 여러 날과 여러 PR에 걸친 프로그램을 돌립니다. Autonomous run 플레이북은 작업 하나를 끝 조건까지 밉니다.
 
@@ -445,7 +446,7 @@ README가 든 예입니다. 스킬은 리뷰 질문을 알아차리고 [`/interr
 
 ### 관련 스킬
 
-설치와 모델은 [`setup-pstack`](#skill-setup-pstack), 작업의 입구는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode)입니다. 일을 시작하기 전에 목표와 문제를 다시 듣기는 [`in-your-own-words`](#skill-in-your-own-words)입니다. 보내기 전에 프롬프트를 다시 쓰는 것은 [`sharpen`](#skill-sharpen)입니다. 앱을 증명할 방법이 없으면 [`create-verification-skill`](verification.md#skill-create-verification-skill)입니다. 테스트가 잘 닿지 않는 속성은 [`create-formal-verification-skill`](verification.md#skill-create-formal-verification-skill)로 형식 검증(formal verification)합니다. 덮는 코드가 바뀐 뒤의 유지는 [`maintain-formal-verification-skill`](verification.md#skill-maintain-formal-verification-skill)입니다. TLA+ 모델에서 사용자가 보는 것을 차트로 그려 PM이나 디자이너에게 보이는 것은 [`statechart`](verification.md#skill-statechart)입니다. 자기 방식은 [`automate-me`](personal.md#skill-automate-me), [`reflect`](personal.md#skill-reflect), [`correct`](personal.md#skill-correct)입니다. 사람이 따라갈 표는 [부록의 선택 흐름도](decision-flow.md)에 있습니다.
+설치와 모델은 [`setup-pstack`](#skill-setup-pstack), 작업의 입구는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode)입니다. 일을 시작하기 전에 목표와 문제를 다시 듣기는 [`in-your-own-words`](#skill-in-your-own-words)입니다. 보내기 전에 프롬프트를 다시 쓰는 것은 [`sharpen`](#skill-sharpen)입니다. 앱을 증명할 방법이 없으면 [`create-verification-skill`](verification.md#skill-create-verification-skill)입니다. 테스트가 잘 닿지 않는 속성은 [`create-formal-verification-skill`](verification.md#skill-create-formal-verification-skill)로 형식 검증(formal verification)합니다. 덮는 코드가 바뀐 뒤의 유지는 [`maintain-formal-verification-skill`](verification.md#skill-maintain-formal-verification-skill)입니다. TLA+ 모델에서 시스템이 상태 사이를 어떻게 움직이는지를 차트로 그리는 것은 [`statechart`](verification.md#skill-statechart)입니다. 자기 방식은 [`automate-me`](personal.md#skill-automate-me), [`reflect`](personal.md#skill-reflect), [`correct`](personal.md#skill-correct)입니다. 사람이 따라갈 표는 [부록의 선택 흐름도](decision-flow.md)에 있습니다.
 
 ## in-your-own-words {#skill-in-your-own-words}
 
@@ -484,7 +485,7 @@ README가 든 예입니다. 스킬은 리뷰 질문을 알아차리고 [`/interr
 
 ### 관련 스킬
 
-입구는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode), 스킬을 고르는 안내는 [`poteto-help`](#skill-poteto-help)입니다. 보내기 전에 프롬프트를 다시 쓰는 것은 [`sharpen`](#skill-sharpen)입니다. 마지막 답을 평이하게 다시 듣는 것은 [`bro`](utility.md#skill-bro)입니다. 이 채팅의 마지막 메시지 이후를 따라잡는 것은 [`ketchup`](teach-recall.md#skill-ketchup)입니다.
+입구는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode), 스킬을 고르는 안내는 [`poteto-help`](#skill-poteto-help)입니다. 보내기 전에 프롬프트를 다시 쓰는 것은 [`sharpen`](#skill-sharpen)입니다. 마지막 답을 평이하게 다시 듣는 것은 [`bro`](utility.md#skill-bro)입니다. 이 채팅의 마지막 메시지 이후를 따라잡는 것은 [`ketchup`](teach-recall.md#skill-ketchup)입니다. 그 따라잡기를 짧은 무음 슬라이드 영상으로 보려면 [`ketchup-video`](teach-recall.md#skill-ketchup-video)입니다.
 
 ## sharpen {#skill-sharpen}
 

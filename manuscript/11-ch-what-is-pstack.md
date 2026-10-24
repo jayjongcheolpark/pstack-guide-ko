@@ -32,7 +32,7 @@ README는 "포크하고, 개선하고, 자기 것으로 만들라"고 권하고,
 
 | 구성 요소 | 내용 |
 | --- | --- |
-| `skills/` | 스킬 57개. 일반 스킬 33개와 `principle-*` 스킬 24개 |
+| `skills/` | 스킬 58개. 일반 스킬 34개와 `principle-*` 스킬 24개 |
 | `agents/` | 서브에이전트 정의 2개: `poteto-agent`, `Comment Sicko`(`name: comment-sicko`) |
 | `automations/` | 휴면 상태의 자동화 팩 `benny` |
 | `docs/guide/` | 열 장으로 된 사용 안내서와 삽화 |
@@ -47,7 +47,7 @@ README는 "포크하고, 개선하고, 자기 것으로 만들라"고 권하고,
 
 ## 사용 방식
 
-README는 Cursor에서 `/add-plugin pstack`으로 설치하고, Claude Code에서는 마켓플레이스를 더한 뒤 `/plugin install pstack@cursor-plugins`로 설치한다고 합니다. Claude Code는 플러그인 명령과 에이전트 이름 앞에 접두사를 붙이므로 `/poteto-mode`는 `/pstack:poteto-mode`가 됩니다. 나머지 Cursor 이름과 설치 세부는 [설치와 첫 사용](setup.md)에서 다룹니다.
+README는 Cursor에서 `/add-plugin pstack`으로 설치하고, Claude Code에서는 마켓플레이스를 더한 뒤 `/plugin install pstack@cursor-plugins`로 설치한다고 합니다. Claude Code는 서드파티 마켓플레이스의 자동 업데이트를 끄므로, pstack은 설치한 버전에 머뭅니다. 켜려면 `/plugin`의 **marketplaces** 탭에서 `cursor-plugins`를 고르고 **enable auto-update**를 선택합니다. 한 번만 손으로 올리려면 `claude plugin update pstack@cursor-plugins`입니다. Claude Code는 플러그인 명령과 에이전트 이름 앞에 접두사를 붙이므로 `/poteto-mode`는 `/pstack:poteto-mode`가 됩니다. 나머지 Cursor 이름과 설치 세부는 [설치와 첫 사용](setup.md)에서 다룹니다.
 
 두 단계면 됩니다. README는 이렇게 안내합니다.
 
@@ -110,17 +110,17 @@ README에는 "왜 계획 스킬이 없는가"라는 절이 있습니다. Cursor�
 
 ## 스킬 지도
 
-57개 스킬을 이 책은 다음과 같이 나눕니다. 전체 목록과 트리거 문구는 [부록의 빠른 참조표](quickref.md)에 있습니다.
+58개 스킬을 이 책은 다음과 같이 나눕니다. 전체 목록과 트리거 문구는 [부록의 빠른 참조표](quickref.md)에 있습니다.
 
 | 부 | 스킬 |
 | --- | --- |
 | 시작하기 | `setup-pstack`, `poteto-help`, `in-your-own-words`, `sharpen` |
 | 진입점 | `poteto-mode` (플레이북 23개 포함) |
-| 이해하기 | `how`, `why`, `teach`, `recall`, `ketchup` |
+| 이해하기 | `how`, `why`, `teach`, `recall`, `ketchup`, `ketchup-video` |
 | 설계하기 | `architect`, `arena`, `swarm`, `figure-it-out`, `principle-*` 24개 |
 | 고치고 검증하기 | `tdd`, `blast-radius`, `interrogate`, `benchmark-checklist`, `create-verification-skill`, `maintain-verification-skill`, `create-formal-verification-skill`, `maintain-formal-verification-skill`, `statechart` |
 | 글과 코드 정리 | `unslop`, `technical-writing`, `no-comments`, `typescript-best-practices` |
 | 나만의 방식과 유틸리티 | `automate-me`, `reflect`, `correct`, `show-me-your-work`, `bro` |
 | 자동화 | `make-bot-ui` |
 
-수를 세면 4 + 1 + 5 + 28 + 9 + 4 + 5 + 1 = 57개입니다. 표의 설계하기 행은 일반 스킬 4개와 원칙 24개를 합쳐 28개입니다.
+수를 세면 4 + 1 + 6 + 28 + 9 + 4 + 5 + 1 = 58개입니다. 표의 설계하기 행은 일반 스킬 4개와 원칙 24개를 합쳐 28개입니다.
