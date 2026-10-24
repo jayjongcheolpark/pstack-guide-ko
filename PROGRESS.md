@@ -4,14 +4,14 @@
 
 ## 원본
 
-`cursor/plugins`의 `pstack/`, 커밋 `4ec7ffa173eaa70d3d9467a627baf0954645a353` (0.15.30) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를, 0.15.20 절은 그때의 핀 `1b6d44f`를, 0.15.21 절은 그때의 핀 `997ffc7`를, 0.15.23 절은 그때의 핀 `dbf4981`을, 0.15.24 절은 그때의 핀 `1e5c90a`를, 0.15.25 절은 그때의 핀 `e5136d8`를, 0.15.25-ko.1 절은 그때의 핀 `99743e9`를, 0.15.25-ko.2 절은 그때의 핀 `182f2ce`를, 0.15.26 절은 그때의 핀 `0b8e952`를, 0.15.28 절은 그때의 핀 `d457567`를, 0.15.29 절은 그때의 핀 `88d4751`을, 0.15.30 절은 그때의 핀 `eb4db2b`를, 0.15.30-ko.1 절은 그때의 핀 `4ec7ffa`를 적은 기록입니다.
+`cursor/plugins`의 `pstack/`, 커밋 `e73df471cd4bd918367e99f3dd9c51bd53ddf5f0` (0.15.32) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를, 0.15.20 절은 그때의 핀 `1b6d44f`를, 0.15.21 절은 그때의 핀 `997ffc7`를, 0.15.23 절은 그때의 핀 `dbf4981`을, 0.15.24 절은 그때의 핀 `1e5c90a`를, 0.15.25 절은 그때의 핀 `e5136d8`를, 0.15.25-ko.1 절은 그때의 핀 `99743e9`를, 0.15.25-ko.2 절은 그때의 핀 `182f2ce`를, 0.15.26 절은 그때의 핀 `0b8e952`를, 0.15.28 절은 그때의 핀 `d457567`를, 0.15.29 절은 그때의 핀 `88d4751`을, 0.15.30 절은 그때의 핀 `eb4db2b`를, 0.15.30-ko.1 절은 그때의 핀 `4ec7ffa`를, 0.15.32 절은 그때의 핀 `e73df47`을 적은 기록입니다.
 
 ## 빌드와 검사
 
 ```shell
 bun install
 bun tools/build.mjs        # dist/pstack-guide-<버전>.epub, dist/pstack-guide-<버전>.pdf
-PSTACK_SRC=<클론 경로>/pstack bun tools/check.mjs   # 원고 규칙, 링크, 스킬 57개와 플레이북 23개의 절 존재, epubcheck
+PSTACK_SRC=<클론 경로>/pstack bun tools/check.mjs   # 원고 규칙, 링크, 스킬 58개와 플레이북 23개의 절 존재, epubcheck
 bun tools/check-layout.mjs                          # EPUB을 390px 폭에서 열어 가로 넘침 검사
 bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2,10,300   # PDF 페이지 수, 개요, 글꼴, 한글 텍스트, 선택한 페이지를 PNG로
 ```
@@ -35,7 +35,7 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 | 30-part-understand | 3부 이해하기 | | checked |
 | 31-ch-how | `how` | | checked |
 | 32-ch-why | `why` | | checked |
-| 33-ch-teach-recall | `teach`, `recall`, `ketchup` | | checked |
+| 33-ch-teach-recall | `teach`, `recall`, `ketchup`, `ketchup-video` | | checked |
 | 40-part-design | 4부 설계하기 | | checked |
 | 41-ch-architect | `architect` | | checked |
 | 42-ch-arena-swarm | `arena`, `swarm`, `figure-it-out` | | checked |
@@ -70,11 +70,11 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 - 검증 스킬(`benchmark-checklist`, `create-verification-skill`, `maintain-verification-skill`, `create-formal-verification-skill`, `maintain-formal-verification-skill`, `statechart`)은 버그 수정과 검증이 같은 흐름이라서 고치고 검증하기 부의 마지막 장에 뒀습니다. `benchmark-checklist`는 플레이북이 아니라 스킬이라 플레이북 장이 아니라 이 장에 절이 있습니다. `create-formal-verification-skill`은 앱을 구동하는 검증 스킬이 아니라 테스트가 잘 닿지 않는 속성 하나를 형식 검증(formal verification)하는 프로젝트 전용 스킬을 남기므로 같은 장에 절을 뒀고, `maintain-formal-verification-skill`은 그 검사가 덮는 코드가 바뀐 뒤의 유지 루프라 그 옆에 뒀습니다. `statechart`는 TLA+ 모델에서 사용자가 보는 것을 차트로 그리고 안내서 6장이 형식 검증 다음에 두므로 그 둘 다음에 뒀습니다.
 - cursor-team-kit의 스킬은 장으로 쓰지 않았습니다. 이 저장소의 pstack 파일이 그것을 부르는 자리에서 한두 문장으로만 언급합니다. 그래서 fix-ci, fix-merge-conflicts, PR 준비 스킬 장은 없고, PR 흐름은 poteto-mode 플레이북 장에서 다룹니다.
 - 원본의 `automations/benny`는 슬래시 스킬로 등록되지 않은 자동화 팩이라 별도 부(자동화)로 뒀습니다.
-- `ketchup`은 `/recall`과 가까운 짝이라 이해하기 부의 teach/recall 장에 절을 뒀습니다. README와 `/poteto-help`가 이 채팅의 마지막 메시지 이후(`/ketchup`)와 최근 채팅을 가로지르는 맥락(`/recall`)과 특정 채팅 이어받기(Session pickup)를 나란히 구분합니다.
+- `ketchup`은 `/recall`과 가까운 짝이라 이해하기 부의 teach/recall 장에 절을 뒀습니다. `ketchup-video`는 그 따라잡기를 영상으로 보여 주므로 같은 장에 절을 뒀습니다. README와 `/poteto-help`가 이 채팅의 마지막 메시지 이후(`/ketchup`, `/ketchup-video`)와 최근 채팅을 가로지르는 맥락(`/recall`)과 특정 채팅 이어받기(Session pickup)를 나란히 구분합니다.
 
 ## 해석한 부분 (원문이 모호했던 곳)
 
-- **원문 개수.** principle 스킬은 24개입니다(스킬 총 57개 = 일반 33개 + principle 24개). README도 24개라고 합니다. 책은 고정한 커밋의 디렉터리를 세어 얻은 수를 따릅니다. 0.15.5 핀에서는 23개와 47개, 0.15.9 핀에서는 26개와 50개, 0.15.15 핀에서는 27개와 51개, 0.15.17부터 0.15.21까지는 28개와 52개, 0.15.23은 29개와 53개, 0.15.24부터 0.15.25까지는 30개와 54개, 0.15.26은 31개와 55개, 0.15.28부터 0.15.29까지는 32개와 56개였고, 그 기록은 아래 사실 확인에 남아 있습니다.
+- **원문 개수.** principle 스킬은 24개입니다(스킬 총 58개 = 일반 34개 + principle 24개). README도 24개라고 합니다. 책은 고정한 커밋의 디렉터리를 세어 얻은 수를 따릅니다. 0.15.5 핀에서는 23개와 47개, 0.15.9 핀에서는 26개와 50개, 0.15.15 핀에서는 27개와 51개, 0.15.17부터 0.15.21까지는 28개와 52개, 0.15.23은 29개와 53개, 0.15.24부터 0.15.25까지는 30개와 54개, 0.15.26은 31개와 55개, 0.15.28부터 0.15.29까지는 32개와 56개, 0.15.30부터 0.15.30-ko.1까지는 33개와 57개였고, 그 기록은 아래 사실 확인에 남아 있습니다.
 - **Comment Sicko의 읽기 전용 여부.** README와 안내서는 "read-only comment reviewer"라고 하지만 `agents/comment-sicko.md`는 스스로 주석을 지우고 삭제 수를 보고한다고 씁니다("I touch comments", "touched files, deletion count"). 애플리케이션 코드는 쓰지 않는다는 점은 일치합니다. 책은 정의 파일의 표현을 따르고 README의 표현을 함께 밝혔습니다.
 - **`/setup-pstack` 재실행의 보존 범위.** README와 안내서는 "기본값과 다른 역할을 유지"라고 하고, `setup-pstack/SKILL.md` 3(b)는 계열, 목록, 별칭으로 바꾼 역할을 유지하고 강도 토큰은 새 예산에 맞춰 다시 계산한다고 합니다. 책은 정밀한 쪽(스킬 본문)을 따릅니다.
 - **`poteto-mode`의 프런트매터 해석.** 0.15.22에서 `mode`와 `reminder` 키를 뺐습니다. 커밋 메시지(#597)는 Cursor가 두 키를 무시해 reminder 문구가 모델에 닿지 않았다고 합니다. `disable-model-invocation: true`는 남습니다. 0.15.10 README와 안내서는 더 이상 "sticky mode"라고 하지 않고, Enter는 한 메시지에만 붙고 Option+Enter/Alt+Enter(또는 Use as Mode)가 Custom Mode를 만든다고 적습니다. 책은 그 설명을 따릅니다. `disable-model-invocation`은 "모델이 자동으로 부르지 않는다"는 통상 뜻으로 적었습니다.
@@ -686,3 +686,46 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 - `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 57개와 플레이북 23개의 절 존재, 용어 병기 짝 29개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
 - `CHROME_PATH=/usr/bin/google-chrome bun tools/check-layout.mjs`: 390px에서 가로 넘침 없음.
 - `CHROME_PATH=/usr/bin/google-chrome bun tools/build.mjs`: `pstack-guide-0.15.30-ko.1.epub`, `pstack-guide-0.15.30-ko.1.pdf` (500쪽, 0.15.30은 499쪽).
+
+## 0.15.32
+
+원문을 `4ec7ffa173eaa70d3d9467a627baf0954645a353`(0.15.30)에서 `e73df471cd4bd918367e99f3dd9c51bd53ddf5f0`(0.15.32)로 올렸습니다. pstack 트리에 닿은 커밋은 열세 개입니다.
+
+- `076f4b2` feat(pstack): bring the statechart skill up to date, with the Pele renderer (#791)
+- `642289e` chore(pstack): bump to 0.15.31 (#792)
+- `00d5dec` feat(pstack): tell generated verify skills to read each model-check result with /statechart (#794)
+- `3c0fdb4` feat(pstack): add the ketchup-video skill (#797)
+- `b1a1298` chore(pstack): bump to 0.15.32 (#798)
+- `7054003` fix(pstack): route reflect edits out of the plugin cache (#800)
+- `96dec8e` fix(watch-pr): distinguish fork heads during stack discovery (#801)
+- `fe096ef` fix(watch-pr): cap polling sleeps at the deadline (#802)
+- `86c2448` fix(pstack): recognize matching inline code delimiters (#803)
+- `3c596e7` fix(orch): prefer active PR over branch history (#804)
+- `f83fbe6` fix(pstack): read transcript mtimes with GNU stat and date in worktree-audit (#805)
+- `a0b0ad9` docs(pstack): note Claude Code auto-update is off for third-party marketplaces (#806)
+- `e73df47` fix(pstack): renumber swarm's Phase A and fix its dangling table reference (#807)
+
+책 버전은 `BOOK_REVISION = 0`이라 pstack 버전과 같은 `0.15.32`입니다. 산출물 이름은 `pstack-guide-0.15.32.epub`, `pstack-guide-0.15.32.pdf`입니다.
+
+확인한 사실입니다. `plugin.json`과 `.cursor-plugin/plugin.json` 버전은 둘 다 0.15.32입니다. `e73df47`은 `main`에서 `pstack/`에 닿은 최신 커밋이고 버전도 0.15.32입니다. 0.15.32를 처음 쓴 커밋은 `b1a1298`입니다. 스킬 수는 58개(일반 34, 원칙 24), 플레이북은 23개입니다. 새 절은 `ketchup-video`(이해하기 부의 teach/recall 장, `ketchup` 다음)입니다. `disable-model-invocation`은 `setup-pstack`만 없고 나머지 57개에 있습니다. 스킬 지도의 이해하기 행이 6개가 되어 수식은 4 + 1 + 6 + 28 + 9 + 4 + 5 + 1 = 58입니다.
+
+원고에서 반영한 내용입니다.
+
+- 핀과 permalink, 산출물 이름을 `e73df47` / `0.15.32`로 올렸습니다.
+- 새 절은 `/ketchup-video`입니다. `/ketchup`을 따르되 일어난 일은 짧은 무음 슬라이드 영상으로 보이고, 기다리는 호출은 그 아래 글입니다. 창은 `/ketchup-video` 직전 메시지부터입니다. 저장소 밖에서 영상을 쓰는 일만 읽기 전용 규칙(rule)의 예외입니다. README와 `/poteto-help`와 안내서 10장, 빠른 참조표, 설치 장의 스킬 표, 선택 흐름도, 레시피에 행을 더했습니다.
+- `/statechart`는 제품 흐름만이 아니라 프로토콜과 서비스도 그립니다. 읽는 사람은 PM, 엔지니어, 리뷰어일 수 있습니다. 버그는 규칙을 깨는 상태로 가는 번호 붙은 경로입니다. PNG에서 규칙을 깨는 상태는 묶음 색 대신 빨강입니다. 본문이 이름 붙인 새 옵션은 `--cover`와 `--expect-broken`입니다. 첫 실행은 mise로 TLC와 Java를 받습니다.
+- `/create-formal-verification-skill`이 만든 TLA+ 검사는 결과마다 `/statechart`로 읽습니다. 명령과 경로는 생성한 스킬에 복사하지 않습니다.
+- `swarm` A단계는 1, 2, 3, 4입니다. B단계는 3단계의 모델을 씁니다. D단계는 결과 표입니다.
+- `reflect`는 `plugins/cache/`를 편집하지 않고, 승인 뒤 `.cursor/skills/`나 `~/.cursor/skills/`의 복사본을 고칩니다. PR을 열거나 푸시하지 않습니다.
+- Claude Code는 서드파티 마켓플레이스의 자동 업데이트를 끕니다. 켜려면 `/plugin`의 marketplaces 탭에서 enable auto-update를 고르고, 한 번만 올리려면 `claude plugin update pstack@cursor-plugins`입니다.
+- `check-plan.mjs`는 같은 길이의 열림과 닫힘 백틱만 인라인 코드로 벗깁니다. `worktree-audit.sh`는 GNU면 `stat -c`와 `date -d`를 씁니다. `orch`는 브랜치의 열린 PR을 이력보다 앞에 둡니다. `watch-pr`는 포크 헤드를 부모로 쓰지 않고, 잠드는 시간은 남은 기한을 넘지 않습니다.
+
+### 해석한 부분
+
+- README와 `/poteto-help`와 안내서 6장은 `/statechart`를 여전히 사용자가 보는 것과 동작함, 아직 틀림, 열린 PR이 고침으로 설명합니다. `SKILL.md`는 시스템 일반과 파란 테두리 경로로 다시 적혔습니다. 책은 절의 동작은 본문을 따르고, README와 안내서의 문구는 그 출처를 밝혀 적었습니다.
+- `#791`은 Pele 렌더러와 스크립트를 많이 나눕니다. `SKILL.md`가 이름 붙인 새 옵션은 `--cover`와 `--expect-broken`입니다. 책은 본문과 안내서가 이름 붙인 명령과 옵션만 적었습니다. `--help`가 나머지를 알려 줍니다.
+- `ketchup-video`는 영상을 저장소 밖에서 씁니다. 책은 그 예외만 옮기고, 렌더 도구 이름은 본문이 밝히지 않아 적지 않았습니다.
+
+### 실행한 검사
+
+- 빌드와 검사 결과는 이어서 적습니다.
