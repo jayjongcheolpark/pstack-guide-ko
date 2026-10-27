@@ -4,7 +4,7 @@
 
 ## 원본
 
-`cursor/plugins`의 `pstack/`, 커밋 `e73df471cd4bd918367e99f3dd9c51bd53ddf5f0` (0.15.32) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를, 0.15.20 절은 그때의 핀 `1b6d44f`를, 0.15.21 절은 그때의 핀 `997ffc7`를, 0.15.23 절은 그때의 핀 `dbf4981`을, 0.15.24 절은 그때의 핀 `1e5c90a`를, 0.15.25 절은 그때의 핀 `e5136d8`를, 0.15.25-ko.1 절은 그때의 핀 `99743e9`를, 0.15.25-ko.2 절은 그때의 핀 `182f2ce`를, 0.15.26 절은 그때의 핀 `0b8e952`를, 0.15.28 절은 그때의 핀 `d457567`를, 0.15.29 절은 그때의 핀 `88d4751`을, 0.15.30 절은 그때의 핀 `eb4db2b`를, 0.15.30-ko.1 절은 그때의 핀 `4ec7ffa`를, 0.15.32 절은 그때의 핀 `e73df47`을 적은 기록입니다.
+`cursor/plugins`의 `pstack/`, 커밋 `519d36aa98955bf680db01bcde5fdfba686dc901` (0.15.34) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를, 0.15.20 절은 그때의 핀 `1b6d44f`를, 0.15.21 절은 그때의 핀 `997ffc7`를, 0.15.23 절은 그때의 핀 `dbf4981`을, 0.15.24 절은 그때의 핀 `1e5c90a`를, 0.15.25 절은 그때의 핀 `e5136d8`를, 0.15.25-ko.1 절은 그때의 핀 `99743e9`를, 0.15.25-ko.2 절은 그때의 핀 `182f2ce`를, 0.15.26 절은 그때의 핀 `0b8e952`를, 0.15.28 절은 그때의 핀 `d457567`를, 0.15.29 절은 그때의 핀 `88d4751`을, 0.15.30 절은 그때의 핀 `eb4db2b`를, 0.15.30-ko.1 절은 그때의 핀 `4ec7ffa`를, 0.15.32 절은 그때의 핀 `e73df47`을, 0.15.34 절은 그때의 핀 `519d36a`를 적은 기록입니다.
 
 ## 빌드와 검사
 
@@ -731,3 +731,38 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 - `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 58개와 플레이북 23개의 절 존재, 용어 병기 짝 29개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
 - `CHROME_PATH=/usr/bin/google-chrome bun tools/check-layout.mjs`: 390px에서 가로 넘침 없음.
 - `CHROME_PATH=/usr/bin/google-chrome bun tools/build.mjs`: `pstack-guide-0.15.32.epub`, `pstack-guide-0.15.32.pdf` (508쪽, 0.15.30-ko.1은 500쪽).
+
+## 0.15.34
+
+원문을 `e73df471cd4bd918367e99f3dd9c51bd53ddf5f0`(0.15.32)에서 `519d36aa98955bf680db01bcde5fdfba686dc901`(0.15.34)로 올렸습니다. pstack 트리에 닿은 커밋은 다섯 개입니다.
+
+- `34b1b7c` feat(pstack): port the statechart compiler (#977)
+- `7c7bde7` chore(pstack): bump to 0.15.33 (#978)
+- `740d2c0` fix(pstack): keep qualified action names in property traces (#982)
+- `164ced1` chore(pstack): bump to 0.15.34 (#983)
+- `519d36a` test(pstack): wait for the reap in the statechart SIGKILL view test (#981)
+
+책 버전은 `BOOK_REVISION = 0`이라 pstack 버전과 같은 `0.15.34`입니다. 산출물 이름은 `pstack-guide-0.15.34.epub`, `pstack-guide-0.15.34.pdf`입니다.
+
+확인한 사실입니다. `plugin.json`과 `.cursor-plugin/plugin.json` 버전은 둘 다 0.15.34입니다. `519d36a`는 `main`에서 `pstack/`에 닿은 최신 커밋입니다. 0.15.34를 처음 쓴 커밋은 `164ced1`입니다. 스킬 수는 58개(일반 34, 원칙 24), 플레이북은 23개, 에이전트는 2개로 그대로입니다. 새 스킬은 없습니다. `disable-model-invocation`은 `setup-pstack`만 없고 나머지 57개에 있습니다.
+
+`e73df47..519d36a`에서 사용자에게 보이는 `pstack/` 파일은 README, 안내서 6장, `create-formal-verification-skill`, `poteto-help`, `statechart/SKILL.md`, 새 `statechart/references/render.md`, 두 `plugin.json`입니다. 나머지 차이는 `skills/statechart/scripts/`를 TypeScript 컴파일러로 바꾼 것과 그 테스트입니다. 바뀐 파일은 439개입니다.
+
+원고에서 반영한 내용입니다.
+
+- 핀과 permalink, 산출물 이름을 `519d36a` / `0.15.34`로 올렸습니다.
+- `/statechart`는 명령 하나입니다. `<skill dir>/scripts/statechart SPEC.tla [--config FILE] [--view FILE] [--out DIR]`. POSIX 런처가 TypeScript를 실행할 런타임을 고릅니다. 차트에서 TLA+ 뼈대를 쓰거나, 기존 명세에 비춰 코드를 감사하는 방향은 없습니다. `from-spec`, `from-chart`, `--against`, `--fixed`, `--against-config`, `--cover`, `--expect-broken`, `--png`, `readerActions`, `stories.md`, `summary.json`은 본문에서 빠졌습니다.
+- 뷰 모듈이 `state()`, `step()`, `group()`, `colors`, `title`을 내보냅니다. 규칙을 깨는 상태는 `breaks` 또는 `mayBreak`입니다. 차트의 예산은 상태 500개입니다. 렌더는 Pele이고 `references/render.md`를 따릅니다.
+- README와 `/poteto-help`와 안내서 6장, 빠른 참조표, 설치 장의 스킬 표, 레시피에서 합의한 차트를 TLA+ 뼈대로 바꾸거나 코드를 감사한다는 문장과, 상태마다 동작함, 아직 틀림, 열린 PR이 고침을 표시한다는 문장을 뺐습니다.
+- `/create-formal-verification-skill`은 TLA+ 결과를 `/statechart`로 읽으라고 하되, 변경이 그중 무엇을 고치는지는 더 이상 말하지 않습니다.
+
+### 해석한 부분
+
+- `#977`의 커밋 메시지는 차트에서 TLA+ 뼈대, 기존 명세에 비춘 코드 감사, 고정 표시를 컴파일러가 더 이상 갖지 않는다고 합니다. 책은 빠진 방향을 되살리지 않았습니다.
+- POSIX 런처가 받는 Node, Bun, Deno 버전은 `scripts/statechart`에 있습니다. 원문 줄에 런처를 넣었으므로 그 버전을 적었습니다. `statechart.ts`의 USAGE가 말하는 종료 코드는 `SKILL.md`가 이름 붙이지 않아 적지 않았습니다.
+- `render.md`의 제안 CSS는 통째로 옮기지 않았습니다. Pele 패키지, 옵션, 클래스(`breaks`, `mayBreak`, `bugPath`, `repeats`), `!important`가 필요한 이유만 적었습니다.
+- `#982`와 `#981`은 스크립트와 테스트입니다. `SKILL.md`는 그 두 커밋에서 바뀌지 않았습니다. 책은 INSTANCE 액션 이름과 SIGKILL 재수집을 적지 않았습니다.
+
+### 실행한 검사
+
+검사는 빌드 뒤에 이 절에 남깁니다.
