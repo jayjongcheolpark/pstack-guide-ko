@@ -110,7 +110,7 @@
 /statechart what the user sees when they edit a note offline
 ```
 
-TLA+ 모델에서 생성한 Mermaid statechart를 받습니다. 안내서는 상태마다 동작함, 아직 틀림, 열린 PR이 고침 중 하나로 표시된다고 하고, TLC가 찾은 버그는 차트를 읽는 사람의 말로 된 번호 붙은 경로입니다. 본문은 제품 흐름만이 아니라 프로토콜과 서비스도 그리고, 버그는 규칙을 깨는 상태로 가는 번호 붙은 경로입니다. 모델이 코드를 설명하면 넘기기 전에 에이전트가 버그 경로마다 실제 코드에서 재현하므로 모델링 오류가 버그로 넘어가지 않습니다. → [`statechart`](verification.md#skill-statechart)
+TLA+ 모델에서 생성한 Mermaid statechart를 받습니다. 차트는 규칙을 깨는 상태를 표시하고, 보고서는 그 상태마다 차트를 읽는 사람의 말로 된 가장 짧은 경로를 줍니다. 본문은 제품 흐름만이 아니라 프로토콜과 서비스도 그립니다. 모델이 코드를 설명하면 넘기기 전에 에이전트가 버그 경로마다 실제 코드에서 재현하므로 모델링 오류가 버그로 넘어가지 않습니다. → [`statechart`](verification.md#skill-statechart)
 
 **숫자를 올리기 전에 걸러 내기.**
 
