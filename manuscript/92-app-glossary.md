@@ -21,7 +21,7 @@
 | 검증 | validation | setup | 입력이나 설정이 유효한지 따지는 일입니다. `boundary-discipline`이 경계에 두라는 validation, `setup-pstack`의 Validate 단계. 두 뜻이 한 장에 함께 나오면 뜻이 바뀌는 곳마다 영어를 붙였습니다. 예: 경계 검증(validation) |
 | 검증기 | validator | playbooks-work | 값이 유효한지 따지는 코드입니다. `subtract-before-you-add`가 지우라는 redundant validators, SKILL.md validator. 예: 중복 검증기(validator) |
 | 검증기 | verifier | playbooks-long | 결과를 확인하는 쪽입니다. `autonomous-run`의 "flaky verifiers". 예: 불안정한 검증기(verifier) |
-| 뼈대 | scaffold | playbooks-long | 뒤따르는 작업을 돕는 기반입니다. `foundational-thinking`의 "scaffold first", 임시 scaffolding. 예: 뼈대(scaffold) 먼저 |
+| 뼈대 | scaffold | principles | 뒤따르는 작업을 돕는 기반입니다. `foundational-thinking`의 "scaffold first", 임시 scaffolding. 예: 뼈대(scaffold) 먼저 |
 | 뼈대 | skeleton | playbooks-work | 채워 넣는 틀입니다. multi-phase plan의 skeleton, eval의 project skeleton. 예: 계획서 뼈대(skeleton) |
 | 관문 | gate | poteto-mode | gate입니다. 사람이 정하는 지점과 통과해야 나아가는 검사 둘 다 gate입니다. 예: 회귀 관문(gate) |
 | 게이트 | gate | playbooks-pr | 같은 gate를 소리 나는 대로 적은 말입니다. 기능 게이트처럼 코드 안의 분기 조건을 가리키거나 병합 사유를 가리킬 때 씁니다. 예: 게이트(gate) 사유 |
@@ -91,9 +91,9 @@
 | throughput checkpoint | 처리량 점검표 | Feature 플레이북 3단계의 네 항목(blocking first steps 등) |
 | decision trail / log | 결정 기록 | `show-me-your-work`가 남기는 TSV |
 | operator | 운영자 | 자율 플레이북을 부리는 사람 |
-| coordinator | 조정자 | Orchestrate에서 브리프를 쓰고 대기열을 비우는 채팅 |
+| coordinator | 조정자 | Orchestrate에서 일마다 어느 에이전트가 할지 정하고 각 에이전트가 만든 것을 확인하는 채팅 |
 | brief | 브리프 | 에이전트에게 주는 프롬프트. GOAL, SCOPE 등 필드가 있음 |
-| ledger | 장부 | Orchestrate의 검증 판정 기록(`ledger.tsv`) |
+| ledger | 장부 | Orchestrate가 헤드 SHA 하나에 두는 검증 판정 |
 | gate | 관문 | 사람의 결정이 필요한 지점이거나 검증을 통과해야 나아가는 조건 |
 
 ## 품질과 검증 개념

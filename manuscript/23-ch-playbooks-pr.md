@@ -43,7 +43,7 @@
 - **준비 상태.** PR은 항상 준비 상태로 열고 초안(draft)으로 열지 않습니다. 내장 PR 도구는 초안이 기본일 수 있으므로, 그 도구로 만드는 호출마다 `draft: false`를 설정합니다. Origin에서는 `--status open`, `gh`에서는 `--draft`를 생략합니다. 그래도 초안으로 열렸으면 그 PR 도구로 준비 상태로 표시하거나, 정한 포지에 따라 `origin pr ready <number>` 또는 `gh pr ready <number>`를 실행합니다. PR 상태를 언급하기 전에 `origin pr view <number>` 또는 `gh pr view <number>`를 실행합니다.
 - **Babysit.** PR을 여는 것이 babysit을 시작하지는 않습니다. URL을 게시하고 계속 만듭니다. 단계나 스택을 먼저 끝냅니다. 스택 전체가 생긴 뒤 사용자가 요청할 때만 별도의 babysit 패스를 돌립니다. 새 PR마다 babysit하면 빌드가 멈추고 나중 웨이브가 다시 시작시킬 커밋에 체크를 낭비합니다. 피드백이 의도에서 벗어나면 반박합니다.
 
-  PR을 여는 서브에이전트는 `interrogate`, `/deslop`, `/no-comments`를 돌리고 URL을 게시한 뒤 babysit 없이 부모에게 돌아갑니다. Autopilot-full이나 Autopilot-stack의 소유자는 예외입니다. 그 소유자의 브리프가 babysit 루프를 배정하고, 그것이 `playbooks/babysit.md`가 기다리는 요청입니다. 소유자는 code-ready 보고 뒤에 루프를 시작하고 자기 플레이북대로 merge-ready나 STACK-READY를 보고합니다. 스택 전체가 만들어질 때까지 babysit을 미루는 이 플레이북과 babysit 플레이북의 규칙(rule)은 그 소유자에게 적용되지 않습니다.
+  PR을 여는 서브에이전트는 `/deslop`과 `/no-comments`를 돌리고 URL을 게시한 뒤 babysit 없이 부모에게 돌아갑니다. Autopilot-full이나 Autopilot-stack의 소유자는 예외입니다. 그 소유자의 브리프가 babysit 루프를 배정하고, 그것이 `playbooks/babysit.md`가 기다리는 요청입니다. 소유자는 code-ready 보고 뒤에 루프를 시작하고 merge-ready를 보고합니다. 스택 전체가 만들어질 때까지 babysit을 미루는 이 플레이북과 babysit 플레이북의 규칙(rule)은 그 소유자에게 적용되지 않습니다.
 
 ### 응답
 
@@ -110,7 +110,7 @@ end 응답
 - **Origin을 쓸 수 없을 때.** `gh`에 머무르고 폴백을 기록합니다. Graphite(`gt`)를 요구하지 않습니다.
 - **본문이 길어질 때.** 스쿼시 커밋 본문이 약 40줄을 넘게 하지 않습니다. 넘으면 본문을 자릅니다. 세부는 링크한 산출물에 둡니다.
 - **피드백이 의도에서 벗어날 때.** 반박합니다(Push back).
-- **서브에이전트가 PR을 열었을 때.** `interrogate`, `/deslop`, `/no-comments`를 돌리고 URL을 게시한 뒤 babysit 없이 부모에게 돌아갑니다. Autopilot-full이나 Autopilot-stack의 소유자만 예외입니다.
+- **서브에이전트가 PR을 열었을 때.** `/deslop`과 `/no-comments`를 돌리고 URL을 게시한 뒤 babysit 없이 부모에게 돌아갑니다. Autopilot-full이나 Autopilot-stack의 소유자만 예외입니다.
 
 ### 호출하는 스킬과 스크립트
 
@@ -120,7 +120,6 @@ end 응답
 | [`/no-comments`](code-hygiene.md#skill-no-comments) | 스킬 | PRs |
 | [`/technical-writing`](writing.md#skill-technical-writing) | 스킬 | PRs |
 | [`/unslop`](writing.md#skill-unslop) | 스킬 | PRs |
-| [`interrogate`](interrogate.md#skill-interrogate) | 스킬 | 서브에이전트가 PR을 열 때 |
 | 내장 PR 도구 | 실행이 제공하는 도구 | Built-in PR tool, Readiness. 있으면 생성, 수정, 재지정, 준비 상태 표시 |
 | `gh` 또는 `origin` | 명령줄 도구 | Forge. 내장 도구가 없거나 덮지 않는 작업의 Size and stacks, Readiness |
 | [Babysit](playbooks-pr.md#playbook-babysit) | 플레이북 | 사용자가 요청할 때만 |
@@ -153,7 +152,7 @@ babysit은 사용자가 요청할 때 시작합니다. 보통은 단계 하나�
    선언하지 않으면 `drive`가 기본입니다. 작거나 문서만 바꾸는 PR은 `drive`가 아니라 `check`를 씁니다.
 2. **병합 프런티어만 다루고 그 위는 건드리지 않습니다.** 가장 낮은 미병합 PR이 병합될 때까지 그것만 중요합니다. 상위 스택의 스레드는 읽고 모아 두되, 프런티어의 체크를 재시작하게 만드는 대가로 고치지 않습니다. 프런티어가 빨간데 상위에 가 있는 자신을 발견하면 멈추고 내려옵니다.
 3. **스택당 babysitter 하나.** 시작하기 전에 이미 다른 것이 붙어 있지 않은지 확인합니다.
-4. **스택 토폴로지를 바꾸지 않습니다.** babysit 안에서 베이스 재지정, 리베이스, 스택 전체 제출, 강제 푸시를 하지 않습니다. 소유 브랜치에서 고치고, 리베이스 성격의 일은 위로 보고하고 소유자가 하게 합니다. 자기 PR을 babysit하는 Autopilot-full 소유자는 그 소유자이며, 리베이스를 보고하라는 곳에서 그 소유자가 자기 브랜치를 리베이스해 `git push --force-with-lease`로 게시합니다. Autopilot-stack에서는 루트가 그 소유자입니다. 허용되는 유일한 생성이 있습니다. 수정의 소유 PR이 이미 병합되었으면 병합된 이력을 다시 쓰지 않고 남은 스택 위에 새 PR로 만듭니다. 6단계의 고정된 대기열 목록이 바뀌는 유일한 경우입니다.
+4. **스택 토폴로지를 바꾸지 않습니다.** babysit 안에서 베이스 재지정, 리베이스, 스택 전체 제출, 강제 푸시를 하지 않습니다. 소유 브랜치에서 고치고, 리베이스 성격의 일은 위로 보고하고 소유자가 하게 합니다. 자기 PR을 babysit하는 Autopilot-full이나 Autopilot-stack의 소유자는 그 소유자이며, 리베이스를 보고하라는 곳에서 그 소유자가 `playbooks/autopilot-full.md` 2단계대로 자기 브랜치를 리베이스해 `git push --force-with-lease`로 게시합니다. 허용되는 유일한 생성이 있습니다. 수정의 소유 PR이 이미 병합되었으면 병합된 이력을 다시 쓰지 않고 남은 스택 위에 새 PR로 만듭니다. 6단계의 고정된 대기열 목록이 바뀌는 유일한 경우입니다.
 5. **순서는 충돌, 리뷰 스레드, CI입니다.** 알려진 수정은 모두 한 번의 푸시 웨이브로 묶습니다. 충돌은 풀지 않고 보고하는 유일한 차단 요소입니다. 어느 브랜치가 리베이스해야 하는지 말하고 멈춥니다. 바빠 보이려고 CI로 넘어가지 않습니다. 그 보고에 표류 스윕(drift sweep)을 명시합니다. 트렁크에 스택이 지우거나 옮기는 코드의 호출자가 새로 생겼을 수 있고, 소유자의 리베이스가 같은 웨이브에서 이를 조정해야 하기 때문입니다.
 6. **초록 체크 목록이 아니라 포지의 판정을 믿습니다.** 준비 상태란 포지가 PR을 병합할 수 있다고 동의한다는 뜻입니다.
 

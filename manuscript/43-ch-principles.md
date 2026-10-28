@@ -852,7 +852,7 @@ separate before serializing shared state. 시도마다 자기 워크트리를 �
 
 **함정.** 리프의 귀결이 가장 분명합니다. 구조로 고쳤으면 지시 문장을 남기지 않습니다. **해설 (이 책의 해석, 원본에 없음).** 인정만 하고 인코딩하지 않거나, 한 사례만 고치고 같은 지시를 다시 쓰면 색인이 말한 인코딩을 건너뛴 것입니다.
 
-**함께 보는 원칙.** `reflect`와 `show-me-your-work`가 이 원칙을 인용합니다. `reflect`는 린트나 스크립트로 더 안정적으로 강제될 항목을 Accepted에서 Backlog로 옮길 때, `show-me-your-work`는 커밋된 스크립트의 증거를 손으로 만든 것보다 선호할 때입니다. Authoring a skill, Orchestrate의 `preferences.md`, Worktree cleanup, Multi-phase plan의 `check-plan.mjs`도 이 원칙을 부릅니다. 안내서는 [`/correct`](personal.md#skill-correct)가 이 원칙을 저장소 전체에 적용한다고 합니다. [`build-the-lever`](#skill-principle-build-the-lever)와의 구분은 위 항목을 봅니다.
+**함께 보는 원칙.** `reflect`와 `show-me-your-work`가 이 원칙을 인용합니다. `reflect`는 린트나 스크립트로 더 안정적으로 강제될 항목을 Accepted에서 Backlog로 옮길 때, `show-me-your-work`는 커밋된 스크립트의 증거를 손으로 만든 것보다 선호할 때입니다. Authoring a skill, Worktree cleanup, Multi-phase plan의 `check-plan.mjs`도 이 원칙을 부릅니다. 안내서는 [`/correct`](personal.md#skill-correct)가 이 원칙을 저장소 전체에 적용한다고 합니다. [`build-the-lever`](#skill-principle-build-the-lever)와의 구분은 위 항목을 봅니다.
 
 
 ## 원칙이 서로 당길 때 {#principles-interactions}
