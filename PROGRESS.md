@@ -800,6 +800,7 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 - `#986`은 Orchestrate가 저장소 파일을 로컬에 한 번 복사한다고 합니다. `#1043`이 `orch`를 지우고 조정자의 도구만 남겼습니다. 책은 핀의 플레이북을 따랐고 CLI 절은 옮기지 않았습니다.
 - `ketchup-video` 렌더는 여전히 "silent landscape video"입니다. 책은 자막을 더하면서 그 무음 가로 문장을 남겼습니다.
 - Orchestrate는 더 이상 `show-me-your-work`를 부르지 않습니다. 기록 호출 목록에서 뺐습니다.
+- 안내서 10장은 "don't change anything yet"를 read-only라고 합니다. 스킬은 적대자 워크트리에 재현을 쓰므로 책은 수정을 적용하지 않는다는 뜻으로 옮겼습니다.
 
 ### 실행한 검사
 
