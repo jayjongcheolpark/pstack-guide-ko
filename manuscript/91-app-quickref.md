@@ -18,14 +18,14 @@
 | [`teach`](teach-recall.md#skill-teach) | `how`와 `why`를 엮어 사람이 이해하도록 평이하게 설명 | "teach me this", "help me really understand X", "explain this change or subsystem to me" |
 | [`recall`](teach-recall.md#skill-recall) | 자신의 채팅 기록과 공유 기록에서 최근 맥락을 복원해 브리프로 | "recall my work on X", "catch me up", "what have I been working on", "where did I leave off" |
 | [`ketchup`](teach-recall.md#skill-ketchup) | 이 채팅에서 사용자의 마지막 메시지 이후 바뀐 것을 평이한 말과 작은 시각으로 따라잡고, 기다리는 항목을 답만으로 결정할 수 있게 모두 나열 | "Catch the user up on what changed in this chat since their last message, in plain words and small visuals", `/ketchup` |
-| [`ketchup-video`](teach-recall.md#skill-ketchup-video) | `/ketchup`처럼 따라잡되, 일어난 일은 짧은 무음 슬라이드 영상으로 보이고 기다리는 호출은 그 아래 글로 둠 | "Catch the user up like /ketchup, with a short silent video of slides", `/ketchup-video` |
+| [`ketchup-video`](teach-recall.md#skill-ketchup-video) | `/ketchup`처럼 따라잡되, 일어난 일은 자막을 단 짧은 슬라이드 영상으로 보이고 기다리는 호출은 그 아래 글로 둠 | "Catch the user up like /ketchup, with a short subtitled video of slides", `/ketchup-video` |
 | [`architect`](architect.md#skill-architect) | 코드 전에 타입, 시그니처, 모듈 구조를 스케치 | `/architect`, "architect this", "design this", 코드로 뛰어들면 잘못된 모양이 굳을 작업 |
 | [`arena`](arena-swarm.md#skill-arena) | 같은 과업에 후보 N개를 만들고 기준안을 고르고 이식 | `/arena`, "arena this", "throw it in the arena" |
 | [`swarm`](arena-swarm.md#skill-swarm) | 병렬 작업자 N명을 띄우고 보고서 하나로 집계 | `/swarm`, "swarm this", 병렬 커버리지, 경주, 관문 시험(gauntlet), 탐색 |
 | [`figure-it-out`](arena-swarm.md#skill-figure-it-out) | 맞는 플레이북이 없는 큰 작업의 감사 가능한 플레이북을 설계 | `/figure-it-out`, "figure it out", 큰 마이그레이션, 좁은 플레이북이 맞지 않을 때 |
 | [`tdd`](tdd-blast.md#skill-tdd) | 버그를 실패하는 테스트로 먼저 고정하고 고침 | 사용자가 TDD, 실패하는 테스트, 회귀 테스트를 요청했을 때, 또는 버그에 값싼 로컬 테스트 대상이 있을 때 |
 | [`blast-radius`](tdd-blast.md#skill-blast-radius) | 변경이 다른 곳에서 깨뜨릴 것을 찾고 안전 근거를 실행으로 증명 | "blast radius of X", "what could this break", 믿지 못하는 작은 diff |
-| [`interrogate`](interrogate.md#skill-interrogate) | 여러 모델이 diff를 적대적으로 리뷰하고 판정을 냄 | "interrogate", "adversarial review", "multi-model review", "challenge this", "stress test this code", "find blind spots", "tear this apart" |
+| [`interrogate`](interrogate.md#skill-interrogate) | 적대자들이 변경이나 설계를 깨뜨려 보고, 실행으로 증명된 발견만 남김 | "interrogate", "adversarial review", "multi-model review", "challenge this", "stress test this code", "find blind spots", "tear this apart" |
 | [`benchmark-checklist`](verification.md#skill-benchmark-checklist) | 성능 숫자를 보고하거나 그 숫자로 행동하기 전에 걸러 냄 | 벤치마크를 돌리거나, 자신이 측정한 속도 향상이나 회귀를 보고할 때 |
 | [`create-verification-skill`](verification.md#skill-create-verification-skill) | 앱을 사용자처럼 구동하는 프로젝트 전용 검증(verification) 스킬 생성 | `/create-verification-skill`, "make a control skill for this repo", 앱 동작을 증명할 스크립트된 방법이 없을 때 |
 | [`maintain-verification-skill`](verification.md#skill-maintain-verification-skill) | 검증 스킬과 기능 지도를 정직하게 유지 | `/maintain-verification-skill`, "audit the verify skill" |
@@ -69,7 +69,7 @@
 | [`principle-fix-root-causes`](principles.md#skill-principle-fix-root-causes) | 검증 | 디버깅할 때 |
 | [`principle-sequence-verifiable-units`](principles.md#skill-principle-sequence-verifiable-units) | 검증 | 여러 단계 작업(스윕, 마이그레이션, 비슷한 수정의 연속)과 커밋과 PR을 쌓는 방식 |
 | [`principle-test-behavior-not-implementation`](principles.md#skill-principle-test-behavior-not-implementation) | 검증 | 테스트를 쓰거나 바꾸거나 남길 때 |
-| [`principle-explain-the-number`](principles.md#skill-principle-explain-the-number) | 검증 | 측정한 숫자(속도 향상, 회귀, 처리량, 지연, eval 결과)를 믿거나 보고하거나 그 숫자로 행동하기 전 |
+| [`principle-explain-the-number`](principles.md#skill-principle-explain-the-number) | 검증 | 측정하기 전, 그리고 측정한 숫자(속도 향상, 회귀, 처리량, 지연, eval 결과)를 믿거나 보고하거나 그 숫자로 행동하기 전 |
 | [`principle-guard-the-context-window`](principles.md#skill-principle-guard-the-context-window) | 위임 | 대용량 출력, 긴 파일, 반복 읽기, 팬아웃 계획으로 컨텍스트가 차오를 때 |
 | [`principle-never-block-on-the-human`](principles.md#skill-principle-never-block-on-the-human) | 위임 | 되돌릴 수 있는 일에서 "X를 할까요?"라고 묻고 싶을 때 |
 | [`principle-encode-lessons-in-structure`](principles.md#skill-principle-encode-lessons-in-structure) | 메타 | 같은 지시를 두 번째로 쓰는 자신을 발견했거나 반복되는 교정을 알아챘을 때 |
@@ -98,7 +98,7 @@
 | Autonomous run | "run until done", "/loop until X" | [장시간 플레이북](playbooks-long.md#playbook-autonomous-run) |
 | Orchestrate | "run this whole project", "own this migration until it lands" | [장시간 플레이북](playbooks-long.md#playbook-orchestrate) |
 | Autopilot-full | "autopilot this queue", "full autopilot", PR마다 소유자 하나 | [장시간 플레이북](playbooks-long.md#playbook-autopilot-full) |
-| Autopilot-stack | "autopilot-stack", "stack them, don't ship", "build the stack, I'll land it" | [장시간 플레이북](playbooks-long.md#playbook-autopilot-stack) |
+| Autopilot-stack | "autopilot-stack", "autopilot, don't merge", "stack them, don't ship", "build the stack, I'll land it" | [장시간 플레이북](playbooks-long.md#playbook-autopilot-stack) |
 | Session pickup | 대화 기록, 클라우드 에이전트 URL, 푸시된 브랜치에서 이전 작업 이어받기 | [장시간 플레이북](playbooks-long.md#playbook-session-pickup) |
 | Pause safely | 명시적 일시 정지, 오프라인, Cursor 재시작, 컨텍스트 압축 임박 | [장시간 플레이북](playbooks-long.md#playbook-pause-safely) |
 | Multi-phase or multi-PR plan | 여러 단계나 스택된 PR에 걸친 작업의 계획서 | [장시간 플레이북](playbooks-long.md#playbook-multi-phase-plan) |
@@ -130,7 +130,7 @@ README의 "모든 스킬" 표가 스킬마다 붙인 한 줄 설명입니다(원
 | `/architect` | 함수 경계를 넘는 코드를 쓰기 전에 호출자의 사용, 타입, 모듈 모양을 먼저 정하고 싶을 때 |
 | `/arena` | 같은 일에 병렬 시도 N개를 만들고 각각의 좋은 부분을 가져오고 싶을 때 |
 | `/swarm` | 서로 다른 조각이나 경주에 병렬 작업자 N명을 두고 집계 보고서 하나를 받고 싶을 때 |
-| `/interrogate` | diff에 대해 서로 다른 모델이 엄격한 코드 품질 렌즈를 포함해 깨뜨려 보기를 원할 때 |
+| `/interrogate` | diff를 서로 다른 모델이 깨뜨려 보게 하고, 실행으로 증명된 발견만 남기기를 원할 때 |
 | `/automate-me` | 실제로 일한 방식에서 초안한 자신만의 `-mode` 스킬을 원할 때 |
 | `/make-bot-ui` | 버튼이 웹훅으로 Grok Bot을 깨우는 페이지나 대시보드를 원할 때 |
 | `/setup-pstack` | pstack이 역할별로 쓸 모델을 고르고 싶을 때. 모델을 감지하고 설정 규칙을 씀 |

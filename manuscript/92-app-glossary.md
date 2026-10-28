@@ -13,7 +13,7 @@
 | 규칙 | non-negotiable | poteto-mode | `poteto-mode`의 Non-negotiables 절을 이 책이 규칙으로 옮긴 곳입니다. 원문에 rule이라는 말이 없는 다른 곳은 규칙(Autonomy section), 규칙(Stack safety), 규칙(mandatory), 규칙(mapping), 규칙(bucket)처럼 원문의 절 이름이나 낱말을 붙였습니다. 예: 규칙(non-negotiable) 위반 |
 | 기준 | criteria | playbooks-work | 채점하거나 받아들이는 조건입니다. rubric의 criteria, acceptance criteria, success criteria. 예: 성공 기준(criteria) |
 | 기준 | bar | playbooks-work | 넘어야 하는 문턱입니다. verification bar, approval bar, "a high bar". 예: 검증 기준(bar) |
-| 기준 | standard | interrogate | 엄격하게 적용하는 표준입니다. code-quality lens의 "strict standard", `technical-writing`의 "layered standard". 예: 층화된 기준(standard) |
+| 기준 | standard | writing | 엄격하게 적용하는 표준입니다. `technical-writing`의 "layered standard". 예: 층화된 기준(standard) |
 | 기준 | rubric | playbooks-pr | 판정하는 틀입니다. Bugbot triage의 Decision rubric. 채점용 루브릭(rubric)과 같은 낱말입니다. 예: Bugbot 분류 기준(rubric) |
 | 기준 | base | poteto-mode | 브랜치를 따는 바탕입니다. 워크트리를 만들 때의 base이고, `arena`의 기준안도 base입니다. 예: 특정 기준(base) |
 | 기준 | baseline | verification | 변경 전에 잡아 두는 비교 대상입니다. 기능 지도의 baseline preconditions. 기준선은 baseline을 옮긴 합성어입니다. 예: 기준(baseline) 사전 조건 |
@@ -38,7 +38,7 @@
 | 산출물 | output | personal | 스킬이 내는 출력입니다. `automate-me`의 "The output is one -mode skill". 예: 산출물(output) |
 | 예시 | example | playbooks-pr | 원문에 있는 예입니다. "Example signal", `*.example.yaml`. 이 책의 저자가 만든 것은 첫 줄에 라벨이 붙은 예시(worked example)로 따로 표시합니다. 예: 예시(example) 신호 |
 
-**원칙의 그 밖의 뜻.** `interrogate`의 리드 판단 틀에 있는 Filtering Principles(리드가 발견을 거르는 원칙), `reflect` 리뷰어가 적는 "Principle:" 항목(세션에서 일반화한 배움 한 문장), `automate-me`의 "principles cited"와 README의 "engineering principles"(스킬이 아닌 일반적인 원칙)입니다. 이때도 영어는 모두 principle이라 무엇을 가리키는지는 문맥으로 가립니다.
+**원칙의 그 밖의 뜻.** `reflect` 리뷰어가 적는 "Principle:" 항목(세션에서 일반화한 배움 한 문장), `automate-me`의 "principles cited"와 README의 "engineering principles"(스킬이 아닌 일반적인 원칙)입니다. 이때도 영어는 모두 principle이라 무엇을 가리키는지는 문맥으로 가립니다.
 
 ## pstack의 구성 개념
 
@@ -71,8 +71,9 @@
 | runner | 러너 | `arena`, `architect`에서 후보를 만드는 서브에이전트 |
 | explorer / explainer | 탐색자 / 설명자 | `how`의 서브에이전트. 사실을 모으는 쪽 / 설명을 쓰는 쪽 |
 | investigator / synthesizer | 조사자 / 종합자 | `why`, `reflect`의 서브에이전트. 증거를 모으는 쪽 / 종합하는 쪽 |
-| reviewer / judge | 리뷰어 / 심사자 | `interrogate`의 리뷰어. `arena`의 교차 심사자 |
-| cross-judge | 교차 심사 | 후보와 다른 모델 계열의 심사자가 루브릭으로 채점 |
+| adversary | 적대자 | `interrogate`가 변경을 깨뜨리려 띄우는 서브에이전트 |
+| reviewer / judge | 리뷰어 / 심사자 | 그 밖의 리뷰어. `arena`의 교차 심사자 |
+| cross-judge | 교차 심사 | 부모와 다른 모델 계열의 심사자가 루브릭으로 채점 |
 | rubric | 루브릭 | 채점 기준 3~6개 |
 | candidate / base / graft | 후보 / 기준안 / 이식 | `arena`에서 후보를 만들고, 하나를 기준으로 고르고, 나머지의 좋은 부분을 옮겨 붙임 |
 | race | 경주 | 같은 지시로 작업자 여럿을 돌리고 선언한 규칙(first pass, rank all, best-of)으로 고름 |

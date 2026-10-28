@@ -228,7 +228,7 @@ interrogate reviewers: claude-opus-5-5-xhigh, grok-4.7-xhigh-fast
 | `arena runners`, `arena cross-judge pool`, `architect runners`, `interrogate reviewers` | 두 모델 패널 (opus, grok) | 다중 모델 패널 |
 | `swarm workers` | grok-4.7-xhigh-fast | `/swarm`의 기본 워커 |
 
-패널 역할의 값은 쉼표로 이은 목록이고 항목마다 서브에이전트가 하나씩 뜹니다. `arena cross-judge pool`도 목록이지만, Arena가 그중 부모의 모델 계열과 가능하면 다른 값 하나를 골라 씁니다.
+패널 역할의 값은 쉼표로 이은 목록이고 항목마다 서브에이전트가 하나씩 뜹니다. `arena cross-judge pool`도 목록이지만 Arena는 심사자를 하나만 돌립니다. 부모와 다른 모델 계열의 값만 목록 순서대로 시도하므로, 선호하는 순서로 적습니다. `inherit-parent`나 `auto` 값은 심사자가 되지 않습니다.
 
 ### 사용 예
 
@@ -327,7 +327,7 @@ pstack은 Cursor용이고, Claude Code에도 `/plugin marketplace add cursor/plu
 | 변경이나 서브시스템을 평이하게 이해하고 싶다 | [`/teach`](teach-recall.md#skill-teach) |
 | 어떤 주제에 대한 자신의 최근 작업을 따라잡고 싶다 | [`/recall`](teach-recall.md#skill-recall) |
 | 이 채팅에서 마지막 메시지 이후 바뀐 것을 평이한 말과 작은 시각으로 따라잡고, 사용자를 기다리는 항목을 답만으로 결정할 수 있게 모두 나열한다 | [`/ketchup`](teach-recall.md#skill-ketchup) |
-| `/ketchup`처럼 따라잡되, 일어난 일은 짧은 무음 슬라이드 영상으로 보고 기다리는 호출은 그 아래 글로 받는다 | [`/ketchup-video`](teach-recall.md#skill-ketchup-video) |
+| `/ketchup`처럼 따라잡되, 일어난 일은 자막을 단 짧은 슬라이드 영상으로 보고 기다리는 호출은 그 아래 글로 받는다 | [`/ketchup-video`](teach-recall.md#skill-ketchup-video) |
 | 작은 diff가 밖에서 무엇을 깨뜨릴 수 있는지 | [`/blast-radius`](tdd-blast.md#skill-blast-radius) |
 | 함수 경계를 넘는 코드 전에 타입과 모듈 모양을 정한다 | [`/architect`](architect.md#skill-architect) |
 | 같은 지시에 여러 시도를 돌려 좋은 부분을 합친다 | [`/arena`](arena-swarm.md#skill-arena) |
@@ -362,7 +362,7 @@ pstack은 Cursor용이고, Claude Code에도 `/plugin marketplace add cursor/plu
 - `/arena`는 모든 작업자에게 같은 지시를 주고 좋은 부분을 합칩니다. `/swarm`은 조각을 나누거나 경주시키고 보고서 하나를 돌립니다.
 - `/architect`는 설계를 정한 뒤 바로 구현합니다. 코드를 쓰기 전에 설계를 보려면 "with checkpoint"를 붙입니다.
 - `/interrogate`는 diff를 리뷰합니다. `/blast-radius`는 diff 밖의 깨짐을 찾고, 변경을 안전하게 하는 사실 하나를 증명합니다.
-- `/recall`은 최근 채팅을 가로질러 맥락을 다시 세웁니다. `/ketchup`은 이 채팅에서 사용자의 마지막 메시지 이후만 다룹니다. 그 따라잡기를 짧은 무음 슬라이드 영상으로 보려면 `/ketchup-video`입니다. 특정 채팅이나 브랜치 하나를 이어받는 것은 Session pickup 플레이북입니다.
+- `/recall`은 최근 채팅을 가로질러 맥락을 다시 세웁니다. `/ketchup`은 이 채팅에서 사용자의 마지막 메시지 이후만 다룹니다. 그 따라잡기를 자막을 단 짧은 슬라이드 영상으로 보려면 `/ketchup-video`입니다. 특정 채팅이나 브랜치 하나를 이어받는 것은 Session pickup 플레이북입니다.
 - `/in-your-own-words`는 목표와 문제를 자기 말로 다시 말합니다. `/sharpen`은 보내기 전에 프롬프트를 더 깊게 다시 쓰고 과업은 하지 않습니다. `/bro`는 마지막 답을 평이하게 다시 말합니다.
 - `/figure-it-out`은 엄밀한 실행 하나를 설계합니다. Orchestrate 플레이북은 여러 날과 여러 PR에 걸친 프로그램을 돌립니다. Autonomous run 플레이북은 작업 하나를 끝 조건까지 밉니다.
 
@@ -380,7 +380,7 @@ pstack에 없는 것입니다.
 - "land the stack"은 Shipping입니다.
 - "take over this branch"는 Session pickup입니다.
 - "pause safely"는 Pause safely입니다.
-- "full autopilot on this queue"는 Autopilot-full입니다. "stack them, don't ship"은 Autopilot-stack입니다.
+- "full autopilot on this queue"는 Autopilot-full입니다. "autopilot, don't merge"는 Autopilot-stack입니다.
 - "run the eval playbook"은 Eval입니다.
 
 `/poteto-mode` 없이 "babysit this pr" 같은 문구는 같은 일을 하는 Cursor 자체 스킬을 켤 수 있습니다. [`poteto-mode`](poteto-mode.md#skill-poteto-mode)의 Playbooks 절이 모든 플레이북과 적용 때를 적습니다. 안내서 6장이 PR을 열고, babysit하고, 랜딩하는 일을 다룹니다.
@@ -485,7 +485,7 @@ README가 든 예입니다. 스킬은 리뷰 질문을 알아차리고 [`/interr
 
 ### 관련 스킬
 
-입구는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode), 스킬을 고르는 안내는 [`poteto-help`](#skill-poteto-help)입니다. 보내기 전에 프롬프트를 다시 쓰는 것은 [`sharpen`](#skill-sharpen)입니다. 마지막 답을 평이하게 다시 듣는 것은 [`bro`](utility.md#skill-bro)입니다. 이 채팅의 마지막 메시지 이후를 따라잡는 것은 [`ketchup`](teach-recall.md#skill-ketchup)입니다. 그 따라잡기를 짧은 무음 슬라이드 영상으로 보려면 [`ketchup-video`](teach-recall.md#skill-ketchup-video)입니다.
+입구는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode), 스킬을 고르는 안내는 [`poteto-help`](#skill-poteto-help)입니다. 보내기 전에 프롬프트를 다시 쓰는 것은 [`sharpen`](#skill-sharpen)입니다. 마지막 답을 평이하게 다시 듣는 것은 [`bro`](utility.md#skill-bro)입니다. 이 채팅의 마지막 메시지 이후를 따라잡는 것은 [`ketchup`](teach-recall.md#skill-ketchup)입니다. 그 따라잡기를 자막을 단 짧은 슬라이드 영상으로 보려면 [`ketchup-video`](teach-recall.md#skill-ketchup-video)입니다.
 
 ## sharpen {#skill-sharpen}
 
