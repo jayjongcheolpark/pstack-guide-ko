@@ -25,7 +25,7 @@
 | 요약이 아니라 실제로 이해하고 싶다, 평이하게 풀어서 설명해 줬으면 한다 | [`teach`](teach-recall.md#skill-teach) |
 | 내 최근 작업 맥락을 되살리고 싶다 | [`recall`](teach-recall.md#skill-recall) |
 | 이 채팅에서 마지막 메시지 이후 바뀐 것을 평이한 말과 작은 시각으로 따라잡고, 기다리는 항목을 답만으로 결정하고 싶다 | [`ketchup`](teach-recall.md#skill-ketchup) |
-| 그 따라잡기를 짧은 무음 슬라이드 영상으로 보고 싶다 | [`ketchup-video`](teach-recall.md#skill-ketchup-video) |
+| 그 따라잡기를 자막을 단 짧은 슬라이드 영상으로 보고 싶다 | [`ketchup-video`](teach-recall.md#skill-ketchup-video) |
 | 일을 시작하기 전에 에이전트가 내 목표와 문제를 자기 말로 다시 말하게 하고 싶다 | [`in-your-own-words`](setup.md#skill-in-your-own-words) |
 | 보내기 전에 프롬프트를 더 깊게, 더 크게는 아니게 다시 받고, 과업은 시키지 않고 싶다 | [`sharpen`](setup.md#skill-sharpen) |
 | 특정 채팅 하나를 이어받고 싶다 | [Session pickup](playbooks-long.md#playbook-session-pickup) |
@@ -73,7 +73,7 @@
 | 시스템이 상태 사이를 어떻게 움직이는지를 모델이 검사한 차트로 보이고 싶다 | [`statechart`](verification.md#skill-statechart) |
 | 끝났다고 선언하기 전이다 | [`principle-prove-it-works`](principles.md#skill-principle-prove-it-works) |
 | 테스트를 쓰거나 남기려 한다 | [`principle-test-behavior-not-implementation`](principles.md#skill-principle-test-behavior-not-implementation) |
-| 측정한 숫자를 믿거나 보고하거나 그 숫자로 행동하기 전이다 | [`benchmark-checklist`](verification.md#skill-benchmark-checklist), [`principle-explain-the-number`](principles.md#skill-principle-explain-the-number) |
+| 측정하기 전, 그리고 측정한 숫자를 믿거나 보고하거나 그 숫자로 행동하기 전이다 | [`benchmark-checklist`](verification.md#skill-benchmark-checklist), [`principle-explain-the-number`](principles.md#skill-principle-explain-the-number) |
 
 **PR을 다루고 싶다.**
 
@@ -83,7 +83,7 @@
 | PR 상태를 묻거나 병합 준비까지 끌고 가고 싶다 | [Babysit](playbooks-pr.md#playbook-babysit) |
 | 초록불 스택을 병합하고 싶다 | [Shipping](playbooks-pr.md#playbook-shipping) |
 | 독립된 PR 대기열을 병합까지 자율로 돌리고 싶다 | [Autopilot-full](playbooks-long.md#playbook-autopilot-full) |
-| 병합 없이 리뷰할 스택만 만들어 두고 싶다 | [Autopilot-stack](playbooks-long.md#playbook-autopilot-stack) |
+| PR 대기열을 자율로 만들고 검증하되 병합은 내가 하고 싶다 | [Autopilot-stack](playbooks-long.md#playbook-autopilot-stack) |
 | 봇의 리뷰 댓글을 분류해야 한다 | [Bugbot 분류 기준](playbooks-pr.md#ref-bugbot-triage) |
 
 **글과 코드를 다듬고 싶다.**

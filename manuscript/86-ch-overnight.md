@@ -73,8 +73,8 @@
 | 플레이북 | 언제 | 핵심 |
 | --- | --- | --- |
 | [Autopilot-full](playbooks-long.md#playbook-autopilot-full) | 독립된 PR 대기열을 병합까지 | PR마다 소유자 에이전트 하나가 빌드에서 병합까지 몰고 가되, 소유자가 자기 판정으로 병합하지 않습니다. 전체 swarm은 코드 준비 헤드에서 한 번이고, 리베이스나 작은 수정은 검증자 하나입니다. 바뀐 감사 tick은 `/ketchup`으로 따라잡습니다 |
-| [Autopilot-stack](playbooks-long.md#playbook-autopilot-stack) | 변경이 결합되었거나 병합 전에 직접 보고 싶을 때 | 같은 소유자 루프를 돌리되 아무것도 배포하지 않습니다. 링크마다 검증자의 판정이 붙은 선형 베이스 브랜치 스택 하나가 아침에 남고, 리뷰하고 랜딩하는 것은 사용자입니다 |
-| [Orchestrate](playbooks-long.md#playbook-orchestrate) | 어떤 단일 에이전트보다 오래 사는 프로그램 | 며칠, 많은 스택 PR, 상시 조정자 채팅 하나 아래의 서브에이전트 무리. 조정자는 브리프를 쓰고 완료를 모으고 가장 낮은 미병합 PR을 초록으로 유지하며 코드를 직접 쓰지 않습니다 |
+| [Autopilot-stack](playbooks-long.md#playbook-autopilot-stack) | 병합 전에 직접 보고 싶을 때 | 병합을 뺀 Autopilot-full입니다. 아침에 판정이 붙은 검증된 PR이 남고, 리뷰하고 랜딩하는 것은 사용자입니다. PR은 자기가 기대는 PR 위에만 쌓입니다 |
+| [Orchestrate](playbooks-long.md#playbook-orchestrate) | 어떤 단일 에이전트보다 오래 사는 프로그램 | 며칠, 많은 스택 PR, 상시 조정자 채팅 하나 아래의 서브에이전트 무리. 조정자는 일마다 어느 에이전트가 할지 정하고 각 에이전트가 만든 것을 확인하며, 코드를 직접 쓰지 않습니다 |
 
 안내서의 프롬프트 예입니다.
 
@@ -83,14 +83,14 @@
 ```
 
 ```text
-/poteto-mode 이 변경 다섯 개를 autopilot으로 하되 스택으로만 쌓고 배포하지는 마. 아침에 내가 스택을 랜딩할게.
+/poteto-mode 이 변경 다섯 개를 autopilot으로 돌려 줘. 병합은 하지 마. 아침에 내가 랜딩할게.
 ```
 
 ```text
 /poteto-mode 스토어 마이그레이션을 orchestrate해 줘. 모든 패키지가 변환되고 병합될 때까지 맡아. 하루 두 번 확인할게.
 ```
 
-Orchestrate는 의도적으로 무거운 장치입니다. 에이전트 하나가 세션 안에 끝낼 수 있는 일이면 플레이북 자체가 위의 밤새 맡기는 계약으로 돌려보냅니다.
+에이전트 하나가 세션 안에 끝낼 수 있는 일이면 Orchestrate 플레이북 자체가 위의 밤새 맡기는 계약으로 돌려보냅니다.
 
 ## 여러 프로젝트를 나란히 돌리기
 

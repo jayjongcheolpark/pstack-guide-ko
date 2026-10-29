@@ -277,7 +277,7 @@ ls -t <agent-transcripts>/*.jsonl <agent-transcripts>/*/*.jsonl <agent-transcrip
 
 ### 언제 쓰는가
 
-원문의 `description`은 기본이 로컬이고 검토자가 결과를 믿으려면 기록이 필요할 때 커밋한다고 하고, 트리거로 `/show-me-your-work`, 자율 또는 여러 단계 실행, 사람이 자리를 뜬 뒤 검토하는 작업을 듭니다. `poteto-mode`는 길거나 자율적이거나 여러 단계인 작업, 사용자가 나중에 검토하려고 자리를 뜨는 작업에서 이 스킬로 결정 기록을 남기게 합니다. Hillclimb, Autonomous run, Orchestrate, Autopilot, `figure-it-out`이 모두 이 스킬로 기록을 남깁니다. 다른 스킬은 자기만의 감사 기록을 만들지 않고 이 스킬로 보냅니다. 스킬 이름으로 참조하고 형식은 이 스킬이 소유합니다. 열을 다시 쓰지 않습니다.
+원문의 `description`은 기본이 로컬이고 검토자가 결과를 믿으려면 기록이 필요할 때 커밋한다고 하고, 트리거로 `/show-me-your-work`, 자율 또는 여러 단계 실행, 사람이 자리를 뜬 뒤 검토하는 작업을 듭니다. `poteto-mode`는 길거나 자율적이거나 여러 단계인 작업, 사용자가 나중에 검토하려고 자리를 뜨는 작업에서 이 스킬로 결정 기록을 남기게 합니다. Hillclimb, Autonomous run, Autopilot, `figure-it-out`이 모두 이 스킬로 기록을 남깁니다. 다른 스킬은 자기만의 감사 기록을 만들지 않고 이 스킬로 보냅니다. 스킬 이름으로 참조하고 형식은 이 스킬이 소유합니다. 열을 다시 쓰지 않습니다.
 
 ### 동작 방식
 
@@ -359,4 +359,4 @@ ts	phase	decision	why	evidence	result
 
 ### 관련 스킬
 
-[`figure-it-out`](arena-swarm.md#skill-figure-it-out), [Hillclimb](playbooks-work.md#playbook-hillclimb), [Autonomous run](playbooks-long.md#playbook-autonomous-run), [Orchestrate](playbooks-long.md#playbook-orchestrate)가 이 스킬로 기록합니다. 사용법은 [밤새 돌리기](overnight.md)에서 다룹니다.
+[`figure-it-out`](arena-swarm.md#skill-figure-it-out), [Hillclimb](playbooks-work.md#playbook-hillclimb), [Autonomous run](playbooks-long.md#playbook-autonomous-run), [Autopilot-full](playbooks-long.md#playbook-autopilot-full)이 이 스킬로 기록합니다. 사용법은 [밤새 돌리기](overnight.md)에서 다룹니다.

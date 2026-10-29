@@ -4,7 +4,7 @@
 
 ## 원본
 
-`cursor/plugins`의 `pstack/`, 커밋 `519d36aa98955bf680db01bcde5fdfba686dc901` (0.15.34) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를, 0.15.20 절은 그때의 핀 `1b6d44f`를, 0.15.21 절은 그때의 핀 `997ffc7`를, 0.15.23 절은 그때의 핀 `dbf4981`을, 0.15.24 절은 그때의 핀 `1e5c90a`를, 0.15.25 절은 그때의 핀 `e5136d8`를, 0.15.25-ko.1 절은 그때의 핀 `99743e9`를, 0.15.25-ko.2 절은 그때의 핀 `182f2ce`를, 0.15.26 절은 그때의 핀 `0b8e952`를, 0.15.28 절은 그때의 핀 `d457567`를, 0.15.29 절은 그때의 핀 `88d4751`을, 0.15.30 절은 그때의 핀 `eb4db2b`를, 0.15.30-ko.1 절은 그때의 핀 `4ec7ffa`를, 0.15.32 절은 그때의 핀 `e73df47`을, 0.15.34 절은 그때의 핀 `519d36a`를 적은 기록입니다.
+`cursor/plugins`의 `pstack/`, 커밋 `c742dd61706fbacc1b95f1a20b7b988cf096ce6c` (0.15.36) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를, 0.15.20 절은 그때의 핀 `1b6d44f`를, 0.15.21 절은 그때의 핀 `997ffc7`를, 0.15.23 절은 그때의 핀 `dbf4981`을, 0.15.24 절은 그때의 핀 `1e5c90a`를, 0.15.25 절은 그때의 핀 `e5136d8`를, 0.15.25-ko.1 절은 그때의 핀 `99743e9`를, 0.15.25-ko.2 절은 그때의 핀 `182f2ce`를, 0.15.26 절은 그때의 핀 `0b8e952`를, 0.15.28 절은 그때의 핀 `d457567`를, 0.15.29 절은 그때의 핀 `88d4751`을, 0.15.30 절은 그때의 핀 `eb4db2b`를, 0.15.30-ko.1 절은 그때의 핀 `4ec7ffa`를, 0.15.32 절은 그때의 핀 `e73df47`을, 0.15.34 절은 그때의 핀 `519d36a`를, 0.15.36 절은 그때의 핀 `c742dd6`를 적은 기록입니다.
 
 ## 빌드와 검사
 
@@ -768,3 +768,42 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 - `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 58개와 플레이북 23개의 절 존재, 용어 병기 짝 29개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
 - `CHROME_PATH=/usr/bin/google-chrome bun tools/check-layout.mjs`: 390px에서 가로 넘침 없음.
 - `CHROME_PATH=/usr/bin/google-chrome bun tools/build.mjs`: `pstack-guide-0.15.34.epub`, `pstack-guide-0.15.34.pdf` (509쪽, 0.15.32는 508쪽).
+
+## 0.15.36
+
+원문을 `519d36aa98955bf680db01bcde5fdfba686dc901`(0.15.34)에서 `c742dd61706fbacc1b95f1a20b7b988cf096ce6c`(0.15.36)로 올렸습니다. pstack 트리에 닿은 커밋은 두 개입니다.
+
+- `ab1f702` feat(pstack): port recent skill updates (#986)
+- `c742dd6` feat(pstack): make Orchestrate agentic and delete the orch scripts (#1043)
+
+책 버전은 `BOOK_REVISION = 0`이라 pstack 버전과 같은 `0.15.36`입니다. 산출물 이름은 `pstack-guide-0.15.36.epub`, `pstack-guide-0.15.36.pdf`입니다.
+
+확인한 사실입니다. `plugin.json`과 `.cursor-plugin/plugin.json` 버전은 둘 다 0.15.36입니다. `c742dd6`는 `main`에서 `pstack/`에 닿은 최신 커밋입니다. 0.15.36을 처음 쓴 커밋은 `c742dd6`입니다. `ab1f702`는 0.15.35입니다. 0.15.35는 책 버전이 되지 않았습니다. 스킬 수는 58개(일반 34, 원칙 24), 플레이북은 23개, 에이전트는 2개로 그대로입니다. 새 스킬은 없습니다. `disable-model-invocation`은 `setup-pstack`만 없고 나머지 57개에 있습니다.
+
+`519d36a..c742dd6`에서 `pstack/`에 닿은 파일은 29개입니다. 사용자에게 보이는 파일은 README, 안내서 4장과 7장과 10장, `poteto-mode`, `poteto-help`, `arena`, `interrogate`, `ketchup-video`, `explain-the-number`, `setup-pstack`, Autopilot과 Orchestrate와 Opening a PR과 Babysit과 Multi-phase plan과 Autonomous run 플레이북, 두 `plugin.json`입니다. 지워진 파일은 `interrogate/references/`의 네 파일과 `scripts/orch/`의 세 파일입니다.
+
+원고에서 반영한 내용입니다.
+
+- 핀과 permalink, 산출물 이름을 `c742dd6` / `0.15.36`으로 올렸습니다.
+- `/interrogate`는 Frame, Fan out, Verify, Output입니다. 참조 파일과 4분류 모델은 없습니다. 다시 돌려 의도를 깨는 발견만 남기고 적용하지 않습니다.
+- `/poteto-mode` 첫 메시지는 목표와 가장 작은 변경을 말하고 확인을 기다리지 않습니다. Explain the Number는 측정하기 전에도 적용합니다. 돌고 있는 에이전트를 조향하거나 재개할 때도 `run_in_background: true`입니다.
+- `arena` 심사자는 부모와 다른 계열입니다. 다른 계열이 없으면 심사를 건너뛰고 기준안을 혼자 고릅니다.
+- `/ketchup-video`는 자막을 단 짧은 슬라이드 영상입니다. 자막은 아래 띠에 두고, 홀드는 파일의 프레임으로 잽니다. 렌더 문장은 원문대로 무음 가로 영상입니다.
+- `explain-the-number`는 돌리기 전에 결정을 바꿀 결과를 적습니다.
+- Orchestrate는 자기 도구로 프로그램을 돌립니다. `Task`, Project tracker(`notes.md`), Project store, PR/CI 구독입니다. `orch` CLI와 `ledger.tsv`는 없습니다.
+- Autopilot-stack은 병합 없는 Autopilot-full입니다. 트리거에 "autopilot, don't merge"가 있고, PR은 자신이 기반으로 삼는 PR 위에만 쌓습니다. 문구만 바꾼 변경에는 검증자를 두지 않습니다. 막는 것은 보여 줄 수 있는 문제뿐입니다.
+- Opening a PR 서브에이전트는 `/deslop`과 `/no-comments`만 돌리고 merge-ready를 보고합니다.
+
+### 해석한 부분
+
+- `#986`의 커밋 메시지는 arena 심사자가 다른 계열이 없으면 부모 모델로 돌아간다고 합니다. 같은 PR의 이후 커밋과 핀의 `SKILL.md`는 심사를 건너뛰고 기준안을 혼자 고릅니다. 책은 핀의 본문을 따랐습니다.
+- `#986`은 Orchestrate가 저장소 파일을 로컬에 한 번 복사한다고 합니다. `#1043`이 `orch`를 지우고 조정자의 도구만 남겼습니다. 책은 핀의 플레이북을 따랐고 CLI 절은 옮기지 않았습니다.
+- `ketchup-video` 렌더는 여전히 "silent landscape video"입니다. 책은 자막을 더하면서 그 무음 가로 문장을 남겼습니다.
+- Orchestrate는 더 이상 `show-me-your-work`를 부르지 않습니다. 기록 호출 목록에서 뺐습니다.
+- 안내서 10장은 "don't change anything yet"를 read-only라고 합니다. 스킬은 적대자 워크트리에 재현을 쓰므로 책은 수정을 적용하지 않는다는 뜻으로 옮겼습니다.
+
+### 실행한 검사
+
+- `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 58개와 플레이북 23개의 절 존재, 용어 병기 짝 29개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
+- `CHROME_PATH=/usr/bin/google-chrome bun tools/check-layout.mjs`: 390px에서 가로 넘침 없음.
+- `CHROME_PATH=/usr/bin/google-chrome bun tools/build.mjs`: `pstack-guide-0.15.36.epub`, `pstack-guide-0.15.36.pdf` (498쪽, 0.15.34는 509쪽).
