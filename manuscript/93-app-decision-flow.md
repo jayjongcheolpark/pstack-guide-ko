@@ -33,6 +33,8 @@
 | 읽기 전용으로 질문에 답만 받고 싶다 | [Investigation](playbooks-work.md#playbook-investigation) |
 | 방금 답이 무슨 말인지 모르겠다 | [`bro`](utility.md#skill-bro) |
 
+`how`는 사용자가 직접 칠 때 도는 스킬입니다. `poteto-mode`는 `how`로 보내지 않고, Investigation 같은 플레이북은 단계 안에서 질문이 가리키는 코드를 직접 추적합니다. 동기를 묻는 질문은 `why`로 보냅니다.
+
 **설계하고 싶다.**
 
 | 상황 | 스킬 |

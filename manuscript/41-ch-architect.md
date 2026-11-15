@@ -18,9 +18,9 @@
 
 시작할 때 단계마다 항목이 하나씩인 할 일 목록을 엽니다. 단계는 Ground, Sketch, Agree, Implement, Scrap 다섯 개입니다.
 
-**A단계. 문제를 그라운딩합니다.** 새 코드가 건드리는 모든 시스템의 진짜 멘탈 모델을 세웁니다. 관련 서브시스템마다 `how` 스킬을 돌립니다. 파일 이름을 대는 것은 그라운딩이 아닙니다. `how`가 요구하는 추적된 모델을 만듭니다. 설계가 소유권이나 계층을 다시 정의한다면 기존 모양에 `why` 스킬도 돌려 그 근거가 추측이 아니라 제약이 되게 합니다. 주변 시스템과 통합할 것이 없는 진짜 그린필드일 때만 A단계를 건너뜁니다.
+**A단계. 문제를 그라운딩합니다.** 새 코드가 건드리는 모든 시스템의 진짜 멘탈 모델을 세웁니다. 관련 서브시스템을 추적합니다. 파일 이름을 대는 것은 그라운딩이 아닙니다. 서브시스템마다 아키텍처 설명을 씁니다. 설계가 소유권이나 계층을 다시 정의한다면 기존 모양에 `why` 스킬도 돌려 그 근거가 추측이 아니라 제약이 되게 합니다. 주변 시스템과 통합할 것이 없는 진짜 그린필드일 때만 A단계를 건너뜁니다.
 
-**B단계. 스케치합니다.** 설계 스케치 작업과 A단계의 그라운딩 산출물(artifact)로 `arena` 스킬을 돌립니다. 각 러너의 프롬프트로 `references/runner-prompt.md`를 넘깁니다. 각 후보는 `references/rationale-template.md`의 모양을 갖춘 설계 패키지를 만듭니다. 러너는 `pstack-models.mdc` 규칙(rule)의 `architect runners` 줄에서 가져오고, `arena runners` 줄 대신 씁니다. 규칙이나 그 줄이 없으면 `claude-opus-5-5-xhigh`와 `grok-4.7-xhigh-fast`를 씁니다. 별칭이나 거부된 항목은 `arena` 스킬 A단계의 러너 규칙을 따릅니다.
+**B단계. 스케치합니다.** 설계 스케치 작업과 A단계의 그라운딩 산출물(artifact)로 `arena` 스킬을 돌립니다. 각 러너의 프롬프트로 `references/runner-prompt.md`를 넘깁니다. 각 후보는 `references/rationale-template.md`의 모양을 갖춘 설계 패키지를 만듭니다. 러너는 `pstack-models.mdc` 규칙(rule)의 `architect runners` 줄에서 가져오고, `arena runners` 줄 대신 씁니다. 규칙이나 그 줄이 없으면 `claude-fable-5-2-high`, `claude-opus-5-5-high-fast`, `gemini-4-carbon-high`를 씁니다. 별칭이나 거부된 항목은 `arena` 스킬 A단계의 러너 규칙을 따릅니다.
 
 - **두 번 설계합니다.** 첫 후보가 충분해 보여도 종합 전에 구조가 뚜렷이 다른 후보를 적어도 둘 요구합니다. `exhaust-the-design-space` 원칙(principle)을 구체화한 것입니다. 한 모양 안의 점 수정이 아니라 모양 전체의 대안입니다.
 - 종합 전에 모든 후보를 `references/design-red-flags.md`(아래 "설계 적신호" 참조)에 견줘 거릅니다. 다음 기여자는 연 파일만 보고, 가장 가까운 예를 베끼고, 컴파일되는 가장 짧은 길을 택하는 에이전트라고 가정합니다. 파일 하나에서 보아 옳은 변경이 저장소 전체에서도 옳은 설계를 선호합니다.
@@ -42,7 +42,7 @@
 - 호출자가 추상화를 쓰려면 그 내부 규칙을 알아야 한다.
 - 구현 전체에서 같은 모양의 독립적인 D단계 이탈이 둘 이상 있다.
 
-판단력을 씁니다. 엣지 케이스 몇 개가 아키텍처를 단죄하지는 않고, 어떤 문제는 정말로 복잡합니다. 데이터의 복잡도는 설계의 복잡도가 아닙니다. 버릴 때는 이렇게 합니다. (1) 지금까지 만든 것에 `how`를 다시 돌립니다. (2) 새 제약이 첫날부터의 가정이었던 것처럼 다시 설계합니다(redesign-from-first-principles). (3) 더하기 전에 뺍니다(`subtract-before-you-add` 원칙). 새 스케치는 자라기 전에 옛것보다 작아야 합니다. (4) B단계로 돌아가 `arena`를 다시 돌립니다.
+판단력을 씁니다. 엣지 케이스 몇 개가 아키텍처를 단죄하지는 않고, 어떤 문제는 정말로 복잡합니다. 데이터의 복잡도는 설계의 복잡도가 아닙니다. 버릴 때는 이렇게 합니다. (1) 지금까지 만든 것을 추적합니다. (2) 새 제약이 첫날부터의 가정이었던 것처럼 다시 설계합니다(redesign-from-first-principles). (3) 더하기 전에 뺍니다(`subtract-before-you-add` 원칙). 새 스케치는 자라기 전에 옛것보다 작아야 합니다. (4) B단계로 돌아가 `arena`를 다시 돌립니다.
 
 #### 산출물
 
@@ -101,7 +101,7 @@
 /architect 코드를 쓰기 전에 임포트 파이프라인을 설계해 줘. 호출하는 쪽이 어떻게 쓰는지가 가장 중요해.
 ```
 
-`/architect`가 먼저 그라운딩합니다. 설계가 건드리는 코드에 `/how`를 돌리고, 소유권이나 계층을 옮긴다면 `/why`도 돌립니다. 그다음 `/arena`로 경쟁하는 설계 스케치를 만드는데, 각 스케치는 호출자의 사용법이 먼저이고 타입, 시그니처, 모듈 지도가 뒤따릅니다. 기본은 종합된 설계에서 곧장 구현으로 들어갑니다. 설계를 먼저 보고 싶다면 그렇게 말합니다.
+`/architect`가 먼저 그라운딩합니다. 설계가 건드리는 코드를 추적하고, 소유권이나 계층을 옮긴다면 `/why`를 돌립니다. 그다음 `/arena`로 경쟁하는 설계 스케치를 만드는데, 각 스케치는 호출자의 사용법이 먼저이고 타입, 시그니처, 모듈 지도가 뒤따릅니다. 기본은 종합된 설계에서 곧장 구현으로 들어갑니다. 설계를 먼저 보고 싶다면 그렇게 말합니다.
 
 ```text
 /architect with checkpoint. 구현하기 전에 멈추고 보여 줘.
@@ -163,4 +163,4 @@ pstack에는 계획 스킬이 없습니다. 쓴 계획이 필요하면 설계가
 
 ### 관련 스킬
 
-그라운딩에 [`how`](how.md#skill-how)와 [`why`](why.md#skill-why), 후보 생성에 [`arena`](arena-swarm.md#skill-arena), 스케치에 대한 적대적 압력에 [`interrogate`](interrogate.md#skill-interrogate)를 씁니다. 적신호 네 가지(소유 분할, 한 일에 두 길, 가져올 수 있는 내부, 손으로 맞추는 목록)는 [`correct`](personal.md#skill-correct)가 아키텍처로 없애라는 것과 같은 모양입니다. 판단의 근거는 [원칙 장](principles.md)의 `exhaust-the-design-space`, `foundational-thinking`, `boundary-discipline`, `separate-before-serializing-shared-state` 등입니다.
+설계가 소유권이나 계층을 옮길 때의 그라운딩에 [`why`](why.md#skill-why), 후보 생성에 [`arena`](arena-swarm.md#skill-arena), 스케치에 대한 적대적 압력에 [`interrogate`](interrogate.md#skill-interrogate)를 씁니다. 적신호 네 가지(소유 분할, 한 일에 두 길, 가져올 수 있는 내부, 손으로 맞추는 목록)는 [`correct`](personal.md#skill-correct)가 아키텍처로 없애라는 것과 같은 모양입니다. 판단의 근거는 [원칙 장](principles.md)의 `exhaust-the-design-space`, `foundational-thinking`, `boundary-discipline`, `separate-before-serializing-shared-state` 등입니다.
