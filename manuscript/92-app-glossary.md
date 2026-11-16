@@ -53,7 +53,7 @@
 | agent / subagent | 에이전트 / 서브에이전트 | 작업하는 모델 인스턴스 / 부모가 띄워 일을 맡기는 에이전트 |
 | harness | 하니스 | 앱을 구동해 검사하거나 지표를 재는 테스트 도구. `docs/harness/`에서는 에이전트가 도는 환경(Cursor, Claude Code)을 가리킵니다 |
 | role | 역할 | 자기 모델 선택을 가진 위임 작업 단위(`arena runners` 등) |
-| panel | 패널 | 다중 모델 스킬이 쓰는 서로 다른 모델의 묶음. 기본은 opus, grok |
+| panel | 패널 | 다중 모델 스킬이 쓰는 서로 다른 모델의 묶음. 기본은 fable 5.2, opus 5.5, gemini 4 carbon |
 | model slug | 모델 슬러그 | 모델을 가리키는 식별 문자열(`claude-opus-5-5-xhigh` 등) |
 | reasoning budget / effort | 추론 예산 / 추론 강도 | `/setup-pstack`이 정하는 unlimited, large, medium, small과 모델 이름의 `max`, `xhigh` 같은 등급 |
 | rule file | 규칙 파일 | `~/.cursor/rules/pstack-models.mdc`. 역할별 모델을 정하는 항상 적용 규칙. Claude Code에서는 `~/.claude/rules/pstack-models.md` |
@@ -69,11 +69,10 @@
 | fan-out | 팬아웃 | 작업을 서브에이전트 여러 개로 나눠 병렬로 돌림 |
 | worker | 작업자 | `swarm`이나 팬아웃에서 조각을 맡는 서브에이전트 |
 | runner | 러너 | `arena`, `architect`에서 후보를 만드는 서브에이전트 |
-| explorer / explainer | 탐색자 / 설명자 | `how`의 서브에이전트. 사실을 모으는 쪽 / 설명을 쓰는 쪽 |
-| investigator / synthesizer | 조사자 / 종합자 | `why`, `reflect`의 서브에이전트. 증거를 모으는 쪽 / 종합하는 쪽 |
+| investigator / synthesizer | 조사자 / 종합자 | `recall`이 출처마다 띄워 증거를 모으는 서브에이전트 / `reflect`에서 리뷰어 셋의 발견을 종합하는 서브에이전트 |
 | adversary | 적대자 | `interrogate`가 변경을 깨뜨리려 띄우는 서브에이전트 |
 | reviewer / judge | 리뷰어 / 심사자 | 그 밖의 리뷰어. `arena`의 교차 심사자 |
-| cross-judge | 교차 심사 | 부모와 다른 모델 계열의 심사자가 루브릭으로 채점 |
+| cross-judge | 교차 심사 | 부모와 다른 모델 벤더의 심사자가 루브릭으로 채점. Fable과 다른 Claude는 한 벤더입니다 |
 | rubric | 루브릭 | 채점 기준 3~6개 |
 | candidate / base / graft | 후보 / 기준안 / 이식 | `arena`에서 후보를 만들고, 하나를 기준으로 고르고, 나머지의 좋은 부분을 옮겨 붙임 |
 | race | 경주 | 같은 지시로 작업자 여럿을 돌리고 선언한 규칙(first pass, rank all, best-of)으로 고름 |

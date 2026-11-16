@@ -134,7 +134,7 @@ ls -t <agent-transcripts>/*.jsonl <agent-transcripts>/*/*.jsonl <agent-transcrip
 | 렌즈 | 역할 줄 | 기본 `model` | 프롬프트 템플릿 |
 | --- | --- | --- | --- |
 | Judgment | `reflect judgment, divergent, synthesizer` | `claude-opus-5-5-xhigh` | `references/judgment-reviewer.md` |
-| Tooling | `reflect tooling` | `grok-4.7-xhigh-fast` | `references/tooling-reviewer.md` |
+| Tooling | `reflect tooling` | `claude-opus-5-5-high-fast` | `references/tooling-reviewer.md` |
 | Divergent | `reflect judgment, divergent, synthesizer` | `claude-opus-5-5-xhigh` | `references/divergent-reviewer.md` |
 
 각 템플릿을 표시된 곳에 대화 기록 경로나 요약을 채워 그대로 넘깁니다. 리뷰어는 `Task` 응답 본문으로 발견을 돌려줍니다.
@@ -183,7 +183,7 @@ ls -t <agent-transcripts>/*.jsonl <agent-transcripts>/*/*.jsonl <agent-transcrip
 | Skill-was-used | 부모가 대화 기록에서 실제로 호출한 스킬, 도구, MCP로 라우팅되는 발견만 수용. 스킬을 안 썼는데 썼어야 했으면 `tune description`으로, 둘 다 아니면 `skill-not-used`로 기각 |
 | Already-covered | 본문 수정 행을 수용하기 전에 대상 스킬을 읽습니다. 명확하고 자리가 좋은 기존 안내와 중복이면 `already-covered`로 기각(문제는 실행이지 스킬이 아님). 기존 안내가 묻혀 있거나 약하거나 지나치기 쉬우면 행을 수용하되 중복 추가가 아니라 문구나 배치 개선으로 재구성 |
 
-버릴 것(표류하는 구현 세부)과 남길 것(지속되는 패턴)의 예도 원문에 있습니다. 버릴 것은 "SHA `bd91aa7`의 린터가 chars/4 휴리스틱을 쓴다", "특정 스킬이 한계 80에서 175 토큰이다", "Bugbot이 5월 2일 정규식 백트래킹을 지적했다" 같은 것이고, 남길 것은 "트리거 검출용 닫힌 정규식 enum은 깨지기 쉽다. 스키마 검증(validation)된 구조를 선호한다", "스킬 설명은 트리거 키워드를 앞세운다(트리거 대 행동 60/40)", "스킬에 딸린 스크립트는 pnpm 워크스페이스가 아니라 자기 락파일을 가진 bun에서 돈다", "경로 모양의 트리거는 설명 산문이 아니라 `paths:`에 속한다" 같은 것입니다.
+버릴 것(표류하는 구현 세부)과 남길 것(지속되는 패턴)의 예도 원문에 있습니다. 버릴 것은 "SHA `bd91aa7`의 린터가 chars/4 휴리스틱을 쓴다", "특정 스킬이 한계 80에서 175 토큰이다", "Bugbot이 5월 2일 정규식 백트래킹을 지적했다", "`settings.ts`에서 `parseConfig`를 `loadConfig`로 이름을 바꿨다" 같은 것이고, 남길 것은 "트리거 검출용 닫힌 정규식 enum은 깨지기 쉽다. 스키마 검증(validation)된 구조를 선호한다", "스킬 설명은 트리거 키워드를 앞세운다(트리거 대 행동 60/40)", "스킬에 딸린 스크립트는 pnpm 워크스페이스가 아니라 자기 락파일을 가진 bun에서 돈다", "경로 모양의 트리거는 설명 산문이 아니라 `paths:`에 속한다" 같은 것입니다.
 
 출력 형식은 정확히 하나입니다. `## Accepted` 표(Problem, Proposal, Routing. 행마다 한 문장씩, 리뷰어가 Problem/Proposal 쌍을 5초에 읽을 수 있게, 사용자가 행별로 승인), `## Rejected`(발견마다 Principle 한 문장과 Reason: durability, specificity, existing-skill-first, convergence, decision-changing, structural, duplicate, skill-not-used, already-covered 중 하나), `## Backlog`(항목마다 패턴, 부딪힌 것, 제안하는 메커니즘)입니다.
 
