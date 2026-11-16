@@ -4,7 +4,7 @@
 
 ## 원본
 
-`cursor/plugins`의 `pstack/`, 커밋 `c742dd61706fbacc1b95f1a20b7b988cf096ce6c` (0.15.36) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를, 0.15.20 절은 그때의 핀 `1b6d44f`를, 0.15.21 절은 그때의 핀 `997ffc7`를, 0.15.23 절은 그때의 핀 `dbf4981`을, 0.15.24 절은 그때의 핀 `1e5c90a`를, 0.15.25 절은 그때의 핀 `e5136d8`를, 0.15.25-ko.1 절은 그때의 핀 `99743e9`를, 0.15.25-ko.2 절은 그때의 핀 `182f2ce`를, 0.15.26 절은 그때의 핀 `0b8e952`를, 0.15.28 절은 그때의 핀 `d457567`를, 0.15.29 절은 그때의 핀 `88d4751`을, 0.15.30 절은 그때의 핀 `eb4db2b`를, 0.15.30-ko.1 절은 그때의 핀 `4ec7ffa`를, 0.15.32 절은 그때의 핀 `e73df47`을, 0.15.34 절은 그때의 핀 `519d36a`를, 0.15.36 절은 그때의 핀 `c742dd6`를 적은 기록입니다.
+`cursor/plugins`의 `pstack/`, 커밋 `bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7` (0.15.42) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를, 0.15.20 절은 그때의 핀 `1b6d44f`를, 0.15.21 절은 그때의 핀 `997ffc7`를, 0.15.23 절은 그때의 핀 `dbf4981`을, 0.15.24 절은 그때의 핀 `1e5c90a`를, 0.15.25 절은 그때의 핀 `e5136d8`를, 0.15.25-ko.1 절은 그때의 핀 `99743e9`를, 0.15.25-ko.2 절은 그때의 핀 `182f2ce`를, 0.15.26 절은 그때의 핀 `0b8e952`를, 0.15.28 절은 그때의 핀 `d457567`를, 0.15.29 절은 그때의 핀 `88d4751`을, 0.15.30 절은 그때의 핀 `eb4db2b`를, 0.15.30-ko.1 절은 그때의 핀 `4ec7ffa`를, 0.15.32 절은 그때의 핀 `e73df47`을, 0.15.34 절은 그때의 핀 `519d36a`를, 0.15.36 절은 그때의 핀 `c742dd6`를, 0.15.42 절은 그때의 핀 `bf0c7cd`를 적은 기록입니다.
 
 ## 빌드와 검사
 
@@ -807,3 +807,40 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 - `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 58개와 플레이북 23개의 절 존재, 용어 병기 짝 29개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
 - `CHROME_PATH=/usr/bin/google-chrome bun tools/check-layout.mjs`: 390px에서 가로 넘침 없음.
 - `CHROME_PATH=/usr/bin/google-chrome bun tools/build.mjs`: `pstack-guide-0.15.36.epub`, `pstack-guide-0.15.36.pdf` (498쪽, 0.15.34는 509쪽).
+
+## 0.15.42
+
+원문을 `c742dd61706fbacc1b95f1a20b7b988cf096ce6c`(0.15.36)에서 `bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7`(0.15.42)로 올렸습니다. pstack 트리에 닿은 커밋은 하나입니다.
+
+- `bf0c7cd` feat(pstack): one-file how/why, three-seat defaults, sharpen prototypes (#1236)
+
+책 버전은 `BOOK_REVISION = 0`이라 pstack 버전과 같은 `0.15.42`입니다. 산출물 이름은 `pstack-guide-0.15.42.epub`, `pstack-guide-0.15.42.pdf`입니다.
+
+확인한 사실입니다. `plugin.json`과 `.cursor-plugin/plugin.json` 버전은 둘 다 0.15.42입니다. `bf0c7cd`는 `main`에서 `pstack/`에 닿은 최신 커밋입니다. 0.15.42를 처음 쓴 커밋이기도 합니다. 스킬 수는 58개(일반 34, 원칙 24), 플레이북은 23개, 에이전트는 2개로 그대로입니다. 새 스킬은 없습니다.
+
+`c742dd6..bf0c7cd`에서 `pstack/`에 닿은 사용자에게 보이는 파일은 50개입니다. README, 안내서 1·2·3·4·10장, Claude Code 어댑터, `how`와 `why`(참조 파일 전부 삭제), `setup-pstack`, `poteto-mode`와 작업 플레이북 여섯, multi-phase-plan, `poteto-help`, `sharpen`, `architect`, `arena`, `swarm`, `teach`, `recall`, `reflect`, `blast-radius`, `no-comments`, Comment Sicko, benny 셋, 두 `plugin.json`입니다. `statechart`의 `SKILL.md`는 바뀌지 않았습니다.
+
+원고에서 반영한 내용입니다.
+
+- 핀과 permalink, 산출물 이름을 `bf0c7cd` / `0.15.42`으로 올렸습니다.
+- `/how`는 읽기 전용 `generalPurpose` 서브에이전트 하나가 탐색과 설명을 한 번에 합니다. 복잡도 관문과 explorer/explainer 역할, 참조 프롬프트는 없습니다. `poteto-mode`와 플레이북은 `how`를 부르지 않고 코드를 직접 추적합니다. `/teach`와 `/poteto-help`는 그대로 `how`를 둡니다.
+- `/why`는 커밋과 PR 토론에서 답하는 짧은 파일 하나입니다. 이름 있는 출처, 조사자/종합자, MCP 범주 팬아웃, 신뢰도 등급 표는 없습니다. 작성자가 쓴 것을 인용하고 추론은 추론이라고 표시하며, 기록이 답하지 못하는 것을 말합니다.
+- `/sharpen`이 다시 쓴 프롬프트는 실험으로 정할 수 있는 선택을 프로토타입하고 관찰에서 추천하게 합니다. 제품과 취향의 선택은 사용자에게 남깁니다.
+- 기본 모델은 코드·글·판단이 opus 5.5, 가장 어려운 변경이 fable 5.2, swarm과 사소한 수정이 opus high-fast입니다. 패널은 fable / opus / gemini 세 자리입니다. Grok은 기본값이 아닙니다. 규칙은 `# defaults: 2` 줄을 갖고, 옛 `grok-*` 기본값과 `how explorer` 같은 폐지된 역할 줄은 `/setup-pstack`이 바꿉니다.
+- `arena` 계열은 가장 긴 접두사(`claude-fable-*`, `claude-*`, `gemini-*`)입니다. 교차 심사는 계열이 아니라 벤더이고, Fable과 다른 Claude는 한 벤더입니다. Claude 부모의 기본 심사자는 gemini입니다.
+- Claude Code 어댑터의 비 Claude 행은 `gemini-*`입니다. 기본 대응에 fable max, opus high, gemini inherit-parent가 들어갑니다.
+- benny는 공유 의존성에서 `how`를 빼고 `why`만 남깁니다.
+
+### 해석한 부분
+
+- 책 버전은 `0.15.42-ko.1`이 아니라 `0.15.42`입니다. 이 저장소는 새 pstack 버전을 처음 다룰 때 접미사를 붙이지 않습니다. `-ko.N`은 같은 pstack 버전에서 책만 고칠 때 씁니다.
+- `how`와 `why` 장에 모델 역할이 없다는 문장을 한 줄씩 남겼습니다. 원문 본문에는 없고, `setup-pstack` 2단계가 폐지된 역할로 지우는 줄을 가리킵니다.
+- `recall`은 공유 기록의 출처마다 조사자 서브에이전트를 띄웁니다. `why`의 조사자 역할과는 다릅니다.
+- `statechart` 스크립트가 SANY 줄·칸 오류와 부모 테두리 화살표를 고쳤지만 `SKILL.md`는 그대로라 스크립트 내부를 원고에 넣지 않았습니다.
+- 용어집에서 `지침(guide)` 짝과 `why`의 신뢰도 등급 행, `how`의 탐색자/설명자 행을 지웠습니다. 교차 심사는 벤더로 고쳤고, `recall`의 조사자는 남겼습니다.
+
+### 실행한 검사
+
+- `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 58개와 플레이북 23개의 절 존재, 용어 병기 짝 28개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
+- `CHROME_PATH=/usr/local/bin/google-chrome bun tools/check-layout.mjs`: 390px에서 가로 넘침 없음.
+- `CHROME_PATH=/usr/local/bin/google-chrome bun tools/build.mjs`: `pstack-guide-0.15.42.epub`, `pstack-guide-0.15.42.pdf` (489쪽, 0.15.36은 498쪽).
