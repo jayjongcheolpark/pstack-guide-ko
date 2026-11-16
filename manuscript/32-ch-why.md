@@ -2,107 +2,19 @@
 
 ## why {#skill-why}
 
-원문: {{src:skills/why/SKILL.md}} {{src:skills/why/references/epistemics.md}} {{src:skills/why/references/investigator-prompt.md}} {{src:skills/why/references/synthesizer-prompt.md}} {{src:skills/why/references/source-playbook.md}} {{src:skills/why/references/sources/code-archaeology.md}} {{src:skills/why/references/sources/incident-postmortem.md}} {{src:skills/why/references/sources/linear.md}} {{src:skills/why/references/sources/notion.md}} {{src:skills/why/references/sources/slack.md}} {{src:skills/why/references/sources/datadog.md}} {{src:skills/why/references/sources/sentry.md}} {{src:skills/why/references/sources/databricks.md}}
+원문: {{src:skills/why/SKILL.md}} {{src:docs/guide/03-understand.md}}
 
-> 코드의 동기와 의도를 조사합니다. 사용 가능한 MCP를 찾아 증거 범주별로 병렬 조사한 뒤, 출처가 붙은 판단을 돌려줍니다.
+> 코드가 아니라 기록에서 답합니다. 대상을 들여온 커밋과 PR 토론을 읽고, 결정과 트레이드오프에 대해 출처가 붙은 판단을 돌려줍니다.
 
 ### 언제 쓰는가
 
-`how`의 짝입니다. `how`는 코드가 무엇을 하고 어떻게 동작하는지를 답하고, `why`는 어떤 힘이 그 모양을 만들었는지를 답합니다. 원문의 `description`은 트리거로 "why does X work this way", "why we picked Y", 설계 근거, 회귀, 포스트모템, 데이터로 뒷받침된 임계값을 듭니다. 런타임 동작은 `how`를 쓰라고 안내합니다. `disable-model-invocation: true`라서 사용자가 직접 부르거나 다른 워크플로가 부릅니다.
-
-코드는 자기 동기를 담고 있지 않습니다. 코드가 무엇을 하는지는 읽을 수 있어도 왜 존재하는지는 읽을 수 없고, 그것은 커밋, PR, 티켓, 문서, 대화에 있습니다. 모두 불완전하고 편향되고 때로는 아예 없습니다. 이 스킬은 그 사실을 인정하고, 자신 있게 들리는 추측이 사용자를 오도하는 일을 막도록 설계되었습니다.
+`how`의 짝입니다. 안내서는 `/how`가 코드가 지금 무엇을 하는지 설명하고 `/why`는 그 모양의 이유를 캐낸다고 합니다. 원문의 `description`은 트리거로 "why does X work this way", "why we picked Y", 설계 근거, 회귀, 포스트모템, 데이터로 뒷받침된 임계값을 들고, 결정과 트레이드오프에 대해 출처가 붙은 판단을 돌려준다고 합니다. 런타임 동작은 `how`를 쓰라고 안내합니다. `disable-model-invocation: true`라서 사용자가 직접 부르거나 다른 워크플로가 부릅니다.
 
 ### 동작 방식
 
-운영 자세는 "신중하고 조심스럽고 정확한 조사자"입니다. 아는 것과 추론하는 것을 정직하게 구분하고, 종합자는 `references/epistemics.md`의 신뢰도 틀을 따라야 합니다. 서브에이전트를 띄울 때는 `pstack-models.mdc` 규칙(rule)의 해당 역할 줄을 읽어 모델을 정합니다(`how`와 같은 규칙입니다). 띄울 때마다 그 일에 맞는 추론 강도와 일반 속도 또는 fast를 고릅니다. [`poteto-mode`](poteto-mode.md#skill-poteto-mode)의 Subagents 절을 따릅니다.
+스킬 본문은 두 문장입니다. 코드가 아니라 기록에서 답합니다. 대상과 그 뒤의 각 변경을 들여온 커밋과 PR 토론을 읽고, 그 흔적이 얇으면 다른 출처도 봅니다. 답에는 작성자가 쓴 것을 인용하고, 자신의 추론은 추론이라고 표시하고, 기록이 답하지 않는 것은 답하지 않는다고 말합니다.
 
-1. **대상과 질문을 이해합니다.** 대상은 보통 코드 덩어리, 패턴, 기능, 이름 붙은 설계 결정입니다. 질문은 보통 설계 근거, 트레이드오프, 동기가 된 엣지 케이스, 외부 제약, 죽은 코드, 넓은 이력 훑기입니다. 대상이 모호하면("왜 이렇게 하나요?"만 있고 지시 대상이 없으면) 대화 맥락(열린 파일, 최근 편집, 커서 위치, 방금 이야기한 것)에서 가장 그럴듯한 추측을 하고 해석을 밝힌 뒤 진행합니다.
-2. **코드 앵커를 세웁니다.** 조사자를 띄우기 전에 조사를 구체적 코드에 닻을 내립니다. 관련 파일 경로와 줄 범위, 핵심 심볼(함수, 클래스, 상수), 대상을 건드린 최근 커밋의 초기 목록, 병합 커밋에서 뽑은 PR 번호(제목의 `(#1234)` 패턴)가 필요합니다. 원문의 명령은 다음과 같습니다.
-
-   ```bash
-   # 대상 줄의 마지막 수정 커밋
-   git blame -L <start>,<end> <file>
-   # 이름 변경을 거치는 파일 전체 이력 (패치 포함)
-   git log --follow -p -- <file>
-   # 파일을 건드린 최근 N개 커밋 (PR 번호가 보임)
-   git log --oneline -20 -- <file>
-   # 커밋 메시지에서 PR 번호 추출
-   git log -1 --format=%B <commit>
-   ```
-
-   실질적인 커밋은 `gh pr view <number> --json title,body,author,createdAt,mergedAt,labels,closingIssuesReferences,comments,reviews`로 PR 본문과 토론을 가져옵니다. 파일 경로, 심볼, 커밋, PR 번호, 연결된 티켓 ID를 시드 맥락으로 정리해 조사자들에게 넘깁니다.
-3. **병렬 조사자를 띄웁니다(기본 자세).** 기본은 전체 병렬 조사입니다. 먼저 Cursor 환경에서 사용 가능한 MCP를 나열합니다(도구 지도가 있으면 그것을 쓰고, 없으면 Cursor가 노출하는 `mcps/` 디렉터리를 봅니다). 각 MCP를 증거 범주 하나에 대응시킵니다. 소스 컨트롤은 git과 `gh`로 언제나 가능합니다. 나머지 여섯은 MCP 이름, 서버 지시문, 도구 이름, 리소스 설명자로 분류하고, 여러 범주에 걸치면 주된 증거에 맞는 범주를 고르며 애매한 경우는 커버리지 지도에 적습니다. 최소가 아니라 완전한 커버리지 지도를 목표로 하고, 검색하지 않고 건너뛰기보다 널(null) 결과를 기록합니다. 일치하는 조사자를 한 메시지에 모두 띄워 동시에 돌립니다. 한 에이전트에게 MCP 여러 개를 맡기지 않습니다.
-
-   각 조사자의 설정은 `subagent_type: generalPurpose`, 모델은 `why investigators` 줄(기본 `grok-4.7-xhigh-fast`), `readonly: false`(에이전트 모드)입니다. 읽기 전용/Ask 모드는 MCP 접근을 벗겨 MCP 기반 조사자를 무력화하므로 쓰지 않습니다. 조사자도 무언가를 쓰면 안 됩니다. 각 조사자는 다섯 가지를 받습니다. `references/investigator-prompt.md`의 기본 프롬프트, 선택한 MCP의 범주 플레이북 `references/sources/<source>.md`(`source-playbook.md`의 예를 바탕으로 조정), 대상 코드가 방어적으로 보이면(널 검사, 재시도 로직, 타임아웃 처리, 속도 제한, 기능 플래그, egress 가드, OOM 핸들러) 범주 교차 플레이북 `incident-postmortem.md`, 2단계의 코드 앵커, 사용자의 원래 질문입니다.
-
-   **조사자 명단은 사용 가능한 증거 범주마다 하나입니다.** 각각이 무엇을 특히 잘 드러내는지가 원문에 적혀 있습니다. 범주가 비어 돌아올 때 그 공백에 이름을 붙이고 (드물게 명백히 무관할 때) 건너뜀을 정당화하는 데 씁니다.
-
-   | 범주 | 예 (원문) | 특히 잘 드러내는 것 |
-   | --- | --- | --- |
-   | 소스 컨트롤 이력 | git, `gh`, 코드 주석, 테스트 | 리뷰 중에 포착된 구현 시점의 근거. 항상 띄우는 유일한 출처 |
-   | 이슈, 티켓 트래커 | Linear, Jira, GitHub Issues, Plane, Shortcut | 제품이나 비즈니스의 강제 요인. why가 엔지니어링 밖에 있을 때 강함 |
-   | 장문 문서 | Notion, Confluence, Google Docs, Coda | 코드가 되기 전에 글로 쓰인 긴 설계 근거 |
-   | 실시간 팀 채팅 | Slack, Discord, Microsoft Teams, Mattermost | 문서에 오르지 못한 실시간 숙의. 소스 컨트롤, 티켓, 문서의 흔적이 얇을 때 특히 중요 |
-   | 인프라 관측 | Datadog, New Relic, Honeycomb, Grafana, Splunk | 코드를 낳은 인프라와 런타임 현실. 타임아웃, 재시도, 속도 제한, 서킷 브레이커에 대응하는 코드에 강함 |
-   | 오류, 예외 추적 | Sentry, Rollbar, Bugsnag, Airbrake | 방어적이거나 교정하는 코드를 낳은 구체적 예외와 오류 궤적. catch 블록, 널 가드, 타입 검사, 재시도에 강함 |
-   | 제품 분석 웨어하우스 | Databricks, Snowflake, BigQuery, ClickHouse, dbt, Redshift | 코드를 빚은 제품과 데이터의 현실. 플래그로 감싼 코드, 실험 기반 출시, 데이터 마이그레이션, "이 숫자는 어디서 왔나"에 강함 |
-
-   **조사자를 건너뛰는 경우**는 최종 "Sources Consulted" 절에 남기는 명시적 서면 정당화가 있을 때뿐이고, 유효한 이유는 둘입니다. 그 범주에 맞는 MCP가 없는 경우(선택이 아니라 공백으로 표시합니다. 예: "실시간 팀 채팅은 건너뜀. 맞는 MCP가 없어 대화 기록을 검색하지 못함"), 그리고 출처가 "아마 무관"이 아니라 명백히 무관한 경우(높은 기준(bar), 예: 런타임 코드 경로가 없는 빌드 타임 스크립트에서 오류 추적)입니다. 단일 커밋의 사소한 대상이고 PR 설명에 답이 다 있다면, 일곱 범주 검색이 모두 중복임을 확인한 뒤에만 직접 답할 수 있습니다. 이는 드물어야 합니다.
-4. **종합합니다.** 종합자 서브에이전트 하나를 띄웁니다. 모델은 `why synthesizer` 줄(기본 `claude-opus-5-5-xhigh`)이고 `readonly: false`입니다. 종합자의 품질 점검이 인용을 표본 검증(verification)하는데 그때 MCP 접근이 필요할 수 있기 때문입니다. 종합자는 조사자 결과(널 결과와 정당화된 건너뜀 포함), 코드 앵커, 원래 질문, `references/epistemics.md`의 인식론 틀, `references/synthesizer-prompt.md`의 프롬프트 템플릿을 받습니다.
-5. **제시합니다.** 종합자의 출력을 사용자에게 보여 줍니다. 명료성을 위한 가벼운 편집이나 대화 맥락 추가는 되지만 **신뢰도 표현은 다시 쓰지 않습니다.**
-
-출력 구조는 `references/synthesizer-prompt.md`의 것입니다. The Question, The Code in Question, What We Found, What We Can Reasonably Infer, Competing Hypotheses, What We Don't Know, Sources Consulted, Confidence Summary입니다. 필요하면 조정하되 신뢰도 구분은 그대로 유지하고, Sources Consulted는 조사자마다 한 줄씩(아무것도 못 찾았거나 건너뛴 것도 이유와 함께) 둡니다. Sources Consulted 뒤에, `why` 질문이 이 코드를 실제로 바꾸기 위한 전 단계라면, 계보 조사 결과를 변경 계획에 쓸 수 있는 Preserve / Change / Avoid / Risk 제약 집합으로 바꿉니다.
-
-#### 인식론: 신뢰도 등급
-
-`references/epistemics.md`는 증거가 역사적이고 단편적이고 때로 모순될 때 신뢰도를 어떻게 다루고 어떻게 전달할지 정합니다. 최종 출력의 모든 주장은 다섯 등급 중 하나에 놓이고, 등급이 그 주장이 들어갈 출력 절과 표현을 정합니다.
-
-| 등급 | 뜻 | 표현 |
-| --- | --- | --- |
-| Direct | 질문에 답하는 명시적 텍스트 인용. "코드가 X를 하니 작성자는 X를 원했을 것"이 아니라 작성자가 실제로 *쓴* 것 (PR 설명, 티켓, 코드 주석, 설계 문서, 저자의 채팅 메시지) | 자신 있게, 현재 시제로. "이것은 X 때문에 존재한다." 출처를 밝힙니다 |
-| Supported | 간접 증거 여러 개가 수렴합니다. 어느 한 출처도 명시하지 않지만 출처를 가로지르는 패턴이 그럴듯하게 만듭니다 | 자신 있되 도출된 것임이 분명하게. "증거는 X를 강하게 가리킨다: [구체적 조각들]". 여러 출처를 인용합니다 |
-| Inferred | 맥락의 합리적 해석이지만 명시적으로 뒷받침하는 것이 없습니다. 독자가 이것이 사실이 아니라 *조사자의 해석*임을 알아야 합니다 | 헤지. "~로 보인다", "아마", "시사한다", "~와 일치한다", "한 가지 해석은". 추론 사슬을 명시합니다 |
-| Speculative | 그럴듯한 가설이지만 증거가 얇고 다른 설명도 똑같이 맞습니다 | 명시적으로 추측이라고. "한 가능성은 X이지만 직접 증거는 없다." 보통 Competing Hypotheses 절에 놓입니다 |
-| Unknown | 찾아봤지만 알아내지 못했습니다. 유효하고 중요한 결과이므로 기록합니다 | "X, Y, Z를 검색했지만 이유의 증거를 찾지 못했다." 무엇을 검색했는지 구체적으로 |
-
-표현 지침(guide)도 있습니다. "because", "the reason is", "was designed to", "fixes", "the team decided"는 Direct나 Supported의 신뢰도를 담으므로 추론에 쓰지 않고, 쓸 때는 바로 옆에 인용이 있어야 합니다. 추론에는 "appears to", "seems to", "likely", "suggests", "is consistent with", "plausibly" 같은 헤지를 씁니다. 피할 말은 "obviously"(분명했다면 사용자가 묻지 않았을 것), "clearly", "of course", 그리고 "just"(성능 때문에 그냥 X다 같은 무시하는 표현), "I think"/"I believe"(증거를 종합하는 것이지 개인 의견이 아니므로 "the evidence suggests"를 씁니다)입니다.
-
-합리화를 피하라는 경고도 있습니다. 오늘 말이 되는 코드가 더는 적용되지 않는 이유로, 혹은 처음부터 틀린 이유로 쓰였을 수 있습니다. 지저분한 이력에 깔끔한 근거를 덧씌우지 않습니다. 작성자가 "옳은 일"을 했다고 가정하고 거꾸로 정당화하지 않고, 코드베이스 전반의 일관된 패턴이 복사 붙여넣기일 수 있는데 의도적이라고 가정하지 않고, 증거의 부재를 부재의 증거로 바꾸지("아무도 보안 우려를 언급하지 않았으니 우려가 없었을 것") 않습니다.
-
-**아첨의 함정.** 사용자는 `why` 질문에 가설을 담기도 합니다("이렇게 하는 건 성능 때문이겠죠?"). 그것을 그대로 확인해 주지 않고 여러 후보 중 하나로 다루며 증거를 독립적으로 확인합니다. 증거가 뒷받침하면 인용과 함께 그렇게 말하고, 아니면 아니라고 말하고 증거가 실제로 뒷받침하는 것을 제시합니다. 사용자의 추측은 조사의 계기이지 검증할 결론이 아닙니다.
-
-출처끼리 모순되면(PR 설명은 한 말을, 티켓은 다른 말을 하면) 둘 다 드러내고 더 깔끔한 서사에 맞는 쪽을 고르지 않습니다. 증거가 없을 때 정직한 "모른다"는 이 스킬이 낼 수 있는 가장 가치 있는 출력 중 하나입니다. 답이 뻔한 곳에 없고, 사람(원작성자, 제품 책임자, 팀 리드)에게 물어야 하거나 더 파지 않아도 된다는 것을 알려 주기 때문입니다. 빈틈을 표시하지 않고 자신 있는 추측으로 채우면 사용자가 그 추측을 근거로 행동하므로 실제로 해가 됩니다. 빈틈은 구체적으로 이름 붙입니다. 어떤 질문에 답하려 했는지, 어떤 출처를 검색했는지, 각각 무엇을 검색했는지, 무엇을 찾았는지입니다.
-
-종합자가 최종화 전에 하는 보정 점검 네 가지는 다음과 같습니다. 각 주장에 인용이 있는가(없으면 추가하거나 Inferred나 Hypotheses로 옮김), 표현이 등급에 맞는가(Direct는 "because"를 쓸 수 있고 Inferred는 못 씀), 코드 자체를 자기 의도의 증거로 취급하지 않았는가, "What We Don't Know" 절이 있는가(빈틈이 하나도 언급되지 않으면 수상하다).
-
-#### 조사자 프롬프트
-
-조사자는 증거를 정확히 모으는 일을 하고, 산문을 쓰지 않습니다. 다른 조사자들이 다른 출처를 병렬로 검색하므로 자기 출처를 깊이 팝니다. 자세는 이렇습니다. 정확한 표현이 중요하면 바꿔 말하지 않고 인용하고, 깊이 들어가기 전에 넓게 그물을 던지고, 찾은 것뿐 아니라 검색한 것을 기록하고(질의를 그대로), 이야기에 저항하고(세 증거가 맞아떨어지는데 네 번째가 모순되면 그 모순이 가장 흥미로운 발견), 반사실을 고려하고, 절대 지어내지 않습니다.
-
-루프는 여섯 가지입니다. 넓게 그물을 던지기, 제목이 아니라 전체를 읽기, 자기 출처 안의 링크를 따라가기(출처를 가로지르는 참조는 직접 쫓지 않고 "Additional Leads"에 기록해 그 출처 담당자가 잡게 함), 위치와 함께 인용을 그대로 잡기, 부재를 기록하기, 모순을 지우지 않기입니다. 인식론적 규율도 있습니다. 기계적 변화(`limit = 50`에서 `100`으로)와 동기를 혼동하지 않고, 코드 스타일에서 의도를 추론하지 않고, 불확실성을 보존하고, 기능 X를 묻는데 Y의 증거를 X의 답처럼 제시하지 않습니다. 출력은 Source, What I Searched, Direct Evidence Found, Indirect / Circumstantial Evidence, Contradictions, Gaps, Additional Leads 일곱 절입니다. 하지 않는 일도 명시합니다. 최종 답 쓰기, 모순에서 편 들기, 증거를 넘는 추측, 동기를 알아내려고 코드 자체를 읽는 것입니다.
-
-#### 종합자 프롬프트
-
-종합자에게는 조사자 결과, 검색하지 않은 출처와 그 이유, 인식론 틀이 주어집니다. 규칙 여섯 가지가 핵심입니다. 모든 주장은 다섯 등급 중 하나, Direct와 Supported에는 인용, Inferred와 Speculative에는 헤지 표현, 코드를 자기 의도의 증거로 인용하지 않기, 빈틈 기록, 사용자 질문에 가설이 들어 있으면 후보로 취급하기입니다. 지시는 모든 결과 읽기, 겹치는 발견 합치기(같은 PR이나 티켓을 여러 조사자가 인용했으면 하나의 권위 있는 참조로), 모순 드러내기, 신뢰도 보정, 인용을 표본 검증하기(코드베이스를 읽고 MCP 도구를 호출할 수 있지만 파일을 쓰거나 커밋하거나 외부 상태를 바꾸지 않음), 과장하지 않기입니다.
-
-출력 절의 형식은 이렇습니다. What We Found의 항목은 `**[Direct]**`나 `**[Supported]**` 태그를 붙이고 출처를 답니다. What We Can Reasonably Infer는 `**[Inferred]**`와 추론 사슬을 적습니다. Competing Hypotheses는 가설마다 "Evidence for"와 "Evidence against or missing"을 답니다. What We Don't Know는 답이 없었던 질문, 빈 손이었던 검색, 사용할 수 없던 출처, 알 만하지만 물을 수 없는 사람을 구체적으로 적습니다. Sources Consulted는 범주별로 검색한 것을 적고 검색하지 않았으면 이유("맞는 MCP가 없음" 등)를 적습니다. Confidence Summary는 전체 신뢰도를 한두 문장으로 요약합니다. 반환 전 점검표에는 증거 없는 자신 있는 어조가 이 스킬이 막으려는 바로 그 실패라는 점이 담겨 있고, 마지막 노트는 "이 출력의 가치는 권위가 아니라 정직에서 나온다"고 말합니다.
-
-#### 범주별 플레이북
-
-각 조사자는 자기 범주에 맞는 플레이북 하나만 읽습니다. 플레이북은 흔한 MCP에 대한 구체적 예이고, 같은 범주의 다른 MCP에는 조정해서 씁니다.
-
-| 플레이북 | 담은 것과 검색 요령 | 대표적인 함정 |
-| --- | --- | --- |
-| `code-archaeology.md` (git, in-repo) | 커밋 이력, PR 설명과 리뷰, 인라인 주석, ADR, 테스트, CHANGELOG. 가장 믿을 만한 출처. `git log --follow`, 정확한 문자열을 넣거나 뺀 커밋을 찾는 `git log -S`(정규식은 `-G`), `git blame -L`, `git show` | 이 파일은 함정 목록을 두지 않음 |
-| `linear.md` (Linear; Jira, GitHub Issues 등에 조정) | 이슈, 프로젝트 문서, 부모/하위 이슈, 댓글, 라벨. 제품과 비즈니스 맥락. 연결된 티켓을 먼저 `get_issue`로, 다음 키워드로 `list_issues`, 이슈 트리를 위로 걷기, `get_project`로 프로젝트 문서 | 범위 표류, 상투적 템플릿("사용자 경험 개선"), 낡은 티켓, 중복 종료 사슬, 접근할 수 없는 비공개 내용은 추측하지 말고 빈틈으로 |
-| `notion.md` (Notion; Confluence, Google Docs 등에 조정) | PRD, 기술 스펙, RFC, ADR, 회의록, 포스트모템, 런북. `notion-search`, `notion-fetch`로 전체 읽기, 하위 페이지와 백링크, 관련 데이터베이스 | 낡은 문서, 문서와 현실의 괴리, 상투적 "Why", 링크되지 않은 문서, 여러 초안, 접근 제한 페이지 |
-| `slack.md` (Slack; Discord, Teams 등에 조정) | 작성자 한정 검색, PR URL, 오류 문자열. MCP 도구는 다양하고 인증이 필요할 수 있으며 인증 실패면 멈추고 빈틈으로 보고 | 보존 기간의 절벽, 검색되지 않는 DM, 농담을 결정으로 오인, 스레드 없는 단일 메시지의 맥락 붕괴, 인증 실패 시 발견을 지어내지 말 것 |
-| `datadog.md` (Datadog; New Relic, Grafana 등에 조정) | 메트릭, 모니터와 알림, 대시보드, APM 트레이스, 로그, 인시던트, 노트북. 프로덕션의 현실. 서비스를 찾고, 대시보드와 모니터를 먼저(임계값이 종종 "왜 N으로 제한됐나"의 답), 메트릭 궤적을 변경 날짜와 상관, 로그는 시간 제한 | 상관은 인과가 아님, 찾은 차트에 과적합, 사라진 텔레메트리(공백이지 널 결과가 아님), 대규모 노이즈, 계측됐다고 해서 그 때문에 생긴 코드는 아님 |
-| `sentry.md` (Sentry; Rollbar, Bugsnag 등에 조정) | 이슈, 이벤트, 릴리스. `search_issues`, `search_issue_events`, first/last seen, 영향받은 릴리스, 빈도 궤적. Seer는 가설 생성기로만. 이슈마다 ID, 제목, first/last seen, 이벤트 수, 스택 조각, 링크를 되돌림 | 이 파일은 함정 목록을 두지 않음 |
-| `databricks.md` (Databricks SQL; Snowflake, BigQuery 등에 조정) | 제품 분석 이벤트, 사용과 과금 이벤트, 실험과 플래그 데이터, 시스템 테이블, dbt 계보. Datadog이 인프라와 런타임 관점이라면 이쪽은 제품과 데이터 관점. `execute_sql_read_only`, 쿼리 전에 `SHOW TABLES`와 `DESCRIBE`로 방향 잡기, 모든 쿼리를 시간 제한(보통 병합 전후 약 30일), 원시 테이블보다 타입 있는 dbt 모델 우선 | 계측됐다고 해서 원인은 아님, 조용한 계측 변경, 스키마 표류, dbt 갱신 지연, 회사별 테이블, 보존 기간의 절벽, 노트북은 SQL MCP로 조회 불가(빈틈으로) |
-| `incident-postmortem.md` (범주 교차) | Linear의 `incident`, `sev-*`, `postmortem-action-item`, `reliability` 라벨. Slack의 `#sev-*`, `#incident-*`. git의 "fix for incident", "add defensive check", "revert" 뒤 "re-apply with..." 커밋 | 이 파일은 함정 목록을 두지 않음 |
-
-출처 플레이북 일곱 개 가운데 Linear, Notion, Datadog, Sentry, Databricks는 끝에 "What to return"을 두어 조사자가 되돌려줄 항목(정확한 텍스트, 위치, 작성자와 날짜, 직접인지 정황인지)을 정해 둡니다. `code-archaeology.md`와 `slack.md`와 범주 교차 플레이북 `incident-postmortem.md`에는 이 절이 없습니다.
+다른 출처가 무엇인지와 답의 형식은 본문이 정하지 않습니다.
 
 ### 사용 예
 
@@ -110,18 +22,17 @@
 /why 재시도 한도가 왜 5로 정해졌나요? 그 이유가 지금도 유효한가요?
 ```
 
-`/why`는 소스 컨트롤에서 시작해 사용 가능한 MCP가 노출하는 증거 범주(이슈 트래커, 장문 문서, 팀 채팅, 관측, 오류 추적, 분석)를 모두 병렬로 조사합니다. 보고는 모든 것을 인용하고, 직접 증거와 추론을 구분하고, 기록이 얇으면 "~로 보인다"고 말합니다. 널 결과도 보고합니다. "왜인지 아무도 적어 두지 않았다"도 답이기 때문입니다.
+`/why`는 재시도 한도를 들여온 커밋과 PR 토론을 읽고, 그 뒤에 그 코드를 바꾼 변경마다 같은 기록을 읽습니다. 그 흔적이 얇으면 다른 출처를 봅니다. 답은 작성자가 쓴 것을 인용하고, 에이전트 자신의 추론은 추론이라고 표시하고, 기록이 답하지 않는 것을 말합니다. 안내서는 "왜인지 아무도 적어 두지 않았다"도 그 자체로 답이라고 합니다.
 
 둘은 자연스럽게 엮입니다. 이력이 엉망의 원인일 것 같다면 "먼저 why를 하고 그다음 how를" 하라는 프롬프트도 좋습니다.
 
 ### 함정과 주의점
 
-- **최신성 편향.** 가장 최근 커밋이 권위 있다고 가정하지 않습니다. 현재 모양은 이전의 여러 결정이 쌓인 결과인 경우가 많으므로 거슬러 올라가 추적합니다. (원문이 유일하게 명시한 실패 모드입니다.)
-- 읽기 전용 모드로 조사자를 띄우지 않습니다. MCP 접근이 사라집니다.
-- 조사자가 다른 출처의 링크를 직접 쫓지 않습니다. Additional Leads에 기록합니다.
-- 신뢰도 표현을 다시 쓰지 않습니다. 사용자의 가설을 그대로 확인해 주지 않습니다.
-- 자신 있는 어조와 약한 증거의 조합이 이 스킬이 막으려는 실패입니다.
+- 코드에서 동기를 읽어 내지 않습니다. 기록에서 답합니다.
+- 대상을 들여온 커밋만 읽고 멈추지 않습니다. 그 뒤의 각 변경을 들여온 커밋과 PR 토론도 읽습니다.
+- 자신의 추론은 추론이라고 표시하고, 기록이 답하지 않는 것은 답하지 않는다고 말합니다.
+- 런타임 동작을 묻는 질문은 `why`가 아니라 `how`의 몫입니다.
 
 ### 관련 스킬
 
-런타임 동작은 [`how`](how.md#skill-how), 둘을 엮은 설명은 [`teach`](teach-recall.md#skill-teach)입니다. `poteto-mode`의 [Bug fix](playbooks-work.md#playbook-bug-fix) 플레이북은 회귀 이력을 조사할 때 `why`를 씁니다. [`no-comments`](code-hygiene.md#skill-no-comments) 흐름의 Comment Sicko도 주석이 주장하는 제약을 검증할 때 `how`와 `why`를 부릅니다.
+런타임 동작은 [`how`](how.md#skill-how), 둘을 엮은 설명은 [`teach`](teach-recall.md#skill-teach)입니다. `poteto-mode`의 [Investigation](playbooks-work.md#playbook-investigation) 플레이북은 동기를 묻는 질문에, [Bug fix](playbooks-work.md#playbook-bug-fix) 플레이북은 회귀 이력을 조사할 때 `why`를 씁니다. [`architect`](architect.md#skill-architect)는 설계가 소유권이나 계층을 다시 정할 때 기존 모양에 `why`를 돌립니다. [`no-comments`](code-hygiene.md#skill-no-comments) 흐름의 Comment Sicko는 주석의 주장이 근처 코드에서 자명하지 않으면 지명된 심볼이나 호출을 추적하거나, 거기에 `/why`를 돌리거나, 둘 다 합니다.

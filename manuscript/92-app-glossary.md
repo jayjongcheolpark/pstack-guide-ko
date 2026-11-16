@@ -27,7 +27,6 @@
 | 게이트 | gate | playbooks-pr | 같은 gate를 소리 나는 대로 적은 말입니다. 기능 게이트처럼 코드 안의 분기 조건을 가리키거나 병합 사유를 가리킬 때 씁니다. 예: 게이트(gate) 사유 |
 | 관문 시험 | gauntlet | poteto-mode | `swarm`의 gauntlet입니다. gate와는 다른 낱말입니다. 예: 관문 시험(gauntlet) |
 | 지침 | guideline | writing | 스타일 가이드의 guideline입니다. Global English Style Guide의 guideline, `create-skill`의 writing guidelines. 예: 지침(guideline) 텍스트 |
-| 지침 | guide | why | epistemics 문서의 phrasing guide입니다. 예: 표현 지침(guide) |
 | 지침 | instruction | principles | "instructions and conventions"의 instructions입니다. 이 책이 지시라고도 옮기는 같은 낱말입니다. 예: 지침(instruction)과 관례 |
 | 절차 | procedure | writing | 글자 그대로 따르는 단계입니다. `technical-writing`의 procedure. 예: 절차(procedure) 안의 "simply" |
 | 절차 | playbook | design | 이 책이 playbook을 "절차"로 옮긴 곳입니다. `figure-it-out`이 설계하는 것은 절차 자체, 곧 playbook입니다. 예: 큰 작업의 절차(playbook) |
@@ -115,7 +114,6 @@
 | suppression | 억제 | `eslint-disable`, `@ts-ignore` 같은 검사 무력화 |
 | bugbot | Bugbot | Cursor의 PR 리뷰 자동화. 영어 그대로 |
 | hedge | 헤지 | "~로 보인다"처럼 확신을 낮추는 표현 |
-| tier(evidence) | 신뢰도 등급 | `why`의 Direct, Supported, Inferred, Speculative, Unknown |
 | fail closed | 안전하게 실패 | 불확실하면 동작하지 않고 멈춤 |
 
 ## 설계 개념
