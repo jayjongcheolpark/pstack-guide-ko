@@ -2,7 +2,7 @@
 
 ![그녀가 완성된 요리를 맛보는 동안 로봇들이 레시피 상자에서 요리하고, 조리대 위에 /how, /tdd, /loop 카드가 핀으로 꽂혀 있는 일러스트](images/recipes.jpg)
 
-원문: {{src:docs/guide/10-recipes-and-pitfalls.md}} {{src:docs/guide/02-poteto-mode.md}} {{src:docs/guide/05-build-and-clean.md}} {{src:docs/guide/09-make-it-yours.md}} {{src:skills/poteto-help/SKILL.md}} {{src:skills/poteto-help/references/recipes.md}} {{src:skills/poteto-help/references/prompting.md}}
+원문: {{src:docs/guide/10-recipes-and-pitfalls.md}} {{src:docs/guide/02-poteto-mode.md}} {{src:docs/guide/04-design.md}} {{src:docs/guide/05-build-and-clean.md}} {{src:docs/guide/09-make-it-yours.md}} {{src:skills/poteto-help/SKILL.md}} {{src:skills/poteto-help/references/recipes.md}} {{src:skills/poteto-help/references/prompting.md}}
 
 바로 복사해 쓸 프롬프트와, 누구나 한 번은 저지르는 실수를 모았습니다. 경로와 끝 조건은 자기 것으로 바꾸십시오. 레시피는 일부러 격식이 없습니다. 실제로 그렇게 입력되고, 스킬은 의도를 잘 알아듣기 때문입니다.
 
@@ -54,7 +54,7 @@
 /poteto-mode 이 설계를 계획으로 바꿔. 검증할 수 있는 작은 PR이고, 각각 자기 증명이 있게.
 ```
 
-설계가 정해진 뒤에만 묻습니다. 계획은 산출물이고, 실행할 플레이북을 이름 붙입니다. → [Multi-phase plan](playbooks-long.md#playbook-multi-phase-plan)
+설계가 정해진 뒤에만 묻습니다. 계획은 산출물이고, 실행은 사용자가 시작하라고 할 때만 시작합니다. → [Multi-phase plan](playbooks-long.md#playbook-multi-phase-plan)
 
 **설계에 대한 두 번째 의견 얻기.**
 

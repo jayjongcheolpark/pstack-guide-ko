@@ -2,7 +2,7 @@
 
 ![/poteto-mode가 작업 요청을 BUG FIX, FEATURE, INVESTIGATION 관문으로 분기시키는 장면을 그린 일러스트](images/router.jpg)
 
-원문: {{src:README.md}} {{src:.cursor-plugin/plugin.json}} {{src:plugin.json}} {{src:docs/guide/README.md}} {{src:docs/harness/claude-code.md}}
+원문: {{src:README.md}} {{src:.cursor-plugin/plugin.json}} {{src:plugin.json}} {{src:docs/guide/README.md}} {{src:docs/harness/claude-code.md}} {{src:skills/poteto-mode/SKILL.md}} {{src:skills/architect/SKILL.md}}
 
 ## 한 문단 요약
 
@@ -58,7 +58,7 @@ README는 Cursor에서 `/add-plugin pstack`으로 설치하고, Claude Code에�
 
 작업을 치기 전에 `/` 메뉴에서 `/poteto-mode`를 고르면 Cursor가 그 메시지에 스킬을 붙입니다.
 
-나머지 스킬은 상황에 따라 쓰는 것이고, 모드 스킬이 필요할 때 알아서 부릅니다. 기본 설정에서 모드는 모델의 강점에 따라 일을 나눕니다. 코드 위임(기능, 리팩터링, 버그 수정, 성능, hillclimb)과 글과 판단은 opus 5.5로 가고, 가장 어려운 변경은 fable 5.2로 갑니다. 기본 패널은 fable 5.2 / opus 5.5 / gemini 4 carbon입니다. `/setup-pstack`으로 어느 것이든 바꿀 수 있습니다.
+나머지 스킬은 상황에 따라 쓰는 것이고, 모드 스킬이 필요할 때 알아서 부릅니다. 기본 설정에서 코드 위임(기능, 리팩터링, 버그 수정, 성능, hillclimb)과 글과 판단은 opus 5.5의 xhigh로 가고, xhigh보다 높게 도는 역할은 없습니다. 리뷰 패널 밖에서 fable 5.2는 사용자가 이름을 댔을 때나, 같은 지시로 돈 opus 5.5 실행 두 번이 실패했을 때만 돕니다. 기본 패널은 fable 5.2 / opus 5.5 / gemini 4 carbon입니다. `/setup-pstack`으로 어느 것이든 바꿀 수 있습니다.
 
 `/poteto-mode`는 요청을 읽고 플레이북(playbook, 작업 유형별 절차서) 중 하나를 고르고, 단계가 필요로 하는 다른 스킬을 실행합니다. 호출되면 세 가지를 합니다.
 
@@ -84,13 +84,13 @@ README는 `/poteto-mode`를 받은 채팅이 플레이북과 할 일 목록과 �
 
 README와 `poteto-mode`의 `SKILL.md`에서 읽히는 설계 아이디어를 정리합니다. 각각은 이후 장에서 구체적인 스킬로 다시 나옵니다.
 
-**하나의 입구, 여러 플레이북.** 대부분의 작업은 `poteto-mode`로 들어갑니다. 플레이북은 조사, 버그 수정, 성능, 기능, 리팩터링, PR 유지, 배포처럼 작업 유형마다 있습니다. 어느 플레이북도 맞지 않는 큰 작업은 `figure-it-out`이 그 작업만의 플레이북을 새로 설계합니다.
+**하나의 입구, 여러 플레이북.** 대부분의 작업은 `poteto-mode`로 들어갑니다. 플레이북은 조사, 버그 수정, 성능, 기능, 리팩터링, PR 유지, 배포처럼 작업 유형마다 있습니다. 크거나 여러 곳을 가로지르는 작업, 사람이 자리를 비운 사이 도는 작업, 어느 플레이북도 맞지 않는 작업은 `figure-it-out`으로 가고, 이 스킬이 그 작업만의 플레이북을 새로 설계합니다.
 
 **원칙이 결정의 근거가 된다.** `poteto-mode`는 원칙 24개의 색인을 내장하고 있고, 응답에서 결정에 영향을 준 원칙과 그 원칙이 바꾼 구체적 선택을 밝히라고 요구합니다. 원칙 하나하나는 짧은 스킬입니다. 사용자는 원칙 이름으로 에이전트를 조향할 수도 있습니다.
 
-**깊이 파고들고 나서 만든다.** 코드가 함수 경계를 넘으면 구현 전에 `architect`로 병렬 설계 탐색을 하고, 논쟁적인 설계는 배포 전에 `interrogate`로 여러 모델이 공격합니다. 이해가 필요하면 `how`와 `why`를 먼저 칠 수 있습니다. README는 `poteto-mode`가 단계에 필요할 때 부르는 스킬로 `why`를 꼽고 `how`는 꼽지 않습니다. `how`는 서브시스템 워크스루를 원할 때 직접 부르는 스킬입니다.
+**깊이 파고들고 나서 만든다.** 코드가 함수 경계를 넘으면 구현 전에 `architect`가 변경이 닿는 시스템을 모두 따라가고, 서로 다른 모양 두 개를 그려 하나를 고릅니다. 설계가 크거나 논쟁적이면 `architect`는 혼자 그리지 않고 `arena`를 돌립니다. `poteto-mode`는 논쟁적인 설계를 `interrogate`로도 보내 여러 모델이 공격하게 합니다. 이해가 필요하면 `how`와 `why`를 먼저 칠 수 있습니다. README는 `poteto-mode`가 단계에 필요할 때 부르는 스킬로 `why`를 꼽고 `how`는 꼽지 않습니다. `how`는 서브시스템 워크스루를 원할 때 직접 부르는 스킬입니다.
 
-**위임하되 결과에 책임진다.** 서브에이전트에게 일을 나누되, 각 서브에이전트의 작업은 부모가 책임지고 diff를 직접 검토합니다. "두 번째 의견은 같은 프롬프트를 다른 모델에 준 것"이고, 두 모델이 일치하면 신호가 강하다고 봅니다.
+**위임하되 결과에 책임진다.** 서브에이전트에게 일을 나누되, 각 서브에이전트의 작업은 부모가 책임지고 diff를 직접 검토합니다. "두 번째 의견은 같은 프롬프트를 다른 벤더의 모델에 준 것"입니다.
 
 **검증(verification)은 실제 산출물로 한다.** "컴파일된다"는 증거가 아닙니다. 버그 수정은 같은 표면에서 먼저 재현하고, 끝났다고 말하기 전에 실제 산출물(artifact)을 확인합니다.
 
@@ -117,7 +117,7 @@ README에는 "왜 계획 스킬이 없는가"라는 절이 있습니다. Cursor�
 | 부 | 스킬 |
 | --- | --- |
 | 시작하기 | `setup-pstack`, `poteto-help`, `in-your-own-words`, `sharpen` |
-| 진입점 | `poteto-mode` (플레이북 23개 포함) |
+| 진입점 | `poteto-mode` (플레이북 22개 포함) |
 | 이해하기 | `how`, `why`, `teach`, `recall`, `ketchup`, `ketchup-video` |
 | 설계하기 | `architect`, `arena`, `swarm`, `figure-it-out`, `principle-*` 24개 |
 | 고치고 검증하기 | `tdd`, `blast-radius`, `interrogate`, `benchmark-checklist`, `create-verification-skill`, `maintain-verification-skill`, `create-formal-verification-skill`, `maintain-formal-verification-skill`, `statechart` |

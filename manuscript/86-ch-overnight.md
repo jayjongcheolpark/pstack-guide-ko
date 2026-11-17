@@ -2,7 +2,7 @@
 
 ![그녀가 문가에서 인사하는 동안 로봇들이 공장을 계속 돌리고, 하나가 DECISION LOG 벽 게시판을 갱신하는 일러스트](images/overnight.jpg)
 
-원문: {{src:docs/guide/07-overnight.md}} {{src:docs/guide/08-principles.md}} {{src:automations/benny/README.md}} {{src:automations/benny/FOR_AGENTS.md}}
+원문: {{src:docs/guide/07-overnight.md}} {{src:docs/guide/08-principles.md}} {{src:skills/poteto-mode/worker.md}} {{src:skills/show-me-your-work/SKILL.md}} {{src:automations/benny/README.md}} {{src:automations/benny/FOR_AGENTS.md}}
 
 이 장은 안내서가 "앞의 모든 것의 보상"이라고 부르는 사용법입니다. 스스로 검증(verification)하는 에이전트는 어려운 작업을 맡기고 떠날 수 있는 에이전트입니다. 그것을 안전하게 만드는 것은 희망이 아니라 검사 가능한 끝 조건, 격리된 워크트리나 클라우드 에이전트, 아침에 감사하는 결정 기록입니다.
 
@@ -62,19 +62,19 @@
 /show-me-your-work 어젯밤에 한 일을 따라잡게 해 줘
 ```
 
-스킬이 요약을 돌려주기 전에 다른 모델 계열의 리뷰어가 기록과 대화 기록을 읽고, 응답은 살펴볼 것을 나열한 Attention 절로 끝납니다. 그 절을 먼저 읽고 그것이 가리키는 행을 읽습니다. 밤 전체를 다시 읽는 것이 아니라 결정을 감사하는 것입니다.
+스킬이 요약을 돌려주기 전에 일을 한 모델과 다른 벤더의 모델에서 리뷰어가 기록과 대화 기록을 읽고, 응답은 살펴볼 것을 나열한 Attention 절로 끝납니다. 그 절을 먼저 읽고 그것이 가리키는 행을 읽습니다. 밤 전체를 다시 읽는 것이 아니라 결정을 감사하는 것입니다.
 
 감사 대신 빠른 상태를 원하면, 일을 돌린 채팅에서 [`/ketchup`](teach-recall.md#skill-ketchup)을 칩니다. 읽기만 하고, 마지막 메시지 이후 바뀐 것을 평이한 말과 작업이 만든 스크린숏과 작은 그림으로 말합니다. 그다음 사용자를 기다리는 호출, 병합이나 승인이나 선택지 사이의 고름마다 추천과 증거와 위험을 나열하므로 답만으로 결정할 수 있습니다. Autopilot 루프의 tick이 운영자에게 바뀐 것을 말할 때도 `/ketchup`을 씁니다. 최근 채팅 여러 개에서 주제를 다시 세우는 것은 [`/recall`](teach-recall.md#skill-recall)입니다.
 
 ## 밤에 대기열이 있을 때
 
-위의 계약은 작업 하나를 끝 조건 하나까지 몰고 갑니다. 어떤 밤에는 독립된 변경의 대기열이나 프로그램 전체가 있습니다. 같은 신뢰를 키우는 플레이북이 셋 있습니다.
+위의 계약은 작업 하나를 끝 조건 하나까지 몰고 갑니다. 어떤 밤에는 독립된 변경의 대기열이나 프로그램 전체가 있습니다. 같은 신뢰를 키우는 것은 플레이북 둘과 스킬 하나입니다.
 
-| 플레이북 | 언제 | 핵심 |
+| 플레이북이나 스킬 | 언제 | 핵심 |
 | --- | --- | --- |
 | [Autopilot-full](playbooks-long.md#playbook-autopilot-full) | 독립된 PR 대기열을 병합까지 | PR마다 소유자 에이전트 하나가 빌드에서 병합까지 몰고 가되, 소유자가 자기 판정으로 병합하지 않습니다. 전체 swarm은 코드 준비 헤드에서 한 번이고, 리베이스나 작은 수정은 검증자 하나입니다. 바뀐 감사 tick은 `/ketchup`으로 따라잡습니다 |
 | [Autopilot-stack](playbooks-long.md#playbook-autopilot-stack) | 병합 전에 직접 보고 싶을 때 | 병합을 뺀 Autopilot-full입니다. 아침에 판정이 붙은 검증된 PR이 남고, 리뷰하고 랜딩하는 것은 사용자입니다. PR은 자기가 기대는 PR 위에만 쌓입니다 |
-| [Orchestrate](playbooks-long.md#playbook-orchestrate) | 어떤 단일 에이전트보다 오래 사는 프로그램 | 며칠, 많은 스택 PR, 상시 조정자 채팅 하나 아래의 서브에이전트 무리. 조정자는 일마다 어느 에이전트가 할지 정하고 각 에이전트가 만든 것을 확인하며, 코드를 직접 쓰지 않습니다 |
+| [`figure-it-out`](arena-swarm.md#skill-figure-it-out) | 여러 패키지에 걸친 마이그레이션 같은 프로그램 전체 | 프로그램 전체에는 따로 플레이북이 없습니다. `/poteto-mode`가 크거나 여러 곳을 가로지르는 작업을 이 스킬로 보내고, 스킬은 그 일을 위한 엄밀한 실행 하나를 설계합니다 |
 
 안내서의 프롬프트 예입니다.
 
@@ -87,14 +87,12 @@
 ```
 
 ```text
-/poteto-mode 스토어 마이그레이션을 orchestrate해 줘. 모든 패키지가 변환되고 병합될 때까지 맡아. 하루 두 번 확인할게.
+/poteto-mode 모든 패키지를 새 스토어로 옮겨 줘. 패키지마다 변환되고 병합될 때까지 맡아. 하루 두 번 확인할게.
 ```
-
-에이전트 하나가 세션 안에 끝낼 수 있는 일이면 Orchestrate 플레이북 자체가 위의 밤새 맡기는 계약으로 돌려보냅니다.
 
 ## 여러 프로젝트를 나란히 돌리기
 
-안내서는 [Cursor Project](https://cursor.com/blog/projects)가 조정자 에이전트에게 지속되는 스레드를 준다고 합니다. 조정자는 코드를 쓰지 않습니다. 서브에이전트를 지휘하고, 서브에이전트는 기본이 클라우드이므로 노트북이 닫혀도 일이 이어집니다. Orchestrate 플레이북이 기대하는 모양입니다. 조정자에게 보내는 프롬프트를 `/poteto-mode`로 시작하면, 띄운 서브에이전트가 플레이북을 따릅니다.
+안내서는 [Cursor Project](https://cursor.com/blog/projects)가 조정자 에이전트에게 지속되는 스레드를 준다고 합니다. 조정자는 코드를 쓰지 않습니다. 서브에이전트를 지휘하고, 서브에이전트는 기본이 클라우드이므로 노트북이 닫혀도 일이 이어집니다. 조정자에게 보내는 프롬프트를 `/poteto-mode`로 시작하면, 띄운 서브에이전트가 플레이북을 따릅니다. 조정자가 띄우는 에이전트는 모두 `worker.md`를 먼저 읽습니다. 그래서 작업자는 kickoff가 정한 기준을 지키고, 되돌릴 수 있는 결정은 사용자에게 묻지 않고 스스로 내리고, PR을 리뷰 준비 상태로 엽니다.
 
 안내서가 드는 습관입니다.
 
