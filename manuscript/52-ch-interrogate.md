@@ -8,7 +8,7 @@
 
 ### 언제 쓰는가
 
-원문의 `description`은 트리거로 "interrogate", "adversarial review", "multi-model review", "challenge this", "stress test this code", "find blind spots", "tear this apart"를 듭니다. 적대자가 변경이나 설계를 깨뜨리려 시도하고, 실행으로 증명된 발견만 살아남습니다. `disable-model-invocation: true`입니다. `poteto-mode`는 논쟁적인 설계에 배포 전 이 스킬을 부르고, Feature 플레이북도 설계가 논쟁적이면 배포 전에 이 스킬을 돌립니다. `architect`는 구현 전에 설계에 적대적 압력이 필요하면 종합된 스케치에 이 스킬을 돌리라고 합니다. README가 이 스킬을 요약하는 문장은 "diff가 있고 서로 다른 모델이 그것을 깨뜨려 보기를 원할 때, 실행으로 증명된 발견만 남기면서"입니다.
+원문의 `description`은 트리거로 "interrogate", "adversarial review", "multi-model review", "challenge this", "stress test this code", "find blind spots", "tear this apart"를 듭니다. 적대자가 변경이나 설계를 깨뜨리려 시도하고, 실행으로 증명된 발견만 살아남습니다. `disable-model-invocation: true`입니다. `poteto-mode`는 논쟁적인 설계에 배포 전 이 스킬을 부르고, Feature 플레이북도 설계가 논쟁적이면 배포 전에 이 스킬을 돌립니다. 안내서는 되돌리기 비싼 논쟁적 설계에 `/architect` 뒤 배포 전 이 스킬을 쓰라고 합니다. README가 이 스킬을 요약하는 문장은 "diff가 있고 서로 다른 모델이 그것을 깨뜨려 보기를 원할 때, 실행으로 증명된 발견만 남기면서"입니다.
 
 안내서가 이 스킬을 설명하는 방식은 이렇습니다. 변경과 그 의도를 설정된 모델의 적대자들에게 주고, 각 적대자는 실제 코드에 대한 실행으로 그것을 깨뜨리려 합니다. 적대자마다 찾는 실패가 다릅니다. 발견은 그 명령을 다시 돌렸을 때 의도를 깨뜨리는 실패가 보일 때만 살아남습니다. 보고는 검증(verification)된 발견을 그것을 찾은 적대자와 함께 모두 적고, 이어서 적대자마다 무엇을 왜 버렸는지 적으며, 아무것도 적용하지 않습니다. 안내서는 Dropped 목록도 읽으라고 하고, 사용자가 판정을 뒤집을 수 있다고 합니다.
 
@@ -20,7 +20,7 @@
 
 **Fan out. 적대자를 띄웁니다.** [`arena`](arena-swarm.md#skill-arena)의 A단계 3, 4번과 B단계를 돌립니다. A단계 3번은 러너를 고르는 단계입니다. 4번은 후보마다 자기 출력 위치를 주는 단계로, 가능하면 git 워크트리이고 아니면 `/tmp/arena-<slug>/candidate-<n>/`입니다. B단계는 모든 서브에이전트를 한 메시지에 `run_in_background: true`로 띄우고, 출력을 내지 못한 서브에이전트가 있으면 나머지로 진행하고 탈락을 적는 단계입니다. 여기에 네 가지를 바꿉니다.
 
-1. `arena runners` 줄 대신 `~/.cursor/rules/pstack-models.mdc`의 `interrogate reviewers` 줄을 읽습니다. 규칙(rule)이나 그 줄이 없으면 arena A단계 3번대로 `claude-fable-5-2-high`, `claude-opus-5-5-high-fast`, `gemini-4-carbon-high`를 하나씩 씁니다. `auto`나 `inherit-parent` 항목은 `model`을 생략해 부모 모델로 돌리고, Task 도구가 거부한 항목의 대체도 arena A단계 3번을 따릅니다. 띄울 때마다 추론 강도와 일반 속도 또는 fast는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode)의 Subagents 절대로 고릅니다.
+1. `arena runners` 줄 대신 `~/.cursor/rules/pstack-models.mdc`의 `interrogate reviewers` 줄을 읽습니다. 규칙(rule)이나 그 줄이 없으면 arena A단계 3번대로 `claude-fable-5-2-high`, `claude-opus-5-5-high-fast`, `gemini-4-carbon-high`를 하나씩 씁니다. `auto`나 `inherit-parent` 항목은 `model`을 생략해 부모 모델로 돌리고, Task 도구가 거부한 항목의 대체도 arena A단계 3번을 따릅니다. 띄울 때마다 그 일에 맞는 추론 강도를 [`poteto-mode`](poteto-mode.md#skill-poteto-mode)의 Subagents 절대로 고릅니다.
 2. 범위의 커밋하지 않은 변경을 각 워크트리에 복사합니다.
 3. 적대자마다 `generalPurpose` 서브에이전트로 띄웁니다.
 4. arena의 과업과 근거 대신 범위, 의도, 아래 브리프를 줍니다.
@@ -78,4 +78,4 @@
 
 ### 관련 스킬
 
-[`architect`](architect.md#skill-architect)가 종합된 스케치에 이 스킬을 돌립니다. 팬아웃과 검증은 [`arena`](arena-swarm.md#skill-arena)의 단계를 빌려 씁니다. 의도를 다시 말하는 것은 [`in-your-own-words`](setup.md#skill-in-your-own-words)입니다. 판정과 별개로 PR 댓글을 분류하는 방법은 [Bugbot 분류 기준](playbooks-pr.md#ref-bugbot-triage)에 있습니다.
+안내서의 사다리에서 되돌리기 비싼 논쟁적 설계는 [`architect`](architect.md#skill-architect) 뒤 배포 전에 이 스킬을 받습니다. 팬아웃과 검증은 [`arena`](arena-swarm.md#skill-arena)의 단계를 빌려 씁니다. 의도를 다시 말하는 것은 [`in-your-own-words`](setup.md#skill-in-your-own-words)입니다. 판정과 별개로 PR 댓글을 분류하는 방법은 [Bugbot 분류 기준](playbooks-pr.md#ref-bugbot-triage)에 있습니다.
