@@ -18,36 +18,29 @@ README는 유지 방법을 이렇게 말합니다. 작업을 치기 전에 `/` �
 
 ### 동작 방식
 
-`SKILL.md` 제목 바로 아래에 한 줄이 있습니다. 함께 실린 스킬은 이 파일 기준으로 `../<name>/SKILL.md`에 있으므로, 모든 `poteto-agent` 프롬프트에 이 파일의 절대 경로를 넣으라고 합니다. 그 아래는 일곱 부분으로 이루어집니다. 위에서부터 순서대로 봅니다.
+`SKILL.md` 제목 바로 아래에 한 줄이 있습니다. 함께 실린 스킬은 이 파일 기준으로 `../<name>/SKILL.md`에 있으므로, 모든 `poteto-agent` 프롬프트에 이 파일의 절대 경로를 넣으라고 합니다. 그 아래는 여섯 부분으로 이루어집니다. 위에서부터 순서대로 봅니다.
 
 #### 1. Non-negotiables (지켜야 할 규칙)
 
 먼저 원칙(principle) 색인이 모든 트리거의 근거라는 규칙(non-negotiable)이 있습니다. 응답에서 결정에 영향을 준 원칙과 그 원칙이 바꾼 구체적 선택을 밝혀야 하고, 그 세션에서 리프 `SKILL.md`를 읽은 원칙만 인용할 수 있습니다.
 
-나머지 트리거는 아래와 같습니다. "상황"이 오면 오른쪽 스킬이나 행동으로 갑니다.
+나머지 트리거는 이 절에만 있습니다. "상황"이 오면 오른쪽 스킬이나 행동으로 갑니다.
 
 | 상황 | 하는 일 |
 | --- | --- |
-| 작업의 첫 메시지 | 사용자의 목표, 사용자가 풀려는 문제, 그리고 작업이 변경을 내보내면 그 목표를 채울 것으로 예상하는 가장 작은 변경을 자기 말로 사용자에게 말합니다. 확인을 기다리지 않습니다. 사용자가 요청한 변경을 증거가 배제하면 그 증거를 보이고 멈춥니다. 서브에이전트 브리프마다 사용자의 목표를 다시 말하고, PR마다 `## Why`를 그것으로 엽니다. 최종 보고도 마지막 응답까지 모두 그것으로 엽니다. 완전히 명시된 한 줄 수정 뒤에는 예외입니다 |
-| "어떤 접근으로", "어떻게 할까", "이건 어떻게 동작해야 하나" 같은 갈림길에서 `AskQuestion`을 하려는 순간 | 먼저 분류합니다. 실행해서 관찰할 수 있는 사실(동작, 타이밍, 레이아웃, 출력, 성능, 심지어 eval이 두 후보를 가르는지)이면 사람이 답할 일이 아닙니다. Prototype 플레이북으로 스케치해 결과가 정하게 합니다. 산출물(deliverable)이 출처를 단 답변인 읽기 전용 Investigation이면 스케치 대신 증거로 답합니다. 실험으로 풀 수 없는 진짜 제품, 취향 판단에만 질문을 씁니다. 전면 자율 권한이 주어지면 그 권한이 덮는 결정은 스스로 내리고 실행한 뒤 보고합니다. 운영자만 내릴 수 있는 결정은 기본값을 적용하고, 전체 설명과 함께 운영자가 대신 하라고 말할 수 있는 일을 평이한 말로 보고합니다. 운영자는 자기 말로 답합니다. 되받아 치라고 짧은 부호를 주지 않습니다. 운영자가 지정한 관문(gate)과 Autonomy의 "반드시 멈춘다" 목록은 여전히 운영자를 기다립니다 |
-| 코드를 쓸 때 | 먼저 데이터 모양의 이름을 정하고, `principle-model-the-domain`에 따라 조직 구조를 고릅니다 |
-| 코드가 함수 경계를 넘을 때 | `architect`. 구현 전에 병렬 설계 탐색 |
-| 병렬 팬아웃 | 커버리지 행렬, 경주, 관문 시험(gauntlet), 탐색 분할은 `swarm`. 설계나 코드 대결에서 기준안을 고르고 이식할 때는 `arena` |
-| 논쟁적인 설계 | 배포 전에 `interrogate` (다중 모델 적대적 리뷰) |
-| 사소하지 않은 여러 단계 작업 | 처리량 점검표(throughput checkpoint)를 씁니다 (Feature 3단계) |
-| 글이 나오는 모든 표면 | `unslop`. 응답도 글이므로 "Writing the reply" 규칙(rule)으로 씁니다. 에이전트가 읽을 글은 Cursor 내장 `create-skill` 스킬도 따릅니다 |
-| 문서, RFC, README, PR 설명, 커밋 메시지 | `technical-writing` |
-| 커밋 전 | cursor-team-kit 플러그인의 `deslop` (`/deslop`) |
-| 리뷰 전 | `no-comments` |
-| UI, IDE, CLI를 배포할 때 | 맞는 control 스킬. cursor-team-kit이 `control-cli`(CLI와 TUI)와 `control-ui`(브라우저, Electron, 웹 UI)를 제공합니다. 버그 수정은 같은 표면에서 직접 먼저 재현하고, Bug fix 1단계의 좁은 예외에서만 사용자에게 넘깁니다 |
-| 벤치마크를 돌리거나, 성능을 직접 재거나, 자신이 측정한 속도 향상이나 회귀를 보고할 때 | 숫자를 보고하거나 그 숫자로 행동하기 전에 `benchmark-checklist` |
-| PR 상태 요청 | Babysit 플레이북. Cursor 내장 babysit 스킬은 설명이 같은 말에 걸려서 쓰지 않습니다. "babysit this", "get it green", "address the bugbot comments", "check on PR X" 같은 말이 모두 해당합니다. PR을 열기만 했다고 자동으로 트리거되지는 않습니다. 폴링 전에 모드를 먼저 선언하며, 요청을 모드로 옮기는 규칙(mapping)은 플레이북 1단계가 갖습니다 |
-| 초록불 스택을 병합해 달라는 요청 | Shipping 플레이북. 초록불이 곧 안전은 아닙니다. PR마다 독립 판정이 나오기 전에는 아무것도 병합 예약하지 않고, 루트에서 이어진 검증 완료 구간만 병합합니다 |
-| Bugbot이나 에이전트 보안 리뷰가 댓글을 달았을 때 | 회의적 자세. 각 지적을 장점 기준으로 평가하고, 잡음은 구체적 이유와 함께 기각합니다. `references/bugbot-triage.md`로 fix, dismiss, ask를 분류합니다 |
-| 작업 중 스킬이 고장났을 때 | 그 스킬을 별도 PR로 고칩니다. 막히지도 말고 조용히 우회하지도 않습니다 |
-| 길거나 자율적이거나 여러 단계인 작업, 사용자가 나중에 검토하려고 자리를 뜨는 작업 ("going to bed", "trust it when i'm back", "/loop until X") | `show-me-your-work`로 결정 기록을 남깁니다. 위험이 크면 커밋하고, 아니면 로컬에 둡니다 |
+| 작업의 첫 메시지 | 사용자의 목표와 그것을 채우는 가장 작은 변경을 다시 말한 뒤 진행합니다. 서브에이전트 브리프, PR의 `## Why`, 최종 보고를 모두 그 목표로 엽니다 |
+| Task 서브에이전트든 Project 워커든 에이전트를 시작할 때 | 킥오프의 첫 줄은 `Read <path>/worker.md before anything else.`이고, `<path>`는 이 스킬 폴더의 절대 경로입니다. 운영자의 규칙은 슬래시 명령으로만 불러오는 스킬에 있어서, 다른 길로는 다른 에이전트에게 닿지 않기 때문입니다. 킥오프의 나머지는 목표와 과업, 그리고 `poteto-agent`라면 이 파일의 절대 경로만 둡니다 |
+| 무언가를 돌려서 풀 수 있는 갈림길 | 묻지 말고 `playbooks/prototype.md`대로 프로토타입을 만듭니다 |
+| 코드 | 먼저 데이터 모양의 이름을 정합니다. 함수 경계를 넘으면 `architect`, 팬아웃은 `swarm`, 대결은 `arena`, 논쟁적인 설계는 `interrogate`입니다. `swarm`의 설명은 병렬 커버리지, 경주, 관문 시험(gauntlet), 탐색을 듭니다 |
+| 응답을 포함한 모든 글 | `unslop`. 문서, PR 설명, 커밋 메시지는 `technical-writing` |
+| 커밋 전, 리뷰 전 | 커밋 전에는 cursor-team-kit 플러그인의 `/deslop`, 리뷰 전에는 `no-comments` |
+| UI, IDE, CLI를 배포할 때 | cursor-team-kit의 `control-ui`나 `control-cli` |
+| 직접 측정한 숫자 | `benchmark-checklist` |
+| PR 상태 | Cursor 내장 babysit 스킬이 아니라 Babysit 플레이북. 초록 스택의 랜딩은 Shipping 플레이북 |
+| 봇의 리뷰 댓글 | 하나씩 그 자체의 타당성으로 판단합니다 |
+| 길거나 자리를 비운 사이에 도는 작업 | `show-me-your-work` |
 
-여기서 "control 스킬", `deslop`, `create-skill`, 내장 babysit은 pstack이 아니라 cursor-team-kit 플러그인이나 Cursor 내장 기능입니다.
+여기서 `deslop`, `control-ui`, `control-cli`, 내장 babysit은 pstack이 아니라 cursor-team-kit 플러그인이나 Cursor 내장 기능입니다. 킥오프 첫 줄이 가리키는 파일은 아래 [worker.md](#ref-worker) 절에서 다룹니다.
 
 #### 2. Principles (원칙 색인)
 
@@ -62,63 +55,35 @@ README는 유지 방법을 이렇게 말합니다. 작업을 치기 전에 `/` �
 
 #### 4. Subagents (서브에이전트)
 
-- 플레이북 단계 안에서 띄우는 서브에이전트(코드를 쓰는 위임, 임시 도우미)는 `subagent_type: "poteto-agent"`를 씁니다. `/poteto-mode`를 받은 채팅이 플레이북을 돌립니다. 플레이북 자체를 돌리려고 `poteto-agent`를 띄우지 않습니다. 부모는 모든 `poteto-agent` 프롬프트에 `poteto-mode` `SKILL.md`의 절대 경로를 넣습니다. 반면 라우팅되는 워크플로 스킬 `interrogate`, `reflect`, `swarm`은 다양한 모델의 리뷰를 위해 자기 `subagent_type`을 정해 두므로, 스킬이 정한 것을 그대로 따르고 `poteto-agent`로 덮어쓰지 않습니다.
-- 모든 `Task` 호출의 기본값은 이렇습니다. `run_in_background: true`(돌고 있는 에이전트를 조향하거나 재개할 때도 같습니다. 포그라운드 호출은 다른 보고가 기다리는 동안 턴을 붙잡기 때문입니다), 에이전트 모드(읽기 전용은 MCP를 벗겨 냄), 맥락을 붙여 넣지 않고 파일 포인터를 넘김, 역할별 명시적 모델(`/setup-pstack`으로 설정. 기본값은 코드, 글, 판단 모두 `claude-opus-5-5-xhigh`). 코드 위임은 난이도별로 나눕니다. 가장 어려운 변경(교차 설계, 까다로운 동시성, 미묘한 알고리즘)은 `hardest tasks` 모델(기본 `claude-fable-5-2-max`)로 갑니다. 애매한 의도에 판단이 필요한 경우든, 글자 그대로 따라야 하는 정밀한 절차든 같습니다. 사소한 기계적 수정은 `swarm workers` 모델(기본 `claude-opus-5-5-high-fast`)로 갑니다. 리뷰와 설계 패널은 기본으로 `claude-fable-5-2-high`, `claude-opus-5-5-high-fast`, `gemini-4-carbon-high`에 러너를 하나씩 둡니다. `/setup-pstack` 규칙(rule)의 역할별 줄은 이 기본값은 물론 `arena`, `swarm`, `architect`, `interrogate`, `reflect`가 스킬 안에 정해 둔 모델보다 우선합니다. 줄이 없는 역할은 기본값을 유지하고, 값이 `inherit-parent`나 `auto`이면 Task의 `model`을 생략해 부모 채팅 모델로 돌립니다. 코드 플레이북은 각자의 줄(`feature, refactoring`, `bug-fix`, `perf-issue`, `hillclimb`)을, 가장 어려운 변경은 `hardest tasks` 줄을, 글과 판단은 `judgment and prose` 줄을 읽습니다. 규칙에 `# defaults: 2` 줄이 없으면 옛 설정이 쓴 규칙입니다. 그 줄들을 계속 따르되, 세션마다 한 번 사용자에게 `/setup-pstack`을 다시 실행하라고 알립니다.
-- **일에 모델을 맞춥니다.** 띄우기 전에 역할의 줄이나 기본값에서 시작해, 그 일이 필요로 하는 추론 강도와 속도를 고릅니다. `/setup-pstack` 예산이 역할의 시작 강도를 정합니다. 기본은 `xhigh`나 `high`이고, `hardest tasks`는 `max`입니다. 가장 어렵거나 미묘한 일은 한 단계 올리고, 상한은 `max`입니다. 판단은 한 단계 내리고, 일상 일은 두 단계 이상 내립니다. fast는 일이 급할 때만 씁니다. CI나 트렁크가 빨갛거나, 사람이 지금 그 결과에 막혀 있을 때입니다. 그렇지 않으면 `-fast`를 뺀 일반 속도입니다. 검증(verification)은 예외이고 `swarm workers` 모델과 속도에 남습니다(기본 `claude-opus-5-5-high-fast`). 바꾸는 것은 강도 토큰과 fast 여부뿐이고, 역할이 이름 붙인 계열은 유지해 다양한 패널이 다양하게 남게 합니다. Fable(`claude-fable-*`)은 다른 Claude 모델과 별개인 자기 계열입니다. 그 계열에 그 강도와 속도의 슬러그가 없으면 가장 가까운 슬러그를 씁니다. Gemini에는 xhigh, max, fast 슬러그가 없으므로, 일이 high 이상을 요구하면 Gemini 서브에이전트는 `gemini-4-carbon-high`처럼 high로 돕니다. Fable 5.2에는 fast 슬러그가 없으므로, 급한 Fable 5.2 서브에이전트는 강도를 유지한 채 일반 속도로 돕니다. 역할이 `auto`나 `inherit-parent`이면 부모 모델에 남습니다. Task 도구가 맞춘 슬러그를 거부하면 다른 맞춘 슬러그를 시도하지 않습니다. 역할의 줄이나 기본값을 쓰고 그렇다고 말합니다. Task 도구가 그것도 거부하면 부르는 스킬의 폴백을 이어 갑니다. Task 오류가 그 모델이 유효하지 않다고 말하거나 유효한 슬러그 목록에서 그 슬러그를 빼면, 그 슬러그는 거부된 것입니다. 거부된 슬러그는 절대 넘기지 않고, 슬러그가 이미 거부된 폴백은 건너뜁니다. 부르는 스킬에 폴백이 없으면 오류의 유효 슬러그 목록에서 역할 계열의 가장 가까운 슬러그를 쓰고, 목록에 그런 슬러그가 없으면 `model`을 생략해 서브에이전트가 부모 모델로 돌게 합니다. 부르는 스킬의 폴백이 다음에 할 일을 말하지 않은 채 슬러그가 바닥나도 `model`을 생략합니다. 두 경우 모두 그렇다고 말합니다.
-- 부모가 모든 서브에이전트의 작업을 책임집니다. diff를 검토하고 요약은 직접 쓰지, 서브에이전트가 한 말을 그대로 넘기지 않습니다. 두 번째 의견은 같은 프롬프트를 다른 모델에 주는 것이고, 두 모델이 일치하면 신호가 강합니다.
-- **기본은 새 서브에이전트입니다.** 새 일은 통합한 범위(처음 브리프, 그 뒤의 모든 지시, 이전 에이전트의 보고와 브랜치)를 가진 새 서브에이전트에게 줍니다. 수정 라운드, 후속, 재시도, 대기열의 다음 항목이 모두 그렇습니다. 기존 서브에이전트를 재개하거나 메시지를 보내거나 후속을 큐에 넣는 것은, 새 일이 그 에이전트 안에만 있고 옮기기 비싼 상태가 꼭 필요할 때뿐입니다. 로컬 체크아웃, 커밋하지 않은 변경, 아직 돌고 있는 프로세스(개발 서버, 시뮬레이터, babysit 감시자)가 그런 상태입니다. 돌고 있는 에이전트에게 정지하거나 보류하라는 명령은 재사용이 아닙니다. PR 소유자 같은 역할은 에이전트보다 오래 삽니다. 그 에이전트가 돌아오면 역할의 다음 라운드는 새 에이전트가 맡습니다. 인터럽트로 이어 붙인 재개는 지시를 조용히 놓치므로, "끝났다"는 요약을 믿기보다 통합한 범위로 새 서브에이전트를 띄웁니다.
+- 플레이북 단계 안에서 직접 띄우는 서브에이전트는 `subagent_type: "poteto-agent"`를 씁니다. `/poteto-mode`를 받은 채팅이 플레이북을 직접 돌립니다. 라우팅되는 워크플로 스킬 `interrogate`와 `swarm`은 자기 `subagent_type`을 정해 두므로 그것을 따릅니다.
+- **모든 `Task` 호출의 기본값.** `run_in_background: true`, 에이전트 모드(읽기 전용은 MCP를 벗겨 냄), 맥락을 붙여 넣지 않고 파일 포인터를 넘김, 그리고 Project 워커까지 포함해 역할별 명시적 모델입니다. `/setup-pstack`은 `~/.cursor/rules/pstack-models.mdc`를 쓰고, 그 규칙(rule)의 역할별 줄은 아래 기본값과 라우팅되는 스킬(`arena`, `swarm`, `interrogate`)의 역할 모델보다 우선합니다. 줄이 없는 역할은 기본값을 유지합니다. 값이 `inherit-parent`나 `auto`인 줄은 그 역할을 부모 모델로 돌립니다. 그때는 `model`을 생략하고 `generalPurpose`를 띄웁니다. `poteto-agent`는 기본이 Opus 5.5이기 때문입니다. 코드 플레이북은 각자의 줄(`feature, refactoring`, `bug-fix`, `perf-issue`, `hillclimb`)을, 글과 판단은 `judgment and prose` 줄을, 사소한 기계적 수정은 `swarm workers` 줄을 읽습니다. 규칙에 `# defaults: 3` 줄이 없으면 옛 설정이 쓴 규칙입니다. 그 줄들을 계속 따르되, 세션마다 한 번 사용자에게 `/setup-pstack`을 다시 실행하라고 알립니다.
+
+  | 역할 | 기본 모델 |
+  | --- | --- |
+  | 코드, 글, 판단 | `claude-opus-5-5-xhigh-fast` |
+  | 사소한 기계적 수정 | `claude-opus-5-5-high-fast` |
+  | 다양한 리뷰와 설계 패널 | `claude-fable-5-2-high`, `claude-opus-5-5-high-fast`, `gemini-4-carbon-high`에 러너 하나씩 |
+
+- **Fable 5.2는 예외입니다.** 패널 밖에서는 사용자가 이 작업에 그 모델을 지정했거나, 같은 브리프로 돌린 Opus 5.5 xhigh 두 번이 모두 검사를 통과하지 못했을 때만 돕니다. 어느 쪽인지 말합니다. 난이도만으로는 해당하지 않습니다.
+- **일에 모델을 맞춥니다.** 역할의 줄이나 기본값에서 시작해 계열은 유지하고, 그 일이 필요로 하는 강도를 정합니다. `/setup-pstack` 예산이 역할마다 시작 강도를 정합니다. 패널의 자리는 적힌 강도를 유지합니다. 그 밖의 역할은 가장 어렵거나 미묘한 일에 한 단계 올리되 xhigh까지이고, 판단에는 한 단계, 일상 일에는 두 단계 이상 내립니다. 어떤 역할도 xhigh 위로 돌지 않습니다. Opus 5.5는 언제나 `-fast` 슬러그로 돕니다. 검증은 언제나 `swarm workers` 모델로 돌고, 기본은 `claude-opus-5-5-high-fast`입니다. Gemini 자리는 그 최상위 슬러그인 `gemini-4-carbon-high` 위로 돌지 않습니다. Task 도구가 슬러그를 거부하면 그 슬러그를 다시 넘기지 않습니다. 역할의 줄이나 기본값, 부르는 스킬의 폴백, 같은 계열에서 가장 가까운 유효 슬러그 순으로 물러서고, 그래도 안 되면 `model`을 생략합니다. 그렇게 했다고 말합니다.
+- 부모가 모든 서브에이전트의 작업을 책임집니다. diff를 검토하고 요약은 직접 씁니다. 두 번째 의견은 같은 프롬프트를 다른 벤더의 모델에 주는 것입니다.
+- **기본은 새 서브에이전트입니다.** 수정 라운드, 후속, 재시도, 대기열의 다음 항목은 처음 브리프, 그 뒤의 모든 지시, 이전 에이전트의 보고와 브랜치를 가진 새 서브에이전트에게 줍니다. 기존 서브에이전트를 재개하는 것은 일이 그 에이전트 안에 있고 옮기기 비싼 상태를 필요로 할 때뿐입니다. 그 에이전트의 체크아웃, 커밋하지 않은 변경, 아직 돌리고 있는 프로세스가 그런 상태입니다.
 
 #### 5. Writing the reply (응답 쓰기)
 
-응답은 초안을 쓰는 순간부터 깨끗하게 씁니다. 다 쓰고 나서 손보는 것으로는 이 패턴들이 빠지지 않습니다.
+짧은 서술문으로 쓰고, 긴 줄표 문자와 연결용 콜론을 쓰지 않습니다. 사용자에게 무엇이 바뀌는지를 앞세웁니다. 모든 주장에 근거나 라벨(측정함, 추론함, 추측)을 답니다. 직접 돌릴 수 있는 확인을 사람에게 넘기지 않습니다.
 
-- 짧은 서술문. 한 문장에 한 생각, 마침표로 끝냅니다.
-- 긴 줄표 문자를 어디에도 쓰지 않습니다. 파일 목록은 문장으로 쓰고("`main.js`는 영속화와 IPC 핸들러를 맡습니다"), 굵은 소제목은 별도 문장으로 씁니다("**Verification.** CDP로 끝에서 끝까지").
-- 문장 중간의 연결용 콜론도 쓰지 않습니다(unslop 규칙(rule) 14). 목록 앞의 콜론은 괜찮습니다.
-- 간결하다는 것이 내용을 빼도 된다는 뜻은 아닙니다. 짧은 문장이되, 플레이북의 응답이 이름 붙인 모든 항목(세부, 트레이드오프, 선택, 열린 결정)은 남깁니다.
-- 소비자와 유지보수자에게 미치는 영향을 앞세웁니다. 이 작업이 누구를 위한 것인지(최종 사용자, 라이브러리를 가져다 쓰는 동료)와 그들에게 무엇이 바뀌는지를 구현 세부보다 먼저 말하고, 다음에 이 코드를 맡을 엔지니어가 무엇을 물려받는지를 말합니다. 둘 다 말할 수 없으면 작업이나 설명이 잘못된 것입니다.
-- 링크, 인용, 대화 기록 참조를 지어내지 않습니다. 그 세션에서 직접 만들었거나 읽은 것만 링크합니다.
-- 모든 주장은 같은 문장 안에 근거나 라벨(측정함, 추론함, 추측)을 답니다. 예측이나 확인하지 못한 원인은 추측입니다. 직접 돌릴 수 있는 확인을 사람에게 넘기지 않습니다.
+#### 6. Playbooks (플레이북 고르기)
 
-모든 플레이북은 이렇게 쓴 응답으로 끝나고, PR 링크는 `https://github.com/<owner>/<repo>/pull/<number>` 형식으로 씁니다.
+작업을 플레이북 하나에 맞추고 그 단계를 `playbooks/<제목>.md`에서 엽니다. 제목은 kebab-case로 바꿉니다. 먼저 그 단계를 할 일 목록 도구에 복사합니다. 크거나, 여러 곳에 걸치거나, 자리를 비운 사이에 도는 작업, 그리고 맞는 플레이북이 없는 작업은 `figure-it-out` 스킬로 갑니다. `figure-it-out`은 코드보다 먼저 내놓는 산출물(deliverable)이 워크플로 자체라고 말합니다.
 
-#### 6. Comments (주석)
+원문은 플레이북 22개의 짧은 이름을 한 줄로 나열하고, 그 이름이 파일 이름이 됩니다. 예를 들어 Authoring a skill은 `playbooks/authoring-a-skill.md`, Worktree cleanup은 `playbooks/worktree-cleanup.md`입니다. 이 책의 절 제목은 각 파일 첫 줄의 긴 제목(Authoring or modifying a skill, Multi-phase or multi-PR plan, Worktree and simulator cleanup)을 씁니다. 22개는 이 부의 나머지 장에서 하나씩 설명하고, 언제 쓰는지는 각 절의 "언제 쓰는가"에 있습니다.
 
-주석도 응답과 같은 규칙(rule)을 따릅니다. 코드가 보여 줄 수 없는 자명하지 않은 이유(why)에만 주석을 남깁니다. 검증 스크립트나 테스트 스크립트에는 `// Phase 1: add cards` 같은 단계 서술 주석을 달지 않습니다. 단언문이나 로그 문자열이 단계를 설명합니다(`assert(ok, 'persisted across restart')`). 위임받은 서브에이전트의 diff를 포함해 만드는 모든 파일에 적용됩니다.
-
-#### 7. Playbooks (플레이북 고르기)
-
-호출되면 맞는 플레이북의 단계를 그대로 복사해 할 일 목록의 첫 항목으로 열고, 그다음에 작업별 항목을 붙입니다. 하지 않기로 한 단계는 목록에 남기고 한 줄 `skip: <이유>`를 답니다. 플레이북 파일은 `playbooks/<제목>.md`입니다. 제목을 kebab-case로 바꾸고, 하이픈은 남기고 다른 문장 부호는 뗍니다. 항목이 경로를 따로 밝히면 그것을 씁니다. 예외는 Authoring or modifying a skill(`playbooks/authoring-a-skill.md`), Multi-phase or multi-PR plan(`playbooks/multi-phase-plan.md`), Worktree and simulator cleanup(`playbooks/worktree-cleanup.md`) 세 개입니다.
-
-크거나 여러 곳에 걸친 작업(호출 지점이 많은 마이그레이션, 야심찬 다부분 변경)이나 나중에 믿기로 하고 자리를 뜨는 작업은, Feature 같은 좁은 플레이북이 맞아도 `figure-it-out`으로 갑니다. 맞는 플레이북이 없을 때도 `figure-it-out`입니다. 그 작업만의 엄밀한 플레이북을 설계합니다. 며칠에 걸친 상시 프로젝트(많은 스택 PR, 한 조정자 아래의 서브에이전트 무리)는 `figure-it-out` 대신 Orchestrate로 갑니다. `figure-it-out`은 한 번의 맞춤 실행을 설계하고, orchestrate는 프로그램을 운영합니다.
-
-플레이북 23개는 이 부의 나머지 장에서 하나씩 설명합니다.
-
-| 플레이북 | 언제 | 어디서 |
-| --- | --- | --- |
-| Investigation | 읽기 전용 질문 | [작업 플레이북](playbooks-work.md) |
-| Bug fix | 재현하고 근본 원인을 찾아 고칠 결함 | 같은 장 |
-| Perf issue | 측정된 느림 | 같은 장 |
-| Hillclimb | 지표 하나를 목표까지 지속적으로 개선 | 같은 장 |
-| Runtime forensics | 실행 중 증상 진단 | 같은 장 |
-| Trace forensics | 이미 캡처된 프로파일 산출물 진단 | 같은 장 |
-| Feature | 새 동작이나 바뀐 동작 | 같은 장 |
-| Refactoring | 동작을 보존하는 구조 변경 | 같은 장 |
-| Prototype | 결정을 위한 일회용 스케치 | 같은 장 |
-| Visual parity | 픽셀 단위 UI 동등성 | 같은 장 |
-| Authoring or modifying a skill | SKILL.md 작성, 수정 | 같은 장 |
-| Eval | 스킬, 구조, 프롬프트 변경의 영향 시험 | 같은 장 |
-| Babysit | PR이나 스택을 병합 준비 상태까지 | [PR 플레이북](playbooks-pr.md) |
-| Shipping | 초록불 스택을 검증한 뒤 병합 | 같은 장 |
-| Opening a PR | 다른 모든 플레이북의 끝 | 같은 장 |
-| Autonomous run | 멈추지 않고 끝까지 가는 긴 작업 | [장시간 플레이북](playbooks-long.md) |
-| Orchestrate | 상시 프로젝트를 조정자 한 명에게 위임 | 같은 장 |
-| Autopilot-full | 독립 PR 대기열을 병합까지 | 같은 장 |
-| Autopilot-stack | 병합 없는 Autopilot-full. PR을 검증까지 만들어 운영자에게 넘기고, PR은 자신이 기반으로 삼는 PR 위에만 쌓기 | 같은 장 |
-| Session pickup | 이전 에이전트의 진행 중 작업 이어받기 | 같은 장 |
-| Pause safely | 진행 중 작업을 안전하게 멈추기 | 같은 장 |
-| Multi-phase or multi-PR plan | 여러 단계, 여러 PR에 걸친 작업 | 같은 장 |
-| Worktree and simulator cleanup | 디스크 회수 | 같은 장 |
+| 장 | 플레이북 |
+| --- | --- |
+| [작업 플레이북](playbooks-work.md) | [Investigation](playbooks-work.md#playbook-investigation), [Bug fix](playbooks-work.md#playbook-bug-fix), [Perf issue](playbooks-work.md#playbook-perf-issue), [Hillclimb](playbooks-work.md#playbook-hillclimb), [Runtime forensics](playbooks-work.md#playbook-runtime-forensics), [Trace forensics](playbooks-work.md#playbook-trace-forensics), [Feature](playbooks-work.md#playbook-feature), [Refactoring](playbooks-work.md#playbook-refactoring), [Prototype](playbooks-work.md#playbook-prototype), [Visual parity](playbooks-work.md#playbook-visual-parity), [Authoring or modifying a skill](playbooks-work.md#playbook-authoring-a-skill), [Eval](playbooks-work.md#playbook-eval) |
+| [PR 플레이북](playbooks-pr.md) | [Opening a PR](playbooks-pr.md#playbook-opening-a-pr), [Babysit](playbooks-pr.md#playbook-babysit), [Shipping](playbooks-pr.md#playbook-shipping) |
+| [장시간 플레이북](playbooks-long.md) | [Autonomous run](playbooks-long.md#playbook-autonomous-run), [Session pickup](playbooks-long.md#playbook-session-pickup), [Pause safely](playbooks-long.md#playbook-pause-safely), [Worktree and simulator cleanup](playbooks-long.md#playbook-worktree-cleanup), [Multi-phase or multi-PR plan](playbooks-long.md#playbook-multi-phase-plan), [Autopilot-full](playbooks-long.md#playbook-autopilot-full), [Autopilot-stack](playbooks-long.md#playbook-autopilot-stack) |
 
 ### 사용 예
 
@@ -128,7 +93,7 @@ README는 유지 방법을 이렇게 말합니다. 작업을 치기 전에 `/` �
 /poteto-mode 재시도 뒤에 알림이 두 번 옵니다. 먼저 재현하고, 고치고, 검증해 줘.
 ```
 
-이것은 Bug fix 프롬프트입니다. "먼저 재현"은 예의가 아니라 실제 제약이고 플레이북이 그것을 지킵니다. 할 일 목록에 Bug fix의 단계가 채워지는 것을 보십시오. 건너뛴 단계는 `skip: <이유>`와 함께 보입니다.
+이것은 Bug fix 프롬프트입니다. "먼저 재현"은 예의가 아니라 실제 제약이고 플레이북이 그것을 지킵니다. 할 일 목록에 Bug fix의 단계가 채워지는 것을 보십시오.
 
 **프롬프트에 넣을 것.** 안내서는 유용한 프롬프트가 다섯까지 싣고, 각각이 한 문장에 들어간다고 합니다.
 
@@ -210,11 +175,29 @@ keep going until done
 - **프롬프트에 스킬을 나열하지 않습니다.** "/architect, 그다음 /arena, 그다음 /interrogate를 써 줘"처럼 쓰면 플레이북이 이미 정해 둔 순서를 뒤섞거나 단계를 빠뜨리기 쉽습니다. 특정 선택을 덮어쓰고 싶을 때만 스킬 이름을 씁니다.
 - 원칙(principle)을 인용하려면 그 세션에서 리프 `SKILL.md`를 읽어야 합니다. 읽지 않은 원칙을 이름만 들먹이는 것은 규칙(non-negotiable) 위반입니다.
 - 서브에이전트의 "끝났다"는 보고를 그대로 전달하지 않습니다. 부모가 diff를 검토하고 직접 요약합니다.
-- 스킬이 작업 중에 고장나면 그 자리에서 우회하지 말고 별도 PR로 고칩니다.
+- 다른 에이전트를 시작하는 킥오프에 `worker.md` 첫 줄을 빼지 않습니다. 빼면 운영자의 규칙이 그 에이전트에게 닿지 않습니다.
 
 ### 관련 스킬
 
 플레이북이 부르는 스킬은 [이해하기](why.md#skill-why), [설계하기](architect.md#skill-architect), [고치고 검증하기](tdd-blast.md#skill-tdd) 부에서 다룹니다. 모델 설정은 [`setup-pstack`](setup.md#skill-setup-pstack)에서, 원칙은 [원칙 장](principles.md)에서 다룹니다. 어느 스킬이나 플레이북이 맞는지 모르겠으면 [`poteto-help`](setup.md#skill-poteto-help)가 이 장을 가리킵니다. 일을 시작하기 전에 목표와 문제를 다시 듣기는 [`in-your-own-words`](setup.md#skill-in-your-own-words)입니다. 보내기 전에 프롬프트를 다시 쓰는 것은 [`sharpen`](setup.md#skill-sharpen)입니다.
+
+## worker.md {#ref-worker}
+
+원문: {{src:skills/poteto-mode/worker.md}}
+
+> 실행이 일해 주는 사람, 곧 운영자의 규칙입니다. `poteto-mode`가 시작하는 모든 에이전트가 킥오프 첫 줄에서 이 파일을 읽습니다.
+
+`poteto-mode`의 규칙은 슬래시 명령으로 불러야 읽히므로, 그 명령 없이 시작된 에이전트에게는 닿지 않습니다. 그래서 Task 서브에이전트든 Project 워커든 킥오프의 첫 줄이 `Read <path>/worker.md before anything else.`입니다. 이 규칙들은 모든 과업에 적용되고, 킥오프가 그중 하나를 덮으려면 그렇다고 분명히 말해야 합니다.
+
+- **다른 에이전트를 시작할 때.** 그 킥오프의 첫 줄은 `Read <path>/worker.md before anything else.`이고, `<path>`는 이 파일이 있는 폴더의 절대 경로입니다.
+- **기준.** 킥오프에 적힌 기준(bar)이 기준의 전부입니다. 그 위에 검사, 관문(gate), 승인, 리뷰 라운드를 더하지 않습니다. 기준이 적혀 있지 않으면 변경이 그 바탕보다 나쁘지 않고 자기 테스트를 통과하면 됩니다.
+- **막기.** 이 헤드에서 실패하는 실행이나 사용자가 겪을 버그가 있을 때만 붙잡거나 막습니다. 바탕이 이미 가진 문제는 한 줄로 보고합니다.
+- **질문.** 사람에게 질문을 보여 주는 도구를 부르지 않습니다. 되돌릴 수 있는 선택은 직접 하고, 무엇을 왜 골랐는지 말합니다.
+- **멈춤.** 배포, 데이터 삭제, 공유 브랜치 강제 푸시, 실행 밖의 사람에게 보내는 메시지 앞에서만 멈춥니다.
+- **PR.** 모든 PR을 초안이 아닌 리뷰 준비 상태로 엽니다. 제목은 `type(scope): subject`입니다. 본문은 40줄 이하이고, `##` 제목 Why, What changed, Scope, Tradeoffs, Blast Radius, Verification을 이 순서로 두며 빈 절은 뺍니다.
+- **증거.** 증거 로그, 실행 이력, 긴 표는 파일이나 PR 댓글에 두고 링크합니다.
+
+PR 규칙은 [Opening a PR](playbooks-pr.md#playbook-opening-a-pr) 플레이북과 같은 형식입니다.
 
 ## poteto-agent {#agent-poteto-agent}
 
@@ -222,8 +205,10 @@ keep going until done
 
 > `/poteto-mode` 실행 중에 띄우는 위임 서브에이전트입니다. 플레이북 러너가 아닙니다.
 
-pstack은 실행 중 코드를 쓰거나 돕는 위임용 서브에이전트를 함께 싣습니다. `/poteto-mode`를 받은 채팅이 플레이북과 할 일 목록과 모든 `Task` 호출을 소유하고, `poteto-agent`는 그 위임 하나입니다. 플레이북 자체를 돌리려고 이 에이전트를 띄우지 않습니다. 부모 에이전트가 `subagent_type: "poteto-agent"`로 띄웁니다. 정의 파일은 짧습니다. 프런트매터의 `description`은 이 에이전트가 `/poteto-mode` 실행 중의 위임이며 러너가 아니고, 새 작업마다 새 `poteto-agent`를 띄우고, 재개는 poteto-mode의 Subagents 절이 이름 붙인 좁은 경우에만 하라고 말합니다. 그리고 `generalPurpose`로 바꿔 치면 읽기 단계를 건너뛰어 스타일이 어긋난다고 경고합니다. `is_background: true`입니다. 본문은 이렇습니다. `/poteto-mode`를 받은 채팅이 플레이북과 할 일 목록과 모든 `Task` 호출을 소유하고 이 에이전트는 그 위임 하나이며, 어떤 작업이든 시작하기 전에 `poteto-mode`의 `SKILL.md`를 인라인 원칙 색인까지 전부 읽고, 원칙을 적용할 때마다 리프 `principle-*` 스킬로 들어가라는 것입니다. `SKILL.md`를 읽을 때는 부모가 준 절대 경로를 씁니다.
+pstack은 실행 중 코드를 쓰거나 돕는 위임용 서브에이전트를 함께 싣습니다. `/poteto-mode`를 받은 채팅이 플레이북과 할 일 목록과 모든 `Task` 호출을 소유하고, `poteto-agent`는 그 위임 하나입니다. 플레이북 자체를 돌리려고 이 에이전트를 띄우지 않습니다. 부모 에이전트가 `subagent_type: "poteto-agent"`로 띄웁니다. 정의 파일은 짧습니다. 프런트매터의 `description`은 이 에이전트가 `/poteto-mode` 실행 중의 위임이며 러너가 아니고, 새 작업마다 새 `poteto-agent`를 띄우고, 재개는 poteto-mode의 Subagents 절이 이름 붙인 좁은 경우에만 하라고 말합니다. 그리고 `generalPurpose`로 바꿔 치면 읽기 단계를 건너뛰어 스타일이 어긋난다고 경고합니다. `is_background: true`이고 `model: claude-opus-5-5-xhigh-fast`입니다. 이 기본 모델 때문에 `poteto-mode`의 Subagents 절은 역할의 줄이 `inherit-parent`나 `auto`이면 `model`을 생략하고 `generalPurpose`를 띄우라고 합니다. 본문은 이렇습니다. `/poteto-mode`를 받은 채팅이 플레이북과 할 일 목록과 모든 `Task` 호출을 소유하고 이 에이전트는 그 위임 하나이며, 어떤 작업이든 시작하기 전에 `poteto-mode`의 `SKILL.md`를 인라인 원칙 색인까지 전부 읽고, 원칙을 적용할 때마다 리프 `principle-*` 스킬로 들어가라는 것입니다. `SKILL.md`를 읽을 때는 부모가 준 절대 경로를 씁니다.
 
 경로가 없으면, 다른 어떤 일보다 먼저 `~/.cursor/plugins/`에서 경로가 `skills/poteto-mode/SKILL.md`로 끝나는 파일을 찾습니다. 둘 이상이 맞으면 `.cursor-plugin/plugin.json`의 `version`이 가장 높은 사본을 씁니다. 스킬 목록에 이 스킬이 없다고 해서 pstack이 없는 것은 아닙니다. 그런 파일이 없으면 멈추고 부모에게 말합니다.
+
+**해설 (이 책의 해석, 원본에 없음).** 프런트매터의 경고와 Subagents 절의 지시는 맞서지 않습니다. 부모 모델로 돌려야 하는 역할만 `generalPurpose`로 가고, 그 경우에는 프런트매터가 경고한 대로 `poteto-mode`를 읽는 단계가 빠집니다.
 
 같은 저장소의 다른 서브에이전트 `Comment Sicko`는 [코드 위생 장](code-hygiene.md#agent-comment-sicko)에서 다룹니다.
