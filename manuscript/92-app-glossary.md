@@ -12,32 +12,32 @@
 | 규칙 | rule | what-is-pstack | 원문이 "rule"이라 부르는 것입니다. 원칙 스킬이 담은 rule, Cursor의 rule 파일(`pstack-models.mdc`), lint rule, `unslop`의 번호 붙은 rule, patch-id rule이 모두 여기에 듭니다. 원칙(principle)과 함께 나오는 곳에서는 둘을 나란히 적었습니다. 예: 원칙(principle)이 가리키는 규칙(rule) |
 | 규칙 | non-negotiable | poteto-mode | `poteto-mode`의 Non-negotiables 절을 이 책이 규칙으로 옮긴 곳입니다. 원문에 rule이라는 말이 없는 다른 곳은 규칙(Autonomy section), 규칙(Stack safety), 규칙(mandatory), 규칙(mapping), 규칙(bucket)처럼 원문의 절 이름이나 낱말을 붙였습니다. 예: 규칙(non-negotiable) 위반 |
 | 기준 | criteria | playbooks-work | 채점하거나 받아들이는 조건입니다. rubric의 criteria, acceptance criteria, success criteria. 예: 성공 기준(criteria) |
-| 기준 | bar | playbooks-work | 넘어야 하는 문턱입니다. verification bar, approval bar, "a high bar". 예: 검증 기준(bar) |
+| 기준 | bar | playbooks-work | 넘어야 하는 문턱입니다. Prototype 플레이북의 "the verification bar". 예: 검증 기준(bar) |
 | 기준 | standard | writing | 엄격하게 적용하는 표준입니다. `technical-writing`의 "layered standard". 예: 층화된 기준(standard) |
 | 기준 | rubric | playbooks-pr | 판정하는 틀입니다. Bugbot triage의 Decision rubric. 채점용 루브릭(rubric)과 같은 낱말입니다. 예: Bugbot 분류 기준(rubric) |
 | 기준 | base | poteto-mode | 브랜치를 따는 바탕입니다. 워크트리를 만들 때의 base이고, `arena`의 기준안도 base입니다. 예: 특정 기준(base) |
 | 기준 | baseline | verification | 변경 전에 잡아 두는 비교 대상입니다. 기능 지도의 baseline preconditions. 기준선은 baseline을 옮긴 합성어입니다. 예: 기준(baseline) 사전 조건 |
 | 검증 | verification | howto | 실제 산출물로 결과를 확인하는 일입니다. verify, verification, verified. 예: 검증(verification) 스킬 |
 | 검증 | validation | setup | 입력이나 설정이 유효한지 따지는 일입니다. `boundary-discipline`이 경계에 두라는 validation, `setup-pstack`의 Validate 단계. 두 뜻이 한 장에 함께 나오면 뜻이 바뀌는 곳마다 영어를 붙였습니다. 예: 경계 검증(validation) |
-| 검증기 | validator | playbooks-work | 값이 유효한지 따지는 코드입니다. `subtract-before-you-add`가 지우라는 redundant validators, SKILL.md validator. 예: 중복 검증기(validator) |
+| 검증기 | validator | playbooks-work | 값이 유효한지 따지는 코드입니다. `subtract-before-you-add`가 지우라는 redundant validators. 예: 중복 검증기(validator) |
 | 검증기 | verifier | playbooks-long | 결과를 확인하는 쪽입니다. `autonomous-run`의 "flaky verifiers". 예: 불안정한 검증기(verifier) |
 | 뼈대 | scaffold | principles | 뒤따르는 작업을 돕는 기반입니다. `foundational-thinking`의 "scaffold first", 임시 scaffolding. 예: 뼈대(scaffold) 먼저 |
-| 뼈대 | skeleton | playbooks-work | 채워 넣는 틀입니다. multi-phase plan의 skeleton, eval의 project skeleton. 예: 계획서 뼈대(skeleton) |
+| 뼈대 | skeleton | playbooks-work | 채워 넣는 틀입니다. eval의 project skeleton. 예: 프로젝트 뼈대(skeleton) |
 | 관문 | gate | poteto-mode | gate입니다. 사람이 정하는 지점과 통과해야 나아가는 검사 둘 다 gate입니다. 예: 회귀 관문(gate) |
 | 게이트 | gate | playbooks-pr | 같은 gate를 소리 나는 대로 적은 말입니다. 기능 게이트처럼 코드 안의 분기 조건을 가리키거나 병합 사유를 가리킬 때 씁니다. 예: 게이트(gate) 사유 |
 | 관문 시험 | gauntlet | poteto-mode | `swarm`의 gauntlet입니다. gate와는 다른 낱말입니다. 예: 관문 시험(gauntlet) |
-| 지침 | guideline | writing | 스타일 가이드의 guideline입니다. Global English Style Guide의 guideline, `create-skill`의 writing guidelines. 예: 지침(guideline) 텍스트 |
-| 지침 | instruction | principles | "instructions and conventions"의 instructions입니다. 이 책이 지시라고도 옮기는 같은 낱말입니다. 예: 지침(instruction)과 관례 |
+| 지침 | guideline | writing | 스타일 가이드의 guideline입니다. `technical-writing`이 말하는 제품의 copy guidelines, `create-skill`의 writing guidelines. 예: 카피 지침(guideline) |
+| 지침 | instruction | principles | `encode-lessons-in-structure`의 "the same instruction a second time"의 instruction입니다. 이 책이 지시라고도 옮기는 같은 낱말입니다. 예: 같은 지침(instruction) |
 | 절차 | procedure | writing | 글자 그대로 따르는 단계입니다. `technical-writing`의 procedure. 예: 절차(procedure) 안의 "simply" |
 | 절차 | playbook | design | 이 책이 playbook을 "절차"로 옮긴 곳입니다. `figure-it-out`이 설계하는 것은 절차 자체, 곧 playbook입니다. 예: 큰 작업의 절차(playbook) |
 | 규약 | contract | verification | 기능 지도의 "Feature entry contract"입니다. 예: 기능 항목 규약(contract) |
 | 규약 | shape | verification | 원문이 "Follow the shape in ..."이라 한 곳을 이 책이 규약으로 옮겼습니다. 예: 규약(shape) |
 | 산출물 | artifact | what-is-pstack | 에이전트가 만들거나 확인하는 파일, 로그, 프로파일 같은 실물입니다. "verify against the real artifact". 산출물의 세 영어 낱말은 뜻이 가까워서 장마다 처음 나올 때만 붙였습니다. 예: 실제 산출물(artifact) |
-| 산출물 | deliverable | poteto-mode | 작업이 끝나면 내놓는 결과입니다. "The deliverable is a synthesized verdict". 예: 산출물(deliverable) |
+| 산출물 | deliverable | poteto-mode | 작업이 끝나면 내놓는 결과입니다. Runtime forensics의 "The deliverable is a cited diagnosis". 예: 산출물(deliverable) |
 | 산출물 | output | personal | 스킬이 내는 출력입니다. `automate-me`의 "The output is one -mode skill". 예: 산출물(output) |
 | 예시 | example | playbooks-pr | 원문에 있는 예입니다. "Example signal", `*.example.yaml`. 이 책의 저자가 만든 것은 첫 줄에 라벨이 붙은 예시(worked example)로 따로 표시합니다. 예: 예시(example) 신호 |
 
-**원칙의 그 밖의 뜻.** `reflect` 리뷰어가 적는 "Principle:" 항목(세션에서 일반화한 배움 한 문장), `automate-me`의 "principles cited"와 README의 "engineering principles"(스킬이 아닌 일반적인 원칙)입니다. 이때도 영어는 모두 principle이라 무엇을 가리키는지는 문맥으로 가립니다.
+**원칙의 그 밖의 뜻.** `automate-me`의 "principles cited"와 README의 "engineering principles"(스킬이 아닌 일반적인 원칙)입니다. 이때도 영어는 모두 principle이라 무엇을 가리키는지는 문맥으로 가립니다.
 
 ## pstack의 구성 개념
 
@@ -45,7 +45,7 @@
 | --- | --- | --- |
 | skill | 스킬 | `SKILL.md`를 가진 디렉터리 하나. 에이전트가 따르는 워크플로 문서 |
 | plugin | 플러그인 | 스킬, 에이전트를 묶어 설치하는 단위. pstack은 `/add-plugin pstack`으로 설치 |
-| playbook | 플레이북 | `poteto-mode`가 작업 유형별로 고르는 절차서. 23개 |
+| playbook | 플레이북 | `poteto-mode`가 작업 유형별로 고르는 절차서. 22개 |
 | principle | 원칙 | `principle-*` 스킬 하나. 24개. 다른 뜻은 위 표에 있음 |
 | mode / sticky mode | 모드 / 스티키 모드 | `poteto-mode` 프런트매터에는 `mode` 키가 없습니다. 매 턴 유지하려면 Custom Mode로 켭니다. Enter만 치면 한 메시지에만 붙습니다 |
 | Custom Mode | Custom Mode | Cursor 기능. `/` 메뉴에서 Option+Enter(Mac) 또는 Alt+Enter(Windows)로 스킬을 모드로 붙입니다. Agents Window와 CLI에서 제공합니다 |
@@ -53,10 +53,10 @@
 | harness | 하니스 | 앱을 구동해 검사하거나 지표를 재는 테스트 도구. `docs/harness/`에서는 에이전트가 도는 환경(Cursor, Claude Code)을 가리킵니다 |
 | role | 역할 | 자기 모델 선택을 가진 위임 작업 단위(`arena runners` 등) |
 | panel | 패널 | 다중 모델 스킬이 쓰는 서로 다른 모델의 묶음. 기본은 fable 5.2, opus 5.5, gemini 4 carbon |
-| model slug | 모델 슬러그 | 모델을 가리키는 식별 문자열(`claude-opus-5-5-xhigh` 등) |
-| reasoning budget / effort | 추론 예산 / 추론 강도 | `/setup-pstack`이 정하는 unlimited, large, medium, small과 모델 이름의 `max`, `xhigh` 같은 등급 |
+| model slug | 모델 슬러그 | 모델을 가리키는 식별 문자열(`claude-opus-5-5-xhigh-fast` 등) |
+| reasoning budget / effort | 추론 예산 / 추론 강도 | `/setup-pstack`이 정하는 large, medium, small과 모델 이름의 `xhigh`, `high` 같은 등급. 어느 역할도 `xhigh`를 넘지 않음 |
 | rule file | 규칙 파일 | `~/.cursor/rules/pstack-models.mdc`. 역할별 모델을 정하는 항상 적용 규칙. Claude Code에서는 `~/.claude/rules/pstack-models.md` |
-| inherit-parent / auto | inherit-parent / auto | 모델 필드를 생략해 서브에이전트가 부모 모델을 쓰게 하는 별칭 |
+| inherit-parent / auto | inherit-parent / auto | 역할을 부모 모델로 돌리는 별칭. `Task`의 `model`을 생략하고 `generalPurpose`로 띄움 |
 | control skill | control 스킬 | UI, CLI를 구동해 증명하는 스킬. cursor-team-kit의 `control-cli`, `control-ui` |
 | cursor-team-kit | cursor-team-kit | pstack과 별개인 Cursor 플러그인. `deslop` 등이 여기 있음 |
 | automation | 자동화 | 외부 신호(슬랙 제보 등)에 반응해 도는 Cursor 자동화. `automations/benny` |
@@ -67,9 +67,8 @@
 | --- | --- | --- |
 | fan-out | 팬아웃 | 작업을 서브에이전트 여러 개로 나눠 병렬로 돌림 |
 | worker | 작업자 | `swarm`이나 팬아웃에서 조각을 맡는 서브에이전트 |
-| runner | 러너 | `arena`, `architect`에서 후보를 만드는 서브에이전트 |
+| runner | 러너 | `arena`에서 후보를 만드는 서브에이전트 |
 | investigator | 조사자 | `recall`이 공유 기록의 출처마다 띄우는 서브에이전트 |
-| synthesizer | 종합자 | `reflect`의 서브에이전트. 리뷰어들의 발견을 종합하는 쪽 |
 | adversary | 적대자 | `interrogate`가 변경을 깨뜨리려 띄우는 서브에이전트 |
 | reviewer / judge | 리뷰어 / 심사자 | 그 밖의 리뷰어. `arena`의 교차 심사자 |
 | cross-judge | 교차 심사 | 부모와 다른 모델 벤더의 심사자가 루브릭으로 채점. `arena`에서 Fable과 다른 Claude는 한 벤더 |
@@ -89,10 +88,9 @@
 | todo list | 할 일 목록 | 플레이북 단계를 그대로 복사해 여는 에이전트의 작업 목록 |
 | throughput checkpoint | 처리량 점검표 | Feature 플레이북 3단계의 네 항목(blocking first steps 등) |
 | decision trail / log | 결정 기록 | `show-me-your-work`가 남기는 TSV |
-| operator | 운영자 | 자율 플레이북을 부리는 사람 |
-| coordinator | 조정자 | Orchestrate에서 일마다 어느 에이전트가 할지 정하고 각 에이전트가 만든 것을 확인하는 채팅 |
-| brief | 브리프 | 에이전트에게 주는 프롬프트. GOAL, SCOPE 등 필드가 있음 |
-| ledger | 장부 | Orchestrate가 헤드 SHA 하나에 두는 검증 판정 |
+| operator | 운영자 | 실행 전체가 일하는 대상인 사람. 킥오프를 쓴 에이전트가 아님(`worker.md`) |
+| coordinator | 조정자 | Cursor Project에서 지속되는 스레드를 가진 에이전트. 코드는 쓰지 않고 서브에이전트를 지휘함. `benny`에서는 슬랙에 글을 올리는 유일한 쪽 |
+| brief | 브리프 | 서브에이전트에게 주는 프롬프트. `poteto-mode`는 목표로 시작하게 하고, `swarm`은 목표, 범위, 맡은 조각, 검증 방법, 보고할 것을 담게 함 |
 | gate | 관문 | 사람의 결정이 필요한 지점이거나 검증을 통과해야 나아가는 조건 |
 
 ## 품질과 검증 개념

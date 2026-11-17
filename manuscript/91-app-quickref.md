@@ -2,7 +2,7 @@
 
 원문: {{src:README.md}} {{src:skills/poteto-mode/SKILL.md}}
 
-이 표는 pstack 0.15.42(커밋 `bf0c7cd`)의 스킬 58개, 에이전트 2개, `poteto-mode` 플레이북 23개를 한곳에 모았습니다. 트리거 문구는 각 스킬의 `description`에 있는 문구를 그대로 두었고(`no-comments`처럼 `description`에 없는 곳은 `poteto-mode`의 규칙(non-negotiable)을 적었고), 영어 원문이 없는 곳(원칙(principle) 스킬 등)은 "언제 적용하는가"를 한국어로 적었습니다. 이름을 누르면 해당 절로 갑니다.
+이 표는 pstack 0.15.43(커밋 `2f87c85`)의 스킬 58개, 에이전트 2개, `poteto-mode` 플레이북 22개를 한곳에 모았습니다. 트리거 문구는 각 스킬의 `description`에 있는 문구를 그대로 두었고(`no-comments`처럼 `description`에 없는 곳은 `poteto-mode`의 규칙(non-negotiable)을 적었고), 영어 원문이 없는 곳(원칙(principle) 스킬 등)은 "언제 적용하는가"를 한국어로 적었습니다. 이름을 누르면 해당 절로 갑니다.
 
 ## 일반 스킬 34개
 
@@ -37,7 +37,7 @@
 | [`no-comments`](code-hygiene.md#skill-no-comments) | Comment Sicko로 주석을 걷어 내고 제약 주석에 인코딩을 제안 | 리뷰 전 (`poteto-mode`의 트리거) |
 | [`typescript-best-practices`](code-hygiene.md#skill-typescript-best-practices) | 타입 시스템 원칙을 TypeScript 문법으로 구체화 | `.ts`나 `.tsx` 파일을 읽거나 편집할 때. 스스로 로드되지 않으므로 `/typescript-best-practices`를 침 |
 | [`automate-me`](personal.md#skill-automate-me) | 자신의 작업 방식에서 `-mode` 스킬을 만듦 | "automate me", "create/update/refresh my -mode skill", "turn/capture my preferences or working style into a skill" |
-| [`reflect`](personal.md#skill-reflect) | 대화 기록에서 배운 것을 스킬 수정으로 라우팅 | "reflect", `/reflect` |
+| [`reflect`](personal.md#skill-reflect) | 대화 기록에서 오래갈 배움을 캐내 기존 스킬의 구체적 수정으로 라우팅 | "reflect", `/reflect` |
 | [`correct`](personal.md#skill-correct) | 되풀이되는 에이전트 실수를 찾아 각각을 불가능하게 만듦 | `/correct` |
 | [`show-me-your-work`](personal.md#skill-show-me-your-work) | 오래 걸리거나 무인인 작업의 결정 기록을 TSV로 남김 | `/show-me-your-work`, 자율 또는 여러 단계 실행, 사람이 자리를 뜬 뒤 검토하는 작업 |
 | [`bro`](utility.md#skill-bro) | 마지막 메시지를 전문 용어 없이 다시 말함 | `/bro` |
@@ -74,35 +74,34 @@
 | [`principle-never-block-on-the-human`](principles.md#skill-principle-never-block-on-the-human) | 위임 | 되돌릴 수 있는 일에서 "X를 할까요?"라고 묻고 싶을 때 |
 | [`principle-encode-lessons-in-structure`](principles.md#skill-principle-encode-lessons-in-structure) | 메타 | 같은 지시를 두 번째로 쓰는 자신을 발견했거나 반복되는 교정을 알아챘을 때 |
 
-## poteto-mode 플레이북 23개
+## poteto-mode 플레이북 22개
 
-플레이북마다 절 끝에 흐름도, 단계별 산출물, 예시, 실패와 중단 처리, 호출하는 스킬과 스크립트의 표가 붙어 있습니다.
+플레이북마다 절 끝에 흐름도, 단계별 산출물, 예시, 실패와 중단 처리, 호출하는 스킬과 스크립트의 표가 붙어 있습니다. 용도는 README의 플레이북 표를 옮겼습니다. 맞는 플레이북이 없거나 작업이 크거나 여러 곳에 걸치거나 무인이면 `poteto-mode`는 [`figure-it-out`](arena-swarm.md#skill-figure-it-out)으로 보냅니다.
 
 | 플레이북 | 트리거와 용도 | 절 |
 | --- | --- | --- |
-| Investigation | 읽기 전용 질문 (how does X work, why was Y built this way, are we sure about Z, should we do X or Y) | [작업 플레이북](playbooks-work.md#playbook-investigation) |
+| Investigation | 읽기 전용 질문 (how does X work, why was Y built this way, are we sure) | [작업 플레이북](playbooks-work.md#playbook-investigation) |
 | Bug fix | 재현하고 근본 원인을 찾아 런타임 증거로 고칠 결함 | [작업 플레이북](playbooks-work.md#playbook-bug-fix) |
 | Perf issue | 기준선에 대해 추적하고 개선할 측정된 느림 | [작업 플레이북](playbooks-work.md#playbook-perf-issue) |
 | Hillclimb | 지표 하나를 목표까지 지속적으로 개선 | [작업 플레이북](playbooks-work.md#playbook-hillclimb) |
 | Runtime forensics | 실행 중 증상(누수, 유휴 CPU 스핀, 글리치) 진단. 산출물(deliverable)은 진단 | [작업 플레이북](playbooks-work.md#playbook-runtime-forensics) |
 | Trace forensics | 캡처된 프로파일링 산출물(cpuprofile, 트레이스, spindump, 힙 스냅숏) 진단 | [작업 플레이북](playbooks-work.md#playbook-trace-forensics) |
 | Feature | 이름 붙인 데이터 모양에서 만드는 새 동작이나 바뀐 동작 | [작업 플레이북](playbooks-work.md#playbook-feature) |
-| Refactoring | 동작을 보존하는 구조 변경 (이름 바꾸기, 추출, 인라인, 중복 제거, 이동) | [작업 플레이북](playbooks-work.md#playbook-refactoring) |
-| Prototype | "prototype", "mock it up", "try this layout", "sketch it to decide" | [작업 플레이북](playbooks-work.md#playbook-prototype) |
+| Refactoring | 동작을 보존하는 구조나 모양의 변경 | [작업 플레이북](playbooks-work.md#playbook-refactoring) |
+| Prototype | 설계나 동작의 결정을 싸게 내리거나, 경험적 갈림길을 관찰로 정하는 버리는 스케치 | [작업 플레이북](playbooks-work.md#playbook-prototype) |
 | Visual parity | 두 구현 사이의 픽셀 단위 UI 동등성 | [작업 플레이북](playbooks-work.md#playbook-visual-parity) |
 | Authoring or modifying a skill | `SKILL.md`를 쓰거나 고칠 때 | [작업 플레이북](playbooks-work.md#playbook-authoring-a-skill) |
 | Eval | 스킬, 구조, 프롬프트 변경이 에이전트 행동에 미치는 영향 시험 | [작업 플레이북](playbooks-work.md#playbook-eval) |
-| Babysit | "babysit this", "get it green", "address the bugbot comments", "check on PR X", "anything outstanding on X" | [PR 플레이북](playbooks-pr.md#playbook-babysit) |
+| Babysit | PR이나 스택을 병합 준비까지 끌고 감(충돌, 리뷰 스레드, CI). "babysit this pr", "check on pr 123" | [PR 플레이북](playbooks-pr.md#playbook-babysit) |
 | Shipping | 초록불 스택을 검증한 뒤 병합해 달라는 요청 | [PR 플레이북](playbooks-pr.md#playbook-shipping) |
-| Opening a PR | 다른 모든 플레이북의 끝에서 호출됨 | [PR 플레이북](playbooks-pr.md#playbook-opening-a-pr) |
+| Opening a PR | 작은 순서 있는 커밋, Conventional Commits 제목, 브리핑식 본문으로 준비된 PR을 엶. 다른 모든 플레이북의 끝에서 호출됨 | [PR 플레이북](playbooks-pr.md#playbook-opening-a-pr) |
 | Autonomous run | "run until done", "/loop until X" | [장시간 플레이북](playbooks-long.md#playbook-autonomous-run) |
-| Orchestrate | "run this whole project", "own this migration until it lands" | [장시간 플레이북](playbooks-long.md#playbook-orchestrate) |
-| Autopilot-full | "autopilot this queue", "full autopilot", PR마다 소유자 하나 | [장시간 플레이북](playbooks-long.md#playbook-autopilot-full) |
-| Autopilot-stack | "autopilot-stack", "autopilot, don't merge", "stack them, don't ship", "build the stack, I'll land it" | [장시간 플레이북](playbooks-long.md#playbook-autopilot-stack) |
+| Autopilot-full | 독립 PR들을 PR마다 소유자 하나로 병합까지. "full autopilot" | [장시간 플레이북](playbooks-long.md#playbook-autopilot-full) |
+| Autopilot-stack | 병합하지 않는 Autopilot-full. 운영자가 리뷰하고 병합할 PR을 만들고 검증함. "autopilot, don't merge" | [장시간 플레이북](playbooks-long.md#playbook-autopilot-stack) |
 | Session pickup | 대화 기록, 클라우드 에이전트 URL, 푸시된 브랜치에서 이전 작업 이어받기 | [장시간 플레이북](playbooks-long.md#playbook-session-pickup) |
-| Pause safely | 명시적 일시 정지, 오프라인, Cursor 재시작, 컨텍스트 압축 임박 | [장시간 플레이북](playbooks-long.md#playbook-pause-safely) |
+| Pause safely | 나중에 이어받을 수 있게 진행 중인 작업을 깨끗이 멈춤. 명시적 요청이나 컨텍스트 압축 임박 때만 | [장시간 플레이북](playbooks-long.md#playbook-pause-safely) |
 | Multi-phase or multi-PR plan | 여러 단계나 스택된 PR에 걸친 작업의 계획서 | [장시간 플레이북](playbooks-long.md#playbook-multi-phase-plan) |
-| Worktree and simulator cleanup | "what's using my disk", "clean up worktrees", "prune safe-to-prune worktrees", "free up space", "delete old simulators" | [장시간 플레이북](playbooks-long.md#playbook-worktree-cleanup) |
+| Worktree and simulator cleanup | 병합되었거나 버려진 워크트리와 낡은 iOS 시뮬레이터를 지워 디스크를 되찾음. 안전 관문을 둠 | [장시간 플레이북](playbooks-long.md#playbook-worktree-cleanup) |
 
 ## 에이전트와 자동화
 

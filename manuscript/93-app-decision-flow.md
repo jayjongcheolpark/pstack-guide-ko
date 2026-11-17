@@ -1,6 +1,6 @@
 # 스킬 선택 흐름도
 
-원문: {{src:skills/poteto-mode/SKILL.md}} {{src:docs/guide/02-poteto-mode.md}} {{src:docs/guide/04-design.md}} {{src:skills/poteto-help/SKILL.md}}
+원문: {{src:skills/poteto-mode/SKILL.md}} {{src:docs/guide/02-poteto-mode.md}} {{src:docs/guide/04-design.md}} {{src:docs/guide/07-overnight.md}} {{src:skills/poteto-help/SKILL.md}}
 
 어떤 스킬을 써야 할지 모를 때 위에서부터 질문에 답하며 내려갑니다. 대부분은 첫 질문에서 끝납니다. 원문이 강조하듯 스킬을 손으로 나열하지 않아도 `poteto-mode`가 플레이북을 고르고 필요한 스킬을 부릅니다. 이 흐름도는 `poteto-mode`가 하는 선택을 사람이 따라가 볼 수 있게 풀어 쓴 것입니다. Cursor 안에서 막혔거나 어느 스킬이 맞는지 모르겠으면 [`/poteto-help`](setup.md#skill-poteto-help)를 질문과 함께 칩니다. 이 질문을 대신 묻고 보낼 프롬프트를 주며, 칠 때만 돕니다.
 
@@ -39,11 +39,10 @@
 
 | 상황 | 스킬 |
 | --- | --- |
-| 함수 경계를 넘는 코드를 쓰기 전에 타입과 모듈 모양을 정하고 싶다 | [`architect`](architect.md#skill-architect) (`arena`를 함께 씀) |
+| 함수 경계를 넘는 코드를 쓰기 전에 타입과 모듈 모양을 정하고 싶다 | [`architect`](architect.md#skill-architect) (설계가 크거나 논쟁적이면 `arena`) |
 | 같은 지시에 여러 시도를 돌려 좋은 부분을 합치고 싶다 (이름, 형식, 알고리즘) | [`arena`](arena-swarm.md#skill-arena) |
 | 조각을 나눠 커버하거나 같은 지시로 경주시키고 싶다 | [`swarm`](arena-swarm.md#skill-swarm) |
-| 맞는 플레이북이 없는 큰 마이그레이션이거나 자리를 뜨고 나중에 믿어야 한다 | [`figure-it-out`](arena-swarm.md#skill-figure-it-out) |
-| 며칠에 걸친 프로그램을 조정자 한 명에게 맡기고 싶다 | [Orchestrate](playbooks-long.md#playbook-orchestrate) |
+| 맞는 플레이북이 없거나, 작업이 크거나 여러 곳에 걸치거나 무인으로 돈다 | [`figure-it-out`](arena-swarm.md#skill-figure-it-out) |
 | 새 요구를 기존 설계에 통합해야 한다 | [`principle-redesign-from-first-principles`](principles.md#skill-principle-redesign-from-first-principles) |
 | 여러 단계나 여러 PR에 걸친 작업의 계획서가 필요하다 | [Multi-phase plan](playbooks-long.md#playbook-multi-phase-plan) |
 | 결정을 위한 일회용 스케치가 필요하다 | [Prototype](playbooks-work.md#playbook-prototype) |
@@ -103,6 +102,7 @@
 | 상황 | 스킬 |
 | --- | --- |
 | 끝 조건이 있는 작업 하나를 멈추지 않고 돌리고 싶다 | [Autonomous run](playbooks-long.md#playbook-autonomous-run) |
+| 여러 패키지에 걸친 마이그레이션처럼 프로그램 전체를 맡기고 싶다 | [`figure-it-out`](arena-swarm.md#skill-figure-it-out) (전용 플레이북은 없음) |
 | 결정 기록을 감사할 수 있게 남기고 싶다 | [`show-me-your-work`](personal.md#skill-show-me-your-work) |
 | 작업을 안전하게 멈추고 나중에 이어 가고 싶다 | [Pause safely](playbooks-long.md#playbook-pause-safely) |
 | 디스크가 부족하다 | [Worktree and simulator cleanup](playbooks-long.md#playbook-worktree-cleanup) |
@@ -126,10 +126,12 @@
 | 상황 | 쓸 것 |
 | --- | --- |
 | 작고 끝난 변경이 미덥지 않다 | `interrogate`만 |
-| 함수 경계를 넘거나 소유권을 옮긴다 | `architect` (`arena`가 함께 옴) |
+| 함수 경계를 넘거나 소유권을 옮긴다 | `architect` (설계가 크거나 논쟁적이면 `arena`가 함께 옴) |
 | 독립된 시도가 도움이 될 단독 결정(이름, 형식, 알고리즘) | `arena` 직접 |
 | 커버리지 행렬, 병렬 검사 모음, 선언된 팔이 있는 경주 | `swarm` |
+| 레이아웃, 타이밍, 접근법처럼 무언가를 돌려 보면 답이 나오는 열린 질문 | 논쟁이 아니라 프로토타입 |
 | 논쟁적이고 되돌리기 비싼 설계 | `architect`, 그다음 배포 전 `interrogate` |
+| 여러 PR에 걸친 작업 | 설계가 정해진 뒤 쓰는 계획서 |
 
 ## 4단계: 하지 말아야 할 것
 
