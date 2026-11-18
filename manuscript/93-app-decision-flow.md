@@ -39,11 +39,10 @@
 
 | 상황 | 스킬 |
 | --- | --- |
-| 함수 경계를 넘는 코드를 쓰기 전에 타입과 모듈 모양을 정하고 싶다 | [`architect`](architect.md#skill-architect) (`arena`를 함께 씀) |
+| 함수 경계를 넘는 코드를 쓰기 전에 타입과 모듈 모양을 정하고 싶다 | [`architect`](architect.md#skill-architect) (크거나 논쟁적인 설계면 `arena`를 씀) |
 | 같은 지시에 여러 시도를 돌려 좋은 부분을 합치고 싶다 (이름, 형식, 알고리즘) | [`arena`](arena-swarm.md#skill-arena) |
 | 조각을 나눠 커버하거나 같은 지시로 경주시키고 싶다 | [`swarm`](arena-swarm.md#skill-swarm) |
-| 맞는 플레이북이 없는 큰 마이그레이션이거나 자리를 뜨고 나중에 믿어야 한다 | [`figure-it-out`](arena-swarm.md#skill-figure-it-out) |
-| 며칠에 걸친 프로그램을 조정자 한 명에게 맡기고 싶다 | [Orchestrate](playbooks-long.md#playbook-orchestrate) |
+| 크거나 여러 곳에 걸친 작업, 자리를 뜨고 나중에 믿어야 하는 작업, 맞는 플레이북이 없는 작업 | [`figure-it-out`](arena-swarm.md#skill-figure-it-out) |
 | 새 요구를 기존 설계에 통합해야 한다 | [`principle-redesign-from-first-principles`](principles.md#skill-principle-redesign-from-first-principles) |
 | 여러 단계나 여러 PR에 걸친 작업의 계획서가 필요하다 | [Multi-phase plan](playbooks-long.md#playbook-multi-phase-plan) |
 | 결정을 위한 일회용 스케치가 필요하다 | [Prototype](playbooks-work.md#playbook-prototype) |
@@ -126,7 +125,7 @@
 | 상황 | 쓸 것 |
 | --- | --- |
 | 작고 끝난 변경이 미덥지 않다 | `interrogate`만 |
-| 함수 경계를 넘거나 소유권을 옮긴다 | `architect` (`arena`가 함께 옴) |
+| 함수 경계를 넘거나 소유권을 옮긴다 | `architect` (설계가 크거나 논쟁적이면 `arena`가 함께 옴) |
 | 독립된 시도가 도움이 될 단독 결정(이름, 형식, 알고리즘) | `arena` 직접 |
 | 커버리지 행렬, 병렬 검사 모음, 선언된 팔이 있는 경주 | `swarm` |
 | 논쟁적이고 되돌리기 비싼 설계 | `architect`, 그다음 배포 전 `interrogate` |

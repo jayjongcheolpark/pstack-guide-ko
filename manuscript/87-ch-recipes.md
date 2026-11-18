@@ -2,7 +2,7 @@
 
 ![그녀가 완성된 요리를 맛보는 동안 로봇들이 레시피 상자에서 요리하고, 조리대 위에 /how, /tdd, /loop 카드가 핀으로 꽂혀 있는 일러스트](images/recipes.jpg)
 
-원문: {{src:docs/guide/10-recipes-and-pitfalls.md}} {{src:docs/guide/02-poteto-mode.md}} {{src:docs/guide/05-build-and-clean.md}} {{src:docs/guide/09-make-it-yours.md}} {{src:skills/poteto-help/SKILL.md}} {{src:skills/poteto-help/references/recipes.md}} {{src:skills/poteto-help/references/prompting.md}}
+원문: {{src:docs/guide/10-recipes-and-pitfalls.md}} {{src:docs/guide/02-poteto-mode.md}} {{src:docs/guide/05-build-and-clean.md}} {{src:docs/guide/09-make-it-yours.md}} {{src:skills/poteto-help/SKILL.md}} {{src:skills/poteto-help/references/recipes.md}} {{src:skills/poteto-help/references/prompting.md}} {{src:skills/poteto-mode/SKILL.md}} {{src:skills/poteto-mode/playbooks/multi-phase-plan.md}}
 
 바로 복사해 쓸 프롬프트와, 누구나 한 번은 저지르는 실수를 모았습니다. 경로와 끝 조건은 자기 것으로 바꾸십시오. 레시피는 일부러 격식이 없습니다. 실제로 그렇게 입력되고, 스킬은 의도를 잘 알아듣기 때문입니다.
 
@@ -54,7 +54,7 @@
 /poteto-mode 이 설계를 계획으로 바꿔. 검증할 수 있는 작은 PR이고, 각각 자기 증명이 있게.
 ```
 
-설계가 정해진 뒤에만 묻습니다. 계획은 산출물이고, 실행할 플레이북을 이름 붙입니다. → [Multi-phase plan](playbooks-long.md#playbook-multi-phase-plan)
+설계가 정해진 뒤에만 묻습니다. 계획이 산출물이고, 플레이북은 계획 경로를 돌려주고 멈춥니다. 실행은 사용자가 시작하라고 할 때 시작합니다. → [Multi-phase plan](playbooks-long.md#playbook-multi-phase-plan)
 
 **설계에 대한 두 번째 의견 얻기.**
 
@@ -221,7 +221,7 @@ prove it works를 적용해. 빌드 로그가 아니라 실제 출력을 보여 
 - **같은 실수를 손으로 고치기.** 채팅의 교정은 그 실행 하나에 도움이 됩니다. `/correct`는 저장소를 고쳐 이후 실행이 반복하지 않게 합니다.
 - **커버리지에 `/arena` 쓰기.** `/arena`는 설계나 코드 지시 하나를 반복해 기준안을 고르고 좋은 부분을 이식합니다. `/swarm`은 조각이나 선언된 경주 팔을 나누고 보고서 하나로 집계합니다.
 - **모든 리뷰 댓글 수용하기.** 봇과 사람은 진짜 발견과 잡음을 한 목록에 올립니다. `/interrogate`는 다시 돌려 증명된 발견만 남기고 버린 것과 그 이유를 나열하며, 사용자는 양쪽 어느 쪽으로든 뒤집을 수 있습니다.
-- **`auto`를 모델 슬러그로 취급하기.** `auto`와 `inherit-parent`는 "모델 필드를 생략해 서브에이전트가 부모 채팅 모델을 물려받게 한다"는 뜻입니다. [설치와 첫 사용](setup.md)이 역할을 다룹니다.
+- **`auto`를 모델 슬러그로 취급하기.** `auto`와 `inherit-parent`는 "모델 필드를 생략해 서브에이전트가 부모 채팅 모델을 물려받게 한다"는 뜻입니다. `poteto-mode`는 이때 `generalPurpose`로 띄웁니다. `poteto-agent`의 기본 모델은 Opus 5.5이기 때문입니다. [설치와 첫 사용](setup.md)이 역할을 다룹니다.
 - **초록 빌드로 성공을 보고하기.** 빌드는 컴파일된다는 것을 증명할 뿐입니다. 실제 명령, 흐름, 저장된 값, 프로파일을 요구하고 응답에 증거가 있기를 기대합니다.
 - **`SKILL.md`를 즉흥으로 쓰기.** [Authoring or modifying a skill](playbooks-work.md#playbook-authoring-a-skill) 플레이북으로 보내 검증(validation)과 리뷰가 일어나게 합니다.
 - **작업 중에 스킬이 오작동한다고 그 자리에서 고치기.** 별도 PR로 고치고 작업은 계속 진행합니다. 기능 작업에 엉킨 스킬 수정은 리뷰에서 보이지 않고 평가할 수도 없습니다.
