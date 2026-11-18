@@ -9,7 +9,7 @@ Cursor에서 에이전트에게 실제 코드를 맡겨 본 엔지니어를 위�
 | 부 | 내용 |
 | --- | --- |
 | 시작하기 | pstack의 목적과 설계 아이디어, 설치와 첫 사용, 모델 설정, `poteto-help`, `in-your-own-words`, `sharpen` |
-| 진입점 | 대부분의 작업이 거쳐 가는 `poteto-mode`와 그 플레이북 23개 |
+| 진입점 | 대부분의 작업이 거쳐 가는 `poteto-mode`와 그 플레이북 22개 |
 | 이해하기 | `how`, `why`, `teach`, `recall`, `ketchup`, `ketchup-video` |
 | 설계하기 | `architect`, `arena`, `swarm`, `figure-it-out`, 그리고 `principle-*` 스킬 24개 |
 | 고치고 검증하기 | `tdd`, `blast-radius`, `interrogate`, `benchmark-checklist`, 검증 스킬 4개 |
