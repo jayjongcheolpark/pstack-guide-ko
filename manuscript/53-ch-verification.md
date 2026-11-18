@@ -14,7 +14,7 @@
 
 ### 언제 쓰는가
 
-성능 숫자를 낼 때입니다. PR의 전후, 회귀 주장, hillclimb 하니스, 라이브러리나 설정 선택이 해당합니다. 이유는 [`principle-explain-the-number`](principles.md#skill-principle-explain-the-number)가 말합니다. 아래 질문마다 코드에 대한 짐작이 아니라 실행의 증거로 답합니다. `disable-model-invocation: true`입니다. `poteto-mode`는 벤치마크를 돌리거나 성능을 재거나 측정한 속도 향상이나 회귀를 보고할 때, 보고하거나 행동하기 전에 이 스킬을 부릅니다.
+성능 숫자를 낼 때입니다. PR의 전후, 회귀 주장, hillclimb 하니스, 라이브러리나 설정 선택이 해당합니다. 이유는 [`principle-explain-the-number`](principles.md#skill-principle-explain-the-number)가 말합니다. 아래 질문마다 코드에 대한 짐작이 아니라 실행의 증거로 답합니다. `disable-model-invocation: true`입니다. `poteto-mode`는 측정한 숫자가 있으면 이 스킬을 부릅니다.
 
 ```text
 /benchmark-checklist 내보내기 속도 향상을 PR에 넣기 전에 걸러 줘
@@ -36,7 +36,7 @@
 6. **중요한가.** 마이크로 결과 옆에, 사용자가 기다리는 종단 경로를 현실적인 데이터 크기와 동시성으로 잽니다. 마이크로 결과를 전체의 몫으로 보고합니다. 요청의 1%를 차지하는 헬퍼는, 헬퍼가 아무리 빨라져도 요청을 기껏해야 1% 빠르게 합니다.
 7. **일이 실제로 일어났는가.** 잰 구간 안에서 일이 돌았는지 확인합니다. 요청이 서버에 닿았고, 행이 써졌고, 바이트가 읽혔고, 코드가 결과를 썼습니다. 게으른 코드(아무도 돌리지 않는 제너레이터, 아무도 await하지 않는 프로미스, JIT가 버릴 수 있는 결과)와 시간 초과는 일어나지 않은 일의 숫자를 만듭니다.
 
-**보고.** 판정으로 시작합니다. 더 빠름, 더 느림, 측정 가능한 차이 없음, 결론 없음 중 하나입니다. 단위가 있는 숫자, 실행 횟수, 범위, 제한 요인을 줍니다. 원문의 예는 "p50 41 ms → 33 ms, median of 7 runs per side, range 32 to 35 ms after, bound by JSON parsing on one core."입니다. 차이를 주장하면서 제한 요인을 이름 붙이지 못하거나, 한쪽이 조율되지 않은 채 돌았거나, 질문 4와 7을 확인하지 못했으면 판정은 결론 없음이고 빈틈을 이름 붙입니다. PR 본문은 Opening a PR대로 대표 수치 하나를 두고, 실행과 범위와 제한 요인 증거는 링크된 산출물이나 노트 파일에 둡니다.
+**보고.** 판정으로 시작합니다. 더 빠름, 더 느림, 측정 가능한 차이 없음, 결론 없음 중 하나입니다. 단위가 있는 숫자, 실행 횟수, 범위, 제한 요인을 줍니다. 원문의 예는 "p50 41 ms → 33 ms, median of 7 runs per side, range 32 to 35 ms after, bound by JSON parsing on one core."입니다. 차이를 주장하면서 제한 요인을 이름 붙이지 못하거나, 한쪽이 조율되지 않은 채 돌았거나, 질문 4와 7을 확인하지 못했으면 판정은 결론 없음이고 빈틈을 이름 붙입니다. PR 본문에는 대표 수치 하나만 두고, 실행과 범위와 제한 요인 증거는 링크된 산출물이나 노트 파일에 둡니다.
 
 **다른 성능 자료와의 자리.** Perf issue는 느림을 찾아 고치고, 그 2단계의 성능 만트라가 수정을 만듭니다. 이 스킬은 플레이북이 기준선으로 계획하기 전에 그 기준선을, 그리고 그 뒤의 숫자마다 걸러 냅니다. Hillclimb는 지표 하나를 반복합니다. 이 스킬은 하니스가 동결되기 전에 하니스를 걸러 냅니다. 동결된 하니스는 오류 횟수와 한 일의 횟수를 찍으므로, 유지할지 되돌릴지 정할 때마다 질문 4와 7이 공짜로 확인됩니다.
 
@@ -65,7 +65,7 @@
 
 ### 관련 스킬
 
-이유가 되는 원칙은 [`principle-explain-the-number`](principles.md#skill-principle-explain-the-number)입니다. 기준선과 이후 숫자는 [Perf issue](playbooks-work.md#playbook-perf-issue)가, 동결 전의 하니스는 [Hillclimb](playbooks-work.md#playbook-hillclimb)가 이 스킬로 걸러 냅니다. PR 본문의 대표 수치 하나는 [Opening a PR](playbooks-pr.md#playbook-opening-a-pr)을 따릅니다.
+이유가 되는 원칙은 [`principle-explain-the-number`](principles.md#skill-principle-explain-the-number)입니다. 기준선과 이후 숫자는 [Perf issue](playbooks-work.md#playbook-perf-issue)가, 동결 전의 하니스는 [Hillclimb](playbooks-work.md#playbook-hillclimb)가 이 스킬로 걸러 냅니다.
 
 ## create-verification-skill {#skill-create-verification-skill}
 

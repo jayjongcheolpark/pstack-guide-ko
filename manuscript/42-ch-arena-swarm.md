@@ -1,6 +1,6 @@
 # arena, swarm, figure-it-out
 
-이 장은 병렬성과 절차(playbook) 설계를 다루는 세 스킬을 설명합니다. `arena`는 같은 과업에 후보를 여러 개 만들어 기준안을 고르고 좋은 부분을 이식합니다. `swarm`은 조각을 나눠 커버하거나 같은 지시로 경주시키고 하나의 보고서로 돌려줍니다. `figure-it-out`은 맞는 플레이북이 없는 큰 작업의 플레이북 자체를 설계합니다.
+이 장은 병렬성과 절차(playbook) 설계를 다루는 세 스킬을 설명합니다. `arena`는 같은 과업에 후보를 여러 개 만들어 기준안을 고르고 좋은 부분을 이식합니다. `swarm`은 조각을 나눠 커버하거나 같은 지시로 경주시키고 하나의 보고서로 돌려줍니다. `figure-it-out`은 크거나 자리를 비운 사이에 도는 작업, 또는 맞는 플레이북이 없는 작업의 플레이북 자체를 설계합니다.
 
 ## arena {#skill-arena}
 
@@ -10,7 +10,7 @@
 
 ### 언제 쓰는가
 
-원문의 `description`이 든 트리거는 `/arena`, "arena this", "throw it in the arena", 그리고 사소하지 않은 산출물(artifact)에서 한 번의 시도가 잘못된 모양을 굳힐 때입니다. `disable-model-invocation: true`입니다. 안내서는 이것을 설계 도구의 밑바닥으로 소개합니다. `architect`가 이것을 쓰고, `poteto-mode`의 Feature 플레이북은 구현이 여러 유효한 모양(오류 처리, 추상화 계층, 테스트 구조)을 허용할 때 코드 작성을 이 스킬로 위임하게 합니다. Eval 플레이북은 후보를 띄우고 눈가림 심사를 하는 데 이 스킬의 B단계와 C단계를 씁니다.
+원문의 `description`이 든 트리거는 `/arena`, "arena this", "throw it in the arena", 그리고 사소하지 않은 산출물(artifact)에서 한 번의 시도가 잘못된 모양을 굳힐 때입니다. `disable-model-invocation: true`입니다. 안내서는 이것을 설계 도구의 밑바닥으로 소개합니다. `architect`는 크거나 논쟁적인 설계에서 이것을 돌리고, `poteto-mode`의 Feature 플레이북은 구현이 여러 유효한 모양(오류 처리, 추상화 계층, 테스트 구조)을 허용할 때 코드 작성을 이 스킬로 위임하게 합니다. Eval 플레이북은 후보를 띄우고 눈가림 심사를 하는 데 이 스킬의 B단계와 C단계를 씁니다.
 
 `swarm`과의 차이는 안내서가 분명히 적습니다. `arena`는 모든 작업자에게 같은 설계나 코드 지시를 주고 기준안을 고르고 좋은 부분을 이식합니다. `swarm`은 조각이나 미리 선언한 규칙(rule)이 있는 경주를 맡고 기준안 선택과 이식 의식은 쓰지 않습니다.
 
@@ -22,12 +22,12 @@
 
 1. 각 후보가 만들 산출물을 밝힙니다.
 2. 루브릭을 도출합니다. *이* 과업에서 성공이 어떤 모습인지 밝히고 채점할 수 있는 구체적 기준(criteria) 3~6개로 바꿉니다. 루브릭은 D단계에서 고르는 사람의 도구이고 후보는 과업만 봅니다.
-3. 러너를 고릅니다. `~/.cursor/rules/pstack-models.mdc`의 `arena runners` 줄을 씁니다. 규칙이나 그 줄이 없으면 `claude-fable-5-2-high`, `claude-opus-5-5-high-fast`, `gemini-4-carbon-high`를 하나씩 씁니다. 이 줄의 `auto`나 `inherit-parent` 항목은 부모 모델이라는 뜻이므로 `model`을 생략합니다. Task 도구가 설정된 항목을 거부하면 그 자리를 그 계열의 기본값으로 돌리고 그렇다고 말합니다. 계열은 접두사로 나누고, 가장 길게 맞는 접두사가 이깁니다. 접두사는 `claude-fable-*`, `claude-*`, `gemini-*`입니다. 비교하기 전에 앞의 `cursor-`를 뗍니다. 그 밖의 슬러그는 첫 하이픈 앞의 글자가 계열입니다. 계열의 기본값은 위 기본 목록에 있는 그 계열의 항목입니다. 계열에 기본값이 없거나 Task 도구가 그 기본값을 거부하면 오류 메시지에서 같은 계열의 가장 가까운 유효 슬러그를 쓰고, 그런 슬러그가 없으면 그 자리를 빼고 그렇다고 말합니다. 뺀 자리 때문에 러너가 둘보다 적어지면 둘이 될 때까지 러너를 더합니다. 줄에 항목이 하나뿐이면 하나가 될 때까지입니다. 더한 러너는 남은 러너의 모델로 돌리고, 남은 러너가 없으면 `model`을 생략해 부모 모델로 돌린 뒤 그렇다고 말합니다. 아레나가 여러 설계 방향을 덮을 때는 더 띄웁니다. 판단에 민감하지 않고 생성이 병목인 작업은 같은 모델을 N번 씁니다. 띄울 때마다 그 일에 맞는 추론 강도와 일반 속도 또는 fast를 고릅니다. [`poteto-mode`](poteto-mode.md#skill-poteto-mode)의 Subagents 절을 따릅니다.
+3. 러너를 고릅니다. `~/.cursor/rules/pstack-models.mdc`의 `arena runners` 줄에서 고르고, 기본값은 `claude-fable-5-2-high`, `claude-opus-5-5-high-fast`, `gemini-4-carbon-high`입니다. `auto`나 `inherit-parent` 항목은 부모 모델이므로 `model`을 생략하고 `generalPurpose`로 띄웁니다. Task 도구가 슬러그를 거부하면 같은 계열의 가장 가까운 유효 슬러그를 쓰거나 그 자리를 빼되, 러너를 둘 이상 유지하고 그렇다고 말합니다. 계열은 앞의 `cursor-`를 뗀 뒤 접두사로 나누고, 가장 길게 맞는 접두사가 이깁니다. 접두사는 `claude-fable-*`, `claude-*`, `gemini-*`입니다. 그 밖의 슬러그는 첫 하이픈 앞의 글자가 계열입니다. 설계 방향이 여럿이면 더 띄웁니다. 판단에 민감하지 않고 생성이 병목인 작업은 한 모델을 되풀이해 씁니다. 띄울 때마다 추론 강도는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode)의 Subagents 절을 따라 고릅니다.
 4. 출력 경로를 배정합니다. 후보마다 자기 위치에 씁니다. 가능하면 git 워크트리이고, 아니면 `/tmp/arena-<slug>/candidate-<n>/`입니다(`separate-before-serializing-shared-state` 원칙(principle)).
 
 **B단계. 팬아웃.** 모든 N개의 서브에이전트를 한 메시지에 `run_in_background: true`로 띄웁니다. 각자 과업, 공유 그라운딩의 경로, 자기 출력 경로, 산출물과 짧은 근거를 모두 만들라는 지시를 받습니다. 각 근거는 후보가 고려한 대안과 기각한 것을 밝힙니다. 후보가 출력을 만들지 못하면 N-1개로 진행하고 종합 기록에 탈락을 적습니다.
 
-**C단계. 교차 심사.** B단계의 모든 후보가 끝난 뒤 `arena cross-judge pool` 줄에서 모델 하나를 고릅니다. 규칙이나 그 줄이 없으면 `claude-fable-5-2-high`, `claude-opus-5-5-high-fast`, `gemini-4-carbon-high` 중에서 고릅니다. 읽기 전용 심사 서브에이전트 하나를 띄웁니다. 심사자는 절대 부모의 벤더(vendor, 모델을 만든 회사)가 아닙니다. 벤더는 A단계 3번이 정한 계열과 같되, `claude-fable-*`와 `claude-*`는 한 벤더입니다. 다른 벤더의 항목만 줄에 적힌 순서대로 시도합니다. `auto`나 `inherit-parent` 항목은 부모 모델이므로 심사하지 않습니다. 기본 목록에서는 Claude 부모가 `gemini-4-carbon-high`를 받고, 다른 벤더의 부모는 `claude-fable-5-2-high`를 먼저, 그다음 `claude-opus-5-5-high-fast`를 받습니다. Task 도구가 항목을 거부하면 오류 메시지에서 같은 모델의 가장 가까운 강도나 속도의 유효 슬러그를 쓰고, 그런 슬러그가 없으면 다음 항목으로 넘어갑니다. 다른 벤더의 항목이 하나도 돌지 않으면 기본 목록에서 다른 벤더의 항목을 같은 방식으로 시도합니다. 그것도 돌지 않으면 심사자를 건너뛰고, D단계에서 기준안을 혼자 고르고, 그렇다고 말합니다. 부모의 모델을 모르면 줄의 실제 슬러그를 적힌 순서대로 시도하고, 벤더 확인을 하지 않았다고 말합니다. 심사자는 루브릭과 경로 라벨로 표시된 후보를 보고 기준마다 채점하고 근거와 함께 기준안을 추천합니다. 후보 자신들이 아니라 D단계의 부모 독서와 병렬로 돕니다. 후보가 아직 쓰는 동안에는 심사자를 띄우지 않습니다.
+**C단계. 교차 심사.** B단계의 모든 후보가 끝난 뒤 `~/.cursor/rules/pstack-models.mdc`의 `arena cross-judge pool` 줄에서 읽기 전용 심사자 하나를 띄웁니다. 기본값은 `claude-opus-5-5-high-fast`, `gemini-4-carbon-high`입니다. 심사자는 절대 부모의 벤더(vendor, 모델을 만든 회사)가 아닙니다. 이 확인에서 Fable은 Claude로 치므로, 다른 벤더의 첫 항목을 씁니다. `auto`나 `inherit-parent` 항목은 부모 모델입니다. 부모의 모델을 모르면 첫 실제 슬러그를 쓰고, 벤더 확인을 하지 않았다고 말합니다. Task 도구가 슬러그를 거부하면 같은 계열의 가장 가까운 유효 슬러그를 쓰고, 그것도 안 되면 다른 벤더의 다음 항목을 쓰거나 심사자를 건너뛰고, 그렇다고 말합니다. 부모가 D단계에서 읽는 동안 심사자는 경로 라벨로 후보마다 루브릭 기준별로 채점하고 기준안을 추천합니다.
 
 **D단계. 기준안을 고릅니다.** 고르기 전에 모든 후보를 처음부터 끝까지 읽습니다. 후보마다 총체적 느낌이 아니라 루브릭 기준별로 채점합니다. C단계가 심사자를 돌렸으면 교차 심사와 비교합니다. 기준안에 합의하면 선택이 확인되고, 불일치하면 한쪽이 편향되었거나 루브릭이 모호했다는 뜻이므로 결정하기 전에 두 근거를 모두 읽습니다. 미래의 유지보수자가 불변식을 깨지 않고 가장 쉽게 확장할 수 있는 후보를 기준안으로 고릅니다. 둘이 비슷해 보이면 Laziness Protocol에 따라 더 깨끗한 경계나 더 작은 API를 선호합니다. 교차 심사의 판정이나 C단계가 심사자를 건너뛰었다는 사실을 포함한 짧은 종합 메모에 선택과 이유를 기록합니다.
 
@@ -62,14 +62,14 @@
 ### 함정과 주의점
 
 - 커버리지에 `arena`를 쓰지 않습니다. `arena`는 설계나 코드 지시 하나를 반복하고 기준안을 고르고 좋은 부분을 이식합니다. 조각을 나눠 검사하거나 경주시키는 것은 `swarm`입니다. (안내서가 꼽은 흔한 실수입니다.)
-- 후보가 아직 쓰는 동안 교차 심사자를 띄우지 않습니다.
+- 교차 심사자는 B단계의 모든 후보가 끝난 뒤에 띄웁니다.
 - 루브릭을 후보에게 보여 주지 않습니다. 후보는 과업만 봅니다.
 - 후보가 크게 갈리면 결과를 평균 내지 않고 A단계를 다시 합니다.
 - 각 후보에 자기 워크트리나 디렉터리를 줍니다.
 
 ### 관련 스킬
 
-[`architect`](architect.md#skill-architect)가 설계 스케치에 이 스킬을 씁니다. 커버리지와 경주는 [`swarm`](#skill-swarm), 눈가림 시험은 [Eval](playbooks-work.md#playbook-eval) 플레이북이 이 스킬의 B, C단계를 씁니다. 적대적 리뷰는 [`interrogate`](interrogate.md#skill-interrogate)입니다.
+[`architect`](architect.md#skill-architect)는 크거나 논쟁적인 설계를 혼자 스케치하지 않고 이 스킬을 돌립니다. 커버리지와 경주는 [`swarm`](#skill-swarm), 눈가림 시험은 [Eval](playbooks-work.md#playbook-eval) 플레이북이 이 스킬의 B, C단계를 씁니다. 적대적 리뷰는 [`interrogate`](interrogate.md#skill-interrogate)입니다.
 
 ## swarm {#skill-swarm}
 
@@ -79,7 +79,7 @@
 
 ### 언제 쓰는가
 
-원문의 `description`은 `/swarm`, "swarm this", 병렬 커버리지, 경주, 관문 시험(gauntlet), 탐색을 트리거로 듭니다. 작업자들은 서로 다른 조각을 맡거나, 같은 지시로 경주하거나, 둘을 섞을 수 있습니다. 부모는 기다리고 집계하고 보고서 하나를 돌려줍니다. 병렬성이 커버리지를 사거나 독립적인 검사를 경주시킬 때 씁니다. `poteto-mode`는 커버리지 행렬, 경주, 관문 시험, 탐색 분할에 `swarm`을 쓰라고 하고, Autopilot 플레이북의 라운드 검증과 Multi-phase 플레이북의 라이브 레인이 이 스킬로 돌아갑니다.
+원문의 `description`은 `/swarm`, "swarm this", 병렬 커버리지, 경주, 관문 시험(gauntlet), 탐색을 트리거로 듭니다. 작업자들은 서로 다른 조각을 맡거나, 같은 지시로 경주하거나, 둘을 섞을 수 있습니다. 부모는 기다리고 집계하고 보고서 하나를 돌려줍니다. 병렬성이 커버리지를 사거나 독립적인 검사를 경주시킬 때 씁니다. `poteto-mode`는 팬아웃을 `swarm`으로 보냅니다. 안내서는 이 스킬이 독립된 조각, 커버리지 행렬, 관문 시험 레인, 탐색 분할, 미리 선언한 경주 팔에 작업자를 펼친다고 설명합니다. Autopilot-full 플레이북의 4단계 검증이 이 스킬로 돌아갑니다.
 
 ### 동작 방식
 
@@ -89,7 +89,7 @@
 
 1. 완료 술어와 swarm이 돌려줘야 할 산출물이나 보고서를 밝힙니다.
 2. 모양을 고릅니다. 조각으로 나누기, 같은 지시로 N명 경주, 둘을 섞기. 경주나 혼합 모양이면 띄우기 전에 `first pass`, `rank all`, `best-of` 중 하나를 선언합니다.
-3. 작업자 모델은 `swarm workers` 줄에서 고릅니다. 규칙이나 그 줄이 없으면 `claude-opus-5-5-high-fast`입니다. `auto`나 `inherit-parent`면 `model`을 생략해 작업자가 부모 모델로 돕니다. Task 도구가 슬러그를 거부하면 기본값을 쓰고 그렇다고 말합니다. 기본값도 거부되면 오류 메시지에서 같은 계열의 가장 가까운 유효 슬러그를 씁니다. 모델 경주에서는 각 팔의 모델을 미리 이름 붙입니다. 띄울 때마다 그 일에 맞는 추론 강도와 일반 속도 또는 fast를 고릅니다. [`poteto-mode`](poteto-mode.md#skill-poteto-mode)의 Subagents 절을 따릅니다.
+3. 작업자 모델은 `swarm workers` 줄에서 고릅니다. 규칙이나 그 줄이 없으면 `claude-opus-5-5-high-fast`입니다. `auto`나 `inherit-parent`면 `model`을 생략해 작업자가 부모 모델로 돕니다. Task 도구가 슬러그를 거부하면 기본값을 쓰고 그렇다고 말합니다. 기본값도 거부되면 오류 메시지에서 같은 계열의 가장 가까운 유효 슬러그를 씁니다. 모델 경주에서는 각 팔의 모델을 미리 이름 붙입니다. 띄울 때마다 그 일에 맞는 추론 강도를 고릅니다. [`poteto-mode`](poteto-mode.md#skill-poteto-mode)의 Subagents 절을 따릅니다.
 4. 작업자가 쓰면 각자 쓸 수 있는 자기 출력을 줍니다. 작업자가 커밋을 검증하거나 측정하면 브리프마다 정확한 SHA를 이름 붙입니다. 측정 브리프는 방법(표본 수, 표본 하나가 무엇인지, 순서)도 이름 붙이고, 작업자는 둘 다 결과에 기록합니다.
 
 **B단계. 팬아웃.** 모든 N명을 한 메시지에 `subagent_type: generalPurpose`, `environment: "cloud"`, `run_in_background: true`로 띄우고 3단계의 모델(`auto`나 `inherit-parent`면 비워 둠)을 지정합니다. 사용자 컴퓨터의 무언가에 접근해야 하는 작업자일 때만 `environment: "local"`을 씁니다. 작업자가 기본이 아닌 푸시된 브랜치에서 시작해야 하면 `cloud_base_branch`를 넘깁니다. 모든 브리프는 독립적으로 서야 합니다. 목표, 범위, 정확한 조각이나 경주 팔, 검증 방법, 보고할 것을 담습니다. 보고는 증거와 함께 `PASS`, `ISSUES`, `BLOCKED`를 씁니다. 결함을 증명할 수 있는 작업자는 `ISSUES`를 보고하고 첫 번째만이 아니라 증명할 수 있는 모든 문제를 나열합니다. 작업자가 탈락하면 N-1로 진행하고 그렇다고 적습니다.
@@ -118,20 +118,26 @@
 
 ### 관련 스킬
 
-[`arena`](#skill-arena), 그리고 이 스킬을 쓰는 플레이북 [Autopilot-full](playbooks-long.md#playbook-autopilot-full), [Multi-phase plan](playbooks-long.md#playbook-multi-phase-plan)입니다.
+[`arena`](#skill-arena), 그리고 이 스킬을 쓰는 [Autopilot-full](playbooks-long.md#playbook-autopilot-full) 플레이북입니다.
 
 ## figure-it-out {#skill-figure-it-out}
 
-원문: {{src:skills/figure-it-out/SKILL.md}} {{src:docs/guide/07-overnight.md}} {{src:README.md}}
+원문: {{src:skills/figure-it-out/SKILL.md}} {{src:docs/guide/07-overnight.md}} {{src:skills/poteto-help/SKILL.md}} {{src:README.md}}
 
 > 맞는 플레이북이 없을 때 감사할 수 있는 플레이북을 새로 설계합니다. 코드 전에 나오는 산출물은 워크플로 자체입니다.
 
 ### 언제 쓰는가
 
-원문의 `description`은 더 좁은 플레이북이 맞지 않는 큰 마이그레이션, 야심찬 다부분 변경, 사람이 자리를 뜬 뒤에 검토할 작업을 듭니다. 트리거는 `/figure-it-out`, "figure it out", 큰 마이그레이션, 더 좁은 플레이북이 맞지 않을 때입니다. `poteto-mode`는 크거나 여러 곳에 걸친 작업이나 나중에 믿기로 하고 자리를 뜨는 작업을, Feature 같은 좁은 플레이북이 맞아도 이 스킬로 보냅니다. 며칠에 걸친 상시 프로그램은 Orchestrate로 갑니다. `figure-it-out`은 한 번의 맞춤 실행을 설계하고 orchestrate는 프로그램을 운영합니다. README의 예입니다.
+원문의 `description`은 더 좁은 플레이북이 맞지 않는 큰 마이그레이션, 야심찬 다부분 변경, 사람이 자리를 뜬 뒤에 검토할 작업을 듭니다. 트리거는 `/figure-it-out`, "figure it out", 큰 마이그레이션, 더 좁은 플레이북이 맞지 않을 때입니다. `poteto-mode`는 크거나 여러 곳에 걸친 작업, 자리를 비운 사이에 도는 작업, 어느 플레이북도 맞지 않는 과업을 이 스킬로 보냅니다. `poteto-help`는 이 스킬이 엄밀한 실행 하나를 설계하고, Autonomous run 플레이북은 과업 하나를 끝 조건까지 몬다고 구분합니다. README의 예입니다.
 
 ```text
 /poteto-mode 자리를 비울 거야. 동기 스토어를 쓰는 모든 호출자를 새 비동기 스토어로 옮기고 동작은 그대로 유지해 줘. 돌아왔을 때 제대로 됐다고 믿을 수 있으면 좋겠어.
+```
+
+여러 패키지에 걸친 마이그레이션처럼 프로그램 하나 전체에도 따로 플레이북이 없습니다. 안내서는 `/poteto-mode`가 그런 작업을 이 스킬로 보내 엄밀한 실행 하나를 설계하게 한다고 설명합니다. 안내서의 예입니다.
+
+```text
+/poteto-mode 모든 패키지를 새 스토어로 옮겨 줘. 하나하나 변환되고 병합될 때까지 맡아 줘. 나는 하루에 두 번 들여다볼게.
 ```
 
 ### 동작 방식
@@ -152,7 +158,7 @@
 
 - 작업 전에 검증 하니스를 만들고 기준선은 변경 전 상태에서 잡아, 검사가 "옛 값 대 새 값"으로 읽히게 합니다.
 - 되돌릴 수 없는 문인 설계 결정에는 `architect` 스킬(이것이 `arena`를 돌림)을 돌립니다. 모양이 이미 구체적인 기계적 작업에는 건너뜁니다. 이미 굳은 설계 위의 두 번째 아레나는 과잉 설계입니다(`laziness-protocol` 원칙).
-- 무엇을 팬아웃할지 정합니다. 이음매를 가로질러서만 병렬화하고 작업자마다 자기 워크트리나 브랜치를 줍니다(`separate-before-serializing-shared-state` 원칙). 지나치게 팬아웃하지 않습니다. 띄울 때마다 그 일에 맞는 추론 강도와 일반 속도 또는 fast를 고릅니다. [`poteto-mode`](poteto-mode.md#skill-poteto-mode)의 Subagents 절을 따릅니다.
+- 무엇을 팬아웃할지 정합니다. 이음매를 가로질러서만 병렬화하고 작업자마다 자기 워크트리나 브랜치를 줍니다(`separate-before-serializing-shared-state` 원칙). 지나치게 팬아웃하지 않습니다. 띄울 때마다 그 일에 맞는 추론 강도를 고릅니다. [`poteto-mode`](poteto-mode.md#skill-poteto-mode)의 Subagents 절을 따릅니다.
 - 설계한 단계 목록을 적어 둡니다. 그 목록이 사람이 검토하는 것입니다.
 
 그다음 설계를 실행합니다. 그 단계들을 C단계 항목 뒤 D단계 앞에 구체적 항목으로 할 일 목록에 더합니다. 각각을 C단계의 루프 규율 아래서 실행하고, D단계의 기록을 그 사이사이에 엮어 넣습니다. 끝에 몰아서가 아니라 단계가 랜딩될 때마다 한 행씩입니다.
@@ -173,7 +179,7 @@
 
 ### 함정과 주의점
 
-- 과업이 좁은 플레이북에 맞는데 `figure-it-out`을 쓰지 않습니다. 단, 크거나 자리를 뜨는 작업은 좁은 플레이북이 맞아도 여기로 갑니다.
+- 더 좁은 플레이북이 맞는 작은 과업에는 쓰지 않습니다. 크거나 여러 곳에 걸친 작업, 자리를 비운 사이에 도는 작업, 맞는 플레이북이 없는 과업이 여기로 옵니다.
 - 이미 굳은 설계 위에 두 번째 아레나를 돌리지 않습니다(과잉 설계).
 - 계획은 코드 전에 나오는 산출물입니다. 위험한 미지수를 먼저 놓고 검증 하니스를 기능보다 먼저 만듭니다.
 - 너무 쉽게 통과하면 시스템보다 관찰 방법을 의심합니다.
@@ -182,4 +188,4 @@
 
 ### 관련 스킬
 
-설계 결정에는 [`architect`](architect.md#skill-architect), 기록은 [`show-me-your-work`](personal.md#skill-show-me-your-work)입니다. 프로그램 규모는 [Orchestrate](playbooks-long.md#playbook-orchestrate)로, 밤새 맡기는 사용법은 [밤새 돌리기](overnight.md)에서 다룹니다.
+설계 결정에는 [`architect`](architect.md#skill-architect), 기록은 [`show-me-your-work`](personal.md#skill-show-me-your-work)입니다. 과업 하나를 끝 조건까지 모는 일은 [Autonomous run](playbooks-long.md#playbook-autonomous-run) 플레이북이 맡고, 밤새 맡기는 사용법은 [밤새 돌리기](overnight.md)에서 다룹니다.

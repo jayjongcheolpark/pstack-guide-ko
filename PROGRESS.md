@@ -4,14 +4,14 @@
 
 ## 원본
 
-`cursor/plugins`의 `pstack/`, 커밋 `bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7` (0.15.42) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를, 0.15.20 절은 그때의 핀 `1b6d44f`를, 0.15.21 절은 그때의 핀 `997ffc7`를, 0.15.23 절은 그때의 핀 `dbf4981`을, 0.15.24 절은 그때의 핀 `1e5c90a`를, 0.15.25 절은 그때의 핀 `e5136d8`를, 0.15.25-ko.1 절은 그때의 핀 `99743e9`를, 0.15.25-ko.2 절은 그때의 핀 `182f2ce`를, 0.15.26 절은 그때의 핀 `0b8e952`를, 0.15.28 절은 그때의 핀 `d457567`를, 0.15.29 절은 그때의 핀 `88d4751`을, 0.15.30 절은 그때의 핀 `eb4db2b`를, 0.15.30-ko.1 절은 그때의 핀 `4ec7ffa`를, 0.15.32 절은 그때의 핀 `e73df47`을, 0.15.34 절은 그때의 핀 `519d36a`를, 0.15.36 절은 그때의 핀 `c742dd6`를, 0.15.42 절은 그때의 핀 `bf0c7cd`를 적은 기록입니다.
+`cursor/plugins`의 `pstack/`, 커밋 `2f87c854fe3e2fcda44ca86b46ede35aad3c46b7` (0.15.43) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를, 0.15.20 절은 그때의 핀 `1b6d44f`를, 0.15.21 절은 그때의 핀 `997ffc7`를, 0.15.23 절은 그때의 핀 `dbf4981`을, 0.15.24 절은 그때의 핀 `1e5c90a`를, 0.15.25 절은 그때의 핀 `e5136d8`를, 0.15.25-ko.1 절은 그때의 핀 `99743e9`를, 0.15.25-ko.2 절은 그때의 핀 `182f2ce`를, 0.15.26 절은 그때의 핀 `0b8e952`를, 0.15.28 절은 그때의 핀 `d457567`를, 0.15.29 절은 그때의 핀 `88d4751`을, 0.15.30 절은 그때의 핀 `eb4db2b`를, 0.15.30-ko.1 절은 그때의 핀 `4ec7ffa`를, 0.15.32 절은 그때의 핀 `e73df47`을, 0.15.34 절은 그때의 핀 `519d36a`를, 0.15.36 절은 그때의 핀 `c742dd6`를, 0.15.42 절은 그때의 핀 `bf0c7cd`를, 0.15.43 절은 그때의 핀 `2f87c85`를 적은 기록입니다.
 
 ## 빌드와 검사
 
 ```shell
 bun install
 bun tools/build.mjs        # dist/pstack-guide-<버전>.epub, dist/pstack-guide-<버전>.pdf
-PSTACK_SRC=<클론 경로>/pstack bun tools/check.mjs   # 원고 규칙, 링크, 스킬 58개와 플레이북 23개의 절 존재, epubcheck
+PSTACK_SRC=<클론 경로>/pstack bun tools/check.mjs   # 원고 규칙, 링크, 스킬 58개와 플레이북 22개의 절 존재, epubcheck
 bun tools/check-layout.mjs                          # EPUB을 390px 폭에서 열어 가로 넘침 검사
 bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2,10,300   # PDF 페이지 수, 개요, 글꼴, 한글 텍스트, 선택한 페이지를 PNG로
 ```
@@ -31,7 +31,7 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 | 21-ch-poteto-mode | `poteto-mode` 본체와 `poteto-agent` | | checked |
 | 22-ch-playbooks-work | 작업 플레이북 12개 (조사, 버그, 성능, 기능 등) | | checked |
 | 23-ch-playbooks-pr | PR 플레이북 (opening-a-pr, babysit, shipping, bugbot-triage) | | checked |
-| 24-ch-playbooks-long | 장시간, 대규모 플레이북 8개 | | checked |
+| 24-ch-playbooks-long | 장시간, 대규모 플레이북 7개 | | checked |
 | 30-part-understand | 3부 이해하기 | | checked |
 | 31-ch-how | `how` | | checked |
 | 32-ch-why | `why` | | checked |
@@ -64,7 +64,7 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 
 - 원본의 `docs/guide`는 10장짜리 사용 안내서입니다. 이 책은 스킬을 주제별로 묶는 구성을 유지하되, 가이드의 흐름(설정, 라우팅, 이해, 설계, 빌드와 정리, 검증과 배포, 밤새 돌리기, 원칙, 나만의 방식, 레시피)을 각 부에 나눠 담았습니다.
 - 원본의 `docs/harness/claude-code.md`는 설치와 Cursor 이름 대응이므로 시작하기 부의 설치 장에서 다룹니다. `docs/guide/01-setup.md`와 같은 자리입니다.
-- `poteto-mode`는 SKILL.md와 플레이북 23개, references, scripts로 분량이 가장 큽니다. 다른 부의 항목으로 두면 균형이 무너져서 시작하기 다음에 독립된 부(진입점)로 세웠습니다.
+- `poteto-mode`는 SKILL.md와 플레이북 22개, references, scripts로 분량이 가장 큽니다. 다른 부의 항목으로 두면 균형이 무너져서 시작하기 다음에 독립된 부(진입점)로 세웠습니다.
 - `setup-pstack`은 설치와 설정이 주제라서 시작하기 부의 설치 장에서 스킬 절로 다룹니다.
 - `principle-*` 스킬은 독립된 장(설계하기 부)으로 묶었습니다.
 - 검증 스킬(`benchmark-checklist`, `create-verification-skill`, `maintain-verification-skill`, `create-formal-verification-skill`, `maintain-formal-verification-skill`, `statechart`)은 버그 수정과 검증이 같은 흐름이라서 고치고 검증하기 부의 마지막 장에 뒀습니다. `benchmark-checklist`는 플레이북이 아니라 스킬이라 플레이북 장이 아니라 이 장에 절이 있습니다. `create-formal-verification-skill`은 앱을 구동하는 검증 스킬이 아니라 테스트가 잘 닿지 않는 속성 하나를 형식 검증(formal verification)하는 프로젝트 전용 스킬을 남기므로 같은 장에 절을 뒀고, `maintain-formal-verification-skill`은 그 검사가 덮는 코드가 바뀐 뒤의 유지 루프라 그 옆에 뒀습니다. `statechart`는 TLA+ 모델에서 사용자가 보는 것을 차트로 그리고 안내서 6장이 형식 검증 다음에 두므로 그 둘 다음에 뒀습니다.
@@ -844,3 +844,41 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 - `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 58개와 플레이북 23개의 절 존재, 용어 병기 짝 28개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
 - `CHROME_PATH=/usr/local/bin/google-chrome bun tools/check-layout.mjs`: 390px에서 가로 넘침 없음.
 - `CHROME_PATH=/usr/local/bin/google-chrome bun tools/build.mjs`: `pstack-guide-0.15.42.epub`, `pstack-guide-0.15.42.pdf` (489쪽, 0.15.36은 498쪽).
+
+## 0.15.43
+
+원문을 `bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7`(0.15.42)에서 `2f87c854fe3e2fcda44ca86b46ede35aad3c46b7`(0.15.43)로 올렸습니다. pstack 트리에 닿은 커밋은 하나입니다.
+
+- `2f87c85` feat(pstack): shorter skill texts, worker.md, and Opus-first routing capped at xhigh (#1249)
+
+책 버전은 `BOOK_REVISION = 0`이라 pstack 버전과 같은 `0.15.43`입니다. 산출물 이름은 `pstack-guide-0.15.43.epub`, `pstack-guide-0.15.43.pdf`입니다.
+
+확인한 사실입니다. `plugin.json`과 `.cursor-plugin/plugin.json` 버전은 둘 다 0.15.43입니다. `2f87c85`는 `main`에서 `pstack/`에 닿은 최신 커밋입니다. 0.15.43을 처음 쓴 커밋이기도 합니다. 스킬 수는 58개(일반 34, 원칙 24), 에이전트는 2개로 그대로입니다. 새 스킬은 없습니다. 플레이북은 `orchestrate.md`가 지워져 22개입니다. 장시간, 대규모 플레이북 장은 7개를 다룹니다.
+
+`bf0c7cd..2f87c85`에서 `pstack/`에 닿은 파일은 70개입니다. 사용자에게 보이는 파일은 README, 안내서 1·2·4·5·6·7·9장, Claude Code 어댑터, `poteto-agent`, `poteto-mode`와 새 `worker.md`, 플레이북 열일곱, 원칙 스킬 열넷, `architect`, `arena`, `automate-me`, `benchmark-checklist`, `figure-it-out`, `no-comments`, `poteto-help`, `recall`, `reflect`, `setup-pstack`, `show-me-your-work`, `swarm`, `technical-writing`, `unslop`, 두 `plugin.json`입니다. 지워진 파일은 `playbooks/orchestrate.md`, `scripts/check-plan.mjs`와 그 테스트, `architect/references/`의 세 파일, `reflect/references/`의 네 파일입니다. 나머지 하나는 `scripts/package.json`입니다.
+
+원고에서 반영한 내용입니다.
+
+- 핀과 permalink, 산출물 이름을 `2f87c85` / `0.15.43`으로 올렸습니다.
+- 기본 모델은 코드·글·판단이 `claude-opus-5-5-xhigh-fast`입니다. 어떤 역할도 `xhigh`보다 높게 돌지 않습니다. 패널 밖의 Fable 5.2는 사용자가 이 과업에 이름을 댔거나, 같은 브리프로 Opus 5.5 xhigh를 두 번 돌려 확인에 실패했을 때만 돕니다. 난이도만으로는 해당하지 않습니다. Opus 5.5는 늘 `-fast` 슬러그이고, 플레이북과 스킬은 속도를 고르지 않고 추론 강도만 고릅니다.
+- `/setup-pstack` 규칙은 `# defaults: 3` 줄을 갖습니다. 예산은 `large`, `medium`, `small` 셋이고, 옛 `# budget: unlimited`는 `large`가 됩니다. `hardest tasks`, `architect runners`, `reflect tooling`, `why investigators` 줄은 폐지된 역할이라 지웁니다. arena 교차 심사 기본 풀은 `claude-opus-5-5-high-fast, gemini-4-carbon-high`입니다.
+- 역할 값이 `inherit-parent`나 `auto`이면 `model`을 생략하고 `generalPurpose`를 띄웁니다. `poteto-agent`는 프런트매터에 `model: claude-opus-5-5-xhigh-fast`를 둡니다.
+- `poteto-mode`에 `worker.md`가 생겼습니다. 에이전트를 띄우는 킥오프의 첫 줄은 `Read <path>/worker.md before anything else.`입니다. 플레이북 목록은 22개이고 Orchestrate는 없습니다. 크거나 여러 곳에 걸치거나 지켜보는 사람 없이 도는 작업, 그리고 맞는 플레이북이 없는 작업은 `figure-it-out`으로 갑니다.
+- `architect`는 두 문단입니다. 바뀌는 시스템을 추적한 뒤 모양 두 가지를 그려 하나를 고르고, 크거나 논쟁적인 설계는 `arena`로 갑니다. 참조 파일과 "with checkpoint"는 없습니다.
+- `reflect`는 짧은 파일 하나이고 네 리뷰어 참조가 없습니다. Multi-phase plan은 다섯 단계이고 계획이 산출물입니다. 구현하지 않고 `check-plan.mjs`도 없습니다.
+- Babysit은 리베이스, 대상 변경, 강제 푸시를 하지 않습니다. 충돌이나 낡은 기준을 리베이스가 필요한 브랜치와 함께 보고하고 멈춥니다. Eval에서 디스패치, 폴링, 묶기만 하는 에이전트는 `claude-opus-5-5-medium-fast`로 돕니다.
+- 1장의 기본 모델 문장을 README대로 고쳤습니다. `architect`의 병렬 설계 탐색과 "두 모델이 일치하면 신호가 강하다"는 문장은 `poteto-mode`에서 빠져 1장에서도 뺐습니다.
+
+### 해석한 부분
+
+- 책 버전은 `0.15.43-ko.1`이 아니라 `0.15.43`입니다. 새 pstack 버전을 처음 다룰 때는 접미사를 붙이지 않습니다.
+- README의 `/architect` 한 줄은 여전히 호출자의 사용법, 타입, 모듈 모양을 먼저 정한다고 합니다. 1장은 모양 두 가지를 그려 고른다는 잎 스킬을 따랐습니다.
+- 같은 표면에서 먼저 재현한다는 문장은 `poteto-mode`에서 빠졌고 Bug fix 플레이북 1단계와 4단계에 남았습니다. 1장은 그 문장의 출처를 Bug fix 플레이북으로 밝혔습니다.
+- 플레이북이 22개가 되어 플레이북 세 장의 분량이 달라졌지만 장 구성은 그대로 뒀습니다. 이전 판올림도 장 나눔을 유지했습니다.
+- `poteto-agent`의 `description`은 `generalPurpose`로 바꾸면 `SKILL.md` 읽기를 건너뛴다고 하고, `poteto-mode`는 `inherit-parent`나 `auto` 역할을 `generalPurpose`로 띄우라고 합니다. 원문은 두 문장을 맞추지 않습니다. 이 책은 두 번째를 부모 모델을 고른 역할에만 걸리는 예외로 읽습니다.
+
+### 실행한 검사
+
+- `PSTACK_SRC=/tmp/pstack-01543/pstack bun tools/check.mjs`: 스킬 58개와 플레이북 22개의 절 존재, 용어 병기 짝 28개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
+- `CHROME_PATH=/usr/bin/google-chrome bun tools/check-layout.mjs`: 390px에서 가로 넘침 없음.
+- `CHROME_PATH=/usr/bin/google-chrome bun tools/build.mjs`: `pstack-guide-0.15.43.epub`, `pstack-guide-0.15.43.pdf` (441쪽, 0.15.42는 489쪽).
