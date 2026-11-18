@@ -875,3 +875,10 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 - README의 `/architect` 한 줄은 여전히 호출자의 사용법, 타입, 모듈 모양을 먼저 정한다고 합니다. 1장은 모양 두 가지를 그려 고른다는 잎 스킬을 따랐습니다.
 - 같은 표면에서 먼저 재현한다는 문장은 `poteto-mode`에서 빠졌고 Bug fix 플레이북 1단계와 4단계에 남았습니다. 1장은 그 문장의 출처를 Bug fix 플레이북으로 밝혔습니다.
 - 플레이북이 22개가 되어 플레이북 세 장의 분량이 달라졌지만 장 구성은 그대로 뒀습니다. 이전 판올림도 장 나눔을 유지했습니다.
+- `poteto-agent`의 `description`은 `generalPurpose`로 바꾸면 `SKILL.md` 읽기를 건너뛴다고 하고, `poteto-mode`는 `inherit-parent`나 `auto` 역할을 `generalPurpose`로 띄우라고 합니다. 원문은 두 문장을 맞추지 않습니다. 이 책은 두 번째를 부모 모델을 고른 역할에만 걸리는 예외로 읽습니다.
+
+### 실행한 검사
+
+- `PSTACK_SRC=/tmp/pstack-01543/pstack bun tools/check.mjs`: 스킬 58개와 플레이북 22개의 절 존재, 용어 병기 짝 28개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
+- `CHROME_PATH=/usr/bin/google-chrome bun tools/check-layout.mjs`: 390px에서 가로 넘침 없음.
+- `CHROME_PATH=/usr/bin/google-chrome bun tools/build.mjs`: `pstack-guide-0.15.43.epub`, `pstack-guide-0.15.43.pdf` (441쪽, 0.15.42는 489쪽).
