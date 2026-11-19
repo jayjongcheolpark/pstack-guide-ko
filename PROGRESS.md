@@ -4,7 +4,7 @@
 
 ## 원본
 
-`cursor/plugins`의 `pstack/`, 커밋 `2f87c854fe3e2fcda44ca86b46ede35aad3c46b7` (0.15.43) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를, 0.15.20 절은 그때의 핀 `1b6d44f`를, 0.15.21 절은 그때의 핀 `997ffc7`를, 0.15.23 절은 그때의 핀 `dbf4981`을, 0.15.24 절은 그때의 핀 `1e5c90a`를, 0.15.25 절은 그때의 핀 `e5136d8`를, 0.15.25-ko.1 절은 그때의 핀 `99743e9`를, 0.15.25-ko.2 절은 그때의 핀 `182f2ce`를, 0.15.26 절은 그때의 핀 `0b8e952`를, 0.15.28 절은 그때의 핀 `d457567`를, 0.15.29 절은 그때의 핀 `88d4751`을, 0.15.30 절은 그때의 핀 `eb4db2b`를, 0.15.30-ko.1 절은 그때의 핀 `4ec7ffa`를, 0.15.32 절은 그때의 핀 `e73df47`을, 0.15.34 절은 그때의 핀 `519d36a`를, 0.15.36 절은 그때의 핀 `c742dd6`를, 0.15.42 절은 그때의 핀 `bf0c7cd`를, 0.15.43 절은 그때의 핀 `2f87c85`를 적은 기록입니다.
+`cursor/plugins`의 `pstack/`, 커밋 `e58dd043600587dbaf58ba315e7f2b38373eeb43` (0.15.44) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를, 0.15.20 절은 그때의 핀 `1b6d44f`를, 0.15.21 절은 그때의 핀 `997ffc7`를, 0.15.23 절은 그때의 핀 `dbf4981`을, 0.15.24 절은 그때의 핀 `1e5c90a`를, 0.15.25 절은 그때의 핀 `e5136d8`를, 0.15.25-ko.1 절은 그때의 핀 `99743e9`를, 0.15.25-ko.2 절은 그때의 핀 `182f2ce`를, 0.15.26 절은 그때의 핀 `0b8e952`를, 0.15.28 절은 그때의 핀 `d457567`를, 0.15.29 절은 그때의 핀 `88d4751`을, 0.15.30 절은 그때의 핀 `eb4db2b`를, 0.15.30-ko.1 절은 그때의 핀 `4ec7ffa`를, 0.15.32 절은 그때의 핀 `e73df47`을, 0.15.34 절은 그때의 핀 `519d36a`를, 0.15.36 절은 그때의 핀 `c742dd6`를, 0.15.42 절은 그때의 핀 `bf0c7cd`를, 0.15.43 절은 그때의 핀 `2f87c85`를, 0.15.44 절은 그때의 핀 `e58dd04`를 적은 기록입니다.
 
 ## 빌드와 검사
 
@@ -882,3 +882,36 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 - `PSTACK_SRC=/tmp/pstack-01543/pstack bun tools/check.mjs`: 스킬 58개와 플레이북 22개의 절 존재, 용어 병기 짝 28개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
 - `CHROME_PATH=/usr/bin/google-chrome bun tools/check-layout.mjs`: 390px에서 가로 넘침 없음.
 - `CHROME_PATH=/usr/bin/google-chrome bun tools/build.mjs`: `pstack-guide-0.15.43.epub`, `pstack-guide-0.15.43.pdf` (441쪽, 0.15.42는 489쪽).
+
+## 0.15.44
+
+원문을 `2f87c854fe3e2fcda44ca86b46ede35aad3c46b7`(0.15.43)에서 `e58dd043600587dbaf58ba315e7f2b38373eeb43`(0.15.44)로 올렸습니다. pstack 트리에 닿은 커밋은 하나입니다.
+
+- `e58dd04` chore(pstack): route the Gemini seat to Gemini 4 Neon (#1283)
+
+책 버전은 `BOOK_REVISION = 0`이라 pstack 버전과 같은 `0.15.44`입니다. 산출물 이름은 `pstack-guide-0.15.44.epub`, `pstack-guide-0.15.44.pdf`입니다.
+
+확인한 사실입니다. `plugin.json`과 `.cursor-plugin/plugin.json` 버전은 둘 다 0.15.44입니다. `e58dd04`는 `main`에서 `pstack/`에 닿은 최신 커밋입니다. 0.15.44를 처음 쓴 커밋이기도 합니다. 스킬 수는 58개(일반 34, 원칙 24), 플레이북은 22개, 에이전트는 2개로 그대로입니다. 새 스킬은 없습니다.
+
+`2f87c85..e58dd04`에서 `pstack/`에 닿은 사용자에게 보이는 파일은 7개입니다. README, Claude Code 어댑터, `arena`, `poteto-mode`, `setup-pstack`, 두 `plugin.json`입니다. 안내서 장은 바뀌지 않았습니다.
+
+원고에서 반영한 내용입니다.
+
+- 핀과 permalink, 산출물 이름을 `e58dd04` / `0.15.44`으로 올렸습니다.
+- 기본 패널은 fable 5.2 / opus 5.5 / gemini 4 neon입니다. 슬러그는 `gemini-4-neon-high`입니다.
+- Gemini 자리는 `gemini-4-neon-high`를 넘지 않습니다. 원문은 "its top slug"를 뺐습니다.
+- Gemini 4 Neon에는 `xhigh` 슬러그가 있지만, 역할의 목표가 `xhigh`여도 Gemini 항목은 `high`에 머뭅니다.
+- `/setup-pstack`은 어떤 규칙이든 패널 역할의 `gemini-4-*`가 Neon이 아니면 `gemini-4-neon-high`로 바꿉니다. 어느 항목을 바꿨는지 알립니다.
+- Claude Code 어댑터의 기본값 대응은 `gemini-4-neon-high`가 `inherit-parent`입니다.
+
+### 해석한 부분
+
+- 책 버전은 `0.15.44-ko.1`이 아니라 `0.15.44`입니다. 새 pstack 버전을 처음 다룰 때는 접미사를 붙이지 않습니다.
+- `interrogate`의 `SKILL.md`는 바뀌지 않았습니다. 폴백 슬러그는 arena A단계 3번을 따르므로 책은 neon을 적었습니다. 저자가 만든 예시도 같은 기본 패널을 씁니다.
+
+### 실행한 검사
+
+- `PSTACK_SRC=/tmp/pstack-01544/pstack bun tools/check.mjs`: 스킬 58개와 플레이북 22개의 절 존재, 용어 병기 짝 28개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
+- `CHROME_PATH=/usr/bin/google-chrome bun tools/check-layout.mjs`: 390px에서 가로 넘침 없음.
+- `CHROME_PATH=/usr/bin/google-chrome bun tools/build.mjs`: `pstack-guide-0.15.44.epub`, `pstack-guide-0.15.44.pdf` (441쪽, 0.15.43과 같음).
+- `bun tools/pdf-inspect.mjs dist/pstack-guide-0.15.44.pdf /tmp/pdf-inspect-01544 2,10,300`: 441쪽, 개요 605항목, 한글 183934자, replacement 0, em dash 0.

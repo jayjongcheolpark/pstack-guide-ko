@@ -25,7 +25,7 @@ README는 Claude Code에서 이렇게 설치하라고 합니다.
 
 Claude Code는 플러그인 명령과 에이전트 이름 앞에 접두사를 붙이므로 `/poteto-mode`는 `/pstack:poteto-mode`가 됩니다. 나머지 Cursor 이름은 아래 [Claude Code 어댑터](#claude-code-adapter)가 대응합니다.
 
-Claude Code가 설치하는 것은 저장소 루트의 [`harness/pstack/`](https://github.com/cursor/plugins/tree/2f87c854fe3e2fcda44ca86b46ede35aad3c46b7/harness/pstack)에서 생성한 복사본이고, README와 안내서도 포함합니다. pstack을 바꾼 뒤에는 저장소 루트에서 `node scripts/generate-pstack-harness-trees.mjs`를 실행하고 그 결과를 커밋합니다. 생성 복사가 뒤처져 있으면 CI가 실패합니다. 이 생성 트리는 `pstack/` 밖이므로 이 책의 원문 범위에는 넣지 않았고, README가 밝히는 설치 경로로만 적습니다. Claude Code는 서드파티 마켓플레이스의 자동 업데이트를 끄므로, pstack은 설치한 버전에 머뭅니다. 켜려면 `/plugin`의 **marketplaces** 탭에서 `cursor-plugins`를 고르고 **enable auto-update**를 선택합니다. 한 번만 손으로 올리려면 `claude plugin update pstack@cursor-plugins`입니다. Claude Code에서 `/pstack:setup-pstack`은 모델 선택을 `~/.claude/rules/pstack-models.md`에 쓰고, Bugbot이나 자동화처럼 Cursor에만 있는 기능이 필요한 단계는 한 줄 메모와 함께 건너뜁니다.
+Claude Code가 설치하는 것은 저장소 루트의 [`harness/pstack/`](https://github.com/cursor/plugins/tree/e58dd043600587dbaf58ba315e7f2b38373eeb43/harness/pstack)에서 생성한 복사본이고, README와 안내서도 포함합니다. pstack을 바꾼 뒤에는 저장소 루트에서 `node scripts/generate-pstack-harness-trees.mjs`를 실행하고 그 결과를 커밋합니다. 생성 복사가 뒤처져 있으면 CI가 실패합니다. 이 생성 트리는 `pstack/` 밖이므로 이 책의 원문 범위에는 넣지 않았고, README가 밝히는 설치 경로로만 적습니다. Claude Code는 서드파티 마켓플레이스의 자동 업데이트를 끄므로, pstack은 설치한 버전에 머뭅니다. 켜려면 `/plugin`의 **marketplaces** 탭에서 `cursor-plugins`를 고르고 **enable auto-update**를 선택합니다. 한 번만 손으로 올리려면 `claude plugin update pstack@cursor-plugins`입니다. Claude Code에서 `/pstack:setup-pstack`은 모델 선택을 `~/.claude/rules/pstack-models.md`에 쓰고, Bugbot이나 자동화처럼 Cursor에만 있는 기능이 필요한 단계는 한 줄 메모와 함께 건너뜁니다.
 
 ## Claude Code 어댑터 {#claude-code-adapter}
 
@@ -74,7 +74,7 @@ pstack 스킬은 Cursor 이름을 씁니다. Claude Code에서는 세션마다 �
 Claude Code는 `~/.claude/rules/`의 `.md` 파일을 새 세션마다 로드하므로, `setup-pstack`은 규칙을 그곳에 씁니다. 단계는 그대로 따르되 아래만 바꿉니다.
 
 - 감지. 감지된 모델은 `Agent` 도구 스키마가 나열하는 `model` 값이고, 각각 `effort` 값에서 강도를 하나 고릅니다. 실제 모델은 `opus xhigh`처럼 `<model> <effort>`로 씁니다. 강도는 마지막 토큰이므로 예산 단계는 본문대로 동작합니다.
-- 기본값. 기본 슬러그는 위 행으로 대응합니다. `claude-opus-5-5-xhigh-fast`는 `opus xhigh`, `claude-opus-5-5-high-fast`는 `opus high`, `claude-fable-5-2-high`는 `fable high`, `gemini-4-carbon-high`는 `inherit-parent`입니다.
+- 기본값. 기본 슬러그는 위 행으로 대응합니다. `claude-opus-5-5-xhigh-fast`는 `opus xhigh`, `claude-opus-5-5-high-fast`는 `opus high`, `claude-fable-5-2-high`는 `fable high`, `gemini-4-neon-high`는 `inherit-parent`입니다.
 - 쓰기. `~/.claude/rules/pstack-models.md`를 프런트매터 없이 쓰고, 주석 줄, `# budget` 줄, 5단계의 역할마다 한 줄을 둡니다. 파일 전체를 덮어씁니다. 역할 줄을 `CLAUDE.md`나 `AGENTS.md`에 넣지 않습니다.
 
 ### 경로
@@ -116,11 +116,11 @@ Claude Code에는 Cursor 자동화, Bugbot, Cursor 클라우드 에이전트, �
 
 기본값은 `large` 예산과 같습니다. 코드, 글쓰기, 판단은 Opus 5.5에서 `xhigh` 추론으로 돌고, 리뷰 패널과 swarm 워커는 `high`로 돕니다. 어떤 역할도 `xhigh`보다 높게 돌지 않습니다. 리뷰 패널 밖에서 Fable 5.2는 사용자가 작업에 그 모델을 지정했을 때, 또는 같은 브리프로 돌린 Opus 5.5 두 번이 확인에 실패한 뒤에만 돕니다. `medium`은 역할마다 한 단계, `small`은 두 단계 내리고, 둘 다 토큰을 덜 씁니다.
 
-**기본값이 바뀐 뒤의 규칙 파일.** 기본값이 바뀌어도 그 전에 쓴 규칙은 `/setup-pstack`을 다시 실행할 때까지 옛 기본 모델을 고정해 둡니다. 다시 실행하면 알아보는 옛 기본값을 바꾸고, 어느 것을 바꿨는지 알려 주고, 나머지 선택은 유지합니다. 알아보지 못하는 고정을 없애려면 먼저 그 역할의 줄이나 파일을 지웁니다.
+**기본값이 바뀐 뒤의 규칙 파일.** 기본값이 바뀌어도 그 전에 쓴 규칙은 `/setup-pstack`을 다시 실행할 때까지 옛 기본 모델을 고정해 둡니다. 다시 실행하면 패널 역할의 `gemini-4-*`가 Neon이 아닌 항목을 `gemini-4-neon-high`로 바꾸고, `# defaults: 3` 줄이 없는 규칙에서 알아보는 옛 기본값도 바꿉니다. 어느 것을 바꿨는지 알려 주고, 나머지 선택은 유지합니다. 알아보지 못하는 고정을 없애려면 먼저 그 역할의 줄이나 파일을 지웁니다.
 
 ### 기본 모델 구성
 
-README가 밝히는 기본 구성입니다. 코드를 쓰는 위임(기능, 리팩터링, 버그 수정, 성능, hillclimb)과 글쓰기, 판단은 xhigh의 opus 5.5로 가고, 어떤 역할도 xhigh보다 높게 돌지 않습니다. 리뷰 패널 밖에서 fable 5.2는 사용자가 이름을 댈 때나, 같은 브리프로 돌린 opus 5.5 두 번이 실패한 뒤에만 돕니다. 기본 패널은 fable 5.2, opus 5.5, gemini 4 carbon입니다. `/setup-pstack`이 이 모두를 바꿀 수 있습니다.
+README가 밝히는 기본 구성입니다. 코드를 쓰는 위임(기능, 리팩터링, 버그 수정, 성능, hillclimb)과 글쓰기, 판단은 xhigh의 opus 5.5로 가고, 어떤 역할도 xhigh보다 높게 돌지 않습니다. 리뷰 패널 밖에서 fable 5.2는 사용자가 이름을 댈 때나, 같은 브리프로 돌린 opus 5.5 두 번이 실패한 뒤에만 돕니다. 기본 패널은 fable 5.2, opus 5.5, gemini 4 neon입니다. `/setup-pstack`이 이 모두를 바꿀 수 있습니다.
 
 ## 검증 스킬 제안을 받을지 정하기
 
@@ -170,7 +170,7 @@ pstack은 서브에이전트와 리뷰 패널에 토큰을 더 씁니다. 엄밀
 이 스킬이 하는 일은 `~/.cursor/rules/pstack-models.mdc`를 쓰는 것입니다. 항상 적용되는(always-applied) 규칙으로, 역할마다 모델을 정합니다. 단계는 여덟 개입니다.
 
 1. **사용 가능한 모델 감지.** 이 세션에서 `Task` 서브에이전트에 넘길 수 있는 모델 슬러그를 나열합니다. 이것이 믿을 만한 출처입니다. Cursor가 사용자가 쓸 수 있는 모델을 나열하는 API나 CLI를 따로 제공하면 완전성을 위해 그쪽을 우선합니다. 하나도 감지하지 못하면 사용자에게 접근 가능한 슬러그를 붙여 넣게 합니다. 확인하지 못한 실제 슬러그는 절대 쓰지 않습니다. 별칭 `inherit-parent`와 `auto`는 감지된 슬러그가 아니지만 항상 유효합니다.
-2. **현재 상태 읽기.** 기본 역할-모델 매핑은 5단계에 나오는 규칙의 모양입니다. `~/.cursor/rules/pstack-models.mdc`가 이미 있으면 읽어서 `# budget` 줄과 역할 값을 현재 선택으로 취급합니다. 없으면 기본값에서 시작합니다. 5단계에 없는 역할의 줄(예: `hardest tasks`, `architect runners`, `reflect tooling`, `why investigators`)은 폐지된 역할이므로 버립니다. `# defaults: 3` 줄이 없는 규칙은 옛 설정이 쓴 것입니다. 옛 설정은 역할마다 줄을 썼으므로 그 값 가운데 일부는 사용자의 선택이 아니라 옛 기본값입니다. 3단계 전에 그런 값을 바꿉니다(아래 "옛 규칙의 값 바꾸기" 참조).
+2. **현재 상태 읽기.** 기본 역할-모델 매핑은 5단계에 나오는 규칙의 모양입니다. `~/.cursor/rules/pstack-models.mdc`가 이미 있으면 읽어서 `# budget` 줄과 역할 값을 현재 선택으로 취급합니다. 없으면 기본값에서 시작합니다. 5단계에 없는 역할의 줄(예: `hardest tasks`, `architect runners`, `reflect tooling`, `why investigators`)은 폐지된 역할이므로 버립니다. Gemini 4 Neon 이전에는 더 오래된 Gemini 모델이 패널 자리를 맡았습니다. 그래서 어떤 규칙이든, 패널 역할(`arena runners`, `arena cross-judge pool`, `interrogate reviewers`)에 있는 `gemini-4-*` 항목이 `gemini-4-neon-*`가 아니면 옛 기본값입니다. 각각 `gemini-4-neon-high`가 됩니다. 어느 항목을 바꿨는지 사용자에게 알립니다. `# defaults: 3` 줄이 없는 규칙은 옛 설정이 쓴 것입니다. 옛 설정은 역할마다 줄을 썼으므로 그 값 가운데 일부는 사용자의 선택이 아니라 옛 기본값입니다. 3단계 전에 그런 값을 바꿉니다(아래 "옛 규칙의 값 바꾸기" 참조).
 3. **예산, 매핑, 확인.**
    - (a) 예산을 묻습니다. 자유 입력보다 AskQuestion을 씁니다. 세 가지 선택지가 있고, 규칙에 현재 예산이 기록돼 있으면 그것을 알려 줍니다. 규칙이 없으면 `large`가 스킬 기본값과 같다고 말합니다. 각 라벨은 대부분의 기본값이 놓일 추론 강도(effort)를 이름 붙입니다.
    - (b) 예산을 적용합니다. 스킬의 기본값으로 작업 표를 만들고, 다시 실행하는 경우 계열, 목록, 별칭으로 바꿔 둔 역할은 유지합니다. 계열은 [`arena`](arena-swarm.md#skill-arena) A단계가 정한 것이므로 Fable은 따로 한 계열입니다. 강도 계산은 아래 "예산 선택지"에 있습니다.
@@ -191,7 +191,7 @@ pstack은 서브에이전트와 리뷰 패널에 토큰을 더 씁니다. 엄밀
 
 예산은 역할마다 따로 계산합니다. 역할마다 목표 강도가 있고, 그것은 그 역할의 기본값의 강도를 예산만큼 옮긴 것입니다. `large`는 그대로 두고, `medium`은 한 단계, `small`은 두 단계 내립니다. 사다리는 `xhigh` > `high` > `medium` > `low`입니다. 어떤 역할도 `xhigh`보다 높게 돌지 않고, 목표가 사다리의 바닥에 닿으면 거기에 머뭅니다. 대부분의 기본값이 `xhigh`에 있으므로, 각 라벨은 그 기본값들이 놓일 자리를 이름 붙입니다. 역할의 모든 실제 슬러그(패널 항목 포함)의 강도 토큰을 그 역할의 목표로 바꿉니다. 강도 토큰은 마지막 토큰이거나, 끝에 `fast`가 붙으면 그 앞의 토큰입니다. 결과가 감지된 슬러그가 아니면 같은 계열의 감지된 슬러그 중 목표 이하에서 가장 높은 강도를 쓰고, 그것도 없으면 그 역할을 선택이 필요한 것으로 표시합니다. `inherit-parent`와 `auto`는 바뀌지 않습니다.
 
-원문의 예입니다. `medium`은 `claude-opus-5-5-xhigh-fast`를 `claude-opus-5-5-high-fast`로, `claude-opus-5-5-high-fast`를 `claude-opus-5-5-medium-fast`로 바꿉니다. `small`은 같은 두 슬러그를 `claude-opus-5-5-medium-fast`와 `claude-opus-5-5-low-fast`로 바꿉니다. Opus 5.5는 언제나 `-fast` 슬러그로 돌므로, Opus 5.5의 값은 모두 `-fast`로 끝납니다. Fable 5.2와 Gemini에는 fast 슬러그가 없으므로 그런 슬러그는 쓰지 않습니다. Gemini는 `high`가 끝이므로, 역할의 목표가 `xhigh`여도 Gemini 항목은 `high`로 돕니다.
+원문의 예입니다. `medium`은 `claude-opus-5-5-xhigh-fast`를 `claude-opus-5-5-high-fast`로, `claude-opus-5-5-high-fast`를 `claude-opus-5-5-medium-fast`로 바꿉니다. `small`은 같은 두 슬러그를 `claude-opus-5-5-medium-fast`와 `claude-opus-5-5-low-fast`로 바꿉니다. Opus 5.5는 언제나 `-fast` 슬러그로 돌므로, Opus 5.5의 값은 모두 `-fast`로 끝납니다. Fable 5.2와 Gemini에는 fast 슬러그가 없으므로 그런 슬러그는 쓰지 않습니다. Gemini 4 Neon에는 `xhigh` 슬러그가 있지만, 역할의 목표가 `xhigh`여도 Gemini 항목은 `high`에 머뭅니다.
 
 #### 옛 규칙의 값 바꾸기
 
@@ -221,10 +221,10 @@ bug-fix: claude-opus-5-5-xhigh-fast
 perf-issue: claude-opus-5-5-xhigh-fast
 hillclimb: claude-opus-5-5-xhigh-fast
 judgment and prose: claude-opus-5-5-xhigh-fast
-arena runners: claude-fable-5-2-high, claude-opus-5-5-high-fast, gemini-4-carbon-high
-arena cross-judge pool: claude-opus-5-5-high-fast, gemini-4-carbon-high
+arena runners: claude-fable-5-2-high, claude-opus-5-5-high-fast, gemini-4-neon-high
+arena cross-judge pool: claude-opus-5-5-high-fast, gemini-4-neon-high
 swarm workers: claude-opus-5-5-high-fast
-interrogate reviewers: claude-fable-5-2-high, claude-opus-5-5-high-fast, gemini-4-carbon-high
+interrogate reviewers: claude-fable-5-2-high, claude-opus-5-5-high-fast, gemini-4-neon-high
 ```
 
 역할 이름을 성격별로 묶으면 다음과 같습니다.
@@ -253,7 +253,7 @@ interrogate reviewers: claude-fable-5-2-high, claude-opus-5-5-high-fast, gemini-
 - `auto`와 `inherit-parent`는 모델 슬러그가 아니라, 모델 필드를 생략해 부모 모델을 그대로 쓰겠다는 표시입니다. 규칙의 주석 줄대로 그 역할은 `generalPurpose`로 띄웁니다. [`poteto-mode`](poteto-mode.md#skill-poteto-mode)는 그 이유를 `poteto-agent`의 기본 모델이 Opus 5.5이기 때문이라고 적습니다. 패널 목록 안에 넣어도 패널의 팬아웃 수에는 포함됩니다.
 - 5단계의 역할 이름과 다른 줄은 폐지된 역할로 보고 버립니다. 원문은 `hardest tasks`, `architect runners`, `reflect tooling`, `why investigators`를 예로 듭니다. 옛 규칙에서 다시 실행했는데 줄이 사라졌다면 그런 경우입니다.
 - 규칙은 새 세션부터 적용됩니다.
-- 기본값이 바뀌기 전에 만든 규칙은 다시 실행할 때까지 옛 기본 모델을 고정합니다. 다시 실행하면 `# defaults: 3` 줄이 없는 규칙에서 알아보는 옛 기본값만 바꾸고 나머지 선택은 둡니다. 알아보지 못하는 고정은 줄이나 파일을 지운 뒤 다시 실행합니다.
+- 기본값이 바뀌기 전에 만든 규칙은 다시 실행할 때까지 옛 기본 모델을 고정합니다. 다시 실행하면 패널 역할의 `gemini-4-*`가 Neon이 아닌 항목을 `gemini-4-neon-high`로 바꿉니다. `# defaults: 3` 줄이 없는 규칙에서는 알아보는 옛 기본값도 바꿉니다. 나머지 선택은 둡니다. 알아보지 못하는 고정은 줄이나 파일을 지운 뒤 다시 실행합니다.
 - 어떤 역할도 `xhigh`보다 높게 돌지 않습니다. 예산 선택지에 `unlimited`는 없고, 옛 규칙의 `# budget: unlimited`는 `large`가 됩니다. `xhigh`를 넘는 슬러그는 4단계 검증(validation)을 통과하지 못합니다.
 - 예산은 모든 슬러그를 한 강도로 맞추지 않습니다. 역할의 기본 강도에서 옮깁니다.
 - Opus 5.5의 값은 모두 `-fast`로 끝납니다. Fable 5.2와 Gemini에는 fast 슬러그가 없으므로 그런 슬러그를 쓰지 않습니다.
