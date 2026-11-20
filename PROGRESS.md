@@ -950,7 +950,7 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 
 ### 실행한 검사
 
-- `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: (빌드 뒤 기록)
-- `CHROME_PATH=/usr/bin/google-chrome bun tools/check-layout.mjs`: (빌드 뒤 기록)
-- `CHROME_PATH=/usr/bin/google-chrome bun tools/build.mjs`: `pstack-guide-0.15.46.epub`, `pstack-guide-0.15.46.pdf` ((빌드 뒤 기록)쪽, 0.15.44는 441쪽).
-- `bun tools/pdf-inspect.mjs dist/pstack-guide-0.15.46.pdf /tmp/pdf-inspect-01546 2,10,300`: (빌드 뒤 기록)
+- `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 58개와 플레이북 22개의 절 존재, 용어 병기 짝 28개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
+- `CHROME_PATH=/usr/bin/google-chrome bun tools/check-layout.mjs`: 390px에서 가로 넘침 없음.
+- `CHROME_PATH=/usr/bin/google-chrome bun tools/build.mjs`: `pstack-guide-0.15.46.epub`, `pstack-guide-0.15.46.pdf` (443쪽, 0.15.44는 441쪽).
+- `bun tools/pdf-inspect.mjs dist/pstack-guide-0.15.46.pdf /tmp/pdf-inspect-01546 2,10,300`: 443쪽, 개요 605항목, 한글 184173자, replacement 0, em dash 0.
