@@ -413,7 +413,7 @@
 <skill dir>/scripts/statechart SPEC.tla [--config FILE] [--view FILE] [--out DIR]
 ```
 
-`scripts/statechart.ts`는 TypeScript이므로 TypeScript를 실행하는 런타임이 필요합니다. POSIX 런처 `scripts/statechart`가 런타임을 고릅니다. 런처가 받는 것은 Node 22.18부터 22.x, Node 23.6 이상, Bun 1.1.5 이상, 또는 Deno 2.0 이상입니다. 첫 실행은 mise로 TLC와 Java를 설치하고 네트워크가 필요합니다.
+`scripts/statechart.ts`는 TypeScript이므로 TypeScript를 실행하는 런타임이 필요합니다. POSIX 런처 `scripts/statechart`가 런타임을 고릅니다. 런처가 받는 것은 Node 22.18부터 22.x, Node 23.6 이상, Bun 1.1.5 이상, 또는 Deno 2.0 이상입니다. 네이티브 Windows에서는 `node --disable-warning=ExperimentalWarning <skill dir>/scripts/statechart.ts`를 Node 22.18부터 22.x, 또는 Node 23.6 이상으로 실행합니다. 첫 실행은 mise로 TLC와 Java를 설치하고 네트워크가 필요합니다.
 
 **명세를 씁니다.**
 
