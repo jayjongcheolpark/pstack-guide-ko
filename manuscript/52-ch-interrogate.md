@@ -20,7 +20,7 @@
 
 **Fan out. 적대자를 띄웁니다.** [`arena`](arena-swarm.md#skill-arena)의 A단계 3, 4번과 B단계를 돌립니다. A단계 3번은 러너를 고르는 단계입니다. 4번은 후보마다 자기 출력 위치를 주는 단계로, 가능하면 git 워크트리이고 아니면 `/tmp/arena-<slug>/candidate-<n>/`입니다. B단계는 모든 서브에이전트를 한 메시지에 `run_in_background: true`로 띄우고, 출력을 내지 못한 서브에이전트가 있으면 나머지로 진행하고 탈락을 적는 단계입니다. 여기에 네 가지를 바꿉니다.
 
-1. `arena runners` 줄 대신 `~/.cursor/rules/pstack-models.mdc`의 `interrogate reviewers` 줄을 읽습니다. 규칙(rule)이나 그 줄이 없으면 arena A단계 3번대로 `claude-fable-5-2-high`, `claude-opus-5-5-high-fast`, `gemini-4-neon-high`를 하나씩 씁니다. `auto`나 `inherit-parent` 항목은 `model`을 생략해 부모 모델로 돌리고, Task 도구가 거부한 항목의 대체도 arena A단계 3번을 따릅니다. 띄울 때마다 추론 강도와 일반 속도 또는 fast는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode)의 Subagents 절대로 고릅니다.
+1. `arena runners` 줄 대신 `~/.cursor/rules/pstack-models.mdc`의 `interrogate reviewers` 줄을 읽습니다. 규칙(rule)이나 그 줄이 없으면 arena A단계 3번대로 `claude-fable-5-2-high`, `claude-opus-5-5-high-fast`, `gemini-4-neon-xhigh`를 하나씩 씁니다. `auto`나 `inherit-parent` 항목은 `model`을 생략해 부모 모델로 돌리고, Task 도구가 거부한 항목의 대체도 arena A단계 3번을 따릅니다. 띄울 때마다 추론 강도와 일반 속도 또는 fast는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode)의 Subagents 절대로 고릅니다.
 2. 범위의 커밋하지 않은 변경을 각 워크트리에 복사합니다.
 3. 적대자마다 `generalPurpose` 서브에이전트로 띄웁니다.
 4. arena의 과업과 근거 대신 범위, 의도, 아래 브리프를 줍니다.
@@ -63,8 +63,8 @@
 > 상황: 브랜치가 결제 웹훅 처리에 멱등 키를 더했고, 작업 트리에는 아직 커밋하지 않은 테스트 수정이 있습니다. `interrogate reviewers` 줄은 기본값 그대로이고, `/interrogate review this pr.`를 칩니다.
 >
 > 1. Frame. 범위는 베이스 브랜치와 갈라진 지점부터 작업 트리까지이므로 커밋하지 않은 테스트 수정도 듭니다. 의도는 "같은 웹훅이 재시도로 여러 번 와도 주문은 한 번만 만든다"로 다시 말합니다.
-> 2. Fan out. `claude-fable-5-2-high`, `claude-opus-5-5-high-fast`, `gemini-4-neon-high` 적대자를 각자의 워크트리에 띄우고, 커밋하지 않은 테스트 수정을 세 워크트리에 복사합니다.
-> 3. Verify. Fable과 Gemini 적대자가 같은 키로 요청 두 개를 동시에 보내는 재현 스크립트를 따로 썼습니다. 다시 돌린 `node scripts/race-webhook.mjs`가 `orders created: 2`를 찍었고 의도는 `orders created: 1`을 요구하므로 남깁니다. 두 발견은 확인과 삽입 사이의 경쟁이라는 같은 근본 원인이라 하나로 합칩니다. `gemini-4-neon-high` 적대자의 다른 발견 하나는 다시 돌리자 통과해서 버립니다. `claude-opus-5-5-high-fast` 적대자가 낸 함수 이름 지적은 돌린 명령이 없어서 버립니다.
+> 2. Fan out. `claude-fable-5-2-high`, `claude-opus-5-5-high-fast`, `gemini-4-neon-xhigh` 적대자를 각자의 워크트리에 띄우고, 커밋하지 않은 테스트 수정을 세 워크트리에 복사합니다.
+> 3. Verify. Fable과 Gemini 적대자가 같은 키로 요청 두 개를 동시에 보내는 재현 스크립트를 따로 썼습니다. 다시 돌린 `node scripts/race-webhook.mjs`가 `orders created: 2`를 찍었고 의도는 `orders created: 1`을 요구하므로 남깁니다. 두 발견은 확인과 삽입 사이의 경쟁이라는 같은 근본 원인이라 하나로 합칩니다. `gemini-4-neon-xhigh` 적대자의 다른 발견 하나는 다시 돌리자 통과해서 버립니다. `claude-opus-5-5-high-fast` 적대자가 낸 함수 이름 지적은 돌린 명령이 없어서 버립니다.
 > 4. Output. Intent에 위 의도를, Findings에 합친 발견 하나(명령, `orders created: 2`, 주문이 두 번 만들어진다는 점, Fable과 Gemini 두 적대자)를, Dropped에 적대자마다 버린 발견의 수와 그 이유를 적습니다. Gemini와 Opus는 하나씩, Fable은 0입니다. 경쟁은 고치지 않습니다.
 
 ### 함정과 주의점

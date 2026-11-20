@@ -4,7 +4,7 @@
 
 ## 원본
 
-`cursor/plugins`의 `pstack/`, 커밋 `e58dd043600587dbaf58ba315e7f2b38373eeb43` (0.15.44) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를, 0.15.20 절은 그때의 핀 `1b6d44f`를, 0.15.21 절은 그때의 핀 `997ffc7`를, 0.15.23 절은 그때의 핀 `dbf4981`을, 0.15.24 절은 그때의 핀 `1e5c90a`를, 0.15.25 절은 그때의 핀 `e5136d8`를, 0.15.25-ko.1 절은 그때의 핀 `99743e9`를, 0.15.25-ko.2 절은 그때의 핀 `182f2ce`를, 0.15.26 절은 그때의 핀 `0b8e952`를, 0.15.28 절은 그때의 핀 `d457567`를, 0.15.29 절은 그때의 핀 `88d4751`을, 0.15.30 절은 그때의 핀 `eb4db2b`를, 0.15.30-ko.1 절은 그때의 핀 `4ec7ffa`를, 0.15.32 절은 그때의 핀 `e73df47`을, 0.15.34 절은 그때의 핀 `519d36a`를, 0.15.36 절은 그때의 핀 `c742dd6`를, 0.15.42 절은 그때의 핀 `bf0c7cd`를, 0.15.43 절은 그때의 핀 `2f87c85`를, 0.15.44 절은 그때의 핀 `e58dd04`를 적은 기록입니다.
+`cursor/plugins`의 `pstack/`, 커밋 `0b46ec399d55f2829e88822998f53b84944837d3` (0.15.46) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를, 0.15.20 절은 그때의 핀 `1b6d44f`를, 0.15.21 절은 그때의 핀 `997ffc7`를, 0.15.23 절은 그때의 핀 `dbf4981`을, 0.15.24 절은 그때의 핀 `1e5c90a`를, 0.15.25 절은 그때의 핀 `e5136d8`를, 0.15.25-ko.1 절은 그때의 핀 `99743e9`를, 0.15.25-ko.2 절은 그때의 핀 `182f2ce`를, 0.15.26 절은 그때의 핀 `0b8e952`를, 0.15.28 절은 그때의 핀 `d457567`를, 0.15.29 절은 그때의 핀 `88d4751`을, 0.15.30 절은 그때의 핀 `eb4db2b`를, 0.15.30-ko.1 절은 그때의 핀 `4ec7ffa`를, 0.15.32 절은 그때의 핀 `e73df47`을, 0.15.34 절은 그때의 핀 `519d36a`를, 0.15.36 절은 그때의 핀 `c742dd6`를, 0.15.42 절은 그때의 핀 `bf0c7cd`를, 0.15.43 절은 그때의 핀 `2f87c85`를, 0.15.44 절은 그때의 핀 `e58dd04`를, 0.15.46 절은 그때의 핀 `0b46ec3`을 적은 기록입니다.
 
 ## 빌드와 검사
 
@@ -915,3 +915,42 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 - `CHROME_PATH=/usr/bin/google-chrome bun tools/check-layout.mjs`: 390px에서 가로 넘침 없음.
 - `CHROME_PATH=/usr/bin/google-chrome bun tools/build.mjs`: `pstack-guide-0.15.44.epub`, `pstack-guide-0.15.44.pdf` (441쪽, 0.15.43과 같음).
 - `bun tools/pdf-inspect.mjs dist/pstack-guide-0.15.44.pdf /tmp/pdf-inspect-01544 2,10,300`: 441쪽, 개요 605항목, 한글 183934자, replacement 0, em dash 0.
+
+## 0.15.46
+
+원문을 `e58dd043600587dbaf58ba315e7f2b38373eeb43`(0.15.44)에서 `0b46ec399d55f2829e88822998f53b84944837d3`(0.15.46)으로 올렸습니다. pstack 트리에 닿은 커밋은 두 개입니다.
+
+- `dd24b67` chore(pstack): run the Gemini panel seat at gemini-4-neon-xhigh (#1284) (0.15.45)
+- `0b46ec3` fix(pstack): run /statechart on native Windows and read TLC's `\r\n` line ends (#1292) (0.15.46)
+
+책 버전은 `BOOK_REVISION = 0`이라 pstack 버전과 같은 `0.15.46`입니다. 산출물 이름은 `pstack-guide-0.15.46.epub`, `pstack-guide-0.15.46.pdf`입니다.
+
+확인한 사실입니다. `plugin.json`과 `.cursor-plugin/plugin.json` 버전은 둘 다 0.15.46입니다. `0b46ec3`은 `main`에서 `pstack/`에 닿은 최신 커밋입니다. 0.15.46을 처음 쓴 커밋이기도 합니다. `dd24b67`은 0.15.45입니다. 0.15.45는 책 버전이 되지 않았습니다. 스킬 수는 58개(일반 34, 원칙 24), 플레이북은 22개, 에이전트는 2개로 그대로입니다. 새 스킬은 없습니다.
+
+`e58dd04..0b46ec3`에서 `pstack/`에 닿은 파일은 14개입니다. 사용자에게 보이는 파일은 7개입니다. Claude Code 어댑터, `arena`, `poteto-mode`, `setup-pstack`, `statechart`의 `SKILL.md`, 두 `plugin.json`입니다. 나머지 7개는 `skills/statechart/scripts/`의 스크립트와 테스트입니다. README와 안내서 장은 바뀌지 않았습니다.
+
+원고에서 반영한 내용입니다.
+
+- 핀과 permalink, 산출물 이름을 `0b46ec3` / `0.15.46`으로 올렸습니다. 집필 시점은 2026년 11월 20일입니다.
+- 기본 패널의 Gemini 자리는 `gemini-4-neon-xhigh`입니다. `poteto-mode`의 기본 패널, arena 러너와 교차 심사 풀의 기본값, interrogate 리뷰어의 폴백, 규칙 파일의 예가 같은 슬러그를 씁니다.
+- Gemini 자리는 그 줄이 다른 강도를 적지 않으면 `gemini-4-neon-xhigh`로 돕니다. 0.15.44의 "`gemini-4-neon-high`를 넘지 않는다"는 원문에서 빠졌습니다.
+- `/setup-pstack` 2단계는 패널 역할의 `gemini-4-neon-high` 항목과 Neon이 아닌 `gemini-4-*` 항목을 옛 기본값으로 보고 `gemini-4-neon-xhigh`로 바꿉니다. 다른 강도의 Gemini 4 Neon 항목은 사용자의 선택이라 그대로 둡니다.
+- `/setup-pstack` 3(b)는 Gemini 4 Neon 슬러그가 `low`부터 `xhigh`까지이고 `max`나 `fast` 슬러그가 없다고 밝힙니다. 패널의 Gemini 4 Neon 항목은 `xhigh`를 예산만큼 옮긴 자기 목표를 따르므로 `large`는 `gemini-4-neon-xhigh`, `medium`은 `gemini-4-neon-high`, `small`은 `gemini-4-neon-medium`입니다. 0.15.44의 "역할의 목표가 `xhigh`여도 Gemini 항목은 `high`에 머문다"는 문장을 지웠습니다.
+- 설치 장의 사용 예는 `medium` 예산에서 `swarm workers`와 패널의 Fable, Opus 항목이 `medium`을, 패널의 Gemini 4 Neon 항목이 `gemini-4-neon-high`를 목표로 한다고 적습니다. 패널 전체가 `high` 기본이라는 문장은 뺐습니다.
+- Claude Code 어댑터의 기본값 대응은 `gemini-4-neon-xhigh`가 `inherit-parent`입니다.
+- interrogate 장의 저자가 만든 예시는 `interrogate reviewers` 줄이 기본값이라고 하므로 `gemini-4-neon-xhigh` 적대자로 고쳤습니다.
+- `/statechart`는 네이티브 Windows에서 `node --disable-warning=ExperimentalWarning <skill dir>/scripts/statechart.ts`를 Node 22.18부터 22.x, 또는 Node 23.6 이상으로 실행합니다. POSIX 런처 `scripts/statechart`는 바뀌지 않아 그 Node, Bun, Deno 버전을 그대로 둡니다.
+
+### 해석한 부분
+
+- 책 버전은 `0.15.46-ko.1`이 아니라 `0.15.46`입니다. 새 pstack 버전을 처음 다룰 때는 접미사를 붙이지 않습니다. 운영자가 예로 든 `0.15.46-ko.1`은 번호 방식을 가리킨 것으로 읽었습니다.
+- 안내서 1장은 여전히 "the review panels and swarm workers run at `high`"라고 합니다. `setup-pstack`과 `poteto-mode`는 패널의 Gemini 자리를 `gemini-4-neon-xhigh`로 둡니다. 설치 장은 그 문장을 안내서의 말로 밝히고, 바로 뒤에 `setup-pstack` 기본값의 Gemini 자리를 적었습니다.
+- `setup-pstack` 3(b)는 역할의 목표가 그 기본값의 강도를 옮긴 것이라 하고, 패널의 Gemini 4 Neon 항목에만 따로 목표를 둡니다. 책은 패널의 나머지 항목(Fable, Opus)이 `high`에서 옮긴 역할의 목표를 따른다고 읽었습니다.
+- `#1292`는 `janitor.ts`와 `kill.ts`를 더하고, TLC 출력의 `\r\n` 줄 끝을 나누고, 자식 프로세스에 `windowsHide`를 줍니다. `SKILL.md`는 그 이름을 적지 않으므로 책은 네이티브 Windows 실행 명령만 옮겼습니다.
+
+### 실행한 검사
+
+- `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 58개와 플레이북 22개의 절 존재, 용어 병기 짝 28개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
+- `CHROME_PATH=/usr/bin/google-chrome bun tools/check-layout.mjs`: 390px에서 가로 넘침 없음.
+- `CHROME_PATH=/usr/bin/google-chrome bun tools/build.mjs`: `pstack-guide-0.15.46.epub`, `pstack-guide-0.15.46.pdf` (443쪽, 0.15.44는 441쪽).
+- `bun tools/pdf-inspect.mjs dist/pstack-guide-0.15.46.pdf /tmp/pdf-inspect-01546 2,10,300`: 443쪽, 개요 605항목, 한글 184173자, replacement 0, em dash 0.
