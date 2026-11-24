@@ -4,7 +4,7 @@
 
 이 표는 pstack 0.15.48(커밋 `9e278fe`)의 스킬 59개, 에이전트 2개, `poteto-mode` 플레이북 22개를 한곳에 모았습니다. 트리거 문구는 각 스킬의 `description`에 있는 문구를 그대로 두었고(`no-comments`처럼 `description`에 없는 곳은 `poteto-mode`의 규칙(non-negotiable)을 적었고), 영어 원문이 없는 곳(원칙(principle) 스킬 등)은 "언제 적용하는가"를 한국어로 적었습니다. 플레이북 표의 용도는 README의 플레이북 표를 옮겼고, 따옴표 안의 말은 `poteto-help`가 그 플레이북을 바로 부르는 말로 적은 것입니다. 이름을 누르면 해당 절로 갑니다.
 
-## 일반 스킬 34개
+## 일반 스킬 35개
 
 | 스킬 | 한 줄 목적 | 트리거 문구 |
 | --- | --- | --- |
@@ -12,6 +12,7 @@
 | [`poteto-help`](setup.md#skill-poteto-help) | pstack 사용법과 스킬 선택을 안내하고, 보낼 프롬프트를 건넴. 일은 시작하지 않음 | `/poteto-help`와 질문. 칠 때만 돎. 일을 시키는 요청은 아님 |
 | [`in-your-own-words`](setup.md#skill-in-your-own-words) | 사용자의 목표와 풀려는 문제를 자기 말로 다시 말함 | "Restate in your own words what you think the user's goals are and what problem they're trying to solve", `/in-your-own-words` |
 | [`sharpen`](setup.md#skill-sharpen) | 과업을 더 깊게, 더 크게는 아니게 만든 뒤 프롬프트를 다시 씀. 실험으로 정할 수 있는 선택은 프로토타입하게 함. 과업은 하지 않음 | "Make a task deeper, not bigger, then rewrite the prompt", `/sharpen` |
+| [`reframe`](setup.md#skill-reframe) | 만드는 것을 부르는 전문가의 말을 가르치고, 같은 문제를 푼 이웃 분야의 말을 빌린 뒤, 그 말로 설명을 다시 씀 | "Teach the expert words for what the operator is building", `/reframe` |
 | [`setup-pstack`](setup.md#skill-setup-pstack) | 역할별 모델과 추론 예산을 정하고 규칙(rule) 파일을 씀 | `/setup-pstack`, "configure pstack models", "pstack budget" |
 | [`how`](how.md#skill-how) | 읽기 전용 서브에이전트 하나로 코드가 어떻게 동작하는지, 어디에 두어야 하는지 설명 | "how does X work", 변경 전 코드 워크스루, "where should this live", "which package owns this", "is this the right layer" |
 | [`why`](why.md#skill-why) | 코드가 아니라 기록(커밋과 PR 토론)에서 동기와 의도를 찾아 인용과 함께 답함 | "why does X work this way", "why we picked Y", 설계 근거, 회귀, 포스트모템, 데이터로 뒷받침된 임계값 |
@@ -121,6 +122,7 @@ README의 "모든 스킬" 표가 스킬마다 붙인 한 줄 설명입니다(원
 | `/poteto-help` | pstack이 낯설거나 어느 스킬, 플레이북, 원칙이 맞는지 모르겠을 때. 무엇을 하려는지 알아내고 그 부분만 답하며, 칠 프롬프트를 건넴. `/poteto-help`를 칠 때만 돎 |
 | `/in-your-own-words` | 에이전트가 목표와 문제를 일을 시작하기 전에 자기 말로 다시 말하게 하고 싶을 때. `/in-your-own-words`를 칠 때만 돎 |
 | `/sharpen` | 보내기 전에 프롬프트를 더 깊게, 더 크게는 아니게 만들고 싶을 때. 최상위 전문가가 묻지 않은 것, 원자료, 방법과 도구, 바깥 검사를 넣고 다시 쓴 프롬프트를 돌려줌. 그 프롬프트는 실험으로 정할 수 있는 선택은 에이전트에게 프로토타입하게 하고 제품과 취향의 선택은 사용자에게 남김. 과업은 하지 않음. `/sharpen`을 칠 때만 돎 |
+| `/reframe` | 만드는 것의 이름을 대지 못해 에이전트에게 분명하게 요청하지 못할 때. 사용자의 파일과 자신의 말에서 시작함. 그 말이 둘 이상의 문제를 가리킬 수 있으면 그럴 수 있는 문제 두세 개를 각각을 가르는 신호와 함께 나열하고 가장 그럴듯한 것을 고름. 그다음 만들 것을 얼마나 바꾸는지로 순위를 매긴 전문가 용어 8개에서 12개를 주고, 용어마다 그것이 이름 붙이는 설명의 부분과 링크를 확인한 실제 프로젝트를 묶음. 같은 문제를 다른 이름으로 푼 이웃 분야 2개나 3개에서 용어를 빌리고 비유마다 어디서 깨지는지 말한 뒤, 새 말로 설명을 다시 씀. `/reframe`을 칠 때만 돎 |
 | `/how` | 서브시스템이 어떻게 동작하는지 워크스루를 원할 때 |
 | `/why` | 왜 이렇게 만들었는지 알고 싶을 때. 코드가 아니라 기록에서 답함. 그것을 들여온 커밋과 PR 토론, 이후 변경마다의 것을 읽고, 그 흔적이 얇으면 다른 출처를 봄. 작성자가 쓴 것을 인용하고 자기 추론은 추론이라고 표시하며 기록이 답하지 않는 것을 말함 |
 | `/recall` | 작업을 시작하거나 재개하며 주제에 대한 최근 맥락을 자신의 채팅 기록과 공유 기록에서 다시 세워 빡빡한 현재 상태 브리프로 받고 싶을 때 |

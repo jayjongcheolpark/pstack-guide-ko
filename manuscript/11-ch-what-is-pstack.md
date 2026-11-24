@@ -32,7 +32,7 @@ README는 "포크하고, 개선하고, 자기 것으로 만들라"고 권하고,
 
 | 구성 요소 | 내용 |
 | --- | --- |
-| `skills/` | 스킬 58개. 일반 스킬 34개와 `principle-*` 스킬 24개 |
+| `skills/` | 스킬 59개. 일반 스킬 35개와 `principle-*` 스킬 24개 |
 | `agents/` | 서브에이전트 정의 2개: `poteto-agent`, `Comment Sicko`(`name: comment-sicko`) |
 | `automations/` | 휴면 상태의 자동화 팩 `benny` |
 | `docs/guide/` | 열 장으로 된 사용 안내서와 삽화 |
@@ -54,7 +54,7 @@ README는 Cursor에서 `/add-plugin pstack`으로 설치하고, Claude Code에�
 1. `/setup-pstack`을 실행하고 추론 예산(reasoning budget)을 고르고 쓸 모델을 정합니다.
 2. 엄밀함이 필요한 작업을 할 때마다 `/poteto-mode`를 씁니다.
 
-막혔거나 어느 스킬이 맞는지 모르겠으면 `/poteto-help`를 질문과 함께 칩니다. README와 안내서 차례가 그렇게 안내합니다. 안내서는 이 스킬이 답을 주고 보낼 프롬프트를 건네며, 일은 시작하지 않는다고 합니다. 칠 때만 돕니다. 목표와 문제를 일을 시작하기 전에 다시 듣기를 원하면 `/in-your-own-words`를 칩니다. 보내기 전에 프롬프트를 더 깊게, 더 크게는 아니게 만들고, 네 가지를 들은 뒤 다시 쓴 프롬프트를 받고 과업은 시키지 않으려면 `/sharpen`을 칩니다. README는 두 스킬 모두 칠 때만 돈다고 합니다.
+막혔거나 어느 스킬이 맞는지 모르겠으면 `/poteto-help`를 질문과 함께 칩니다. README와 안내서 차례가 그렇게 안내합니다. 안내서는 이 스킬이 답을 주고 보낼 프롬프트를 건네며, 일은 시작하지 않는다고 합니다. 칠 때만 돕니다. 목표와 문제를 일을 시작하기 전에 다시 듣기를 원하면 `/in-your-own-words`를 칩니다. 보내기 전에 프롬프트를 더 깊게, 더 크게는 아니게 만들고, 네 가지를 들은 뒤 다시 쓴 프롬프트를 받고 과업은 시키지 않으려면 `/sharpen`을 칩니다. 만드는 것의 이름을 대지 못해 에이전트에게 분명하게 요청하지 못하면 `/reframe`을 칩니다. 전문가의 말과 이웃 분야에서 빌린 말을 배우고, 그 말로 다시 쓴 설명을 받습니다. README는 세 스킬 모두 칠 때만 돈다고 합니다.
 
 작업을 치기 전에 `/` 메뉴에서 `/poteto-mode`를 고르면 Cursor가 그 메시지에 스킬을 붙입니다.
 
@@ -112,11 +112,11 @@ README에는 "왜 계획 스킬이 없는가"라는 절이 있습니다. Cursor�
 
 ## 스킬 지도
 
-58개 스킬을 이 책은 다음과 같이 나눕니다. 전체 목록과 트리거 문구는 [부록의 빠른 참조표](quickref.md)에 있습니다.
+59개 스킬을 이 책은 다음과 같이 나눕니다. 전체 목록과 트리거 문구는 [부록의 빠른 참조표](quickref.md)에 있습니다.
 
 | 부 | 스킬 |
 | --- | --- |
-| 시작하기 | `setup-pstack`, `poteto-help`, `in-your-own-words`, `sharpen` |
+| 시작하기 | `setup-pstack`, `poteto-help`, `in-your-own-words`, `sharpen`, `reframe` |
 | 진입점 | `poteto-mode` (플레이북 22개 포함) |
 | 이해하기 | `how`, `why`, `teach`, `recall`, `ketchup`, `ketchup-video` |
 | 설계하기 | `architect`, `arena`, `swarm`, `figure-it-out`, `principle-*` 24개 |
@@ -125,4 +125,4 @@ README에는 "왜 계획 스킬이 없는가"라는 절이 있습니다. Cursor�
 | 나만의 방식과 유틸리티 | `automate-me`, `reflect`, `correct`, `show-me-your-work`, `bro` |
 | 자동화 | `make-bot-ui` |
 
-수를 세면 4 + 1 + 6 + 28 + 9 + 4 + 5 + 1 = 58개입니다. 표의 설계하기 행은 일반 스킬 4개와 원칙 24개를 합쳐 28개입니다.
+수를 세면 5 + 1 + 6 + 28 + 9 + 4 + 5 + 1 = 59개입니다. 표의 설계하기 행은 일반 스킬 4개와 원칙 24개를 합쳐 28개입니다.

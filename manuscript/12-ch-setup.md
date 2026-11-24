@@ -2,7 +2,7 @@
 
 원문: {{src:docs/guide/01-setup.md}} {{src:docs/guide/README.md}} {{src:skills/setup-pstack/SKILL.md}} {{src:skills/poteto-help/SKILL.md}} {{src:README.md}} {{src:docs/harness/claude-code.md}}
 
-이 장에서는 플러그인을 설치하고, pstack이 쓸 모델을 고르고, 첫 작업을 실행합니다. 설정은 명령 한 줄과 짧은 대화면 끝납니다. 막혔거나 어느 스킬이 맞는지 모르겠으면 같은 장의 [`poteto-help`](#skill-poteto-help)가 안내서와 스킬을 가리킵니다. 일을 시작하기 전에 목표와 문제를 다시 듣기를 원하면 [`in-your-own-words`](#skill-in-your-own-words)를 칩니다. 보내기 전에 프롬프트를 더 깊게, 더 크게는 아니게 다시 쓰려면 [`sharpen`](#skill-sharpen)을 칩니다.
+이 장에서는 플러그인을 설치하고, pstack이 쓸 모델을 고르고, 첫 작업을 실행합니다. 설정은 명령 한 줄과 짧은 대화면 끝납니다. 막혔거나 어느 스킬이 맞는지 모르겠으면 같은 장의 [`poteto-help`](#skill-poteto-help)가 안내서와 스킬을 가리킵니다. 일을 시작하기 전에 목표와 문제를 다시 듣기를 원하면 [`in-your-own-words`](#skill-in-your-own-words)를 칩니다. 보내기 전에 프롬프트를 더 깊게, 더 크게는 아니게 다시 쓰려면 [`sharpen`](#skill-sharpen)을 칩니다. 만드는 것의 이름을 대지 못하면 [`reframe`](#skill-reframe)이 전문가의 말을 가르치고 그 말로 설명을 다시 씁니다.
 
 ## 플러그인 설치
 
@@ -334,6 +334,7 @@ pstack은 Cursor용이고, Claude Code에도 `/plugin marketplace add cursor/plu
 | 사소하지 않은 작업을 엄밀하게 | [`/poteto-mode`](poteto-mode.md#skill-poteto-mode) |
 | 에이전트가 목표와 문제를 이해했는지 일을 시작하기 전에 확인한다 | [`/in-your-own-words`](#skill-in-your-own-words) |
 | 보내기 전에 프롬프트를 더 깊게, 더 크게는 아니게 다시 받는다. 최상위 전문가가 더할 것, 원자료와 방법, 바깥 검사. 과업은 하지 않는다 | [`/sharpen`](#skill-sharpen) |
+| 만드는 것을 부르는 전문가의 말을 이웃 분야에서 빌린 말까지 배우고, 인용한 출처를 모두 확인받고, 그 말로 설명을 다시 받는다 | [`/reframe`](#skill-reframe) |
 | 코드가 지금 어떻게 동작하는지, 새 코드가 어디에 살아야 하는지 | [`/how`](how.md#skill-how) |
 | 코드가 왜 이 모양인지, 숫자가 어디서 왔는지 | [`/why`](why.md#skill-why) |
 | 변경이나 서브시스템을 평이하게 이해하고 싶다 | [`/teach`](teach-recall.md#skill-teach) |
@@ -374,7 +375,7 @@ pstack은 Cursor용이고, Claude Code에도 `/plugin marketplace add cursor/plu
 - `/arena`는 모든 작업자에게 같은 지시를 주고 좋은 부분을 합칩니다. `/swarm`은 조각을 나누거나 경주시키고 보고서 하나를 돌립니다.
 - `/interrogate`는 diff를 리뷰합니다. `/blast-radius`는 diff 밖의 깨짐을 찾고, 변경을 안전하게 하는 사실 하나를 증명합니다.
 - `/recall`은 최근 채팅을 가로질러 맥락을 다시 세웁니다. `/ketchup`은 이 채팅에서 사용자의 마지막 메시지 이후만 다룹니다. 그 따라잡기를 자막을 단 짧은 슬라이드 영상으로 보려면 `/ketchup-video`입니다. 특정 채팅이나 브랜치 하나를 이어받는 것은 Session pickup 플레이북입니다.
-- `/in-your-own-words`는 목표와 문제를 자기 말로 다시 말합니다. `/sharpen`은 보내기 전에 프롬프트를 더 깊게 다시 쓰고 과업은 하지 않습니다. `/bro`는 마지막 답을 평이하게 다시 말합니다.
+- `/in-your-own-words`는 목표와 문제를 자기 말로 다시 말합니다. `/sharpen`은 보내기 전에 프롬프트를 더 깊게 다시 쓰고 과업은 하지 않습니다. `/reframe`은 만드는 것을 부르는 전문가의 말을 가르치고 그 말로 설명을 다시 씁니다. `/bro`는 마지막 답을 평이하게 다시 말합니다.
 - `/figure-it-out`은 엄밀한 실행 하나를 설계합니다. Autonomous run 플레이북은 작업 하나를 끝 조건까지 밉니다.
 
 pstack에 없는 것입니다.
@@ -457,7 +458,7 @@ README가 든 예입니다. 스킬은 리뷰 질문을 알아차리고 [`/interr
 
 ### 관련 스킬
 
-설치와 모델은 [`setup-pstack`](#skill-setup-pstack), 작업의 입구는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode)입니다. 일을 시작하기 전에 목표와 문제를 다시 듣기는 [`in-your-own-words`](#skill-in-your-own-words)입니다. 보내기 전에 프롬프트를 다시 쓰는 것은 [`sharpen`](#skill-sharpen)입니다. 앱을 증명할 방법이 없으면 [`create-verification-skill`](verification.md#skill-create-verification-skill)입니다. 테스트가 잘 닿지 않는 속성은 [`create-formal-verification-skill`](verification.md#skill-create-formal-verification-skill)로 형식 검증(formal verification)합니다. 덮는 코드가 바뀐 뒤의 유지는 [`maintain-formal-verification-skill`](verification.md#skill-maintain-formal-verification-skill)입니다. TLA+ 모델에서 시스템이 상태 사이를 어떻게 움직이는지를 차트로 그리는 것은 [`statechart`](verification.md#skill-statechart)입니다. 자기 방식은 [`automate-me`](personal.md#skill-automate-me), [`reflect`](personal.md#skill-reflect), [`correct`](personal.md#skill-correct)입니다. 사람이 따라갈 표는 [부록의 선택 흐름도](decision-flow.md)에 있습니다.
+설치와 모델은 [`setup-pstack`](#skill-setup-pstack), 작업의 입구는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode)입니다. 일을 시작하기 전에 목표와 문제를 다시 듣기는 [`in-your-own-words`](#skill-in-your-own-words)입니다. 보내기 전에 프롬프트를 다시 쓰는 것은 [`sharpen`](#skill-sharpen)입니다. 만드는 것의 이름을 대지 못하면 [`reframe`](#skill-reframe)입니다. 앱을 증명할 방법이 없으면 [`create-verification-skill`](verification.md#skill-create-verification-skill)입니다. 테스트가 잘 닿지 않는 속성은 [`create-formal-verification-skill`](verification.md#skill-create-formal-verification-skill)로 형식 검증(formal verification)합니다. 덮는 코드가 바뀐 뒤의 유지는 [`maintain-formal-verification-skill`](verification.md#skill-maintain-formal-verification-skill)입니다. TLA+ 모델에서 시스템이 상태 사이를 어떻게 움직이는지를 차트로 그리는 것은 [`statechart`](verification.md#skill-statechart)입니다. 자기 방식은 [`automate-me`](personal.md#skill-automate-me), [`reflect`](personal.md#skill-reflect), [`correct`](personal.md#skill-correct)입니다. 사람이 따라갈 표는 [부록의 선택 흐름도](decision-flow.md)에 있습니다.
 
 ## in-your-own-words {#skill-in-your-own-words}
 
@@ -496,7 +497,7 @@ README가 든 예입니다. 스킬은 리뷰 질문을 알아차리고 [`/interr
 
 ### 관련 스킬
 
-입구는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode), 스킬을 고르는 안내는 [`poteto-help`](#skill-poteto-help)입니다. 보내기 전에 프롬프트를 다시 쓰는 것은 [`sharpen`](#skill-sharpen)입니다. 마지막 답을 평이하게 다시 듣는 것은 [`bro`](utility.md#skill-bro)입니다. 이 채팅의 마지막 메시지 이후를 따라잡는 것은 [`ketchup`](teach-recall.md#skill-ketchup)입니다. 그 따라잡기를 자막을 단 짧은 슬라이드 영상으로 보려면 [`ketchup-video`](teach-recall.md#skill-ketchup-video)입니다.
+입구는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode), 스킬을 고르는 안내는 [`poteto-help`](#skill-poteto-help)입니다. 보내기 전에 프롬프트를 다시 쓰는 것은 [`sharpen`](#skill-sharpen)입니다. 만드는 것의 이름을 대지 못하면 [`reframe`](#skill-reframe)입니다. 마지막 답을 평이하게 다시 듣는 것은 [`bro`](utility.md#skill-bro)입니다. 이 채팅의 마지막 메시지 이후를 따라잡는 것은 [`ketchup`](teach-recall.md#skill-ketchup)입니다. 그 따라잡기를 자막을 단 짧은 슬라이드 영상으로 보려면 [`ketchup-video`](teach-recall.md#skill-ketchup-video)입니다.
 
 ## sharpen {#skill-sharpen}
 
@@ -545,4 +546,62 @@ README가 든 예입니다. 스킬은 리뷰 질문을 알아차리고 [`/interr
 
 ### 관련 스킬
 
-일을 시작하기 전에 목표와 문제를 다시 듣기는 [`in-your-own-words`](#skill-in-your-own-words)입니다. 입구는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode), 스킬을 고르는 안내는 [`poteto-help`](#skill-poteto-help)입니다. 다시 쓴 프롬프트를 보내는 한 가지 예는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode)입니다.
+일을 시작하기 전에 목표와 문제를 다시 듣기는 [`in-your-own-words`](#skill-in-your-own-words)입니다. 만드는 것의 이름을 대지 못해 설명부터 전문가의 말로 다시 써야 하면 [`reframe`](#skill-reframe)이고, 안내서는 그 결과에 `/sharpen`을 칠 수 있다고 합니다. 입구는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode), 스킬을 고르는 안내는 [`poteto-help`](#skill-poteto-help)입니다. 다시 쓴 프롬프트를 보내는 한 가지 예는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode)입니다.
+
+## reframe {#skill-reframe}
+
+원문: {{src:skills/reframe/SKILL.md}} {{src:README.md}} {{src:skills/poteto-help/SKILL.md}} {{src:docs/guide/02-poteto-mode.md}}
+
+> 사용자가 만드는 것을 부르는 전문가의 말을 가르치고, 같은 문제를 푼 이웃 분야의 말을 빌린 뒤, 그 말로 사용자의 설명을 다시 씁니다.
+
+### 언제 쓰는가
+
+만드는 것의 이름을 대지 못해서 에이전트에게 분명하게 요청하지 못할 때입니다. 원문의 `description`은 "Teach the expert words for what the operator is building, borrow words from neighboring fields that solved the same problem, then rewrite their description with them. Use for `/reframe`."입니다. `disable-model-invocation: true`입니다. README는 `/sharpen` 다음에 이 스킬을 두고, 만드는 것의 이름을 대지 못해 에이전트에게 분명하게 요청하지 못할 때라고 합니다. 사용자의 파일과 사용자 자신의 말에서 시작한다고 합니다. 그 말이 둘 이상의 문제를 가리킬 수 있으면 그럴 수 있는 문제 두세 개를 각각을 가르는 신호와 함께 나열하고, 가장 그럴듯한 것을 고른다고 합니다. 그다음 만들 것을 얼마나 바꾸는지로 순위를 매긴 전문가 용어 8개에서 12개를 줍니다. 용어마다 그것이 이름 붙이는 설명의 부분과, 링크를 확인한 실제 프로젝트를 묶습니다. 같은 문제를 다른 이름으로 푼 이웃 분야 2개나 3개에서 용어를 빌리고 비유마다 어디서 깨지는지 말한 뒤, 새 말로 설명을 다시 쓴다고 합니다. `/poteto-help`의 표는 "만드는 것을 부르는 전문가의 말을 이웃 분야에서 빌린 말까지 배우고, 인용한 출처를 모두 확인받고, 그 말로 설명을 다시 받는다"고 짝을 짓습니다. 칠 때만 돕니다.
+
+### 동작 방식
+
+스킬 본문은 사용자가 만드는 것을 부르는 전문가의 말을 가르치라고 합니다. 요약이 아니라 사용자 자신의 파일, 코드, 설명에서 시작합니다.
+
+설명이 둘 이상의 문제를 가리킬 수 있으면, 먼저 그럴 수 있는 문제 두세 개를 나열합니다. 문제마다 그것을 이름 붙이는 용어 하나와, 다른 문제와 가르는 신호를 붙입니다. 그다음 가장 그럴듯한 문제의 말을 가르치고, 왜 그것을 골랐는지 말합니다. 이 단계는 0.15.48에서 더해졌습니다.
+
+그다음 네 단계입니다.
+
+1. 용어 8개에서 12개를 줍니다. 순위는 각 용어가 만들어질 것을 얼마나 바꾸는지로 매깁니다. 용어마다 낱말과 그 뜻을 평이한 한 문장으로 주고, 그것이 이름 붙이는 사용자 설명의 부분, 그 용어를 그 뜻으로 쓰는 실제 프로젝트나 논문이나 시스템 하나와 그 링크, 그 용어로 에이전트에게 무엇을 요청할 수 있는지를 붙입니다.
+2. 같은 모양의 문제를 다른 이름으로 푼 이웃 분야 2개나 3개를 고릅니다. 분야마다 무엇이 옮겨 오는지, 비유가 어디서 깨지는지, 거기서 어떤 용어를 가져오는지 말합니다.
+3. 사용자가 말하지 않았지만 신경 써야 할 것을 이름 붙입니다.
+4. 새 말로 사용자의 설명을 다시 씁니다.
+
+링크는 모두 열어 그 용어를 그 뜻으로 쓰는지 확인합니다. 확인하지 못한 인용은 뺍니다. 군더더기를 붙이지 않습니다.
+
+본문의 단계는 설명을 다시 쓰는 데서 끝납니다. 과업을 하라는 단계는 없습니다. 안내서 2장은 다시 쓴 설명을 보내거나, 그것에 `/sharpen`을 치라고 합니다.
+
+### 사용 예
+
+안내서 2장은 찾는 것의 이름을 대지 못할 때 자기 설명과 파일에 먼저 이 스킬을 치라고 하고, 이 예를 듭니다.
+
+```text
+/reframe the settings page saves some fields right away and others only on submit, and people lose edits.
+```
+
+설정 페이지가 어떤 필드는 바로 저장하고 어떤 필드는 제출할 때만 저장해서, 사람들이 편집한 내용을 잃는다는 설명입니다. 안내서는 에이전트가 용어 8개에서 12개를 순위대로 주고, 용어마다 설명의 어느 부분을 이름 붙이는지, 그 용어를 쓰는 실제 프로젝트와 확인한 링크, 그 용어로 에이전트에게 무엇을 요청할 수 있는지를 붙인다고 합니다. 이웃 분야 2개나 3개에서 용어를 빌리고 비유마다 어디서 깨지는지 말한 뒤, 새 말로 설명을 다시 씁니다.
+
+> **예시 (이 책의 저자가 만든 것, 원본에 없음)**
+>
+> 상황: 위 요청을 칩니다. 아래 용어와 분야는 이 책의 저자가 고른 것입니다.
+>
+> 1. 설명이 둘 이상의 문제를 가리킬 수 있으므로 먼저 후보를 나열합니다. 하나는 제출하기 전에 페이지를 떠나면 편집을 잃는 문제입니다. 이름은 dirty state(저장하지 않은 변경이 남은 상태)이고, 가르는 신호는 떠날 때만 잃는다는 것입니다. 다른 하나는 바로 저장하는 필드와 제출이 서로의 값을 덮어쓰는 문제입니다. 이름은 lost update(나중 쓰기가 앞선 쓰기를 덮어써 잃는 갱신)이고, 가르는 신호는 제출한 뒤에도 값이 되돌아간다는 것입니다. 사용자의 파일과 설명에서 더 그럴듯한 쪽을 고르고 이유를 말합니다.
+> 2. 고른 문제의 용어 8개에서 12개를 순위대로 줍니다. 용어마다 실제 프로젝트 하나를 링크와 함께 붙이고, 링크를 열어 그 뜻으로 쓰는지 확인하지 못한 것은 뺍니다. 이웃 분야로 데이터베이스의 autocommit(문장마다 바로 확정하는 방식)과 트랜잭션, 편집기가 저장하지 않은 버퍼를 표시하는 방식을 빌리고, 비유마다 어디서 깨지는지 말합니다.
+> 3. 사용자가 말하지 않은 것을 이름 붙이고, 새 말로 설명을 다시 씁니다. 사용자는 그 설명을 보내거나 `/sharpen`을 칩니다.
+
+### 함정과 주의점
+
+- 칠 때만 돕니다. 사용자의 말만으로 로드되지 않습니다.
+- 요약에서 시작하지 않습니다. 사용자의 파일, 코드, 설명에서 시작합니다.
+- 설명이 둘 이상의 문제를 가리킬 수 있으면 한 문제의 말부터 가르치지 않습니다. 후보 두세 개를 가르는 신호와 함께 먼저 나열하고, 고른 이유를 말합니다.
+- 링크를 열어 그 용어를 그 뜻으로 쓰는지 확인하지 못한 인용은 뺍니다.
+- 이웃 분야의 비유는 어디서 깨지는지 함께 말합니다.
+- 본문의 단계는 설명을 다시 쓰는 데서 끝납니다. [`sharpen`](#skill-sharpen)은 보내려는 프롬프트를 더 깊게 다시 쓰고, 이 스킬은 이름을 대지 못한 것의 말을 가르친 뒤 설명을 다시 씁니다.
+
+### 관련 스킬
+
+보내기 전에 프롬프트를 더 깊게 다시 쓰는 것은 [`sharpen`](#skill-sharpen)이고, 안내서는 이 스킬이 다시 쓴 설명에 `/sharpen`을 칠 수 있다고 합니다. 일을 시작하기 전에 목표와 문제를 다시 듣기는 [`in-your-own-words`](#skill-in-your-own-words)입니다. 입구는 [`poteto-mode`](poteto-mode.md#skill-poteto-mode), 스킬을 고르는 안내는 [`poteto-help`](#skill-poteto-help)입니다.

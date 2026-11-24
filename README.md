@@ -23,7 +23,7 @@ pstack 0.15.48(커밋 `9e278fe4d4ecd8bfe98b1b79bf4be662efb338cc`)을 기준으�
 - 이 책을 읽는 방법
 - 제 1부 시작하기
   - 제 1장 pstack이란 무엇인가
-  - 제 2장 설치와 첫 사용: setup-pstack, poteto-help, in-your-own-words, sharpen
+  - 제 2장 설치와 첫 사용: setup-pstack, poteto-help, in-your-own-words, sharpen, reframe
 - 제 2부 진입점
   - 제 3장 poteto-mode
   - 제 4장 작업 플레이북
