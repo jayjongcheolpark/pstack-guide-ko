@@ -4,14 +4,14 @@
 
 ## 원본
 
-`cursor/plugins`의 `pstack/`, 커밋 `0b46ec399d55f2829e88822998f53b84944837d3` (0.15.46) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를, 0.15.20 절은 그때의 핀 `1b6d44f`를, 0.15.21 절은 그때의 핀 `997ffc7`를, 0.15.23 절은 그때의 핀 `dbf4981`을, 0.15.24 절은 그때의 핀 `1e5c90a`를, 0.15.25 절은 그때의 핀 `e5136d8`를, 0.15.25-ko.1 절은 그때의 핀 `99743e9`를, 0.15.25-ko.2 절은 그때의 핀 `182f2ce`를, 0.15.26 절은 그때의 핀 `0b8e952`를, 0.15.28 절은 그때의 핀 `d457567`를, 0.15.29 절은 그때의 핀 `88d4751`을, 0.15.30 절은 그때의 핀 `eb4db2b`를, 0.15.30-ko.1 절은 그때의 핀 `4ec7ffa`를, 0.15.32 절은 그때의 핀 `e73df47`을, 0.15.34 절은 그때의 핀 `519d36a`를, 0.15.36 절은 그때의 핀 `c742dd6`를, 0.15.42 절은 그때의 핀 `bf0c7cd`를, 0.15.43 절은 그때의 핀 `2f87c85`를, 0.15.44 절은 그때의 핀 `e58dd04`를, 0.15.46 절은 그때의 핀 `0b46ec3`을 적은 기록입니다.
+`cursor/plugins`의 `pstack/`, 커밋 `9e278fe4d4ecd8bfe98b1b79bf4be662efb338cc` (0.15.48) 한 가지입니다. 다른 판이나 포팅 자료는 쓰지 않았습니다. 자세한 내용은 `SOURCE.md`. 아래 사실 확인 기록의 2026-09-28 절은 그때의 핀 `adf3218`(0.15.5)을, 0.15.9 절은 그때의 핀 `e43c7ee`를, 0.15.10 절은 그때의 핀 `4e5b1cf`를, 0.15.15 절은 그때의 핀 `df58112`를, 0.15.17 절은 그때의 핀 `978ca6e`를, 0.15.20 절은 그때의 핀 `1b6d44f`를, 0.15.21 절은 그때의 핀 `997ffc7`를, 0.15.23 절은 그때의 핀 `dbf4981`을, 0.15.24 절은 그때의 핀 `1e5c90a`를, 0.15.25 절은 그때의 핀 `e5136d8`를, 0.15.25-ko.1 절은 그때의 핀 `99743e9`를, 0.15.25-ko.2 절은 그때의 핀 `182f2ce`를, 0.15.26 절은 그때의 핀 `0b8e952`를, 0.15.28 절은 그때의 핀 `d457567`를, 0.15.29 절은 그때의 핀 `88d4751`을, 0.15.30 절은 그때의 핀 `eb4db2b`를, 0.15.30-ko.1 절은 그때의 핀 `4ec7ffa`를, 0.15.32 절은 그때의 핀 `e73df47`을, 0.15.34 절은 그때의 핀 `519d36a`를, 0.15.36 절은 그때의 핀 `c742dd6`를, 0.15.42 절은 그때의 핀 `bf0c7cd`를, 0.15.43 절은 그때의 핀 `2f87c85`를, 0.15.44 절은 그때의 핀 `e58dd04`를, 0.15.46 절은 그때의 핀 `0b46ec3`을, 0.15.48 절은 그때의 핀 `9e278fe`를 적은 기록입니다.
 
 ## 빌드와 검사
 
 ```shell
 bun install
 bun tools/build.mjs        # dist/pstack-guide-<버전>.epub, dist/pstack-guide-<버전>.pdf
-PSTACK_SRC=<클론 경로>/pstack bun tools/check.mjs   # 원고 규칙, 링크, 스킬 58개와 플레이북 22개의 절 존재, epubcheck
+PSTACK_SRC=<클론 경로>/pstack bun tools/check.mjs   # 원고 규칙, 링크, 스킬 59개와 플레이북 22개의 절 존재, epubcheck
 bun tools/check-layout.mjs                          # EPUB을 390px 폭에서 열어 가로 넘침 검사
 bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2,10,300   # PDF 페이지 수, 개요, 글꼴, 한글 텍스트, 선택한 페이지를 PNG로
 ```
@@ -26,7 +26,7 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 | 02-front-howto | 이 책을 읽는 방법 | | checked |
 | 10-part-start | 1부 시작하기 | | checked |
 | 11-ch-what-is-pstack | pstack이란 무엇인가 (README, 매니페스트, 구성) | | checked |
-| 12-ch-setup | 설치와 첫 사용 (`setup-pstack`, `poteto-help`, `in-your-own-words`, `sharpen`) | | checked |
+| 12-ch-setup | 설치와 첫 사용 (`setup-pstack`, `poteto-help`, `in-your-own-words`, `sharpen`, `reframe`) | | checked |
 | 20-part-entry | 2부 진입점 | | checked |
 | 21-ch-poteto-mode | `poteto-mode` 본체와 `poteto-agent` | | checked |
 | 22-ch-playbooks-work | 작업 플레이북 12개 (조사, 버그, 성능, 기능 등) | | checked |
@@ -74,14 +74,14 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 
 ## 해석한 부분 (원문이 모호했던 곳)
 
-- **원문 개수.** principle 스킬은 24개입니다(스킬 총 58개 = 일반 34개 + principle 24개). README도 24개라고 합니다. 책은 고정한 커밋의 디렉터리를 세어 얻은 수를 따릅니다. 0.15.5 핀에서는 23개와 47개, 0.15.9 핀에서는 26개와 50개, 0.15.15 핀에서는 27개와 51개, 0.15.17부터 0.15.21까지는 28개와 52개, 0.15.23은 29개와 53개, 0.15.24부터 0.15.25까지는 30개와 54개, 0.15.26은 31개와 55개, 0.15.28부터 0.15.29까지는 32개와 56개, 0.15.30부터 0.15.30-ko.1까지는 33개와 57개였고, 그 기록은 아래 사실 확인에 남아 있습니다.
+- **원문 개수.** principle 스킬은 24개입니다(스킬 총 59개 = 일반 35개 + principle 24개). README도 24개라고 합니다. 책은 고정한 커밋의 디렉터리를 세어 얻은 수를 따릅니다. 0.15.5 핀에서는 23개와 47개, 0.15.9 핀에서는 26개와 50개, 0.15.15 핀에서는 27개와 51개, 0.15.17부터 0.15.21까지는 28개와 52개, 0.15.23은 29개와 53개, 0.15.24부터 0.15.25까지는 30개와 54개, 0.15.26은 31개와 55개, 0.15.28부터 0.15.29까지는 32개와 56개, 0.15.30부터 0.15.30-ko.1까지는 33개와 57개, 0.15.32부터 0.15.46까지는 34개와 58개였고, 그 기록은 아래 사실 확인에 남아 있습니다.
 - **Comment Sicko의 읽기 전용 여부.** README와 안내서는 "read-only comment reviewer"라고 하지만 `agents/comment-sicko.md`는 스스로 주석을 지우고 삭제 수를 보고한다고 씁니다("I touch comments", "touched files, deletion count"). 애플리케이션 코드는 쓰지 않는다는 점은 일치합니다. 책은 정의 파일의 표현을 따르고 README의 표현을 함께 밝혔습니다.
 - **`/setup-pstack` 재실행의 보존 범위.** README와 안내서는 "기본값과 다른 역할을 유지"라고 하고, `setup-pstack/SKILL.md` 3(b)는 계열, 목록, 별칭으로 바꾼 역할을 유지하고 강도 토큰은 새 예산에 맞춰 다시 계산한다고 합니다. 책은 정밀한 쪽(스킬 본문)을 따릅니다.
 - **`poteto-mode`의 프런트매터 해석.** 0.15.22에서 `mode`와 `reminder` 키를 뺐습니다. 커밋 메시지(#597)는 Cursor가 두 키를 무시해 reminder 문구가 모델에 닿지 않았다고 합니다. `disable-model-invocation: true`는 남습니다. 0.15.10 README와 안내서는 더 이상 "sticky mode"라고 하지 않고, Enter는 한 메시지에만 붙고 Option+Enter/Alt+Enter(또는 Use as Mode)가 Custom Mode를 만든다고 적습니다. 책은 그 설명을 따릅니다. `disable-model-invocation`은 "모델이 자동으로 부르지 않는다"는 통상 뜻으로 적었습니다.
 - **`benny`가 슬래시 스킬이 아니라는 점.** README가 "dormant", "not registered as slash skills"라고 밝힙니다. 책은 별도 부(자동화)에서 지시문의 내용을 원문 순서대로 옮겼습니다.
 - **`cursor-team-kit`.** 별개 플러그인이라 장으로 다루지 않았습니다. `poteto-mode`와 플레이북이 부르는 자리(`deslop`, `control-cli`, `control-ui`, `create-skill` 내장 기능 등)에서 출처만 밝혔습니다.
 - **Claude Code.** 원본 README와 `docs/harness/claude-code.md`가 공식 설치와 이름 대응을 밝히므로 설치 장에서 그 범위만 다룹니다. `/pstack:setup-pstack`은 `~/.claude/rules/pstack-models.md`를 씁니다. Cursor에만 있는 기능이 필요한 단계는 `Skipped in Claude Code: <step>. <reason>.` 한 줄과 함께 건너뜁니다. 생성 복사는 README와 안내서를 포함하고, GitHub main의 pstack 링크는 로컬 복사본으로 읽습니다. 비공식 포팅(`michael-denyer/pstack-claude`)은 원본에 없는 외부 정보라서 저작권 표기 부록에서 존재만 언급하고 원본에서 확인하지 않았다고 밝혔습니다. 저장소 루트의 생성 트리 `harness/pstack/`은 `pstack/` 밖이라 원문으로 쓰지 않았습니다.
-- **`disable-model-invocation`.** `setup-pstack`만 이 프런트매터가 없고 나머지 56개 스킬에는 모두 있습니다. 0.15.11부터 `poteto-help`에도 붙었고, 사용자의 말만으로 로드되는 스킬은 `/setup-pstack`뿐입니다. 스킬 절에서는 있는 경우에 한해 언급했습니다.
+- **`disable-model-invocation`.** `setup-pstack`만 이 프런트매터가 없고 나머지 58개 스킬에는 모두 있습니다. 0.15.11부터 `poteto-help`에도 붙었고, 사용자의 말만으로 로드되는 스킬은 `/setup-pstack`뿐입니다. 스킬 절에서는 있는 경우에 한해 언급했습니다.
 
 ## 열린 질문
 
@@ -954,3 +954,42 @@ bun tools/pdf-inspect.mjs dist/pstack-guide-<버전>.pdf <출력 디렉터리> 2
 - `CHROME_PATH=/usr/bin/google-chrome bun tools/check-layout.mjs`: 390px에서 가로 넘침 없음.
 - `CHROME_PATH=/usr/bin/google-chrome bun tools/build.mjs`: `pstack-guide-0.15.46.epub`, `pstack-guide-0.15.46.pdf` (443쪽, 0.15.44는 441쪽).
 - `bun tools/pdf-inspect.mjs dist/pstack-guide-0.15.46.pdf /tmp/pdf-inspect-01546 2,10,300`: 443쪽, 개요 605항목, 한글 184173자, replacement 0, em dash 0.
+
+## 0.15.48
+
+원문을 `0b46ec399d55f2829e88822998f53b84944837d3`(0.15.46)에서 `9e278fe4d4ecd8bfe98b1b79bf4be662efb338cc`(0.15.48)로 올렸습니다. pstack 트리에 닿은 커밋은 두 개입니다.
+
+- `2dd5c0c` feat(pstack): add /reframe to learn the expert words for what you're building (#1324) (0.15.47)
+- `9e278fe` feat(pstack): have /reframe list the problems a vague description could be (#1326) (0.15.48)
+
+책 버전은 `BOOK_REVISION = 0`이라 pstack 버전과 같은 `0.15.48`입니다. 산출물 이름은 `pstack-guide-0.15.48.epub`, `pstack-guide-0.15.48.pdf`입니다.
+
+확인한 사실입니다. `plugin.json`과 `.cursor-plugin/plugin.json` 버전은 둘 다 0.15.48입니다. 두 커밋 모두 두 `plugin.json`에 닿고, `9e278fe`는 클론에서 `pstack/`에 닿은 마지막 커밋입니다. `2dd5c0c`는 0.15.47입니다. 0.15.47은 책 버전이 되지 않았습니다. 스킬 수는 59개(일반 35, 원칙 24), 플레이북은 22개, 에이전트는 2개입니다. 새 스킬은 `reframe` 하나이고 `disable-model-invocation: true`가 있습니다. 이 프런트매터가 없는 스킬은 여전히 `setup-pstack` 하나입니다.
+
+`0b46ec3..9e278fe`에서 `pstack/`에 닿은 파일은 6개입니다. 두 `plugin.json`, README(`/sharpen` 다음의 `/reframe` 행), 안내서 2장(`/sharpen` 문단 다음의 `/reframe` 문단과 예 프롬프트), `poteto-help`(`/sharpen` 다음의 표 행), 새 `skills/reframe/SKILL.md`입니다. `references/recipes.md`, Claude Code 어댑터, 플레이북은 바뀌지 않았습니다.
+
+원고에서 반영한 내용입니다.
+
+- 핀과 permalink, 산출물 이름을 `9e278fe` / `0.15.48`로 올렸습니다. 집필 시점은 2026년 11월 24일입니다. 부제와 EPUB 설명은 스킬 59종입니다.
+- 설치 장의 `sharpen` 다음에 `reframe` 절을 더했습니다. README와 `/poteto-help` 표의 순서(`/poteto-help`, `/in-your-own-words`, `/sharpen`, `/reframe`, `/how`)를 따랐고, 새 장이나 이해하기 부의 절로 두지 않았습니다.
+- 동작 방식은 0.15.48의 첫 단계를 옮겼습니다. 설명이 둘 이상의 문제를 가리킬 수 있으면 후보 두세 개를 그것을 이름 붙이는 용어와 가르는 신호와 함께 나열하고, 가장 그럴듯한 것의 말을 가르치며 고른 이유를 말합니다. 그 뒤에 네 단계(용어 8개에서 12개, 이웃 분야 2개나 3개, 말하지 않은 것, 설명 다시 쓰기)와 링크 확인, 확인하지 못한 인용 빼기를 옮겼습니다.
+- 사용 예는 안내서 2장의 `/reframe the settings page ...` 프롬프트를 영어 그대로 두었습니다. 저자가 만든 예시는 그 프롬프트의 후보 문제와 이웃 분야를 고른 것이고, 프로젝트 이름이나 링크는 적지 않았습니다.
+- 설치 장의 도입, `poteto-help`의 표와 가까운 짝, `poteto-help`, `in-your-own-words`, `sharpen`의 관련 스킬, poteto-mode 장의 프롬프트 안내와 관련 스킬, 레시피, 빠른 참조표(일반 스킬 35개, 슬래시 명령 요약), 선택 흐름도, 1부 표지, 읽는 방법, README 차례가 `reframe`을 가리킵니다.
+- 스킬 지도는 5 + 1 + 6 + 28 + 9 + 4 + 5 + 1 = 59개입니다. pstack이란 무엇인가 장의 "README는 두 스킬 모두 칠 때만 돈다"는 세 스킬이 되었습니다.
+- 레시피 장의 `reframe` 블록은 안내서 2장의 예를 인용합니다. `references/recipes.md`에는 `/reframe` 레시피가 없으므로 `레시피는 ...` 꼴의 문장을 쓰지 않았습니다.
+
+### 해석한 부분
+
+- 책 버전은 `0.15.48`입니다. 0.15.47은 0.15.45처럼 책 버전으로 다루지 않았습니다. 새 pstack 버전을 처음 다룰 때는 접미사를 붙이지 않습니다.
+- `reframe`의 `SKILL.md`는 사람을 operator라고 하고, README와 안내서는 you라고 합니다. 책은 이 절에서 둘 다 `/reframe`을 치는 사용자로 옮겼고, `description`은 영어 그대로 인용했습니다.
+- 안내서 2장의 `/reframe` 문단은 후보 문제를 먼저 나열하는 단계를 적지 않습니다. 책은 동작 방식을 `SKILL.md`와 README에서 옮겼고, poteto-mode 장과 레시피 장에서는 안내서의 설명에 그 단계를 한 문장으로 덧붙였습니다.
+- `SKILL.md` 2단계의 "which terms come back"은 그 분야에서 사용자의 문제로 가져올 용어로 읽고 "거기서 어떤 용어를 가져오는지"로 옮겼습니다.
+- `reframe`의 `SKILL.md`와 README는 `sharpen`과 달리 "doesn't do the task"라고 하지 않습니다. 본문의 단계가 설명을 다시 쓰는 데서 끝나고 안내서가 다시 쓴 것을 보내거나 `/sharpen`을 치라고 하므로, 책은 "과업을 하라는 단계는 없다"고만 적었습니다.
+- 설치 장 `poteto-help` 절의 가까운 짝 목록에서 `/in-your-own-words`, `/sharpen`, `/bro` 줄은 고정한 커밋의 `poteto-help` "Close calls"에 없는 책의 확장입니다. 0.15.46 원고부터 있던 줄이고, 이번에 같은 줄에 `/reframe` 한 문장을 더했습니다.
+
+### 실행한 검사
+
+- `PSTACK_SRC=/tmp/cursor-plugins/pstack bun tools/check.mjs`: 스킬 59개와 플레이북 22개의 절 존재, 용어 병기 짝 28개, dark palette 25색 25대비, epubcheck 오류 0, 경고 0.
+- `CHROME_PATH=/usr/bin/google-chrome bun tools/check-layout.mjs`: 390px에서 가로 넘침 없음.
+- `CHROME_PATH=/usr/bin/google-chrome bun tools/build.mjs`: `pstack-guide-0.15.48.epub`, `pstack-guide-0.15.48.pdf` (449쪽, 0.15.46은 443쪽).
+- `bun tools/pdf-inspect.mjs dist/pstack-guide-0.15.48.pdf /tmp/pdf-inspect-01548 2,10,300`: 449쪽, 개요 611항목, 한글 187164자, replacement 0, em dash 0.

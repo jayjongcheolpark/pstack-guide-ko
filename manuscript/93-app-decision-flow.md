@@ -6,7 +6,7 @@
 
 ## 1단계: 그냥 `poteto-mode`로 시작해도 되는가
 
-**사소하지 않은 작업이고 엄밀함이 필요하다면 `/poteto-mode`로 목표와 확인 방법을 말합니다.** 이것이 기본 답입니다. 프롬프트에 스킬 이름을 나열하지 않습니다. 일을 시작하기 전에 에이전트가 목표와 문제를 자기 말로 다시 말하게 하려면 [`/in-your-own-words`](setup.md#skill-in-your-own-words)입니다. 보내기 전에 프롬프트를 더 깊게 다시 쓰려면 [`/sharpen`](setup.md#skill-sharpen)입니다.
+**사소하지 않은 작업이고 엄밀함이 필요하다면 `/poteto-mode`로 목표와 확인 방법을 말합니다.** 이것이 기본 답입니다. 프롬프트에 스킬 이름을 나열하지 않습니다. 일을 시작하기 전에 에이전트가 목표와 문제를 자기 말로 다시 말하게 하려면 [`/in-your-own-words`](setup.md#skill-in-your-own-words)입니다. 보내기 전에 프롬프트를 더 깊게 다시 쓰려면 [`/sharpen`](setup.md#skill-sharpen)입니다. 만드는 것의 이름을 대지 못하면 [`/reframe`](setup.md#skill-reframe)이 전문가의 말을 가르치고 그 말로 설명을 다시 씁니다.
 
 ```text
 /poteto-mode 내보내기가 재시도 중간에 중복 행을 씁니다. 먼저 재현하고, 고치고, 검증해 줘.
@@ -28,6 +28,7 @@
 | 그 따라잡기를 자막을 단 짧은 슬라이드 영상으로 보고 싶다 | [`ketchup-video`](teach-recall.md#skill-ketchup-video) |
 | 일을 시작하기 전에 에이전트가 내 목표와 문제를 자기 말로 다시 말하게 하고 싶다 | [`in-your-own-words`](setup.md#skill-in-your-own-words) |
 | 보내기 전에 프롬프트를 더 깊게, 더 크게는 아니게 다시 받고, 과업은 시키지 않고 싶다 | [`sharpen`](setup.md#skill-sharpen) |
+| 만드는 것의 이름을 대지 못한다. 전문가의 말을 배우고 그 말로 설명을 다시 받고 싶다 | [`reframe`](setup.md#skill-reframe) |
 | 특정 채팅 하나를 이어받고 싶다 | [Session pickup](playbooks-long.md#playbook-session-pickup) |
 | 작은 diff가 다른 곳을 깨뜨릴까 걱정된다 | [`blast-radius`](tdd-blast.md#skill-blast-radius) |
 | 읽기 전용으로 질문에 답만 받고 싶다 | [Investigation](playbooks-work.md#playbook-investigation) |

@@ -159,6 +159,14 @@ README는 유지 방법을 이렇게 말합니다. 작업을 치기 전에 `/` �
 
 에이전트는 최상위 전문가가 묻지 않은 것, 그들이 시작할 가장 날것의 자료, 방법과 도구, 사용자나 에이전트가 아닌 무엇이 결과가 맞다는 것을 보여 줄지를 말합니다. 그다음 바로 그것을 묻는 프롬프트로 다시 씁니다. 더 깊게 쓰되 더 크게 쓰지는 않습니다. 다시 쓴 프롬프트는 실험으로 가릴 수 있는 선택을 에이전트가 프로토타입하고 관찰한 것으로 한 선택지를 추천하게 하며, 제품과 취향의 선택은 사용자에게 남깁니다. 과업은 하지 않습니다. 안내서는 다시 쓴 것을 읽고, 맞으면 보내라고 합니다. 예는 `/poteto-mode`입니다.
 
+찾는 것의 이름을 대지 못하면 자기 설명과 파일에 먼저 [`/reframe`](setup.md#skill-reframe)을 칩니다.
+
+```text
+/reframe the settings page saves some fields right away and others only on submit, and people lose edits.
+```
+
+에이전트는 전문가 용어 8개에서 12개를 줍니다. 순위는 각 용어가 만들 것을 얼마나 바꾸는지로 매깁니다. 용어마다 설명의 어느 부분을 이름 붙이는지, 그 용어를 쓰는 실제 프로젝트와 확인한 링크, 그 용어로 에이전트에게 무엇을 요청할 수 있는지가 붙습니다. 같은 문제를 다른 이름으로 푼 이웃 분야 2개나 3개에서도 용어를 빌리고, 비유마다 어디서 깨지는지 말합니다. 그다음 새 말로 설명을 다시 씁니다. 다시 쓴 것을 보내거나, 그것에 `/sharpen`을 칩니다. 설명이 둘 이상의 문제를 가리킬 수 있으면, 스킬 본문은 그 전에 후보 문제 두세 개를 가르는 신호와 함께 나열하고 가장 그럴듯한 것을 고르게 합니다.
+
 대화에 맥락이 이미 있으면 프롬프트는 거의 없어도 됩니다. 아래는 모두 충분합니다.
 
 ```text
@@ -210,7 +218,7 @@ keep going until done
 
 ### 관련 스킬
 
-플레이북이 부르는 스킬은 [이해하기](why.md#skill-why), [설계하기](architect.md#skill-architect), [고치고 검증하기](tdd-blast.md#skill-tdd) 부에서 다룹니다. 모델 설정은 [`setup-pstack`](setup.md#skill-setup-pstack)에서, 원칙은 [원칙 장](principles.md)에서 다룹니다. 어느 스킬이나 플레이북이 맞는지 모르겠으면 [`poteto-help`](setup.md#skill-poteto-help)가 이 장을 가리킵니다. 일을 시작하기 전에 목표와 문제를 다시 듣기는 [`in-your-own-words`](setup.md#skill-in-your-own-words)입니다. 보내기 전에 프롬프트를 다시 쓰는 것은 [`sharpen`](setup.md#skill-sharpen)입니다.
+플레이북이 부르는 스킬은 [이해하기](why.md#skill-why), [설계하기](architect.md#skill-architect), [고치고 검증하기](tdd-blast.md#skill-tdd) 부에서 다룹니다. 모델 설정은 [`setup-pstack`](setup.md#skill-setup-pstack)에서, 원칙은 [원칙 장](principles.md)에서 다룹니다. 어느 스킬이나 플레이북이 맞는지 모르겠으면 [`poteto-help`](setup.md#skill-poteto-help)가 이 장을 가리킵니다. 일을 시작하기 전에 목표와 문제를 다시 듣기는 [`in-your-own-words`](setup.md#skill-in-your-own-words)입니다. 보내기 전에 프롬프트를 다시 쓰는 것은 [`sharpen`](setup.md#skill-sharpen)입니다. 만드는 것의 이름을 대지 못하면 [`reframe`](setup.md#skill-reframe)입니다.
 
 ## poteto-agent {#agent-poteto-agent}
 
